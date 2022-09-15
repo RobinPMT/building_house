@@ -11,6 +11,18 @@
 |
 */
 
-Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index');
+use Illuminate\Support\Facades\Route;
+
+//Route::prefix('admin')->group(function () {
+//    Route::get('/', 'AdminController@index');
+//});
+
+Route::prefix('authenticate')->group(function () {
+    Route::get('/login', 'AdminAuthController@getLogin')->name('admin.login');
+    Route::post('/login', 'AdminAuthController@postLogin');
+    Route::get('/logout', 'AdminAuthController@getLogoutAdmin')->name('admin.logout');
+});
+
+Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin.home');
 });
