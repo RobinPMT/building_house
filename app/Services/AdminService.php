@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Services;
 
-
 use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class AdminService extends ApiService
 {
@@ -23,17 +22,39 @@ class AdminService extends ApiService
 
     protected function getFilterableFields(): array
     {
-        return [];
+        return ['user_not_myself'];
     }
 
     protected function fields(): array
     {
-        return ['name',  'email', 'phone', 'avatar', 'active'];
+        return ['name',  'email', 'phone', 'avatar', 'active', 'arr_active'];
     }
 
     protected function mapFilters(): array
     {
-        return [];
+        return [
+            'user_not_myself' => function ($value) {
+                if ($value == 1) {
+                    return function ($query) use ($value) {
+                        $user = auth('admins')->user();
+                        $query->where('id', '!=', $user->getKey())->where('email', '!=', 'admin@gmail.com');
+                    };
+                }
+            },
+        ];
+    }
+
+    public function get_arr_active_value($record, Admin $model)
+    {
+        return $model->getStatus();
+    }
+
+    protected function newQuery()
+    {
+        $query = parent::newQuery();
+//        $user = auth('admins')->user();
+//        $query->where('id', '!=', $user->getKey())->orWhere('email', '!=', 'admin@gmail.com');
+        return $query;
     }
 
     protected function boot()
@@ -44,4 +65,3 @@ class AdminService extends ApiService
         });
     }
 }
-

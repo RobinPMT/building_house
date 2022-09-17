@@ -19,9 +19,11 @@ abstract class WebController extends BaseController
         return view($view, $this->getService()->getMany($request));
     }
 
-    public function __find(Request $request)
+    public function __find(Request $request, $is_json)
     {
-        return $this->getService()->getOne($request);
+        if ($is_json) {
+            return $this->getService()->getOne($request);
+        }
     }
 
     public function __create(Request $request, $route)
@@ -40,21 +42,20 @@ abstract class WebController extends BaseController
         return redirect()->back()->with('danger', $result->get('message'));
     }
 
-    public function __update($id)
+    public function __update($id, $route)
     {
         $data = $this->getUpdatingData();
         $result = $this->getService()->update($id, $data, null);
         if ($result->get('status')) {
-            $model = $result->get('model');
-            return [
-                'status' => true,
-                'data' => $model instanceof Model ? $model : null,
-            ];
+            if (isset($route)) {
+                return redirect()->route($route)->with('success', 'Cập nhật thành công!');
+            }
+            return redirect()->back()->with('success', 'Cập nhật thành công!');
         }
-        return [
-            'status' => false,
-            'message' => $result->get('message'),
-        ];
+        if (isset($route)) {
+            return redirect()->route($route)->with('danger', $result->get('message'));
+        }
+        return redirect()->back()->with('danger', $result->get('message'));
     }
 
     public function __delete($id)
@@ -91,6 +92,7 @@ abstract class WebController extends BaseController
         if ($request instanceof BaseRequest) {
             $request->validated();
         }
-        return $this->getJsonData();
+        return $request->all();
+//        return $this->getJsonData();
     }
 }

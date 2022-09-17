@@ -34,9 +34,9 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 //        Route::get('/create', [AdminController::class, 'create'])->name('admin.create.admin');
         Route::get('/check_slug', [AdminController::class, 'checkSlug'])->name('admin.checkSlug.admin');
         Route::post('/', [AdminController::class, '__create'])->name('admin.store.admin');
-        Route::get('/update/{id}', [AdminController::class, 'edit'])->name('admin.edit.admin');
-        Route::post('/update/{id}', [AdminController::class, '__update'])->name('admin.update.admin');
-        Route::delete('/delete/{id}', [AdminController::class, '__delete'])->name('admin.delete.admin');
-//        Route::get('/{action}/{id}', 'AdminCategoryController@action')->name('admin.get.action.admin');
+//        Route::get('/update/{id}', [AdminController::class, 'edit'])->name('admin.edit.admin');
+        Route::post('/{id}', [AdminController::class, '__update'])->name('admin.update.admin');
+//        Route::delete('/delete/{id}', [AdminController::class, '__delete'])->name('admin.delete.admin');
+        Route::get('/{action}/{id}', [AdminController::class, 'action'])->name('admin.get.action.admin');
     });
 });

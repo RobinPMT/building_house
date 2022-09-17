@@ -1,29 +1,30 @@
 
 <div class="modal modal-slide-in new-record-modal fade" id="modals-slide-in" style="display: none;" aria-hidden="true">
     <div class="modal-dialog sidebar-sm">
-        <form class="add-new-record modal-content pt-0" action="{{route('admin.store.admin')}}" id="form-add" method="POST" role="form">
+        <form class="add-new-record modal-content pt-0" action="" id="form-crud" method="POST" role="form">
             @csrf
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             <div class="modal-header mb-1">
-                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+{{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
             </div>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
-                    <label class="form-label" for="basic-icon-default-fullname">Họ tên</label>
-                    <input type="text" name="name" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                    <label class="form-label" for="name">Họ tên</label>
+                    <input type="text" name="name" class="form-control dt-full-name" id="name" placeholder="John Doe" aria-label="John Doe" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="basic-icon-default-post">Số điện thoại</label>
-                    <input type="text" name="phone" id="basic-icon-default-post" class="form-control dt-post" placeholder="0123456789" aria-label="0123456789" />
+                    <label class="form-label" for="phone">Số điện thoại</label>
+                    <input type="text" name="phone" id="phone" class="form-control dt-post" placeholder="0123456789" aria-label="0123456789" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="basic-icon-default-email">Email</label>
-                    <input type="email" name="email" id="basic-icon-default-email" class="form-control dt-email" placeholder="employee@example.com" aria-label="employee@example.com" />
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control dt-email" placeholder="employee@example.com" aria-label="employee@example.com" />
                     <small class="form-text text-muted"> Dùng email này để đăng nhập </small>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="basic-default-password1">Mật khẩu</label>
-                    <input type="password" name="password" class="form-control" id="basic-default-password1" placeholder="********" aria-label="********" />
+                    <label class="form-label" for="password">Mật khẩu</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="********" aria-label="********" />
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">

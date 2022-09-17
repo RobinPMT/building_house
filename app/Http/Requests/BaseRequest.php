@@ -20,6 +20,9 @@ abstract class BaseRequest extends FormRequest
             'status' => false,
             'message' => $validator->errors()->first(),
         ], 200);
+        if (in_array('web', $this->route()->middleware())) {
+            return redirect()->back()->with('danger', $validator->errors()->first());
+        }
         throw new ValidationException($validator, $response);
     }
 

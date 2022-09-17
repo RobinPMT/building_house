@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/charts/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -41,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/form-validation.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/pickers/form-flat-pickr.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css')}}">
     <!-- END: Page CSS-->
     <!--  Datatables  -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
@@ -121,6 +123,7 @@
 <script src="{{asset('admin_template/app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/extensions/toastr.min.js')}}"></script>
 
+<script src="{{asset('admin_template/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
@@ -136,7 +139,8 @@
 <script src="{{asset('admin_template/app-assets/js/scripts/forms/form-validation.js')}}"></script>
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>--}}
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/app-user-list.js')}}"></script>--}}
-<script src="{{asset('admin_template/app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script>
+{{--<script src="{{asset('admin_template/app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script>--}}
+<script src="{{asset('admin_template/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js')}}"></script>
 <!-- END: Page JS-->
 
 {{--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}

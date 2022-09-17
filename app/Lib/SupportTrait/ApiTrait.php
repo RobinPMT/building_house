@@ -2,14 +2,15 @@
 
 namespace App\Lib\SupportTrait;
 
+//use App\Models\Base as BaseModel; //config BaseModel
+use Illuminate\Database\Eloquent\Model as BaseModel; //nếu xài cái trên thì cmr cái ni
+use Illuminate\Database\Eloquent\Model;
 use App\Lib\Helper\Result;
-use App\Models\Base as BaseModel;
 use App\Services\ApiService;
 use ArrayAccess;
 use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
