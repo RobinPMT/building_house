@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->char('phone')->nullable();
             $table->string('avatar')->nullable();
-            $table->tinyInteger('active')->default(1)->index();
+            $table->tinyInteger('active')->default(0)->index();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css')}}">
+
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/charts/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
     <!-- END: Vendor CSS-->
@@ -37,6 +38,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/pages/dashboard-ecommerce.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/charts/chart-apex.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-toastr.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/form-validation.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/pickers/form-flat-pickr.css')}}">
     <!-- END: Page CSS-->
     <!--  Datatables  -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
@@ -88,6 +92,9 @@
 
 <!-- BEGIN: Vendor JS-->
 <script src="{{asset('admin_template/app-assets/vendors/js/vendors.min.js')}}"></script>
+
+
+
 <script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js')}}"></script>
@@ -113,6 +120,10 @@
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{asset('admin_template/app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/extensions/toastr.min.js')}}"></script>
+
+<script src="{{asset('admin_template/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -121,12 +132,14 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>
-<script src="{{asset('admin_template/app-assets/js/scripts/pages/app-user-list.js')}}"></script>
+
+<script src="{{asset('admin_template/app-assets/js/scripts/forms/form-validation.js')}}"></script>
+{{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>--}}
+{{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/app-user-list.js')}}"></script>--}}
 <script src="{{asset('admin_template/app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script>
 <!-- END: Page JS-->
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+{{--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 

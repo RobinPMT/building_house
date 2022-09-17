@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -15,11 +14,18 @@ class Admin extends Authenticatable
 
     protected $guarded =  ['*'];
 
-//    protected $fillable = [
-//        'username', 'password', 'name', 'email', 'google_id'
-//    ];
+    protected $fillable = [
+        'phone', 'password', 'name', 'email', 'active'
+    ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        if ($value != "") {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
 }

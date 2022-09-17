@@ -97,42 +97,7 @@
 
         </div>
     </div>
-    <!-- Modal to add new record -->
-    <div class="modal modal-slide-in fade" id="modals-slide-in" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                <div class="modal-header mb-1">
-                    <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
-                </div>
-                <div class="modal-body flex-grow-1">
-                    <div class="form-group">
-                        <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="basic-icon-default-post">Post</label>
-                        <input type="text" id="basic-icon-default-post" class="form-control dt-post" placeholder="Web Developer" aria-label="Web Developer" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="basic-icon-default-email">Email</label>
-                        <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-                        <small class="form-text text-muted"> You can use letters, numbers &amp; periods </small>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="basic-icon-default-date">Joining Date</label>
-                        <input type="text" class="form-control dt-date flatpickr-input" id="basic-icon-default-date" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" readonly="readonly" />
-                    </div>
-                    <div class="form-group mb-4">
-                        <label class="form-label" for="basic-icon-default-salary">Salary</label>
-                        <input type="text" id="basic-icon-default-salary" class="form-control dt-salary" placeholder="$12000" aria-label="$12000" />
-                    </div>
-                    <button type="button" class="btn btn-primary data-submit mr-1 waves-effect waves-float waves-light">Submit</button>
-                    <button type="reset" class="btn btn-outline-secondary waves-effect" data-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    @include("admin::employee.form")
 @stop
 @section('script')
     <script>
@@ -142,6 +107,47 @@
             });
         } );
         $(window).on('load', function() {
+            let newUserForm = $(".add-new-record");
+            let newUserSidebar = $(".new-user-modal");
+            $("#checkbox_active").prop('checked', true);
+            // Form Validation
+            if (newUserForm.length) {
+                newUserForm.validate({
+                    errorClass: "error",
+                    rules: {
+                        phone: {
+                            required: true,
+                        },
+                        name: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        phone: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        name: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        email: {
+                            required: "Vui lòng không bỏ trống!",
+                            email: "Vui lòng nhập đúng định dạng email!"
+                        }
+                    }
+                });
+
+                newUserForm.on("submit", function (e) {
+                    var isValid = newUserForm.valid();
+                    // console.log(e);
+                    // e.preventDefault();
+                    if (isValid) {
+                        newUserSidebar.modal("hide");
+                    }
+                });
+            }
             {{--console.log(JSON.parse(' {{{json_encode($data)}}}'));--}}
             {{--console.log(JSON.parse('<?= json_encode($data) ?>'));--}}
             {{--$('#basic-datatable').DataTable( {--}}

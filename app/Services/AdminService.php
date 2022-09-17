@@ -39,7 +39,8 @@ class AdminService extends ApiService
     protected function boot()
     {
         parent::boot();
-        $this->on('creating', function ($model) {
+        $this->on('saving', function ($model) {
+            $model->active = $model->active == 'on' ? true : false;
         });
     }
 }
