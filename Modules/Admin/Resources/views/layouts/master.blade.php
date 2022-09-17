@@ -16,6 +16,9 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/vendors.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/charts/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
     <!-- END: Vendor CSS-->
@@ -35,11 +38,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/charts/chart-apex.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-toastr.css')}}">
     <!-- END: Page CSS-->
+    <!--  Datatables  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
+
+    <!--  extension responsive  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/assets/css/style.css')}}">
     <!-- END: Custom CSS-->
-
 </head>
 <!-- END: Head-->
 
@@ -81,6 +88,26 @@
 
 <!-- BEGIN: Vendor JS-->
 <script src="{{asset('admin_template/app-assets/vendors/js/vendors.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js')}}"></script>
+
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/jszip.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/pdfmake.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/vfs_fonts.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/buttons.html5.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/buttons.print.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
@@ -95,9 +122,21 @@
 
 <!-- BEGIN: Page JS-->
 <script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/js/scripts/pages/app-user-list.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script>
 <!-- END: Page JS-->
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--   Datatables-->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+
+<!-- extension responsive -->
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script>
+
     $(window).on('load', function() {
         if (feather) {
             feather.replace({
@@ -135,8 +174,12 @@
                 );
             }, 300);
         }
-    })
+    });
+
+
+
 </script>
+@yield('script')
 </body>
 <!-- END: Body-->
 
