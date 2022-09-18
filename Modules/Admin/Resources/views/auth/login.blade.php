@@ -10,8 +10,8 @@
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/image/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin_template/app-assets/image/ico/favicon.ico')}}">
+    <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/images/ico/apple-icon-120.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin_template/app-assets/images/ico/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -84,7 +84,7 @@
                     <!-- /Brand logo-->
                     <!-- Left Text-->
                     <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('admin_template/app-assets/image/pages/login-v2.svg')}}" alt="Login V2" /></div>
+                        <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('admin_template/app-assets/images/pages/login-v2.svg')}}" alt="Login V2" /></div>
                     </div>
                     <!-- /Left Text-->
                     <!-- Login-->

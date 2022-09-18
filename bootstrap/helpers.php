@@ -83,7 +83,7 @@ if (!function_exists('pare_url_file')) {
     function pare_url_file($image, $folder = '')
     {
         if (!$image) {
-            return'/image/no-image.jpg';
+            return'/images/no_image.png';
         }
         $explode = explode('__', $image);
         if (isset($explode[0])) {

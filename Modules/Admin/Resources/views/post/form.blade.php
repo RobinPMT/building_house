@@ -22,7 +22,7 @@
                     <input type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả" />
                 </div>
                 <div class="form-group">
-                    <img id="output_image" src="{{asset('image/no_image.png')}}" alt="" width="200px" height="160px">
+                    <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
                     <label for="input_image">Ảnh</label>
