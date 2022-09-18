@@ -111,6 +111,115 @@
             });
         });
 
+        //delete
+        $(document).ready(function() {
+            function deleteItem(url, id){
+                Swal.fire({
+                    title: 'Bạn có chắc không?',
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Vâng, xóa nó!',
+                    cancelButtonText: 'Hủy!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ml-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function(response) {
+                                console.log(response);
+                                $('#sid'+id).remove();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Đã xóa!',
+                                    text: 'Tài nguyên này đã được xóa!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success'
+                                    }
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                });
+
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                //xử lý lỗi tại đây
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'Đã hủy',
+                            text: 'Tài nguyên của bạn an toàn :)',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-success'
+                            }
+                        });
+                    }
+                });
+            }
+            $("#confirm-color").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let id = $this.attr('data-id');
+                deleteItem(url, id)
+            });
+            $('table tbody').on( 'click', 'li span a.delete-record', function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let id = $this.attr('data-id');
+                deleteItem(url, id)
+            });
+        });
+
+        //edit
+        $(document).ready(function() {
+            function edit(url, data_url_update) {
+                $("#modals-slide-in").modal('show');
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (response) {
+                        console.log(response)
+                        if(response.status) {
+                            $('#name').val(response.data.name);
+                            $('#email').val(response.data.email);
+                            $('#phone').val(response.data.phone);
+                            $('#password').val('');
+                            if(response.data.active == '1'){
+                                $("form #checkbox_active").attr('checked', true)
+                            }
+                            $('#exampleModalLabel').text('Cập nhật');
+                            $('#form-crud').attr('action', data_url_update);
+                        }
+                    }
+                })
+            }
+            $('table tbody').on( 'click', 'li span a.item-edit', function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let data_url_update = $this.attr('data-url-update');
+                edit(url, data_url_update)
+            });
+            $(".item-edit").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let data_url_update = $this.attr('data-url-update');
+                edit(url, data_url_update)
+            });
+        } );
+
+        //add
         $(document).ready(function() {
             $(".item-add").click(function (event) {
                 console.log($('#form-crud').attr('action'))
@@ -177,90 +286,6 @@
             }
             {{--console.log(JSON.parse(' {{{json_encode($data)}}}'));--}}
             {{--console.log(JSON.parse('<?= json_encode($data) ?>'));--}}
-
-            //show form edit
-            $(".item-edit").click(function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                let url = $this.attr('href');
-                let data_url_update = $this.attr('data-url-update');
-                $("#modals-slide-in").modal('show');
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    success: function (response) {
-                        console.log(response)
-                        if(response.status) {
-                            $('#name').val(response.data.name);
-                            $('#email').val(response.data.email);
-                            $('#phone').val(response.data.phone);
-                            $('#password').val('');
-                            if(response.data.active == '1'){
-                                $("form #checkbox_active").attr('checked', true)
-                            }
-                            $('#exampleModalLabel').text('Cập nhật');
-                            $('#form-crud').attr('action', data_url_update);
-                        }
-                    }
-                })
-            });
-
-            //delete
-            $("#confirm-color").click(function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                let url = $this.attr('href');
-                let id = $this.attr('data-id');
-                Swal.fire({
-                    title: 'Bạn có chắc không?',
-                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Vâng, xóa nó!',
-                    cancelButtonText: 'Hủy!',
-                    customClass: {
-                        confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-outline-danger ml-1'
-                    },
-                    buttonsStyling: false
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            type: 'get',
-                            url: url,
-                            success: function(response) {
-                                console.log(response);
-                                $('#sid'+id).remove();
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Đã xóa!',
-                                    text: 'Tài nguyên này đã được xóa!',
-                                    customClass: {
-                                        confirmButton: 'btn btn-success'
-                                    }
-                                }).then((result) => {
-                                    if (result.value) {
-                                        window.location.reload();
-                                    }
-                                });
-
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                //xử lý lỗi tại đây
-                            }
-                        });
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        Swal.fire({
-                            title: 'Đã hủy',
-                            text: 'Tài nguyên của bạn an toàn :)',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'btn btn-success'
-                            }
-                        });
-                    }
-                });
-            });
         });
 
     </script>

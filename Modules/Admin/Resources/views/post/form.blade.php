@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary data-submit mr-1 waves-effect waves-float waves-light">Lưu</button>
-                <button type="reset" class="btn btn-outline-secondary waves-effect" data-dismiss="modal">Hủy</button>
+                <button type="reset" class="btn btn-outline-secondary waves-effect" aria-hidden="true" data-dismiss="modal">Hủy</button>
             </div>
         </form>
 
