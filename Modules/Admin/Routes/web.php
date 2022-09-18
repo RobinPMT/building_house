@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminPostController;
+use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\HomeController;
 
 //Route::prefix('admin')->group(function () {
@@ -50,4 +51,14 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/{id}', [AdminPostController::class, '__update'])->name('admin.update.post');
         Route::get('/{action}/{id}', [AdminPostController::class, 'action'])->name('admin.get.action.post');
     });
+
+//    Route::group(['prefix' => 'setting'], function () {
+//        Route::get('/', [AdminSettingController::class, '__list'])->name('admin.get.list.setting');
+//        Route::post('/', [AdminSettingController::class, '__update'])->name('admin.get.update.setting');
+//    });
+});
+
+Route::group(['prefix' => 'setting'], function () {
+    Route::get('/', [AdminSettingController::class, '__list'])->name('admin.get.list.setting');
+    Route::post('/', [AdminSettingController::class, '__update'])->name('admin.get.update.setting');
 });
