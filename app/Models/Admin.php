@@ -49,4 +49,9 @@ class Admin extends Authenticatable
     {
         return Arr::get($this->_active, $this->active, '[N\A]');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
 }

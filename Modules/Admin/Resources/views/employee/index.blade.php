@@ -131,9 +131,9 @@
                 newUserForm.validate({
                     errorClass: "error",
                     rules: {
-                        phone: {
-                            required: true,
-                        },
+                        // phone: {
+                        //     required: true,
+                        // },
                         name: {
                             required: true,
                         },
@@ -146,10 +146,10 @@
                         },
                     },
                     messages: {
-                        phone: {
-                            required: "Vui lòng không bỏ trống!",
-                            number: "Vui lòng nhập đúng số điện thoại!",
-                        },
+                        // phone: {
+                        //     required: "Vui lòng không bỏ trống!",
+                        //     number: "Vui lòng nhập đúng số điện thoại!",
+                        // },
                         name: {
                             required: "Vui lòng không bỏ trống!"
                         },

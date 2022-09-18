@@ -83,6 +83,8 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{ \Request::route()->getName() == 'admin.get.list.post' ? 'active' : '' }}  nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.post')}}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Post">Bài viết</span></a>
+            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="User">User</span></a>
                 <ul class="menu-content">
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.admin' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.admin')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Employee</span></a>

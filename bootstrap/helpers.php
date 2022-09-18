@@ -3,6 +3,7 @@
 use App\Lib\Helper\MapService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 if (function_exists('c')) {
     throw new Exception('function "c" is already existed !');
@@ -59,7 +60,7 @@ if (!function_exists('upload_image')) {
         }
         // Tên file mới
         $nameFile = trim(str_replace('.'.$ext, '', strtolower($info->getFilename())));
-        $filename = date('Y-m-d__').str_slug($nameFile) . '.' . $ext;
+        $filename = date('Y-m-d__').Str::slug($nameFile) . '.' . $ext;
         // thu muc goc de upload
         $path = public_path().'/uploads/'.date('Y/m/d/');
         if ($folder) {
@@ -82,7 +83,7 @@ if (!function_exists('pare_url_file')) {
     function pare_url_file($image, $folder = '')
     {
         if (!$image) {
-            return'/images/no-image.jpg';
+            return'/image/no-image.jpg';
         }
         $explode = explode('__', $image);
         if (isset($explode[0])) {

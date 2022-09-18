@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\HomeController;
 
 //Route::prefix('admin')->group(function () {
@@ -38,5 +39,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/{id}', [AdminController::class, '__update'])->name('admin.update.admin');
 //        Route::delete('/delete/{id}', [AdminController::class, '__delete'])->name('admin.delete.admin');
         Route::get('/{action}/{id}', [AdminController::class, 'action'])->name('admin.get.action.admin');
+    });
+
+
+    Route::group(['prefix' => 'post'], function () {
+        Route::get('/', [AdminPostController::class, '__list'])->name('admin.get.list.post');
+        Route::get('/check_slug', [AdminPostController::class, 'checkSlug'])->name('admin.checkSlug.post');
+        Route::get('/{id}', [AdminPostController::class, '__find'])->name('admin.get.find.post');
+        Route::post('/', [AdminPostController::class, '__create'])->name('admin.store.post');
+        Route::post('/{id}', [AdminPostController::class, '__update'])->name('admin.update.post');
+        Route::get('/{action}/{id}', [AdminPostController::class, 'action'])->name('admin.get.action.post');
     });
 });

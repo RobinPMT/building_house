@@ -9,9 +9,10 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}" />--}}
     <title>Dashboard ecommerce - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin_template/app-assets/images/ico/favicon.ico')}}">
+    <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/image/ico/apple-icon-120.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin_template/app-assets/image/ico/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -53,6 +54,23 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/assets/css/style.css')}}">
     <!-- END: Custom CSS-->
+    <style>
+        @media (min-width: 720px) {
+            .modal-slide-in .modal-dialog.sidebar-lg {
+                width: 50rem;
+            }
+        }
+        @media (min-width: 1200px) {
+            .modal-slide-in .modal-dialog.sidebar-lg {
+                width: 80rem;
+            }
+        }
+        @media (min-width: 1800px) {
+            .modal-slide-in .modal-dialog.sidebar-lg {
+                width: 100rem;
+            }
+        }
+    </style>
 </head>
 <!-- END: Head-->
 
@@ -152,8 +170,42 @@
 
 <!-- extension responsive -->
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script>
 
+{{--<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>--}}
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+<script>
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+
+    {{--hiện ảnh--}}
+    function readUrl(input) {
+        if (input.files && input.files[0] ){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#output_image').attr('src',e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#input_image").change(function () {
+        readUrl(this);
+    });
+
+
+    //check slug
+    $('#title').change(function (event) {
+        console.log(234);
+        $.get('{{route('admin.checkSlug.post')}}',
+            { 'title' : $(this).val()},
+            function (data) {
+                console.log(data);
+                $('#slug').val(data.slug);
+            }
+        );
+    });
     $(window).on('load', function() {
         if (feather) {
             feather.replace({
