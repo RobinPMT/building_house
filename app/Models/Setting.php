@@ -13,7 +13,7 @@ class Setting extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'name', 'key', 'value', 'active',
+        'name', 'key', 'value', 'active', 'icon'
     ];
 
     const ACTIVE = 1;

@@ -24,15 +24,17 @@ class AdminSettingController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_setting_fields' => 'name,key,value,active',
+            '_setting_fields' => 'name,key,value,active,icon',
             '_noPagination' => 1
         ]);
         return parent::__list($request, 'admin::setting.index');
     }
 
-    public function __update($id, $route = null)
+    public function update(Request $request)
     {
-        return parent::__update($id, 'admin.get.list.setting');
+        $result = $this->getService()->updateKeySeting($request->all());
+        return response()->json($result);
+//        return view('admin::category.index', $viewData);
     }
 
     // TODO: Đổ dữ liệu ra vs cập nhật lại setting

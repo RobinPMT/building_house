@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\Admin;
-use App\Models\Post;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
+use function Aws\boolean_value;
 
 class SettingService extends ApiService
 {
@@ -29,7 +29,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active',
+            'key', 'value', 'active', 'name', 'icon'
         ];
     }
 
@@ -38,7 +38,6 @@ class SettingService extends ApiService
         return [
         ];
     }
-
 
     protected function newQuery()
     {
@@ -52,9 +51,30 @@ class SettingService extends ApiService
     {
         parent::boot();
         $user = auth('admins')->user();
-        $this->on('saving', function ($model) use ($user) {
-
+        $this->on('updated', function ($model) use ($user) {
         });
     }
 
+    public function updateKeySeting(array $data)
+    {
+        $newData = $data['newData'];
+        if (is_array($newData) && count($newData) > 0) {
+            $keys = array_keys($newData);
+            $settings = services()->settingService()->whereIn('key', $keys)->get();
+            foreach ($settings as $setting) {
+                $setting->name = $newData[$setting->key]['name'];
+                $setting->value = $newData[$setting->key]['value'];
+                $setting->active = boolean_value($newData[$setting->key]['active']);
+                $setting->save();
+            }
+            return [
+                'status'  => true,
+                'success' => 'Cập nhật thành công!'
+            ];
+        }
+        return [
+            'status'  => false,
+            'danger' => 'Cập nhật thất bại!'
+        ];
+    }
 }
