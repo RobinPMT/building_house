@@ -3,6 +3,7 @@
 namespace App\Lib\Helper;
 
 use App\Services\AdminService;
+use App\Services\ContactService;
 use App\Services\PostService;
 use App\Services\SettingService;
 use App\Services\UserService;
@@ -35,5 +36,10 @@ class MapService
     public function settingService(): SettingService
     {
         return c(SettingService::class);
+    }
+
+    public function contactService(): ContactService
+    {
+        return c(ContactService::class);
     }
 }

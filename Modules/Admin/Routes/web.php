@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
@@ -55,6 +56,12 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::group(['prefix' => 'setting'], function () {
         Route::get('/', [AdminSettingController::class, '__list'])->name('admin.get.list.setting');
         Route::post('/update', [AdminSettingController::class, 'update'])->name('admin.get.update.setting');
+    });
+
+    Route::group(['prefix' => 'contact'], function () {
+        Route::get('/', [AdminContactController::class, '__list'])->name('admin.get.list.contact');
+        Route::post('/{id}', [AdminContactController::class, 'update'])->name('admin.get.update.contact');
+        Route::get('/{action}/{id}', [AdminContactController::class, 'action'])->name('admin.get.action.contact');
     });
 });
 
