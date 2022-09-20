@@ -164,7 +164,7 @@
                     }
                 });
             }
-            $("#confirm-color").click(function (event) {
+            $(".delete-record").click(function (event) {
                 event.preventDefault();
                 let $this = $(this);
                 let url = $this.attr('href');

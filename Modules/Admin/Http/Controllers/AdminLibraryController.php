@@ -37,22 +37,25 @@ class AdminLibraryController extends WebController
             $view = 'admin::library.index';
         }
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom',
-            '_relations' => 'creator',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url',
+//            '_relations' => 'creator',
             '_filter' => 'freedom:'.$value,
-            '_admin_fields' => 'name'
+//            '_admin_fields' => 'name',
+            '_noPagination' => 1
         ]);
-        return parent::__list($request, 'admin::library.slide');
+        return parent::__list($request, $view);
 //        return view('admin::category.index', $viewData);
     }
 
     public function store(Request $request)
     {
+        $user = auth('admins')->user();
         if ($request->hasFile('images')) {
             $imageName = new Library();
             $file = upload_image('images', 'slides_hot');
             if (isset($file['name'])) {
                 $imageName->avatar = $file['name'];
+                $imageName->author_id = $user->getKey() ?? null;
             }
             $imageName->save();
         }
@@ -70,16 +73,25 @@ class AdminLibraryController extends WebController
         $user = auth('admins')->user();
         $messages = '';
         if ($action) {
-            $contact = Contact::find($id);
+            $image = Library::find($id);
             switch ($action) {
                 case 'delete':
-                    $contact->delete();
+                    $image->delete();
                     $messages = 'Xóa thành công!';
                     break;
                 case 'active':
-                    $contact->active = $contact->active ? 0 : 1;
-                    $contact->author_id = $contact->active ? $user->getKey() : null;
-                    $contact->save();
+                    $image->active = $image->active ? 0 : 1;
+                    $image->save();
+                    $messages = 'Cập nhật thành công!';
+                    break;
+                case 'banner_home':
+                    $image->banner_home = $image->banner_home ? 0 : 1;
+                    $image->save();
+                    $messages = 'Cập nhật thành công!';
+                    break;
+                case 'banner_product':
+                    $image->banner_product = $image->banner_product ? 0 : 1;
+                    $image->save();
                     $messages = 'Cập nhật thành công!';
                     break;
             }

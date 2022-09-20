@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Admin;
 use App\Models\Library;
-use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class LibraryService extends ApiService
@@ -15,7 +14,7 @@ class LibraryService extends ApiService
         'creator'
     ];
 
-    protected $fieldsName = '_post_fields';
+    protected $fieldsName = '_library_fields';
 
     protected function getOrderbyableFields(): array
     {
@@ -30,7 +29,8 @@ class LibraryService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom'
+            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom',
+            'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url'
         ];
     }
 
@@ -60,12 +60,27 @@ class LibraryService extends ApiService
 
     public function get_arr_freedom_value($record, Library $model)
     {
+        return $model->getFreedom();
+    }
+
+    public function get_arr_active_value($record, Library $model)
+    {
         return $model->getStatus();
     }
 
-    public function get_avatar_value($record, Library $model)
+    public function get_arr_banner_home_value($record, Library $model)
     {
-        return pare_url_file($model->avatar);
+        return $model->getBannerHome();
+    }
+
+    public function get_arr_banner_product_value($record, Library $model)
+    {
+        return $model->getBannerProduct();
+    }
+
+    public function get_avatar_url_value($record, Library $model)
+    {
+        return pare_url_file($model->avatar, 'slides_hot');
     }
 
     protected function newQuery()

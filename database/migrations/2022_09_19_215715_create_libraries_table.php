@@ -18,7 +18,10 @@ class CreateLibrariesTable extends Migration
             $table->string('title')->nullable();
             $table->string('avatar')->nullable();
             $table->LongText('arr_image')->nullable();
-            $table->tinyInteger('freedom')->default(0)->index();
+            $table->tinyInteger('active')->default(1)->index();
+            $table->tinyInteger('freedom')->default(1)->index();
+            $table->tinyInteger('banner_home')->default(0)->index();
+            $table->tinyInteger('banner_product')->default(0)->index();
             $table->string('author_id')->nullable();
             $table->timestamps();
         });

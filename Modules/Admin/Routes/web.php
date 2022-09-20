@@ -70,7 +70,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/slide', [AdminLibraryController::class, 'store'])->name('admin.store.slide');
 
         Route::post('/{id}', [AdminLibraryController::class, 'update'])->name('admin.get.update.contact');
-        Route::get('/{action}/{id}', [AdminLibraryController::class, 'action'])->name('admin.get.action.contact');
+        Route::get('/{action}/{id}', [AdminLibraryController::class, 'action'])->name('admin.get.action.slide');
     });
 });
 
