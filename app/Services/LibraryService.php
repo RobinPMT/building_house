@@ -97,6 +97,34 @@ class LibraryService extends ApiService
         $user = auth('admins')->user();
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
+            $model->active = $model->active == 'on' ? true : false;
+            if (isset($model->title)) {
+                $model->freedom = false;
+            }
+            $this->uploadAvatar($model);
+            $data = $this->uploadArrImages($model);
+            $model->arr_image = json_encode($data);
         });
+    }
+
+    public function uploadAvatar(Library $model)
+    {
+        if ($this->getApiRequest()->hasFile('avatar')) {
+            $file = upload_image('avatar');
+            if (isset($file['name'])) {
+                $model->avatar = $file['name'];
+            }
+        }
+    }
+
+    public function uploadArrImages(Library $model)
+    {
+        if ($this->getApiRequest()->hasFile('images')) {
+            $files = upload_images('images', 'libraries');
+            return array_map(function ($item) {
+                return $item['name'];
+            }, $files);
+        }
+        return null;
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Library;
 use App\Models\Post;
 use App\Services\LibraryService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class AdminLibraryController extends WebController
@@ -30,21 +31,20 @@ class AdminLibraryController extends WebController
     public function __list(Request $request, $view = null)
     {
         if ($request->route()->getName() === 'admin.get.list.slide') {
-            $value = true;
+            $value = 1;
             $view = 'admin::library.slide';
         } else {
-            $value = false;
+            $value = 0;
             $view = 'admin::library.index';
         }
         $request->merge([
             '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url',
-//            '_relations' => 'creator',
-            '_filter' => 'freedom:'.$value,
-//            '_admin_fields' => 'name',
-            '_noPagination' => 1
+            '_relations' => 'creator',
+            '_filter' => 'freedom:'."$value",
+            '_admin_fields' => 'name',
+            '_noPagination' => $value
         ]);
         return parent::__list($request, $view);
-//        return view('admin::category.index', $viewData);
     }
 
     public function store(Request $request)
@@ -56,10 +56,17 @@ class AdminLibraryController extends WebController
             if (isset($file['name'])) {
                 $imageName->avatar = $file['name'];
                 $imageName->author_id = $user->getKey() ?? null;
+                $imageName->slug = SlugService::createslug(Library::class, 'slug', time());
             }
             $imageName->save();
         }
         return response()->json(['uploaded' => '/slides_hot/'.$imageName->avatar]);
+    }
+
+    public function __create(Request $request, $route = null)
+    {
+        return parent::__create($request, 'admin.get.list.library');
+//        return view('admin::category.index', $viewData);
     }
 
 //    public function __update($id, $route = null)
@@ -97,5 +104,11 @@ class AdminLibraryController extends WebController
             }
         }
         return redirect()->back()->with('success', $messages);
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createslug(Library::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

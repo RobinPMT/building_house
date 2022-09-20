@@ -86,7 +86,7 @@
                 <ul class="menu-content">
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.slide' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.slide')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Slide">Slide nổi bật</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-ecommerce-details.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List Library">Danh sách thư viện</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.library' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.library')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List Library">Danh sách thư viện</span></a>
                     </li>
                 </ul>
             </li>

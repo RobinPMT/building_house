@@ -23,6 +23,7 @@ class CreateLibrariesTable extends Migration
             $table->tinyInteger('banner_home')->default(0)->index();
             $table->tinyInteger('banner_product')->default(0)->index();
             $table->string('author_id')->nullable();
+            $table->string('slug')->index();
             $table->timestamps();
         });
     }

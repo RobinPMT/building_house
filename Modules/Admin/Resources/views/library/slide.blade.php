@@ -25,7 +25,7 @@
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
                             <input type="file" name="images" id="file-1" multiple class="filename"
-                                   data-overwrite-initial="fasle" data-min-file-count="2">
+                                   data-overwrite-initial="fasle" data-min-file-count="1">
                         </div>
                     </div>
                 </div>
@@ -46,9 +46,9 @@
                     @if(isset($data, $status) && $status)
                         @foreach($data as $stt => $item)
 {{--                            <div class="swiper-slide">--}}
-{{--                                <img class="img-fluid" src="{{$item['avatar']}}" alt="banner" />--}}
+{{--                                <img class="img-fluid" src="{{$item['avatar_url']}}" alt="banner" />--}}
 {{--                            </div>--}}
-{{--                        {{dd($item)}}--}}
+
                             <div class="swiper-slide" id="sid{{$item['id']}}">
                                 <div class="file-preview-frame krajee-default kv-preview-thumb" id="thumb-file-1-8750_images.png" data-fileindex="-1" data-fileid="8750_images.png" data-template="image">
                                 <div class="kv-zoom-cache">
@@ -149,6 +149,20 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#file-1').on('filebatchuploadcomplete', function(event, files, extra) {
+                setTimeout(function () {
+                    toastr['success'](
+                        'Upload thành công!',
+                        '👋 Thành công!',
+                        {
+                            closeButton: true,
+                            tapToDismiss: false,
+                            // rtl: isRtl
+                        }
+                    );
+                    window.location.reload();
+                }, 800);
+            });
             $("#file-1").fileinput({
                 {{--uploadUrl: '{{route('admin.store.slide')}}',--}}
                 {{--enableResumableUpload: true,--}}
@@ -179,7 +193,11 @@
                 allowedFileExtensions: ['jpg','png','gif'],
                 overwriteInitial: false,
                 maxFileSize: 2000,
-                maxFileNum: 8,
+                maxFileNum: 20,
+                minFileNum: 1,
+
+                // minFileCount: 0,
+                // maxFileCount: 0,
                 uploadExtraData:function () {
                     return{
                         _token: $("input[name='_token']").val()

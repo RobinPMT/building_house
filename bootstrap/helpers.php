@@ -39,14 +39,24 @@ if (!function_exists('convert_time')) {
 if (!function_exists('upload_image')) {
     /**
      * @param $file [tên file trùng tên input]
+     * @param string $folder
      * @param array $extend [ định dạng file có thể upload được]
+     * @param null $tmp_name_file
      * @return array|int [ tham số trả về là 1 mảng - nếu lỗi trả về int ]
      */
-    function upload_image($file, $folder = '', array $extend = [])
+    function upload_image($file, $folder = '', array $extend = [], $tmp_name_file = null)
     {
+
         $code = 1;
         // lay duong dan anh
-        $baseFilename = public_path() . '/uploads/' . $_FILES[$file]['name'];
+        if (isset($_FILES[$file])) {
+            $baseFilename = $_FILES[$file]['name'];
+            $tmp_name = $_FILES[$file]['tmp_name'];
+        } else {
+            $baseFilename = $file;
+            $tmp_name = $tmp_name_file;
+        }
+        $baseFilename = public_path() . '/uploads/' . $baseFilename;
         // thong tin file
         $info = new SplFileInfo($baseFilename);
         // duoi file
@@ -70,12 +80,25 @@ if (!function_exists('upload_image')) {
             mkdir($path, 0777, true);
         }
         // di chuyen file vao thu muc uploads
-        move_uploaded_file($_FILES[$file]['tmp_name'], $path. $filename);
+        move_uploaded_file($tmp_name, $path. $filename);
         $data = [
             'name' => $filename,
             'code' => $code,
             'path_img' => 'uploads/'.$filename
         ];
+        return $data;
+    }
+}
+if (!function_exists('upload_images')) {
+
+    function upload_images($files, $folder = '')
+    {
+        $data = [];
+        $files = $_FILES[$files];
+        $arr = array_combine($files['tmp_name'], $files['name']);
+        foreach ($arr as $key => $value) {
+            $data [] = upload_image($value, $folder, [], $key);
+        }
         return $data;
     }
 }

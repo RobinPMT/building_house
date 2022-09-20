@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 
 class Library extends Base
 {
+    use Sluggable;
     protected $table   = 'libraries';
 
 //    protected $guarded =  ['*'];
@@ -87,5 +89,14 @@ class Library extends Base
     public function creator()
     {
         return $this->belongsTo(Admin::class, 'author_id');
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
