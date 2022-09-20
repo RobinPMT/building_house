@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\HomeController;
@@ -62,6 +63,14 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::get('/', [AdminContactController::class, '__list'])->name('admin.get.list.contact');
         Route::post('/{id}', [AdminContactController::class, 'update'])->name('admin.get.update.contact');
         Route::get('/{action}/{id}', [AdminContactController::class, 'action'])->name('admin.get.action.contact');
+    });
+
+    Route::group(['prefix' => 'library'], function () {
+        Route::get('/slide', [AdminLibraryController::class, '__list'])->name('admin.get.list.slide');
+        Route::post('/slide', [AdminLibraryController::class, 'store'])->name('admin.store.slide');
+
+        Route::post('/{id}', [AdminLibraryController::class, 'update'])->name('admin.get.update.contact');
+        Route::get('/{action}/{id}', [AdminLibraryController::class, 'action'])->name('admin.get.action.contact');
     });
 });
 

@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css')}}">
@@ -24,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/charts/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/swiper.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_template/fileinput.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -44,6 +47,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/form-validation.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/pickers/form-flat-pickr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-swiper.css')}}">
     <!-- END: Page CSS-->
     <!--  Datatables  -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
@@ -86,6 +90,7 @@
 <!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+{{--<script src="{{asset('admin_template/vi.js')}}" type="text/javascript"></script>--}}
 
 <!-- BEGIN: Header-->
 @include('admin::layouts.header')
@@ -154,6 +159,8 @@
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/extensions/swiper.min.js')}}"></script>
+<script src="{{asset('admin_template/fileinput.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
