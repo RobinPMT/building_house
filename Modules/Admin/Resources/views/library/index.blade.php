@@ -137,7 +137,7 @@
                 <div class="modal-body">
                     <div class="floating-buttons"></div>
                     <div class="kv-zoom-body file-zoom-content krajee-default">
-                        <img src="" class="file-preview-image kv-preview-data file-zoom-detail" title="wip-work-in-progress-1024x701.jpg" alt="wip-work-in-progress-1024x701.jpg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                        <img src="" class="file-preview-image kv-preview-data file-zoom-detail" title="" alt="" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
                     </div>
 
                     <button type="button" class="btn btn-navigate btn-prev" title="View previous file" style="display: none;"><i class="glyphicon glyphicon-triangle-left"></i></button> <button type="button" class="btn btn-navigate btn-next" title="View next file" style="display: none;"><i class="glyphicon glyphicon-triangle-right"></i></button>
