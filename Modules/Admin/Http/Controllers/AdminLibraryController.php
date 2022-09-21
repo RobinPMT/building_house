@@ -5,7 +5,6 @@ namespace Modules\Admin\Http\Controllers;
 use App\Http\Controllers\WebController;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
-use App\Models\Contact;
 use App\Models\Library;
 use App\Models\Post;
 use App\Services\LibraryService;
@@ -84,6 +83,7 @@ class AdminLibraryController extends WebController
             switch ($action) {
                 case 'delete':
                     $image->delete();
+                    //TODO: xoa file ra khoi sourse
                     $messages = 'Xóa thành công!';
                     break;
                 case 'active':
@@ -110,5 +110,24 @@ class AdminLibraryController extends WebController
     {
         $slug = SlugService::createslug(Library::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function deleteImages($id, $image)
+    {
+        if (trim($image) != '') {
+            $library = Library::find($id);
+            if (isset($library)) {
+                $arr = json_decode($library->arr_image);
+                if (($key = array_search($image, $arr)) !== false) {
+                    unset($arr[$key]);
+                    $library->arr_image = json_encode(array_values($arr));
+                    $library->save();
+                    //TODO: xoa file ra khoi sourse
+                    return response()->json(['status' => true]);
+                }
+            }
+            return response()->json(['status' => false]);
+        }
+        return response()->json(['status' => false]);
     }
 }

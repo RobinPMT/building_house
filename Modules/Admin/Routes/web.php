@@ -77,6 +77,8 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/list', [AdminLibraryController::class, '__create'])->name('admin.store.library');
         Route::post('/list/{id}', [AdminLibraryController::class, '__update'])->name('admin.update.library');
 
+        Route::delete('/delete_images/{id}/{image}', [AdminLibraryController::class, 'deleteImages'])->name('admin.delete.images.library');
+
     });
 });
 

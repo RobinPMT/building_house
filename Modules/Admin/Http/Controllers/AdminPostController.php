@@ -67,6 +67,7 @@ class AdminPostController extends WebController
             switch ($action) {
                 case 'delete':
                     $post->delete();
+                    //TODO: xoa file ra khoi sourse
                     $messages = 'Xóa thành công!';
                     break;
                 case 'active':

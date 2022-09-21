@@ -41,7 +41,7 @@
                                     <img src="{{$item['avatar_url']}}" width="100px" height="100px" alt="">
                                 </td>
                                 <td style="">
-                                    <a class="badge badge-pill badge-light-primary item-detail" href="#" data-title="{{$item['title']}}" data-arr-images="{{$item['arr_image']}}" data-toggle="modal" data-target="#detail-image">
+                                    <a class="badge badge-pill badge-light-primary item-detail" href="{{route('admin.delete.images.library', [$item['id'], ''])}}" data-title="{{$item['title']}}" data-arr-images="{{$item['arr_image']}}" data-toggle="modal" data-target="#detail-image">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50">
                                             <polyline points="21 8 21 21 3 21 3 8"></polyline>
                                             <rect x="1" y="3" width="22" height="5"></rect>
@@ -119,6 +119,32 @@
 
     @include("admin::library.form")
     @include("admin::library.image")
+
+    {{--<!--/ Multi row Slides Per View swiper -->--}}
+    <div id="image_modal" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="image_modal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Detailed Preview</h5>
+                    <span class="kv-zoom-title" title="" id="detail-title">
+                </span>
+                    <div class="kv-zoom-actions">
+                        <button type="button" class="btn btn-sm btn-kv btn-default btn-outline-secondary btn-close" title="Close detailed preview" data-dismiss="modal" aria-hidden="true">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="floating-buttons"></div>
+                    <div class="kv-zoom-body file-zoom-content krajee-default">
+                        <img src="" class="file-preview-image kv-preview-data file-zoom-detail" title="wip-work-in-progress-1024x701.jpg" alt="wip-work-in-progress-1024x701.jpg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                    </div>
+
+                    <button type="button" class="btn btn-navigate btn-prev" title="View previous file" style="display: none;"><i class="glyphicon glyphicon-triangle-left"></i></button> <button type="button" class="btn btn-navigate btn-next" title="View next file" style="display: none;"><i class="glyphicon glyphicon-triangle-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -144,14 +170,13 @@
 
         // show item detail
         $(document).ready(function() {
-            function detail(title, data_images) {
+            function detail(title, data_images, url) {
                 $(".content__title").text(title);
                 let arr_images = JSON.parse(data_images);
                 let html = '';
                 for (let i = 0; i < arr_images.length; i++) {
-                    console.log(arr_images[i])
                     html +=`
-                        <div class="file-preview-frame krajee-default kv-preview-thumb" >
+                        <div class="file-preview-frame krajee-default kv-preview-thumb" id="modal-image-${i}">
                             <div class="kv-zoom-cache">
                                 <div class="file-preview-frame krajee-default kv-zoom-thumb"  >
                                     <div class="kv-file-content">
@@ -159,11 +184,96 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="file-actions">
+                                <div class="file-footer-buttons">
+                                    <a href="${url}" data-id-modal="${i}" data-image-src="${arr_images[i]}" class="kv-file-remove btn btn-sm btn-kv btn-default btn-outline-secondary item-delete-modal" title="Remove file">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <a href="#" data-image-src="${arr_images[i]}" data-toggle="modal" data-target="#image_modal" class="kv-file-zoom btn btn-sm btn-kv btn-default btn-outline-secondary item-detail-modal" title="View Details">
+                                        <i class="glyphicon glyphicon-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
 
                         </div>
                     `
                 }
                 $(".content__body").html(html);
+                //detail image modal
+                $(".item-detail-modal").click(function (event) {
+                    event.preventDefault();
+                    let $this = $(this);
+                    let src = $this.attr('data-image-src');
+                    $(' img.file-zoom-detail ').attr('src', src);
+                });
+                $(".item-delete-modal").click(function (event) {
+                    event.preventDefault();
+                    let $this = $(this);
+                    let src = $this.attr('data-image-src');
+                    let url = $this.attr('href');
+                    let id = $this.attr('data-id-modal');
+
+                    let arr = src.split('/');
+                    let image = arr[arr.length - 1];
+                    Swal.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Vâng, xóa nó!',
+                        cancelButtonText: 'Hủy!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-outline-danger ml-1'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                type: 'delete',
+                                url: url+ '/' +image,
+                                success: function(response) {
+                                    if (response.status) {
+                                        $('#modal-image-'+id).remove();
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Đã xóa!',
+                                            text: 'Tài nguyên này đã được xóa!',
+                                            customClass: {
+                                                confirmButton: 'btn btn-success'
+                                            }
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                window.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Thất bại!',
+                                            text: 'Xóa thất bại!',
+                                            icon: 'error',
+                                            customClass: {
+                                                confirmButton: 'btn btn-error'
+                                            }
+                                        });
+                                    }
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    //xử lý lỗi tại đây
+                                }
+                            });
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire({
+                                title: 'Đã hủy',
+                                text: 'Tài nguyên của bạn an toàn :)',
+                                icon: 'error',
+                                customClass: {
+                                    confirmButton: 'btn btn-success'
+                                }
+                            });
+                        }
+                    });
+                });
             }
             $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
                 event.preventDefault();
@@ -173,7 +283,7 @@
             $(".item-detail").click(function (event) {
                 event.preventDefault();
                 let $this = $(this);
-                detail($this.attr('data-title'), $this.attr('data-arr-images'));
+                detail($this.attr('data-title'), $this.attr('data-arr-images'), $this.attr('href'));
             });
         });
 
@@ -245,8 +355,5 @@
                 deleteItem(url, id)
             });
         });
-    </script>
-    <script>
-
     </script>
 @stop
