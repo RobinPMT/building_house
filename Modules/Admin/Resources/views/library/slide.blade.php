@@ -219,18 +219,18 @@
                     clickable: true
                 }
             });
-            $(".view-image").click(function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                let id = $this.attr('id');
-                console.log(id);
-                $("#"+id).fileinput({
-                    initialPreviewAsData: true,
-                    overwriteInitial: false,
-                    showCancel: true,
-                });
-
-            });
+            // $(".view-image").click(function (event) {
+            //     event.preventDefault();
+            //     let $this = $(this);
+            //     let id = $this.attr('id');
+            //     console.log(id);
+            //     $("#"+id).fileinput({
+            //         initialPreviewAsData: true,
+            //         overwriteInitial: false,
+            //         showCancel: true,
+            //     });
+            //
+            // });
         });
         //delete
         $(document).ready(function() {

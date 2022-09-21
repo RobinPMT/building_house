@@ -105,7 +105,7 @@ if (!function_exists('upload_images')) {
 if (!function_exists('pare_url_file')) {
     function pare_url_file($image, $folder = '')
     {
-        if (!$image) {
+        if (!$image || $image == '') {
             return'/images/no_image.png';
         }
         $explode = explode('__', $image);

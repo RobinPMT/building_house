@@ -66,6 +66,9 @@
             .modal-dialog {
                 max-width: 850px;
             }
+            .model-image-list{
+                max-width: 620px !important;
+            }
         }
         @media (min-width: 1200px) {
             .modal-slide-in .modal-dialog.sidebar-lg {
@@ -73,6 +76,9 @@
             }
             .modal-dialog {
                 max-width: 850px;
+            }
+            .model-image-list{
+                max-width: 880px !important;
             }
         }
         @media (min-width: 1800px) {

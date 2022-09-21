@@ -83,6 +83,15 @@ class LibraryService extends ApiService
         return pare_url_file($model->avatar, 'slides_hot');
     }
 
+    public function get_arr_image_value($record, Library $model)
+    {
+        if (isset($model->arr_image)) {
+            return json_encode(array_map(function ($item) {
+                return pare_url_file($item, 'libraries');
+            }, json_decode($model->arr_image)));
+        }
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();

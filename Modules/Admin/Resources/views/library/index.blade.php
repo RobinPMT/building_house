@@ -38,9 +38,17 @@
                                 <td scope="row">{{$stt + 1}}</td>
                                 <td>{{$item['title']}}</td>
                                 <td style="">
-                                    <img src="{{$item['avatar']}}" width="100px" height="100px" alt="">
+                                    <img src="{{$item['avatar_url']}}" width="100px" height="100px" alt="">
                                 </td>
-                                <td style=""></td>
+                                <td style="">
+                                    <a class="badge badge-pill badge-light-primary item-detail" href="#" data-title="{{$item['title']}}" data-arr-images="{{$item['arr_image']}}" data-toggle="modal" data-target="#detail-image">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50">
+                                            <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                            <rect x="1" y="3" width="22" height="5"></rect>
+                                            <line x1="10" y1="12" x2="14" y2="12"></line>
+                                        </svg>Xem
+                                    </a>
+                                </td>
                                 <td style="">{{$item['creator']['name']}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.slide', ['active', $item['id']])}}">
@@ -108,7 +116,9 @@
 
         </div>
     </div>
+
     @include("admin::library.form")
+    @include("admin::library.image")
 @stop
 
 @section('script')
@@ -130,28 +140,113 @@
                 maxFileNum: 20,
                 minFileNum: 2,
             });
-            var mySwiper5 = new Swiper('.swiper-multi-row', {
-                slidesPerView: 5,
-                slidesPerColumn: 2,
-                spaceBetween: 10,
-                slidesPerColumnFill: 'row',
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
+        });
+
+        // show item detail
+        $(document).ready(function() {
+            function detail(title, data_images) {
+                $(".content__title").text(title);
+                let arr_images = JSON.parse(data_images);
+                let html = '';
+                for (let i = 0; i < arr_images.length; i++) {
+                    console.log(arr_images[i])
+                    html +=`
+                        <div class="file-preview-frame krajee-default kv-preview-thumb" >
+                            <div class="kv-zoom-cache">
+                                <div class="file-preview-frame krajee-default kv-zoom-thumb"  >
+                                    <div class="kv-file-content">
+                                        <img src="${arr_images[i]}" class="center-block img-responsive" style="margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; image-orientation: from-image;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    `
                 }
-            });
-            $(".view-image").click(function (event) {
+                $(".content__body").html(html);
+            }
+            $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
                 event.preventDefault();
                 let $this = $(this);
-                let id = $this.attr('id');
-                console.log(id);
-                $("#"+id).fileinput({
-                    initialPreviewAsData: true,
-                    overwriteInitial: false,
-                    showCancel: true,
-                });
-
+                detail($this.attr('data-title'), $this.attr('data-arr-images'));
+            });
+            $(".item-detail").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                detail($this.attr('data-title'), $this.attr('data-arr-images'));
             });
         });
+
+        //delete
+        $(document).ready(function() {
+            function deleteItem(url, id){
+                Swal.fire({
+                    title: 'Bạn có chắc không?',
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Vâng, xóa nó!',
+                    cancelButtonText: 'Hủy!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ml-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function(response) {
+                                console.log(response);
+                                $('#sid'+id).remove();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Đã xóa!',
+                                    text: 'Tài nguyên này đã được xóa!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success'
+                                    }
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                });
+
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                //xử lý lỗi tại đây
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'Đã hủy',
+                            text: 'Tài nguyên của bạn an toàn :)',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-success'
+                            }
+                        });
+                    }
+                });
+            }
+            $(".delete-record").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let id = $this.attr('data-id');
+                deleteItem(url, id)
+            });
+            $('table tbody').on( 'click', 'li span a.delete-record', function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let id = $this.attr('data-id');
+                deleteItem(url, id)
+            });
+        });
+    </script>
+    <script>
+
     </script>
 @stop
