@@ -67,13 +67,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 
     Route::group(['prefix' => 'library'], function () {
         Route::get('/slide', [AdminLibraryController::class, '__list'])->name('admin.get.list.slide');
+        Route::get('/list/{id}', [AdminLibraryController::class, '__find'])->name('admin.get.find.library');
         Route::post('/slide', [AdminLibraryController::class, 'store'])->name('admin.store.slide');
         Route::get('/{action}/{id}', [AdminLibraryController::class, 'action'])->name('admin.get.action.slide');
 
 
+
         Route::get('/check_slug', [AdminLibraryController::class, 'checkSlug'])->name('admin.checkSlug.library');
         Route::get('/list', [AdminLibraryController::class, '__list'])->name('admin.get.list.library');
-        Route::get('/list/{id}', [AdminLibraryController::class, '__find'])->name('admin.get.find.library');
+
         Route::post('/list', [AdminLibraryController::class, '__create'])->name('admin.store.library');
         Route::post('/list/{id}', [AdminLibraryController::class, '__update'])->name('admin.update.library');
 

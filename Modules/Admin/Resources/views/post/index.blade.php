@@ -283,52 +283,23 @@
                 newUserForm.validate({
                     errorClass: "error",
                     rules: {
-                        phone: {
+                        title: {
                             required: true,
                         },
-                        name: {
+                        slug: {
                             required: true,
-                        },
-                        email: {
-                            required: true,
-                        },
-                        password: {
-                            // required: true,
-                            minlength: 4,
                         },
                     },
                     messages: {
-                        phone: {
-                            required: "Vui lòng không bỏ trống!",
-                            number: "Vui lòng nhập đúng số điện thoại!",
-                        },
-                        name: {
+                        title: {
                             required: "Vui lòng không bỏ trống!"
                         },
-                        email: {
-                            required: "Vui lòng không bỏ trống!",
-                            email: "Vui lòng nhập đúng định dạng email!"
-                        },
-                        password: {
-                            // required: "Vui lòng không bỏ trống!",
-                            minlength: jQuery.validator.format("Vui lòng nhập giá trị lớn hơn hoặc bằng {4} kí tự.")
+                        slug: {
+                            required: "Vui lòng không bỏ trống!"
                         },
                     }
                 });
-
-                // newUserForm.on("submit", function (e) {
-                //     var isValid = newUserForm.valid();
-                //     // console.log(e);
-                //     // e.preventDefault();
-                //
-                //     if (isValid) {
-                //         newUserSidebar.modal("hide");
-                //
-                //     }
-                // });
             }
-            {{--console.log(JSON.parse(' {{{json_encode($data)}}}'));--}}
-            {{--console.log(JSON.parse('<?= json_encode($data) ?>'));--}}
         });
 
     </script>

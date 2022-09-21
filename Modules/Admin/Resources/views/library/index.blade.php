@@ -355,5 +355,79 @@
                 deleteItem(url, id)
             });
         });
+
+        //edit
+        $(document).ready(function() {
+            function edit(url, data_url_update) {
+                $("#modals-slide-in").modal('show');
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (response) {
+                        console.log(response)
+                        if(response.status) {
+                            $('#title').val(response.data.title);
+                            $('#slug').val(response.data.slug);
+                            $('#output_image').attr('src', response.data.avatar_url);
+                            if(response.data.active == '1'){
+                                $("form #checkbox_active").attr('checked', true)
+                            }
+                            $('#exampleModalLabel').text('Cập nhật');
+                            $('#form-crud').attr('action', data_url_update);
+                        }
+                    }
+                })
+            }
+            $('table tbody').on( 'click', 'li span a.item-edit', function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let data_url_update = $this.attr('data-url-update');
+                edit(url, data_url_update)
+            });
+            $(".item-edit").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let data_url_update = $this.attr('data-url-update');
+                edit(url, data_url_update)
+            });
+        });
+
+        // form add
+        $(document).ready(function() {
+            $(".item-add").click(function (event) {
+                if($('#form-crud').attr('action') !== '{{route('admin.store.library')}}'){
+                    $('#form-crud').trigger("reset");
+                }
+                $('#form-crud').attr('action', '{{route('admin.store.library')}}');
+                $('#exampleModalLabel').text('Thêm mới');
+            });
+
+            let newUserForm = $(".add-new-record");
+            // let newUserSidebar = $(".new-user-modal");
+            // Form Validation
+            if (newUserForm.length) {
+                newUserForm.validate({
+                    errorClass: "error",
+                    rules: {
+                        title: {
+                            required: true,
+                        },
+                        slug: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        title: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                    }
+                });
+            }
+        });
     </script>
 @stop

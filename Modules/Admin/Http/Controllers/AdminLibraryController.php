@@ -6,7 +6,6 @@ use App\Http\Controllers\WebController;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use App\Models\Library;
-use App\Models\Post;
 use App\Services\LibraryService;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -46,6 +45,15 @@ class AdminLibraryController extends WebController
         return parent::__list($request, $view);
     }
 
+    public function __find(Request $request, $is_json = false)
+    {
+        $request->merge([
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active',
+//            '_relations' => 'creator'
+        ]);
+        return parent::__find($request, true);
+    }
+
     public function store(Request $request)
     {
         $user = auth('admins')->user();
@@ -68,11 +76,11 @@ class AdminLibraryController extends WebController
 //        return view('admin::category.index', $viewData);
     }
 
-//    public function __update($id, $route = null)
-//    {
-//        return parent::__update($id, 'admin.get.list.post');
-    ////        return view('admin::category.index', $viewData);
-//    }
+    public function __update($id, $route = null)
+    {
+        return parent::__update($id, 'admin.get.list.library');
+        //        return view('admin::category.index', $viewData);
+    }
 
     public function action($action, $id)
     {

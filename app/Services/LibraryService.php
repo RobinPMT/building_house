@@ -30,7 +30,7 @@ class LibraryService extends ApiService
     {
         return [
             'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom',
-            'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url'
+            'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url', 'slug'
         ];
     }
 
@@ -80,12 +80,12 @@ class LibraryService extends ApiService
 
     public function get_avatar_url_value($record, Library $model)
     {
-        return pare_url_file($model->avatar, 'slides_hot');
+        return pare_url_file($model->avatar, 'libraries');
     }
 
     public function get_arr_image_value($record, Library $model)
     {
-        if (isset($model->arr_image)) {
+        if (isset($model->arr_image) && trim($model->arr_image) != '') {
             return json_encode(array_map(function ($item) {
                 return pare_url_file($item, 'libraries');
             }, json_decode($model->arr_image)));
@@ -112,14 +112,19 @@ class LibraryService extends ApiService
             }
             $this->uploadAvatar($model);
             $data = $this->uploadArrImages($model);
-            $model->arr_image = json_encode($data);
+            if (isset($data)) {
+                $oldImages = json_decode($model->arr_image);
+                $newImages = array_merge($data, $oldImages);
+                $model->arr_image = json_encode($newImages);
+            }
+
         });
     }
 
     public function uploadAvatar(Library $model)
     {
         if ($this->getApiRequest()->hasFile('avatar')) {
-            $file = upload_image('avatar');
+            $file = upload_image('avatar', 'libraries');
             if (isset($file['name'])) {
                 $model->avatar = $file['name'];
             }
