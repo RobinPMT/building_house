@@ -3,6 +3,7 @@
 namespace App\Lib\Helper;
 
 use App\Services\AdminService;
+use App\Services\CategoryService;
 use App\Services\ContactService;
 use App\Services\LibraryService;
 use App\Services\PostService;
@@ -53,5 +54,10 @@ class MapService
     public function productService(): ProductService
     {
         return c(ProductService::class);
+    }
+
+    public function categoryService(): CategoryService
+    {
+        return c(CategoryService::class);
     }
 }

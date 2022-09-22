@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminCategoryController;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
@@ -91,6 +92,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminProductController::class, '__create'])->name('admin.store.product');
         Route::post('/{id}', [AdminProductController::class, '__update'])->name('admin.update.product');
         Route::get('/{action}/{id}', [AdminProductController::class, 'action'])->name('admin.get.action.product');
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/', [AdminCategoryController::class, '__list'])->name('admin.get.list.category');
+        Route::get('/check_slug', [AdminCategoryController::class, 'checkSlug'])->name('admin.checkSlug.category');
+        Route::get('/{id}', [AdminCategoryController::class, '__find'])->name('admin.get.find.category');
+        Route::post('/', [AdminCategoryController::class, '__create'])->name('admin.store.category');
+        Route::post('/{id}', [AdminCategoryController::class, '__update'])->name('admin.update.category');
+        Route::get('/{action}/{id}', [AdminCategoryController::class, 'action'])->name('admin.get.action.category');
     });
 });
 
