@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Admin;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function Aws\boolean_value;
 
@@ -29,7 +30,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active', 'name', 'icon'
+            'key', 'value', 'active', 'name', 'icon', 'type'
         ];
     }
 
@@ -51,13 +52,46 @@ class SettingService extends ApiService
     {
         parent::boot();
         $user = auth('admins')->user();
-        $this->on('updated', function ($model) use ($user) {
+        $this->on('updating', function ($model) use ($user) {
+            $this->updateSettingHome($model);
         });
     }
 
     public function get_value_value($record, Setting $model)
     {
-        return json_decode($model->value);
+        if ($model->type == 'setting') {
+            return json_decode($model->value);
+        }
+        return $model->value;
+    }
+
+    public function updateSettingHome(Request $request)
+    {
+        $dataNew = $request->data_new;
+        $dataOldIds = $request->ids ?? [];
+        $dataOldValues = $request->values ?? [];
+        if (count($dataOldIds) > 0 && count($dataOldIds) == count($dataOldValues)) {
+            $oldArr = array_combine($dataOldIds, $dataOldValues);
+            if (isset($oldArr) && is_array($oldArr)) {
+                $oldSettings = services()->settingService()->findMany(array_keys($oldArr));
+                foreach ($oldSettings as $oldSetting) {
+                    $oldSetting->value = $oldArr[$oldSetting->id];
+                    $oldSetting->save();
+                }
+            }
+        }
+
+        if (is_array($dataNew)) {
+            $data = [];
+            foreach ($dataNew as $item) {
+                if (isset($item['value']) && trim($item['value']) != '') {
+                    $data[] = $item;
+                }
+            }
+            Setting::insert($data);
+            return true;
+        }
+        return false;
     }
 
     public function updateKeySeting(array $data)
@@ -69,7 +103,7 @@ class SettingService extends ApiService
             foreach ($settings as $setting) {
                 $setting->name = $newData[$setting->key]['name'];
 //                if ($newData[$setting->key]['key'] == 'housing') {
-                    $setting->value = json_encode($newData[$setting->key]['value']);
+                $setting->value = json_encode($newData[$setting->key]['value']);
 //                } else {
 //                    $setting->value = $newData[$setting->key]['value'];
 //                }

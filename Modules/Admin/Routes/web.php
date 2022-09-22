@@ -57,8 +57,10 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 
     Route::group(['prefix' => 'setting'], function () {
         Route::get('/', [AdminSettingController::class, '__list'])->name('admin.get.list.setting');
+        Route::post('/home', [AdminSettingController::class, 'updateSettingHome'])->name('admin.store.setting');
         Route::post('/update', [AdminSettingController::class, 'update'])->name('admin.get.update.setting');
         Route::get('/list', [AdminSettingController::class, 'listSetting'])->name('admin.get.list.setting.arr');
+        Route::get('/{action}/{id}', [AdminSettingController::class, 'action'])->name('admin.get.action.setting');
     });
 
     Route::group(['prefix' => 'contact'], function () {
