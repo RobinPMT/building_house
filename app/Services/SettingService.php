@@ -55,6 +55,11 @@ class SettingService extends ApiService
         });
     }
 
+    public function get_value_value($record, Setting $model)
+    {
+        return json_decode($model->value);
+    }
+
     public function updateKeySeting(array $data)
     {
         $newData = $data['newData'];
@@ -63,7 +68,11 @@ class SettingService extends ApiService
             $settings = services()->settingService()->whereIn('key', $keys)->get();
             foreach ($settings as $setting) {
                 $setting->name = $newData[$setting->key]['name'];
-                $setting->value = $newData[$setting->key]['value'];
+//                if ($newData[$setting->key]['key'] == 'housing') {
+                    $setting->value = json_encode($newData[$setting->key]['value']);
+//                } else {
+//                    $setting->value = $newData[$setting->key]['value'];
+//                }
                 $setting->active = boolean_value($newData[$setting->key]['active']);
                 $setting->save();
             }

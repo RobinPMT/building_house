@@ -166,6 +166,7 @@
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/extensions/swiper.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
 <script src="{{asset('admin_template/fileinput.js')}}"></script>
 <!-- END: Page Vendor JS-->
 

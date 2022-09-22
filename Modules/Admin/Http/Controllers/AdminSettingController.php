@@ -37,4 +37,14 @@ class AdminSettingController extends WebController
         return response()->json($result);
 //        return view('admin::category.index', $viewData);
     }
+
+    public function listSetting(Request $request)
+    {
+        $request->merge([
+            '_setting_fields' => 'name,key,value,active,icon',
+            '_noPagination' => 1,
+            '_orderBy' => 'id:asc',
+        ]);
+        return response()->json($this->getService()->getMany($request));
+    }
 }
