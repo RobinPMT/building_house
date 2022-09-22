@@ -6,6 +6,7 @@ use App\Services\AdminService;
 use App\Services\ContactService;
 use App\Services\LibraryService;
 use App\Services\PostService;
+use App\Services\ProductService;
 use App\Services\SettingService;
 use App\Services\UserService;
 use Psr\Container\ContainerInterface;
@@ -47,5 +48,10 @@ class MapService
     public function libraryService(): LibraryService
     {
         return c(LibraryService::class);
+    }
+
+    public function productService(): ProductService
+    {
+        return c(ProductService::class);
     }
 }

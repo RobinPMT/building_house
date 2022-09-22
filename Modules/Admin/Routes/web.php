@@ -16,6 +16,7 @@ use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
+use Modules\Admin\Http\Controllers\AdminProductController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\HomeController;
 
@@ -75,12 +76,18 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 
         Route::get('/check_slug', [AdminLibraryController::class, 'checkSlug'])->name('admin.checkSlug.library');
         Route::get('/list', [AdminLibraryController::class, '__list'])->name('admin.get.list.library');
-
         Route::post('/list', [AdminLibraryController::class, '__create'])->name('admin.store.library');
         Route::post('/list/{id}', [AdminLibraryController::class, '__update'])->name('admin.update.library');
-
         Route::delete('/delete_images/{id}/{image}', [AdminLibraryController::class, 'deleteImages'])->name('admin.delete.images.library');
+    });
 
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/', [AdminProductController::class, '__list'])->name('admin.get.list.product');
+        Route::get('/check_slug', [AdminProductController::class, 'checkSlug'])->name('admin.checkSlug.product');
+        Route::get('/{id}', [AdminProductController::class, '__find'])->name('admin.get.find.product');
+        Route::post('/', [AdminProductController::class, '__create'])->name('admin.store.product');
+        Route::post('/{id}', [AdminProductController::class, '__update'])->name('admin.update.product');
+        Route::get('/{action}/{id}', [AdminProductController::class, 'action'])->name('admin.get.action.product');
     });
 });
 

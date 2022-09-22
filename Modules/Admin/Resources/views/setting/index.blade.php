@@ -21,16 +21,18 @@
                                                 <div class="col-md-4 col-12">
                                                     <div class="form-group">
                                                         <label for="name">Tên</label>
-                                                        <input type="text" value="{{old('name',isset($item['name']) ? $item['name'] : '')}}" class="form-control" id="name" aria-describedby="name" placeholder="Tên" />
+                                                        <input type="text" value="{{old('name',isset($item['name']) ? $item['name'] : '')}}" style="height: 45px;" class="form-control" id="name" aria-describedby="name" placeholder="Tên" disabled />
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="value">Value</label>
-                                                        <input type="text" value="{{old('value',isset($item['value']) ? $item['value'] : '')}}" class="form-control" id="value" aria-describedby="value" placeholder="Value" />
+{{--                                                            <input type="text" value="{{old('value',isset($item['value']) ? $item['value'] : '')}}" class="form-control" id="value" aria-describedby="Nội dung" placeholder="Nội dung" />--}}
+                                                            <textarea class="form-control" id="value" rows="1" placeholder="Nội dung">{{old('value',isset($item['value']) ? $item['value'] : '')}}</textarea>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-2 col-12 mb-75">
                                                     <label for="active{{$item['id']}}">Success</label>
                                                     <div class="form-group custom-control custom-switch custom-switch-success">

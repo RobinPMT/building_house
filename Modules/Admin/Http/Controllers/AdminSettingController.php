@@ -25,7 +25,8 @@ class AdminSettingController extends WebController
     {
         $request->merge([
             '_setting_fields' => 'name,key,value,active,icon',
-            '_noPagination' => 1
+            '_noPagination' => 1,
+            '_orderBy' => 'id:asc',
         ]);
         return parent::__list($request, 'admin::setting.index');
     }
@@ -36,6 +37,4 @@ class AdminSettingController extends WebController
         return response()->json($result);
 //        return view('admin::category.index', $viewData);
     }
-
-    // TODO: Đổ dữ liệu ra vs cập nhật lại setting
 }

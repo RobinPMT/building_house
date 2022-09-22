@@ -55,8 +55,6 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-calendar.html"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Calendar">Calendar</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-kanban.html"><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Kanban">Kanban</span></a>
-            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Invoice</span></a>
                 <ul class="menu-content">
                     <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a>
@@ -81,6 +79,8 @@
                     <li><a class="d-flex align-items-center" href="app-ecommerce-checkout.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Checkout">Checkout</span></a>
                     </li>
                 </ul>
+            </li>
+            <li class="{{ \Request::route()->getName() == 'admin.get.list.product' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.product')}}"><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Product">Sản Phẩm</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="save"></i><span class="menu-title text-truncate" data-i18n="File Manager">Thư viện ảnh</span></a>
                 <ul class="menu-content">
