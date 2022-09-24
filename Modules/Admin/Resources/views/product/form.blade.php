@@ -10,8 +10,8 @@
             </div>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
-                    <label class="form-label" for="title">Tiêu đề <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
+                    <label class="form-label" for="title">Tên <span style="color: red">*</span></label>
+                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tên" aria-label="Tên" />
                 </div>
                 <div class="form-group">
                     <label for="slug">Slug <span style="color: red">*</span></label>
@@ -19,33 +19,41 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="description">Mô tả</label>
-                    <input type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả" />
+                    <textarea type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
                 </div>
                 <div class="form-group">
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
-                    <label for="input_image">Ảnh</label>
+                    <label for="input_image">Ảnh thiết kế</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="input_image" name="avatar">
+                        <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
                         <label class="custom-file-label" for="input_image">Chọn ảnh</label>
                     </div>
                 </div>
                 <div class="form-group">
+                    <label>Upload ảnh cho thư viện</label>
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <div class="form-group">
+                        <input type="file" name="images[]" id="file-1" multiple class="filename"
+                               data-overwrite-initial="fasle" data-min-file-count="0">
+                    </div>
+                    {{--                    <input type="file" class="form-control" name="photos[]" multiple />--}}
+                </div>
+                <div class="form-group">
                     <label class="form-label" for="content">Nội dung</label>
-                    <textarea type="text" name="content" id="content" rows="3" class="form-control dt-post" placeholder="Nội dung" aria-label="Nội dung">
-                    </textarea>
+                    <textarea type="text" name="content" id="content" rows="3" class="form-control dt-post" placeholder="Nội dung" aria-label="Nội dung"></textarea>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="title_seo">Meta Title</label>
-                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />
+{{--                <div class="form-group">--}}
+{{--                    <label class="form-label" for="title_seo">Meta Title</label>--}}
+{{--                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />--}}
 {{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="description_seo">Meta Description</label>
-                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />
-                    {{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
-                </div>
+{{--                </div>--}}
+{{--                <div class="form-group">--}}
+{{--                    <label class="form-label" for="description_seo">Meta Description</label>--}}
+{{--                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />--}}
+{{--                    --}}{{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
+{{--                </div>--}}
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

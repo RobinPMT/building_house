@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BaseRequest;
 use App\Services\ApiService;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 abstract class WebController extends BaseController
@@ -17,6 +16,12 @@ abstract class WebController extends BaseController
     public function __list(Request $request, $view)
     {
         return view($view, $this->getService()->getMany($request));
+    }
+
+    public function __lists(Request $request, $data, $view)
+    {
+        $arr = array_merge($this->getService()->getMany($request), $data);
+        return view($view, $arr);
     }
 
     public function __find(Request $request, $is_json)

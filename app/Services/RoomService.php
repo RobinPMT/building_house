@@ -3,19 +3,18 @@
 namespace App\Services;
 
 use App\Models\Admin;
-use App\Models\Post;
-use App\Models\Product;
+use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 
-class ProductService extends ApiService
+class RoomService extends ApiService
 {
-    protected $model = Product::class;
+    protected $model = Room::class;
 
     protected $relations = [
         'creator'
     ];
 
-    protected $fieldsName = '_post_fields';
+    protected $fieldsName = '_room_fields';
 
     protected function getOrderbyableFields(): array
     {
@@ -30,8 +29,7 @@ class ProductService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price',
-            'arr_active', 'arr_hot', 'avatar_design', 'description'
+            'title', 'active', 'author_id', 'arr_active'
         ];
     }
 
@@ -51,24 +49,14 @@ class ProductService extends ApiService
 
     public function includeCreator()
     {
-        return [services()->adminService(), 'item', function (Product $model) {
+        return [services()->adminService(), 'item', function (Room $model) {
             return $model->creator;
         }];
     }
 
-    public function get_arr_active_value($record, Product $model)
+    public function get_arr_active_value($record, Room $model)
     {
         return $model->getStatus();
-    }
-
-    public function get_arr_hot_value($record, Product $model)
-    {
-        return $model->getHot();
-    }
-
-    public function get_avatar_design_value($record, Product $model)
-    {
-        return pare_url_file($model->avatar_design);
     }
 
     protected function newQuery()
@@ -86,18 +74,6 @@ class ProductService extends ApiService
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
-            $model->hot = $model->hot == 'on' ? true : false;
-            $this->uploadFile($model);
         });
-    }
-
-    public function uploadFile(Post $model)
-    {
-        if ($this->getApiRequest()->hasFile('avatar')) {
-            $file = upload_image('avatar');
-            if (isset($file['name'])) {
-                $model->avatar = $file['name'];
-            }
-        }
     }
 }

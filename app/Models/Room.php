@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Support\Arr;
 
-class SettingKeyProduct extends Base
+class Room extends Base
 {
-    protected $table   = 'setting_keys_tables';
-
-//    protected $guarded =  ['*'];
+    protected $table   = 'rooms';
 
     protected $fillable = [
-        'name', 'key', 'tag_type', 'active', 'html'
+        'title', 'slug', 'icon', 'active',
+        'author_id'
     ];
 
-    const ACTIVE = 1;
+    const STATUS_PUBLIC = 1;
 
-    const NOT_ACTIVE = 0;
+    const STATUS_PRIVATE = 0;
 
     protected $_active = [
         1 => [
@@ -34,8 +33,8 @@ class SettingKeyProduct extends Base
         return Arr::get($this->_active, $this->active, '[N\A]');
     }
 
-    public function products()
+    public function creator()
     {
-        return $this->morphedByMany(Product::class, 'setting_key_able');
+        return $this->belongsTo(Admin::class, 'author_id');
     }
 }

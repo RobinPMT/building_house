@@ -18,6 +18,7 @@ use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
+use Modules\Admin\Http\Controllers\AdminRoomController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
 use Modules\Admin\Http\Controllers\HomeController;
@@ -87,7 +88,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     });
 
     Route::group(['prefix' => 'product'], function () {
-        Route::get('/', [AdminProductController::class, '__list'])->name('admin.get.list.product');
+        Route::get('/', [AdminProductController::class, '__lists'])->name('admin.get.list.product');
         Route::get('/check_slug', [AdminProductController::class, 'checkSlug'])->name('admin.checkSlug.product');
         Route::get('/{id}', [AdminProductController::class, '__find'])->name('admin.get.find.product');
         Route::post('/', [AdminProductController::class, '__create'])->name('admin.store.product');
@@ -110,5 +111,23 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminSettingKeyProductController::class, '__create'])->name('admin.store.setting_key_product');
         Route::post('/{id}', [AdminSettingKeyProductController::class, '__update'])->name('admin.update.setting_key_product');
         Route::get('/{action}/{id}', [AdminSettingKeyProductController::class, 'action'])->name('admin.get.action.setting_key_product');
+    });
+
+    Route::group(['prefix' => 'room'], function () {
+        Route::get('/', [AdminRoomController::class, '__list'])->name('admin.get.list.room');
+        Route::get('/check_slug', [AdminRoomController::class, 'checkSlug'])->name('admin.checkSlug.room');
+        Route::get('/{id}', [AdminRoomController::class, '__find'])->name('admin.get.find.room');
+        Route::post('/', [AdminRoomController::class, '__create'])->name('admin.store.room');
+        Route::post('/{id}', [AdminRoomController::class, '__update'])->name('admin.update.room');
+        Route::get('/{action}/{id}', [AdminRoomController::class, 'action'])->name('admin.get.action.room');
+    });
+
+    Route::group(['prefix' => 'attribute'], function () {
+        Route::get('/', [AdminRoomController::class, '__list'])->name('admin.get.list.attribute');
+        Route::get('/check_slug', [AdminRoomController::class, 'checkSlug'])->name('admin.checkSlug.attribute');
+        Route::get('/{id}', [AdminRoomController::class, '__find'])->name('admin.get.find.attribute');
+        Route::post('/', [AdminRoomController::class, '__create'])->name('admin.store.attribute');
+        Route::post('/{id}', [AdminRoomController::class, '__update'])->name('admin.update.attribute');
+        Route::get('/{action}/{id}', [AdminRoomController::class, 'action'])->name('admin.get.action.attribute');
     });
 });

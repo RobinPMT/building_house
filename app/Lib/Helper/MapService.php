@@ -8,6 +8,7 @@ use App\Services\ContactService;
 use App\Services\LibraryService;
 use App\Services\PostService;
 use App\Services\ProductService;
+use App\Services\RoomService;
 use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
 use App\Services\UserService;
@@ -65,5 +66,10 @@ class MapService
     public function settingKeyProductService(): SettingKeyProductService
     {
         return c(SettingKeyProductService::class);
+    }
+
+    public function roomService(): RoomService
+    {
+        return c(RoomService::class);
     }
 }

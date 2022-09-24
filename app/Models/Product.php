@@ -14,13 +14,7 @@ class Product extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'slug',
-        'technology', 'performance', 'device',
-        'is_electricity_sys', 'is_water_sys', 'is_kitchen',
-
-
-        'description', 'content', 'active', 'hot',
-        'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
+        'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description'
     ];
 
     const ACTIVE = 1;
@@ -66,6 +60,11 @@ class Product extends Base
     public function creator()
     {
         return $this->belongsTo(Admin::class, 'author_id');
+    }
+
+    public function keys()
+    {
+        return $this->morphToMany(SettingKeyProduct::class, 'setting_key_able');
     }
 
     /**

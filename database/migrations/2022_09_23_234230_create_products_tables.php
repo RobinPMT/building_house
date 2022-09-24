@@ -16,10 +16,15 @@ class CreateProductsTables extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->string('avatar_design')->nullable();
             $table->unsignedDouble('price')->default(0);
             $table->tinyInteger('active')->default(1)->index();
             $table->tinyInteger('hot')->default(0)->index();
+            $table->bigInteger('category_id')->nullable();
+            $table->longText('description')->nullable();
             $table->longText('arr_image')->nullable();
+            $table->string('slug')->index();
+            $table->bigInteger('author_id')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +36,6 @@ class CreateProductsTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_tables');
+        Schema::dropIfExists('products');
     }
 }

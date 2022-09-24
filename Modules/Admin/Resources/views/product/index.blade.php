@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{dd($data)}}
+                            {{dd($settingkeys)}}
 {{--                        @if(isset($data, $status) && $status)--}}
 {{--                            @foreach($data as $stt => $item)--}}
 {{--                                <tr id="sid{{$item['id']}}">--}}
@@ -113,12 +113,29 @@
 @stop
 @section('script')
     <script>
-        CKEDITOR.replace('content');
+        // CKEDITOR.replace('content');
+        // CKEDITOR.replace('editor1', {
+        //     height: 150,
+        //     removeButtons: 'PasteFromWord'
+        // });
     </script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+            });
+            $("#file-1").fileinput({
+                theme: 'fa5',
+                showUpload: false,
+                showRemove:true,
+                initialPreviewAsData: true,
+                showCancel: true,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg','png','gif'],
+                overwriteInitial: false,
+                maxFileSize: 2000,
+                maxFileNum: 20,
+                minFileNum: 2,
             });
         });
         // ClassicEditor

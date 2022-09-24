@@ -6,6 +6,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use App\Models\Post;
+use App\Models\SettingKeyProduct;
 use App\Services\ProductService;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class AdminProductController extends WebController
         return request();
     }
 
-    public function __list(Request $request, $view = null)
+    public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
             '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot',
@@ -34,7 +35,11 @@ class AdminProductController extends WebController
             '_admin_fields' => 'name'
 //            '_filter' => 'user_not_myself:1;'
         ]);
-        return parent::__list($request, 'admin::product.index');
+        $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->select('name', 'key', 'html')->get()->toArray();
+        $data = [
+            'settingkeys' => $settingkeys
+        ];
+        return parent::__lists($request, $data, 'admin::product.index');
 //        return view('admin::category.index', $viewData);
     }
 

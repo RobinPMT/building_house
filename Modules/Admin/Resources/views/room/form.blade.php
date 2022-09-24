@@ -6,26 +6,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             <div class="modal-header mb-1">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
-                {{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
+{{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
             </div>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
-                    <label class="form-label" for="name">Tiêu đề <span style="color: red">*</span></label>
-                    <input type="text" name="name" class="form-control dt-full-name" id="name" placeholder="Tên" aria-label="Tên" />
-                </div>
-                <div class="form-group">
-                    <label for="key">Key <span style="color: red">*</span></label>
-                    <input name="key" type="text" class="form-control" id="key" placeholder="Key">
-                </div>
-                <div class="form-group">
-                    <label for="tag_type">Loại thẻ <span style="color: red">*</span></label>
-
-                    <select name="tag_type" id="tag_type" class="select2 form-control form-control-lg select-single">
-                        <option value="input" selected>Input</option>
-                        <option value="textarea">Textarea</option>
-                        <option value="checkbox">Checkbox</option>
-                    </select>
-
+                    <label class="form-label" for="title">Tên phòng <span style="color: red">*</span></label>
+                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tên phòng" aria-label="Tên phòng" />
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
