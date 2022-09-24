@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminAttributeController;
 use Modules\Admin\Http\Controllers\AdminCategoryController;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
@@ -123,11 +124,11 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     });
 
     Route::group(['prefix' => 'attribute'], function () {
-        Route::get('/', [AdminRoomController::class, '__list'])->name('admin.get.list.attribute');
-        Route::get('/check_slug', [AdminRoomController::class, 'checkSlug'])->name('admin.checkSlug.attribute');
-        Route::get('/{id}', [AdminRoomController::class, '__find'])->name('admin.get.find.attribute');
-        Route::post('/', [AdminRoomController::class, '__create'])->name('admin.store.attribute');
-        Route::post('/{id}', [AdminRoomController::class, '__update'])->name('admin.update.attribute');
-        Route::get('/{action}/{id}', [AdminRoomController::class, 'action'])->name('admin.get.action.attribute');
+        Route::get('/', [AdminAttributeController::class, '__list'])->name('admin.get.list.attribute');
+        Route::get('/check_slug', [AdminAttributeController::class, 'checkSlug'])->name('admin.checkSlug.attribute');
+        Route::get('/{id}', [AdminAttributeController::class, '__find'])->name('admin.get.find.attribute');
+        Route::post('/', [AdminAttributeController::class, '__create'])->name('admin.store.attribute');
+        Route::post('/{id}', [AdminAttributeController::class, '__update'])->name('admin.update.attribute');
+        Route::get('/{action}/{id}', [AdminAttributeController::class, 'action'])->name('admin.get.action.attribute');
     });
 });

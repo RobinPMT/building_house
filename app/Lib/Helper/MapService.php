@@ -3,6 +3,7 @@
 namespace App\Lib\Helper;
 
 use App\Services\AdminService;
+use App\Services\AttributeService;
 use App\Services\CategoryService;
 use App\Services\ContactService;
 use App\Services\LibraryService;
@@ -71,5 +72,10 @@ class MapService
     public function roomService(): RoomService
     {
         return c(RoomService::class);
+    }
+
+    public function attributeService(): AttributeService
+    {
+        return c(AttributeService::class);
     }
 }

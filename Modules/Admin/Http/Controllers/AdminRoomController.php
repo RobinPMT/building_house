@@ -74,4 +74,14 @@ class AdminRoomController extends WebController
         }
         return redirect()->back()->with('success', $messages);
     }
+
+    public static function showRooms()
+    {
+        $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title')->get()->toArray();
+        foreach ($rooms as $key => $item) {
+            echo '<option value="'.$item['id'].'">';
+            echo  $item['title'];
+            echo '</option>';
+        }
+    }
 }

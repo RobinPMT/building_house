@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Support\Arr;
+
+class Attribute extends Base
+{
+    protected $table   = 'attributes';
+
+    protected $fillable = [
+        'title', 'type', 'room_id', 'avatar', 'active',
+        'author_id', 'arr_value', 'arr_image'
+    ];
+
+    const TYPE_SYSTEM = 'system';
+
+    const TYPE_STYLE = 'style';
+
+    const STATUS_PUBLIC = 1;
+
+    const STATUS_PRIVATE = 0;
+
+    protected $_active = [
+        1 => [
+            'name' => 'Hoạt động',
+            'class' => 'badge-light-success'
+        ],
+        0 => [
+            'name' => 'Tắt',
+            'class' => 'badge-light-warning'
+        ],
+    ];
+
+    public function getStatus()
+    {
+        return Arr::get($this->_active, $this->active, '[N\A]');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(Admin::class, 'author_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_id')->select('id', 'title');
+    }
+}
