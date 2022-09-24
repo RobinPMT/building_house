@@ -8,6 +8,7 @@ use App\Services\ContactService;
 use App\Services\LibraryService;
 use App\Services\PostService;
 use App\Services\ProductService;
+use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
 use App\Services\UserService;
 use Psr\Container\ContainerInterface;
@@ -59,5 +60,10 @@ class MapService
     public function categoryService(): CategoryService
     {
         return c(CategoryService::class);
+    }
+
+    public function settingKeyProductService(): SettingKeyProductService
+    {
+        return c(SettingKeyProductService::class);
     }
 }

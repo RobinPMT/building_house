@@ -19,6 +19,7 @@ use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
+use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
 use Modules\Admin\Http\Controllers\HomeController;
 
 //Route::prefix('admin')->group(function () {
@@ -102,6 +103,12 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/{id}', [AdminCategoryController::class, '__update'])->name('admin.update.category');
         Route::get('/{action}/{id}', [AdminCategoryController::class, 'action'])->name('admin.get.action.category');
     });
+
+    Route::group(['prefix' => 'setting_key_product'], function () {
+        Route::get('/', [AdminSettingKeyProductController::class, '__list'])->name('admin.get.list.setting_key_product');
+        Route::get('/{id}', [AdminSettingKeyProductController::class, '__find'])->name('admin.get.find.setting_key_product');
+        Route::post('/', [AdminSettingKeyProductController::class, '__create'])->name('admin.store.setting_key_product');
+        Route::post('/{id}', [AdminSettingKeyProductController::class, '__update'])->name('admin.update.setting_key_product');
+        Route::get('/{action}/{id}', [AdminSettingKeyProductController::class, 'action'])->name('admin.get.action.setting_key_product');
+    });
 });
-
-
