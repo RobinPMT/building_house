@@ -1,7 +1,7 @@
 
 <div class="modal modal-slide-in new-record-modal fade" id="modals-system-in" style="display: none;" aria-hidden="true">
     <div class="modal-dialog sidebar-lg">
-        <form class="add-new-record modal-content pt-0 invoice-repeater" action="" id="form-crud-system" method="POST" role="form" enctype="multipart/form-data">
+        <form class="add-new-record-system modal-content pt-0 invoice-repeater" action="" id="form-crud-system" method="POST" role="form" enctype="multipart/form-data">
             @csrf
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             <div class="modal-header mb-1">
@@ -10,13 +10,13 @@
             </div>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
-                    <label class="form-label" for="title">Tên thuộc tính <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
+                    <label class="form-label" for="title-system">Tên thuộc tính <span style="color: red">*</span></label>
+                    <input type="text" name="title" class="form-control dt-full-name" id="title-system" placeholder="Tiêu đề" aria-label="Tiêu đề" />
                 </div>
                 <div class="form-group">
-                    <label for="room_id">Chọn phòng <span style="color: red">*</span></label>
+                    <label for="room_id-system">Chọn phòng <span style="color: red">*</span></label>
 
-                    <select name="room_id" id="room_id" class="select2 form-control form-control-lg select-single">
+                    <select name="room_id" id="room_id-system" class="select2 form-control form-control-lg select-single">
                         <option value="" selected>Chọn phòng</option>
                         @php echo Modules\Admin\Http\Controllers\AdminRoomController::showRooms();  @endphp
                     </select>
@@ -80,8 +80,8 @@
 {{--                </div>--}}
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">
-                        <label class="custom-control-label" for="checkbox_active">Public</label>
+                        <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active-system">
+                        <label class="custom-control-label" for="checkbox_active-system">Public</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary data-submit mr-1 waves-effect waves-float waves-light">Lưu</button>

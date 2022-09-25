@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Admin;
 use App\Models\Attribute;
-use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class AttributeService extends ApiService
@@ -81,6 +80,17 @@ class AttributeService extends ApiService
         }
     }
 
+    public function get_arr_image_value($record, Attribute $model)
+    {
+        if (isset($model->arr_image) && $model->type == Attribute::TYPE_STYLE) {
+            return array_map(function ($item) {
+                $item->image = pare_url_file($item->image, 'attributes');
+                return $item;
+            }, json_decode($model->arr_image));
+//            return json_decode($model->arr_image);
+        }
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();
@@ -103,6 +113,8 @@ class AttributeService extends ApiService
         $this->on('saved', function ($model) use ($user) {
             if ($model->type == Attribute::TYPE_SYSTEM) {
                 $this->updateSystemKey($model);
+            } else {
+                $this->updateStyleKey($model);
             }
         });
     }
@@ -111,7 +123,7 @@ class AttributeService extends ApiService
     {
         $arr_new = [];
         $data_new = $model->getRaw('data_new');
-        if (is_array($data_new) && count($data_new)) {
+        if (is_array($data_new) && count($data_new) > 0) {
             $arr_new = array_map(function ($item) {
                 if (isset($item['value'])) {
                     if (!isset($item['key'])) {
@@ -127,13 +139,47 @@ class AttributeService extends ApiService
         $model->save();
     }
 
-    public function uploadFile(Post $model)
+    public function updateStyleKey(Attribute $model)
     {
-        if ($this->getApiRequest()->hasFile('avatar')) {
-            $file = upload_image('avatar');
-            if (isset($file['name'])) {
-                $model->avatar = $file['name'];
+        $data = $this->uploadArrImages($model);
+        $arr_new = [];
+        $arr_old = [];
+        $data_new = $model->getRaw('data_new');
+        $data_old = json_decode($model->arr_image);
+        if (is_array($data_old) && count($data_old) > 0) {
+            foreach ($data_old as $item) {
+                $arr_old[$item->key] = $item;
             }
         }
+        if (is_array($data_new) && count($data_new) > 0) {
+            $arr_new = array_map(function ($item, $i) use ($data_new, $arr_old, $data) {
+                if (isset($item['value'])) {
+                    if (!isset($item['key'])) {
+                        $item['key'] = md5(microtime().rand());
+                        $item['image'] = $data[$i];
+                    } else {
+                        if (is_array($arr_old) && count($arr_old) > 0) {
+                            $item['image'] = $arr_old[$item['key']]->image;
+                        }
+                    }
+                    return  $item;
+                }
+                return null;
+            }, $data_new, array_keys($data_new));
+        }
+        $arr_new =  array_filter($arr_new);
+        $model->arr_image = json_encode($arr_new);
+        $model->save();
+    }
+
+    public function uploadArrImages(Attribute $model)
+    {
+        if ($this->getApiRequest()->hasFile('images')) {
+            $files = upload_images('images', 'attributes');
+            return array_map(function ($item) {
+                return $item['name'];
+            }, $files);
+        }
+        return null;
     }
 }

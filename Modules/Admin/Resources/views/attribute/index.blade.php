@@ -7,7 +7,7 @@
                     <div class="head-label"><h6 class="mb-0">DataTable with Buttons</h6></div>
                     <div class="dt-action-buttons text-right">
                         <div class="dt-buttons d-inline-flex">
-                            <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modal-style">
+                            <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-style-in" type-target="style">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-50 font-small-4">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -18,7 +18,7 @@
                             </button>
                         </div>
                         <div class="dt-buttons d-inline-flex">
-                            <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-system-in">
+                            <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-system-in" type-target="system">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-50 font-small-4">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -79,7 +79,7 @@
                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
                                             </svg>
                                         </a>
-                                        <a href="{{route('admin.get.find.attribute', $item['id'])}}" data-url-update="{{route('admin.update.attribute', $item['id'])}}" class="item-edit" data-toggle="modal" data-target="#modals-{{$item['type']}}-in">
+                                        <a href="{{route('admin.get.find.attribute', $item['id'])}}" data-url-update="{{route('admin.update.attribute', $item['id'])}}" class="item-edit" data-toggle="modal" type-target="{{$item['type']}}" data-target="#modals-{{$item['type']}}-in">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4">
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -104,6 +104,7 @@
                     </tfoot>
                 </table>
                 @include("admin::attribute.form")
+                @include("admin::attribute.form_style")
             </div>
 
         </div>
@@ -113,6 +114,79 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $('input#file-1').change(function(){
+                var files = $(this)[0].files;
+                console.log(files)
+                let html = '';
+                for (let i = 0; i <  files.length; i++ ) {
+                    html += `
+                        <div data-repeater-item="" style="">
+                            <label for="">Thuộc tính mới</label>
+                            <div class="row d-flex align-items-end">
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="value">Tên màu sác</label>
+                                        <input type="text" name="data_new[${i}][value]" class="form-control" id="value" aria-describedby="Nội dung" placeholder="Nội dung">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="color">Chọn màu</label>
+                                        <input type="color" name="data_new[${i}][color]" class="form-control" id="color" aria-describedby="Nội dung" placeholder="Nội dung">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12 mb-50">
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-danger text-nowrap px-1 waves-effect" data-repeater-delete="" type="button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x mr-25"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                            <span>Delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    `;
+                }
+                $(".data_new_style").html(html);
+            });
+            // style
+            $('.style-repeater').repeater({
+                defaultValues: {
+                    'type': 'home',
+                },
+                initEmpty: true,
+                show: function () {
+                    $(this).slideDown();
+                },
+                hide: function (deleteElement) {
+                    if (confirm('Bạn có muốn xóa thuộc tính này?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                }
+            });
+            $(".filename").fileinput({
+                theme: 'fa5',
+                showUpload: false,
+                showRemove:true,
+                initialPreviewAsData: true,
+                showCancel: true,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg','png','gif'],
+                overwriteInitial: false,
+                maxFileSize: 2000,
+                maxFileNum: 20,
+                minFileNum: 2,
+            });
+
+            // $(".fileinput-remove-button").click(function (event) {
+            //     event.preventDefault();
+            //     $(".data_new_style").remove();
+            // });
+
+
             $('#example').DataTable({
                 responsive: true,
             });
@@ -129,7 +203,7 @@
             $( "#parent_id" ).change(function () {
                 $("#select2-parent_id-container").text($( "#parent_id option:selected" ).text().trim());
             });
-            // form repeater jquery
+            // form repeater jquery system
             $('.invoice-repeater').repeater({
                 defaultValues: {
                     'type': 'home',
@@ -142,7 +216,7 @@
                     // }
                 },
                 hide: function (deleteElement) {
-                    if (confirm('Are you sure you want to delete this element?')) {
+                    if (confirm('Bạn có muốn xóa thuộc tính này?')) {
                         $(this).slideUp(deleteElement);
                     }
                 }
@@ -220,7 +294,7 @@
 
         //edit
         $(document).ready(function() {
-            function edit(url, data_url_update) {
+            function edit(url, data_url_update, target) {
                 // $("#"+modal).modal('show');
                 $.ajax({
                     type: 'GET',
@@ -228,19 +302,69 @@
                     success: function (response) {
                         console.log(response)
                         if(response.status) {
-                            $("#room_id").val(response.data.room_id).change();
-                            $('#title').val(response.data.title);
+                            $("#room_id-"+target).val(response.data.room_id).change();
+                            $('#title-'+target).val(response.data.title);
                             if(response.data.active == '1'){
-                                $("form #checkbox_active").attr('checked', true)
+                                $("form #checkbox_active-"+target).attr('checked', true)
                             }
                             if(response.data.arr_value) {
                                 get_arr_value(response.data.arr_value);
                             }
+                            if(response.data.arr_image) {
+                                get_arr_image(response.data.arr_image);
+                            }
                             $('#exampleModalLabel').text('Cập nhật hệ thống');
-                            $('#form-crud-system').attr('action', data_url_update);
+                            $('#example-style').text('Cập nhật kiểu dáng');
+                            $('#form-crud-'+target).attr('action', data_url_update);
                         }
                     }
                 })
+            }
+            function get_arr_image(data){
+                let arr_images = data;
+                console.log(arr_images);
+                let html = '';
+                if(arr_images.length > 0 ) {
+                    for (let j = 0; j < arr_images.length; j++) {
+                        html += `
+                             <div data-repeater-item id="style-${arr_images[j]['key']}">
+                            <label for="">Thuộc tính</label>
+                            <div class="row d-flex align-items-end">
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label for="value">Tên màu sác</label>
+                                        <input type="text" name="data_new[${arr_images[j]['key']}][value]" value="${arr_images[j]['value']}" class="form-control" id="value" aria-describedby="Nội dung" placeholder="Nội dung">
+                                    </div>
+                                </div>
+                                <input type="text" name="data_new[${arr_images[j]['key']}][key]" value="${arr_images[j]['key']}" class="form-control" id="key" hidden>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label for="color">Chọn màu</label>
+                                        <input type="color" name="data_new[${arr_images[j]['key']}][color]" value="${arr_images[j]['color']}" class="form-control" id="color" aria-describedby="Nội dung" placeholder="Nội dung">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="form-group">
+                                        <label for="image">Ảnh</label>
+                                         <img id="image" src="${arr_images[j]['image']}" alt="" width="200px" height="160px">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 col-12 mb-50">
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-danger text-nowrap px-1 waves-effect" data-repeater-delete type="button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x mr-25"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                            <span>Delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        `;
+                    }
+                    $(".data_old_style").html(html);
+                }
             }
             function get_arr_value(data){
                 let arr_values = data;
@@ -299,20 +423,23 @@
                 $(".data_new").html(html);
 
             }
+
             $('table tbody').on( 'click', 'li span a.item-edit', function (event) {
                 event.preventDefault();
                 let $this = $(this);
                 let url = $this.attr('href');
+                let target = $this.attr('type-target');
                 let data_url_update = $this.attr('data-url-update');
-                edit(url, data_url_update)
+                edit(url, data_url_update, target)
             });
             $(".item-edit").click(function (event) {
                 event.preventDefault();
                 let $this = $(this);
                 let url = $this.attr('href');
-                let modal = $this.attr('data-target');
+                // let modal = $this.attr('data-target');
+                let target = $this.attr('type-target');
                 let data_url_update = $this.attr('data-url-update');
-                edit(url, data_url_update)
+                edit(url, data_url_update, target)
             });
         });
 
@@ -321,40 +448,47 @@
         $(document).ready(function() {
             $(".item-add").click(function (event) {
                 // console.log($('#form-crud').attr('action'));
-                if($('#form-crud-system').attr('action') !== '{{route('admin.store.attribute')}}'){
-                    $('#form-crud-system').trigger("reset");
+                let $this = $(this);
+                let target = $this.attr('type-target');
+                console.log(target);
+                if($('#form-crud-'+target).attr('action') !== '{{route('admin.store.attribute')}}'){
+                    $('#form-crud-'+target).trigger("reset");
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
-                $('#form-crud-system').attr('action', '{{route('admin.store.attribute')}}');
+                $('#form-crud-'+target).attr('action', '{{route('admin.store.attribute')}}');
                 $('#exampleModalLabel').text('Thêm mới hệ thống');
+                $('#example-style').text('Thêm mới kiểu dáng');
+
+                let newUserForm = $(".add-new-record-"+target);
+                console.log(newUserForm);
+                // let newUserSidebar = $(".new-user-modal");
+                // Form Validation
+                if (newUserForm.length) {
+                    newUserForm.validate({
+                        errorClass: "error",
+                        rules: {
+                            title: {
+                                required: true,
+                            },
+                            room_id: {
+                                required: true,
+                            },
+                        },
+                        messages: {
+                            title: {
+                                required: "Vui lòng không bỏ trống!"
+                            },
+                            room_id: {
+                                required: "Vui lòng không bỏ trống!"
+                            },
+                        }
+                    });
+                }
             });
 
-            let newUserForm = $(".add-new-record");
-            // let newUserSidebar = $(".new-user-modal");
-            // Form Validation
-            if (newUserForm.length) {
-                newUserForm.validate({
-                    errorClass: "error",
-                    rules: {
-                        title: {
-                            required: true,
-                        },
-                        room_id: {
-                            required: true,
-                        },
-                    },
-                    messages: {
-                        title: {
-                            required: "Vui lòng không bỏ trống!"
-                        },
-                        room_id: {
-                            required: "Vui lòng không bỏ trống!"
-                        },
-                    }
-                });
-            }
+
         });
 
     </script>
