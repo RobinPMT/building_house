@@ -9,28 +9,95 @@
 {{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
             </div>
             <div class="modal-body flex-grow-1">
-                <div class="form-group">
-                    <label class="form-label" for="title">Tên <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tên" aria-label="Tên" />
-                </div>
-                <div class="form-group">
-                    <label for="slug">Slug <span style="color: red">*</span></label>
-                    <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="description">Mô tả</label>
-                    <textarea type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
-                </div>
-                <div class="form-group">
-                    <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
-                </div>
-                <div class="form-group">
-                    <label for="input_image">Ảnh thiết kế</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
-                        <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                <div class="row d-flex align-items-end">
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="title">Tên <span style="color: red">*</span></label>
+                            <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tên" aria-label="Tên" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label for="slug">Slug <span style="color: red">*</span></label>
+                            <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
+                        </div>
                     </div>
                 </div>
+                <div class="row d-flex align-items-end">
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="description">Mô tả</label>
+                            <textarea type="text" name="description" id="description" rows="4" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="description">Kích thước</label>
+                            <hr/>
+                            <div class="demo-inline-spacing">
+                                <div class="form-group">
+                                    <label for="longs">Chiều dài</label>
+                                    <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                                        <input type="text" class="touchspin" name="longs" id="longs" value="0" data-bts-step="0.5" data-bts-decimals="2" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="width">Chiều Rộng</label>
+                                    <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                                        <input type="text" class="touchspin" name="width" id="width" value="0" data-bts-step="0.5" data-bts-decimals="2" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="height">Chiều Cao</label>
+                                    <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                                        <input type="text" class="touchspin" name="height" id="height" value="0" data-bts-step="0.5" data-bts-decimals="2" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="area">Diện tích</label>
+                                    <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                                        <input type="text" class="touchspin" name="area" id="area" value="0" data-bts-step="0.5" data-bts-decimals="2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
+                        </div>
+                        <div class="form-group">
+                            <label for="input_image">Ảnh Design</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
+                                <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                    <div class="col-4">
+                                        <div class="demo-inline-spacing">
+                                            <div class="form-group">
+                                                <label for="room_number" style="">Số phòng</label>
+                                                <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                                                    <input type="text" class="touchspin" name="room_number" id="room_number" value="0" data-bts-step="1" data-bts-decimals="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8" style="margin-top: 12px !important">
+                                        <div class="form-group" style="">
+                                            <label for="room_description">Mô tả phòng</label>
+                                            <input name="room_description" type="text" class="form-control" id="room_description" placeholder="2 phòng ngủ, 1 phòng bếp, 1 phòng vệ sinh">
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label>Upload ảnh cho thư viện</label>
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -39,10 +106,6 @@
                                data-overwrite-initial="fasle" data-min-file-count="0">
                     </div>
                     {{--                    <input type="file" class="form-control" name="photos[]" multiple />--}}
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="content">Nội dung</label>
-                    <textarea type="text" name="content" id="content" rows="3" class="form-control dt-post" placeholder="Nội dung" aria-label="Nội dung"></textarea>
                 </div>
 {{--                <div class="form-group">--}}
 {{--                    <label class="form-label" for="title_seo">Meta Title</label>--}}

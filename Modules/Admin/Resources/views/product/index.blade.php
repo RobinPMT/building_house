@@ -23,8 +23,8 @@
                     <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tiêu đề</th>
-                        <th>Ảnh</th>
+                        <th>Tên</th>
+                        <th>Ảnh Design</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
@@ -32,7 +32,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                            {{dd($settingkeys)}}
 {{--                        @if(isset($data, $status) && $status)--}}
 {{--                            @foreach($data as $stt => $item)--}}
 {{--                                <tr id="sid{{$item['id']}}">--}}
@@ -95,8 +94,8 @@
                     <tfoot>
                     <tr>
                         <th>STT</th>
-                        <th>Tiêu đề</th>
-                        <th>Ảnh</th>
+                        <th>Tên</th>
+                        <th>Ảnh Design</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
@@ -228,7 +227,7 @@
                             $('#description').val(response.data.description);
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
-                            CKEDITOR.instances.content.setData( response.data.content);
+                            // CKEDITOR.instances.content.setData( response.data.content);
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);
                             $('#output_image').attr('src', response.data.avatar);
@@ -285,7 +284,7 @@
             $(".item-add").click(function (event) {
                 if($('#form-crud').attr('action') !== '{{route('admin.store.product')}}'){
                     $('#form-crud').trigger("reset");
-                    CKEDITOR.instances.content.setData('<p>Viết nội dung ở đây</p>');
+                    // CKEDITOR.instances.content.setData('<p>Viết nội dung ở đây</p>');
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });

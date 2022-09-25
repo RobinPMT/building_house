@@ -14,7 +14,8 @@ class Product extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description'
+        'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description',
+        'longs', 'width', 'height', 'area', 'room_number', 'room_description'
     ];
 
     const ACTIVE = 1;

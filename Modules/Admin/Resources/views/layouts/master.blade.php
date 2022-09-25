@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/swiper.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css')}}">
     <link rel="stylesheet" href="{{asset('admin_template/fileinput.css')}}">
     <!-- END: Vendor CSS-->
 
@@ -167,6 +168,7 @@
 <script src="{{asset('admin_template/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/extensions/swiper.min.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js')}}"></script>
 <script src="{{asset('admin_template/fileinput.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
@@ -178,6 +180,7 @@
 <!-- BEGIN: Page JS-->
 <script src="{{asset('admin_template/app-assets/js/scripts/forms/form-select2.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/js/scripts/forms/form-validation.js')}}"></script>
+<script src="{{asset('admin_template/app-assets/js/scripts/forms/form-number-input.js')}}"></script>
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>--}}
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/app-user-list.js')}}"></script>--}}
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/tables/table-datatables-basic.js')}}"></script>--}}

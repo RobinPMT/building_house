@@ -12,6 +12,8 @@
 
   // Default Spin
   $('.touchspin').TouchSpin({
+    min: 0,
+    max: 1000000000,
     buttondown_class: 'btn btn-primary',
     buttonup_class: 'btn btn-primary',
     buttondown_txt: feather.icons['minus'].toSvg(),

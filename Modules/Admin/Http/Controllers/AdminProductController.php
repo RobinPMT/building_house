@@ -30,7 +30,7 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description',
             '_relations' => 'creator',
             '_admin_fields' => 'name'
 //            '_filter' => 'user_not_myself:1;'
@@ -52,7 +52,7 @@ class AdminProductController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description',
             '_relations' => 'creator'
         ]);
         return parent::__find($request, true);

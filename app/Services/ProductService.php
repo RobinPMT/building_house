@@ -31,7 +31,8 @@ class ProductService extends ApiService
     {
         return [
             'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price',
-            'arr_active', 'arr_hot', 'avatar_design', 'description'
+            'arr_active', 'arr_hot', 'avatar_design', 'description',
+            'longs', 'width', 'height', 'area', 'room_number', 'room_description'
         ];
     }
 
