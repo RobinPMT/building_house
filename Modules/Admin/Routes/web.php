@@ -95,6 +95,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminProductController::class, '__create'])->name('admin.store.product');
         Route::post('/{id}', [AdminProductController::class, '__update'])->name('admin.update.product');
         Route::get('/{action}/{id}', [AdminProductController::class, 'action'])->name('admin.get.action.product');
+        Route::get('/action_images/{id}/{image}', [AdminProductController::class, 'actionImages'])->name('admin.action.images.product');
         Route::delete('/delete_images/{id}/{image}', [AdminProductController::class, 'deleteImages'])->name('admin.delete.images.product');
     });
 

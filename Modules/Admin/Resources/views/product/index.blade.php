@@ -51,7 +51,7 @@
                                         </ul>
                                     </td>
                                     <td style="">
-                                        <a class="badge badge-pill badge-light-primary item-detail" href="{{route('admin.delete.images.product', [$item['id'], ''])}}" data-title="{{$item['title']}}" data-arr-images="{{$item['arr_image']}}" data-toggle="modal" data-target="#detail-image">
+                                        <a class="badge badge-pill badge-light-primary item-detail" action-image="{{route('admin.action.images.product', [$item['id'], ''])}}" href="{{route('admin.delete.images.product', [$item['id'], ''])}}" data-title="{{$item['title']}}" data-arr-images="{{$item['arr_image']}}" data-toggle="modal" data-target="#detail-image">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50">
                                                 <polyline points="21 8 21 21 3 21 3 8"></polyline>
                                                 <rect x="1" y="3" width="22" height="5"></rect>
@@ -206,9 +206,10 @@
 
         // show item detail
         $(document).ready(function() {
-            function detail(title, data_images, url) {
+            function detail(title, data_images, url, url_action_image) {
                 $(".content__title").text(title);
                 let arr_images = JSON.parse(data_images);
+                console.log(arr_images)
                 let html = '';
                 for (let i = 0; i < arr_images.length; i++) {
                     html +=`
@@ -216,16 +217,19 @@
                             <div class="kv-zoom-cache">
                                 <div class="file-preview-frame krajee-default kv-zoom-thumb"  >
                                     <div class="kv-file-content">
-                                        <img src="${arr_images[i]}" class="center-block img-responsive" style="margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; image-orientation: from-image;" />
+                                        <img src="${arr_images[i]['image']}" class="center-block img-responsive" style="margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; image-orientation: from-image;" />
                                     </div>
                                 </div>
                             </div>
                             <div class="file-actions">
                                 <div class="file-footer-buttons">
-                                    <a href="${url}" data-id-modal="${i}" data-image-src="${arr_images[i]}" class="kv-file-remove btn btn-sm btn-kv btn-default btn-outline-secondary item-delete-modal" title="Remove file">
+                                    <a href="${url_action_image}" data-id-modal="${i}" data-image-src="${arr_images[i]['image']}" class="kv-file-remove btn btn-sm btn-kv btn-default btn-outline-${arr_images[i]['status'] ? 'warning' : 'secondary'}  item-update-modal" title="Trạng thái">
+                                        ${arr_images[i]['status'] ? 'Chính' : 'Phụ'}
+                                    </a>
+                                    <a href="${url}" data-id-modal="${i}" data-image-src="${arr_images[i]['image']}" class="kv-file-remove btn btn-sm btn-kv btn-default btn-outline-secondary item-delete-modal" title="Remove file">
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </a>
-                                    <a href="#" data-image-src="${arr_images[i]}" data-toggle="modal" data-target="#image_modal" class="kv-file-zoom btn btn-sm btn-kv btn-default btn-outline-secondary item-detail-modal" title="View Details">
+                                    <a href="#" data-image-src="${arr_images[i]['image']}" data-toggle="modal" data-target="#image_modal" class="kv-file-zoom btn btn-sm btn-kv btn-default btn-outline-secondary item-detail-modal" title="View Details">
                                         <i class="glyphicon glyphicon-zoom-in"></i>
                                     </a>
                                 </div>
@@ -310,16 +314,53 @@
                         }
                     });
                 });
+                $(".item-update-modal").click(function (event) {
+                    event.preventDefault();
+                    let $this = $(this);
+                    let src = $this.attr('data-image-src');
+                    let url = $this.attr('href');
+                    let id = $this.attr('data-id-modal');
+                    console.log(url);
+                    let arr = src.split('/');
+                    let image = arr[arr.length - 1];
+                    console.log(image);
+                    Swal.fire({
+                        title: 'Bạn có chắc không?',
+                        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Vâng, cập nhật!',
+                        cancelButtonText: 'Hủy!',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-outline-danger ml-1'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = url+ '/' +image;
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire({
+                                title: 'Đã hủy',
+                                text: 'Tài nguyên của bạn an toàn :)',
+                                icon: 'error',
+                                customClass: {
+                                    confirmButton: 'btn btn-success'
+                                }
+                            });
+                        }
+                    });
+                });
             }
             $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
                 event.preventDefault();
                 let $this = $(this);
-                detail($this.attr('data-title'), $this.attr('data-arr-images'));
+                detail($this.attr('data-title'), $this.attr('data-arr-images'), $this.attr('href'), $this.attr('action-image'));
             });
             $(".item-detail").click(function (event) {
                 event.preventDefault();
                 let $this = $(this);
-                detail($this.attr('data-title'), $this.attr('data-arr-images'), $this.attr('href'));
+                detail($this.attr('data-title'), $this.attr('data-arr-images'), $this.attr('href'), $this.attr('action-image'));
             });
         });
         //delete

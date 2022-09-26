@@ -76,7 +76,10 @@ class ProductService extends ApiService
     {
         if (isset($model->arr_image) && trim($model->arr_image) != '') {
             return json_encode(array_map(function ($item) {
-                return pare_url_file($item->image, 'products');
+                return [
+                    'image' => pare_url_file($item->image, 'products'),
+                    'status' => $item->status
+                ];
             }, json_decode($model->arr_image)));
         }
     }

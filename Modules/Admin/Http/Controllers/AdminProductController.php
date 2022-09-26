@@ -109,16 +109,45 @@ class AdminProductController extends WebController
             $product = Product::find($id);
             if (isset($product)) {
                 $arr = json_decode($product->arr_image);
-                if (($key = array_search($image, $arr)) !== false) {
-                    unset($arr[$key]);
-                    $product->arr_image = json_encode(array_values($arr));
+                if (is_array($arr) && count($arr) > 0) {
+                    foreach ($arr as $key => $item) {
+                        if ($item->image == $image) {
+                            unset($arr[$key]);
+                        }
+                    }
+                    $product->arr_image = json_encode($arr);
                     $product->save();
-                    //TODO: xoa file ra khoi sourse
                     return response()->json(['status' => true]);
                 }
+                return response()->json(['status' => false]);
             }
             return response()->json(['status' => false]);
         }
         return response()->json(['status' => false]);
+    }
+
+    public function actionImages($id, $image)
+    {
+        if (trim($image) != '') {
+            $product = Product::find($id);
+            if (isset($product)) {
+                $arr = json_decode($product->arr_image);
+                if (is_array($arr) && count($arr) > 0) {
+                    foreach ($arr as $item) {
+                        if ($item->image == $image) {
+                            $item->status = true;
+                        } else {
+                            $item->status = false;
+                        }
+                    }
+                    $product->arr_image = json_encode($arr);
+                    $product->save();
+                    return redirect()->back()->with('success', 'Cập nhật thành công!');
+                }
+                return redirect()->back()->with('danger', 'Cập nhật thất bại!');
+            }
+            return redirect()->back()->with('danger', 'Cập nhật thất bại!');
+        }
+        return redirect()->back()->with('danger', 'Cập nhật thất bại!');
     }
 }
