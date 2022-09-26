@@ -18,16 +18,27 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="form-group">
-                            <label for="slug">Slug <span style="color: red">*</span></label>
-                            <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
+                            <label for="parent_id">Danh mục cha</label>
+
+                            <select name="parent_id" id="parent_id" class="select2 form-control form-control-lg select-single">
+                                <option value="" selected>Chọn danh mục cha</option>
+                                @if(isset($categories, $status) && $status)
+                                    @php echo Modules\Admin\Http\Controllers\AdminCategoryController::showCategories($categories);  @endphp
+                                @endif
+                            </select>
+
                         </div>
                     </div>
                 </div>
                 <div class="row d-flex align-items-end">
                     <div class="col-md-6 col-12">
                         <div class="form-group">
+                            <label for="slug">Slug <span style="color: red">*</span></label>
+                            <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label" for="description">Mô tả</label>
-                            <textarea type="text" name="description" id="description" rows="4" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
+                            <textarea type="text" name="description" id="description" rows="2" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="description">Kích thước</label>

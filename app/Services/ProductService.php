@@ -15,7 +15,7 @@ class ProductService extends ApiService
         'creator'
     ];
 
-    protected $fieldsName = '_post_fields';
+    protected $fieldsName = '_product_fields';
 
     protected function getOrderbyableFields(): array
     {
@@ -69,7 +69,16 @@ class ProductService extends ApiService
 
     public function get_avatar_design_value($record, Product $model)
     {
-        return pare_url_file($model->avatar_design);
+        return pare_url_file($model->avatar_design, 'products');
+    }
+
+    public function get_arr_image_value($record, Product $model)
+    {
+        if (isset($model->arr_image) && trim($model->arr_image) != '') {
+            return json_encode(array_map(function ($item) {
+                return pare_url_file($item->image, 'products');
+            }, json_decode($model->arr_image)));
+        }
     }
 
     protected function newQuery()
@@ -89,6 +98,18 @@ class ProductService extends ApiService
             $model->active = $model->active == 'on' ? true : false;
             $model->hot = $model->hot == 'on' ? true : false;
             $this->uploadFile($model);
+            $data = $this->uploadArrImages($model);
+            if (isset($data)) {
+                $oldImages = json_decode($model->arr_image);
+                $newImages = array_merge($data, $oldImages ?? []);
+                $arrImages = array_map(function ($item) {
+                    return [
+                        'image' => $item,
+                        'status' => false
+                    ];
+                }, $newImages);
+                $model->arr_image = json_encode($arrImages);
+            }
         });
 
         $this->on('saved', function ($model) use ($user) {
@@ -104,6 +125,17 @@ class ProductService extends ApiService
                 $model->avatar_design = $file['name'];
             }
         }
+    }
+
+    public function uploadArrImages(Product $model)
+    {
+        if ($this->getApiRequest()->hasFile('images')) {
+            $files = upload_images('images', 'products');
+            return array_map(function ($item) {
+                return $item['name'];
+            }, $files);
+        }
+        return null;
     }
 
     public function syncDataSettingKey(Product $model)

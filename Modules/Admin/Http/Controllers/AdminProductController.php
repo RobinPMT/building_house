@@ -5,7 +5,9 @@ namespace Modules\Admin\Http\Controllers;
 use App\Http\Controllers\WebController;
 use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\SettingKeyProduct;
 use App\Services\ProductService;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -30,14 +32,17 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description',
-            '_relations' => 'creator',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image',
+            '_relations' => 'creator,category',
+            '_category_fields' => 'title',
             '_admin_fields' => 'name'
 //            '_filter' => 'user_not_myself:1;'
         ]);
         $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->select('name', 'key', 'html')->get()->toArray();
+        $categories = services()->categoryService()->where('active', Category::STATUS_PUBLIC)->select('title', 'id', 'parent_id')->get()->toArray();
         $data = [
-            'settingkeys' => $settingkeys
+            'settingkeys' => $settingkeys,
+            'categories' => $categories
         ];
         return parent::__lists($request, $data, 'admin::product.index');
 //        return view('admin::category.index', $viewData);
@@ -52,8 +57,10 @@ class AdminProductController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description',
-            '_relations' => 'creator'
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image',
+            '_relations' => 'creator,category',
+            '_category_fields' => 'title',
+//            '_admin_fields' => 'name'
         ]);
         return parent::__find($request, true);
     }
@@ -68,7 +75,7 @@ class AdminProductController extends WebController
     {
         $messages = '';
         if ($action) {
-            $product = Post::find($id);
+            $product = Product::find($id);
             switch ($action) {
                 case 'delete':
                     $product->delete();
@@ -94,5 +101,24 @@ class AdminProductController extends WebController
     {
         $slug = SlugService::createslug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function deleteImages($id, $image)
+    {
+        if (trim($image) != '') {
+            $product = Product::find($id);
+            if (isset($product)) {
+                $arr = json_decode($product->arr_image);
+                if (($key = array_search($image, $arr)) !== false) {
+                    unset($arr[$key]);
+                    $product->arr_image = json_encode(array_values($arr));
+                    $product->save();
+                    //TODO: xoa file ra khoi sourse
+                    return response()->json(['status' => true]);
+                }
+            }
+            return response()->json(['status' => false]);
+        }
+        return response()->json(['status' => false]);
     }
 }

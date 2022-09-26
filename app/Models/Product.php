@@ -16,7 +16,7 @@ class Product extends Base
     protected $fillable = [
         'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description',
         'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'created_at',
-        'updated_at'
+        'updated_at', 'category_id'
     ];
 
     const ACTIVE = 1;
@@ -62,6 +62,11 @@ class Product extends Base
     public function creator()
     {
         return $this->belongsTo(Admin::class, 'author_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
 //    public function keys()
