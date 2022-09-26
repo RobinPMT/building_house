@@ -107,6 +107,7 @@
 
         </div>
     </div>
+{{--    {{dd($settingkeys)}}--}}
     @include("admin::.product.form")
     @include("admin::.product.detail")
 @stop
@@ -142,7 +143,10 @@
         //     .catch( error => {
         //         console.error( error );
         // });
-
+        $(document).ready(function() {
+            {{--let data = JSON.parse('<?= json_encode($settingkeys) ?>');--}}
+            // console.log(data);
+        });
         //delete
         $(document).ready(function() {
             function deleteItem(url, id){

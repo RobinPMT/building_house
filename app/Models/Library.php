@@ -8,18 +8,24 @@ use Illuminate\Support\Arr;
 class Library extends Base
 {
     use Sluggable;
+
     protected $table   = 'libraries';
 
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product'
+        'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product','created_at',
+        'updated_at'
     ];
 
     const FREEDOM = 1;
+
     const NOT_FREEDOM = 0;
+
     const ACTIVE = 1;
+
     const BANNER_PUBLIC = 1;
+
     const BANNER_PRIVATE = 0;
 
     protected $_active = [

@@ -117,6 +117,17 @@
 {{--                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />--}}
 {{--                    --}}{{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
 {{--                </div>--}}
+                <div class="content-element">
+
+                    @if(isset($settingkeys))
+                        @foreach($settingkeys as $settingkey)
+                            @if(isset($settingkey['html']))
+                                {!! $settingkey['html'] !!}
+                            @endif
+                        @endforeach
+                    @endif
+
+                </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

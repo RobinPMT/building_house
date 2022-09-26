@@ -10,7 +10,8 @@ class Room extends Base
 
     protected $fillable = [
         'title', 'slug', 'icon', 'active',
-        'author_id'
+        'author_id','created_at',
+        'updated_at'
     ];
 
     const STATUS_PUBLIC = 1;

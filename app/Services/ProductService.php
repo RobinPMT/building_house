@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Admin;
-use App\Models\Post;
 use App\Models\Product;
+use App\Models\SettingKeyProduct;
 use Illuminate\Support\Facades\Auth;
 
 class ProductService extends ApiService
@@ -90,15 +90,33 @@ class ProductService extends ApiService
             $model->hot = $model->hot == 'on' ? true : false;
             $this->uploadFile($model);
         });
+
+        $this->on('saved', function ($model) use ($user) {
+            $this->syncDataSettingKey($model);
+        });
     }
 
-    public function uploadFile(Post $model)
+    public function uploadFile(Product $model)
     {
-        if ($this->getApiRequest()->hasFile('avatar')) {
-            $file = upload_image('avatar');
+        if ($this->getApiRequest()->hasFile('avatar_design')) {
+            $file = upload_image('avatar_design', 'products');
             if (isset($file['name'])) {
-                $model->avatar = $file['name'];
+                $model->avatar_design = $file['name'];
             }
         }
+    }
+
+    public function syncDataSettingKey(Product $model)
+    {
+        $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->select('id', 'key', 'tag_type')->get();
+        $data = [];
+        foreach ($settingkeys as $settingkey) {
+            if ($settingkey->tag_type == SettingKeyProduct::TYPE_CHECKBOX) {
+                $data[$settingkey->id] = ['value' => $model->getRaw($settingkey->key) == 'on' ? true : false];
+            } else {
+                $data[$settingkey->id] = ['value' => $model->getRaw($settingkey->key)];
+            }
+        }
+        $model->keys()->sync($data);
     }
 }

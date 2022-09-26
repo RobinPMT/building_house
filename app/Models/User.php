@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'address', 'avatar', 'phone', 'active', 'code_active', 'time_code_active', 'code_reset', 'time_code_reset'
+        'address', 'avatar', 'phone', 'active', 'code_active', 'time_code_active', 'code_reset', 'time_code_reset','created_at',
+        'updated_at'
     ];
 
     /**

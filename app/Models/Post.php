@@ -15,7 +15,8 @@ class Post extends Base
 
     protected $fillable = [
         'title', 'slug', 'description', 'content', 'active', 'hot',
-        'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
+        'author_id', 'description_seo', 'title_seo', 'avatar', 'view','created_at',
+        'updated_at'
     ];
 
     const ACTIVE = 1;

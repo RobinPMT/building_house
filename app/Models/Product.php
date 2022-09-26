@@ -15,7 +15,8 @@ class Product extends Base
 
     protected $fillable = [
         'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description',
-        'longs', 'width', 'height', 'area', 'room_number', 'room_description'
+        'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'created_at',
+        'updated_at'
     ];
 
     const ACTIVE = 1;
@@ -63,9 +64,13 @@ class Product extends Base
         return $this->belongsTo(Admin::class, 'author_id');
     }
 
+//    public function keys()
+//    {
+//        return $this->morphToMany(SettingKeyProduct::class, 'setting_key_able');
+//    }
     public function keys()
     {
-        return $this->morphToMany(SettingKeyProduct::class, 'setting_key_able');
+        return $this->belongsToMany(SettingKeyProduct::class, 'setting_products', 'product_id', 'setting_key_product_id')->withPivot('value');
     }
 
     /**

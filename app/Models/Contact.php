@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 
 class Contact extends Base
 {
-
     protected $table   = 'contacts';
 
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'name', 'email', 'phone', 'active', 'author_id'
+        'name', 'email', 'phone', 'active', 'author_id','created_at',
+        'updated_at'
     ];
 
     const ACTIVE = 1;
 
     const NOT_ACTIVE = 0;
-
 
     protected $_active = [
         1 => [
@@ -32,7 +30,6 @@ class Contact extends Base
         ],
     ];
 
-
     public function getStatus()
     {
         return Arr::get($this->_active, $this->active, '[N\A]');
@@ -42,5 +39,4 @@ class Contact extends Base
     {
         return $this->belongsTo(Admin::class, 'author_id');
     }
-
 }

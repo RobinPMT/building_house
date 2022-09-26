@@ -113,7 +113,15 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ \Request::route()->getName() == 'admin.get.list.setting' ? 'active' : '' }}  nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting')}}"><i data-feather="settings"></i><span class="menu-title text-truncate" data-i18n="Settings">Cài đặt</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="settings"></i><span class="menu-title text-truncate" data-i18n="Settings">Cài đặt</span></a>
+                <ul class="menu-content">
+                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Cài đặt hệ thống</span></a>
+                    </li>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.setting' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Cài đặt trang chủ</span></a>
+                    </li>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.setting_key_product' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting_key_product')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Cài đặt sản phẩm</span></a>
+                    </li>
+                </ul>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Pages">Pages</span></a>
                 <ul class="menu-content">

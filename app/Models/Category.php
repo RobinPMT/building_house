@@ -13,7 +13,8 @@ class Category extends Base
 
     protected $fillable = [
         'title', 'slug', 'parent_id', 'icon', 'active',
-        'author_id', 'description_seo', 'title_seo', 'keyword_seo'
+        'author_id', 'description_seo', 'title_seo', 'keyword_seo','created_at',
+        'updated_at'
     ];
 
     const STATUS_PUBLIC = 1;

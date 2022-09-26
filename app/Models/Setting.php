@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 
 class Setting extends Base
 {
-
     protected $table   = 'settings';
 
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'name', 'key', 'value', 'active', 'icon'
+        'name', 'key', 'value', 'active', 'icon','created_at',
+        'updated_at'
     ];
 
     const ACTIVE = 1;
 
     const NOT_ACTIVE = 0;
-
 
     protected $_active = [
         1 => [
@@ -32,11 +30,8 @@ class Setting extends Base
         ],
     ];
 
-
     public function getStatus()
     {
         return Arr::get($this->_active, $this->active, '[N\A]');
     }
-
-
 }
