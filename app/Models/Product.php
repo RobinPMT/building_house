@@ -75,7 +75,8 @@ class Product extends Base
 //    }
     public function keys()
     {
-        return $this->belongsToMany(SettingKeyProduct::class, 'setting_products', 'product_id', 'setting_key_product_id')->withPivot('value');
+        return $this->belongsToMany(SettingKeyProduct::class, 'setting_products', 'product_id', 'setting_key_product_id')->withPivot('setting_key_product_id', 'product_id', 'value')
+            ->select('value', 'key', 'name', 'tag_type');
     }
 
     /**

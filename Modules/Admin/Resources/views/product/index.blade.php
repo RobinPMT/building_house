@@ -181,8 +181,8 @@
                     }
                 }
             });
-            $( "#parent_id" ).change(function () {
-                $("#select2-parent_id-container").text($( "#parent_id option:selected" ).text().trim());
+            $( "#category_id" ).change(function () {
+                $("#select2-category_id-container").text($( "#category_id option:selected" ).text().trim());
             });
             $("#file-1").fileinput({
                 theme: 'fa5',
@@ -326,7 +326,7 @@
                     console.log(image);
                     Swal.fire({
                         title: 'Bạn có chắc không?',
-                        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                        text: "Bạn muốn cập nhật tài nguyên này!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Vâng, cập nhật!',
@@ -440,14 +440,37 @@
                     type: 'GET',
                     url: url,
                     success: function (response) {
+
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
                             $('#slug').val(response.data.slug);
-                            $('#description').val(response.data.description);
+                            $('#longs').val(response.data.longs);
+                            $('#width').val(response.data.width);
+                            $('#height').val(response.data.height);
+                            $('#area').val(response.data.area);
+                            $('#room_number').val(response.data.room_number);
+                            $('#room_description').val(response.data.room_description);
+                            $("#category_id").val(response.data.category_id).change();
+                            $('#output_image').attr('src', response.data.avatar_design);
+                            $("textarea#description").html(response.data.description);
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
                             // CKEDITOR.instances.content.setData( response.data.content);
+                            let setting_keys = response.data.setting_keys;
+                            if(setting_keys) {
+                                for (let i = 0; i < setting_keys.length; i++) {
+                                    if (setting_keys[i]['tag_type'] === 'input') {
+                                        $('#'+setting_keys[i]['key']).val(setting_keys[i]['value']);
+                                    } else if (setting_keys[i]['tag_type'] === 'checkbox') {
+                                        if(setting_keys[i]['value'] === '1'){
+                                            $('form #'+setting_keys[i]['key']).attr('checked', true)
+                                        }
+                                    } else if (setting_keys[i]['tag_type'] === 'textarea') {
+                                        $("textarea#"+setting_keys[i]['key']).html(setting_keys[i]['value']);
+                                    }
+                                }
+                            }
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);
                             $('#output_image').attr('src', response.data.avatar);

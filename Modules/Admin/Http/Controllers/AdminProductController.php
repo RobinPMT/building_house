@@ -32,10 +32,11 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
-            '_admin_fields' => 'name'
+            '_admin_fields' => 'name',
+//            '_setting_key_product_fields' => 'name,key,value,product_id',
 //            '_filter' => 'user_not_myself:1;'
         ]);
         $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->select('name', 'key', 'html')->get()->toArray();
@@ -57,7 +58,7 @@ class AdminProductController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
 //            '_admin_fields' => 'name'

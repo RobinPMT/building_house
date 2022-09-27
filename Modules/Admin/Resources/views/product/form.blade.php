@@ -18,9 +18,9 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="form-group">
-                            <label for="parent_id">Danh mục cha</label>
+                            <label for="category_id">Danh mục cha</label>
 
-                            <select name="parent_id" id="parent_id" class="select2 form-control form-control-lg select-single">
+                            <select name="category_id" id="category_id" class="select2 form-control form-control-lg select-single">
                                 <option value="" selected>Chọn danh mục cha</option>
                                 @if(isset($categories, $status) && $status)
                                     @php echo Modules\Admin\Http\Controllers\AdminCategoryController::showCategories($categories);  @endphp

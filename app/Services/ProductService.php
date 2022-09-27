@@ -12,7 +12,7 @@ class ProductService extends ApiService
     protected $model = Product::class;
 
     protected $relations = [
-        'creator'
+        'creator', 'keys'
     ];
 
     protected $fieldsName = '_product_fields';
@@ -32,7 +32,7 @@ class ProductService extends ApiService
         return [
             'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price',
             'arr_active', 'arr_hot', 'avatar_design', 'description',
-            'longs', 'width', 'height', 'area', 'room_number', 'room_description'
+            'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'category_id', 'setting_keys'
         ];
     }
 
@@ -55,6 +55,18 @@ class ProductService extends ApiService
         return [services()->adminService(), 'item', function (Product $model) {
             return $model->creator;
         }];
+    }
+
+    public function includeKeys()
+    {
+        return [services()->settingKeyProductService(), 'items', function (Product $model) {
+            return $model->keys;
+        }];
+    }
+
+    public function get_setting_keys_value($record, Product $model)
+    {
+        return $model->keys->toArray();
     }
 
     public function get_arr_active_value($record, Product $model)
