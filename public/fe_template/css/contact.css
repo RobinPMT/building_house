@@ -1,0 +1,9 @@
+.google-map{height: 600px;border-top: 2px solid #dfdfdf;}.google-map iframe{height: 100%;}
+.contact-section{width: 700px;max-width: 100%;margin: 0 auto;}.contact-form{margin-top: 30px;font-size: 16px;}
+.contact-input{width: 100%;margin-bottom: 20px;line-height: 30px;padding: 12px 15px;border: 1px solid #071628;}.contact-captcha{margin-bottom: 20px;}
+.contact-button{display: inline-block;line-height: 30px;padding: 12px 40px;text-transform: uppercase;font-family: 'SF Pro Display Bold';background: #014C47;color: #fff;border: none;outline: none;}
+.page-title{text-transform: capitalize;}
+@media (max-width: 991px){.google-map{height: 400px;}}
+@media (max-width: 767px){
+    .google-map{height: 350px;}.contact-form{font-size: 15px;}.contact-input,.contact-button{padding: 10px 15px;line-height: 24px;}
+}
