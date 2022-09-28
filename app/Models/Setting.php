@@ -12,7 +12,7 @@ class Setting extends Base
 
     protected $fillable = [
         'name', 'key', 'value', 'active', 'icon','created_at',
-        'updated_at'
+        'updated_at', 'type'
     ];
 
     const ACTIVE = 1;

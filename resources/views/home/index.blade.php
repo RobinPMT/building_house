@@ -32,7 +32,7 @@
                 <h2 class="home-title"><em>Lợi ích</em> đến từ
                     Consolar Housing
                 </h2>
-                <div class="homedesc"><div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Ut enim ad miconsectetur adipiscing elit</div></div>
+                <div class="homedesc"><div>{{isset($settings['housing']) ? $settings['housing'] : ''}}</div></div>
             </div>
             <div class="benefit-list">
                 <div class="row row_sm_10">

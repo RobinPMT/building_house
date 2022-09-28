@@ -57,13 +57,13 @@ class SettingService extends ApiService
         });
     }
 
-    public function get_value_value($record, Setting $model)
-    {
-        if ($model->type == 'setting') {
-            return json_decode($model->value);
-        }
-        return $model->value;
-    }
+//    public function get_value_value($record, Setting $model)
+//    {
+//        if ($model->type == 'setting') {
+//            return json_decode($model->value);
+//        }
+//        return $model->value;
+//    }
 
     public function updateSettingHome(Request $request)
     {
@@ -103,7 +103,8 @@ class SettingService extends ApiService
             foreach ($settings as $setting) {
                 $setting->name = $newData[$setting->key]['name'];
 //                if ($newData[$setting->key]['key'] == 'housing') {
-                $setting->value = json_encode($newData[$setting->key]['value']);
+                $setting->value = $newData[$setting->key]['value'];
+//                $setting->value = json_encode($newData[$setting->key]['value']);
 //                } else {
 //                    $setting->value = $newData[$setting->key]['value'];
 //                }
