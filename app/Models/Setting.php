@@ -12,12 +12,18 @@ class Setting extends Base
 
     protected $fillable = [
         'name', 'key', 'value', 'active', 'icon','created_at',
-        'updated_at', 'type'
+        'updated_at', 'type', 'avatar'
     ];
 
     const ACTIVE = 1;
 
     const NOT_ACTIVE = 0;
+
+    const TYPE_SETTING = 'setting';
+
+    const TYPE_HOME= 'home';
+
+    const TYPE_BANNER = 'banner';
 
     protected $_active = [
         1 => [

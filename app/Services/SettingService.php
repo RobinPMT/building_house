@@ -30,7 +30,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active', 'name', 'icon', 'type'
+            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active'
         ];
     }
 
@@ -38,6 +38,16 @@ class SettingService extends ApiService
     {
         return [
         ];
+    }
+
+    public function get_arr_active_value($record, Setting $model)
+    {
+        return $model->getStatus();
+    }
+
+    public function get_avatar_value($record, Setting $model)
+    {
+        return pare_url_file($model->avatar, 'settings');
     }
 
     protected function newQuery()
@@ -52,8 +62,12 @@ class SettingService extends ApiService
     {
         parent::boot();
         $user = auth('admins')->user();
+        $this->on('saving', function ($model) use ($user) {
+            $model->active = $model->active == 'on' ? true : false;
+            $this->uploadAvatar($model);
+        });
         $this->on('updating', function ($model) use ($user) {
-            $this->updateSettingHome($model);
+//            $this->updateSettingHome($model);
         });
     }
 
@@ -120,5 +134,16 @@ class SettingService extends ApiService
             'status'  => false,
             'danger' => 'Cập nhật thất bại!'
         ];
+    }
+
+    public function uploadAvatar(Setting $model)
+    {
+        if ($this->getApiRequest()->hasFile('avatar')) {
+            $model->type = Setting::TYPE_HOME;
+            $file = upload_image('avatar', 'settings');
+            if (isset($file['name'])) {
+                $model->avatar = $file['name'];
+            }
+        }
     }
 }

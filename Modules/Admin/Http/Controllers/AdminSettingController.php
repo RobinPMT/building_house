@@ -25,28 +25,45 @@ class AdminSettingController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_setting_fields' => 'name,key,value,active,icon,type',
+            '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active',
             '_noPagination' => 1,
             '_orderBy' => 'id:asc',
         ]);
         return parent::__list($request, 'admin::setting.index');
     }
 
+    public function __create(Request $request, $route = null)
+    {
+        return parent::__create($request, 'admin.get.list.setting');
+    }
+
+    public function __find(Request $request, $is_json = false)
+    {
+        $request->merge([
+            '_setting_fields' => 'value,active,type,avatar,arr_active',
+        ]);
+        return parent::__find($request, true);
+    }
+
     public function update(Request $request)
     {
         $result = $this->getService()->updateKeySeting($request->all());
         return response()->json($result);
-//        return view('admin::category.index', $viewData);
     }
 
-    public function updateSettingHome(Request $request)
+    public function __update($id, $route = null)
     {
-        $result = $this->getService()->updateSettingHome($request);
-        if ($result) {
-            return redirect()->back()->with('success', 'Cập nhật thành công!');
-        }
-        return redirect()->back()->with('danger', 'Thêm mới thất bại!');
+        return parent::__update($id, 'admin.get.list.setting');
     }
+
+//    public function updateSettingHome(Request $request) //lợi ích housing
+//    {
+//        $result = $this->getService()->updateSettingHome($request);
+//        if ($result) {
+//            return redirect()->back()->with('success', 'Cập nhật thành công!');
+//        }
+//        return redirect()->back()->with('danger', 'Thêm mới thất bại!');
+//    }
 
     public function listSetting(Request $request)
     {
@@ -76,6 +93,7 @@ class AdminSettingController extends WebController
                     break;
             }
         }
-        return response()->json(['success' => $messages]);
+        return redirect()->back()->with('success', $messages);
+//        return response()->json(['success' => $messages]);
     }
 }
