@@ -68,7 +68,7 @@ class PostService extends ApiService
 
     public function get_avatar_value($record, Post $model)
     {
-        return pare_url_file($model->avatar);
+        return pare_url_file($model->avatar, 'posts');
     }
 
     protected function newQuery()
@@ -94,7 +94,7 @@ class PostService extends ApiService
     public function uploadFile(Post $model)
     {
         if ($this->getApiRequest()->hasFile('avatar')) {
-            $file = upload_image('avatar');
+            $file = upload_image('avatar', 'posts');
             if (isset($file['name'])) {
                 $model->avatar = $file['name'];
             }

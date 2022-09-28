@@ -220,6 +220,20 @@
         readUrl(this);
     });
 
+    {{--hiện ảnh phụ--}}
+    function readUrlExtra(input) {
+        if (input.files && input.files[0] ){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#output_image_extra').attr('src',e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#input_image_extra").change(function () {
+        readUrlExtra(this);
+    });
+
 
     //check slug
     $('#title').change(function (event) {

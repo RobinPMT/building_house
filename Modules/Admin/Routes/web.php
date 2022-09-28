@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminAttributeController;
+use Modules\Admin\Http\Controllers\AdminBannerController;
 use Modules\Admin\Http\Controllers\AdminCategoryController;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
@@ -135,5 +136,13 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminAttributeController::class, '__create'])->name('admin.store.attribute');
         Route::post('/{id}', [AdminAttributeController::class, '__update'])->name('admin.update.attribute');
         Route::get('/{action}/{id}', [AdminAttributeController::class, 'action'])->name('admin.get.action.attribute');
+    });
+
+    Route::group(['prefix' => 'banner'], function () {
+        Route::get('/', [AdminBannerController::class, '__list'])->name('admin.get.list.banner');
+        Route::get('/{id}', [AdminBannerController::class, '__find'])->name('admin.get.find.banner');
+        Route::post('/', [AdminBannerController::class, '__create'])->name('admin.store.banner');
+        Route::post('/{id}', [AdminBannerController::class, '__update'])->name('admin.update.banner');
+        Route::get('/{action}/{id}', [AdminBannerController::class, 'action'])->name('admin.get.action.banner');
     });
 });

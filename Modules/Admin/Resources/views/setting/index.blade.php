@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Cài đặt</h4>
+                        <h4 class="card-title">Thông tin liên hệ và mô tả Consolar Housing</h4>
                     </div>
                     <div class="card-body">
                         <form action=""  method="POST" role="form">

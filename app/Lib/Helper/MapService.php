@@ -4,6 +4,7 @@ namespace App\Lib\Helper;
 
 use App\Services\AdminService;
 use App\Services\AttributeService;
+use App\Services\BannerService;
 use App\Services\CategoryService;
 use App\Services\ContactService;
 use App\Services\LibraryService;
@@ -77,5 +78,10 @@ class MapService
     public function attributeService(): AttributeService
     {
         return c(AttributeService::class);
+    }
+
+    public function bannerService(): BannerService
+    {
+        return c(BannerService::class);
     }
 }
