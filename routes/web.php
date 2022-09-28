@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Auth::routes();
+//Auth::routes();
 
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('dang-ki', [AuthController::class, 'getRegister'])->name('get.register');

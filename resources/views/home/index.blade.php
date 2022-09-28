@@ -7,7 +7,7 @@
                 <img class="detail-banner" src="{{asset('fe_template/images/banner/1.png')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
                 <div class="banner-descr">
                     <h2>Lợi ích đến từ Consolar Housing</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    <p>{{isset($settings['housing']) ? $settings['housing'] : ''}}</p>
                     <a href="#" class="button-link bg-green">Xem thêm <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
                         </svg></a>
@@ -18,7 +18,7 @@
                 <img class="detail-banner" src="{{asset('fe_template/images/banner/2.png')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
                 <div class="banner-descr">
                     <h2>Lợi ích đến từ Consolar Housing</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    <p>{{isset($settings['housing']) ? $settings['housing'] : ''}}</p>
                     <a href="#" class="button-link bg-green">Xem thêm <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
                         </svg></a>
@@ -36,110 +36,52 @@
             </div>
             <div class="benefit-list">
                 <div class="row row_sm_10">
-                    <div class="col-xs-6 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/1.jpg')}}"> <!-- 690x840 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/1_1.jpg')}}"> <!-- 570x700 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/1_4.jpg')}}"> <!-- 455x560 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/1_2.jpg')}}"> <!-- 470x570 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/1_3.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>01</span>
-                                <strong>Giải pháp xây dựng
-                                    linh hoạt, nhanh chóng
-                                </strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/2.jpg')}}"> <!-- 690x405 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/2_1.jpg')}}"> <!-- 570x335 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/2_4.jpg')}}"> <!-- 455x265 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/2_2.jpg')}}"> <!-- 470x275 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/2_3.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>02</span>
-                                <strong>Chi phí đầu tư hợp lý</strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/3.jpg')}}"> <!-- 690x405 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/3_1.jpg')}}"> <!-- 570x335 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/3_4.jpg')}}"> <!-- 455x265 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/3_2.jpg')}}"> <!-- 470x275 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/3_3.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>03</span>
-                                <strong>Hỗ trợ vận chuyển &
-                                    lắp đặt trọn gói
-                                </strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/4.jpg')}}"> <!-- 1440x410 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/4_1.jpg')}}"> <!-- 1170x335 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/4_4.jpg')}}"> <!-- 940x270 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/4_2.jpg')}}"> <!-- 970x280 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/4_3.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>03</span>
-                                <strong>Thiết kế đa dạng, độc đáo
-                                </strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/5.jpg')}}"> <!-- 690x600 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/5.jpg')}}"> <!-- 570x495 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/5.jpg')}}"> <!-- 455x395 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/5.jpg')}}"> <!-- 455x395 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/5.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>05</span>
-                                <strong>Tiêu chuẩn Châu Âu,
-                                    thân thiện với môi trường
-                                </strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 benefit-item">
-                        <div class="benefit-item-content">
-                            <picture>
-                                <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/benifit/6.jpg')}}"> <!-- 690x600 -->
-                                <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/benifit/6.jpg')}}"> <!-- 570x495 -->
-                                <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/benifit/6.jpg')}}"> <!-- 455x395 -->
-                                <source media="(min-width: 571px)" srcset="{{asset('fe_template/images/benifit/6.jpg')}}"> <!-- 455x395 -->
-                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{asset('fe_template/images/benifit/6.jpg')}}" alt="540x320" />
-                            </picture>
-                            <div class="benefit-item-desc">
-                                <span>06</span>
-                                <strong>Ứng dụng cho mọi
-                                    địa hình & thời tiết</strong>
-                                <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    @if(isset($housing_settings))
+                        @foreach($housing_settings as $key => $housing_setting)
+                            @if($key == 3)
+                                <div class="col-xs-12 benefit-item">
+                                    <div class="benefit-item-content">
+                                        <picture>
+{{--                                            <source media="(min-width: 1500px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 1440x410 -->--}}
+{{--                                            <source media="(min-width: 1230px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 1170x335 -->--}}
+{{--                                            <source media="(min-width: 992px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 940x270 -->--}}
+{{--                                            <source media="(min-width: 571px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 970x280 -->--}}
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
+                                        </picture>
+                                        <div class="benefit-item-desc">
+                                            <span>0{{$key + 1}}</span>
+                                            <strong>{{$housing_setting->value}}
+                                            </strong>
+                                            <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-xs-6 benefit-item">
+                                    <div class="benefit-item-content">
+                                        <picture>
+{{--                                            <source media="(min-width: 1500px)" srcset="{{ pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 690x840 -->--}}
+{{--                                            <source media="(min-width: 1230px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 570x700 -->--}}
+{{--                                            <source media="(min-width: 992px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 455x560 -->--}}
+{{--                                            <source media="(min-width: 571px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 470x570 -->--}}
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
+                                        </picture>
+                                        <div class="benefit-item-desc">
+                                            <span>0{{$key + 1}}</span>
+                                            <strong>{{$housing_setting->value}}
+                                            </strong>
+                                            <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+
+
+
+
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

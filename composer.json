@@ -12,6 +12,7 @@
         "ext-json": "*",
         "artesaos/seotools": "^0.22.0",
         "aws/aws-sdk-php": "^3.222",
+        "cviebrock/eloquent-sluggable": "^8.0",
         "evenement/evenement": "^3.0",
         "firebase/php-jwt": "^5.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -22,7 +23,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "^8.3",
-        "cviebrock/eloquent-sluggable": "^8.0"
+        "ext-gd": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
