@@ -64,6 +64,11 @@ class Post extends Base
         return $this->belongsTo(Admin::class, 'author_id')->select('id', 'name');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id')->withPivot('post_id', 'tag_id');
+    }
+
     /**
      * @inheritDoc
      */

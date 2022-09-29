@@ -13,6 +13,7 @@ use App\Services\ProductService;
 use App\Services\RoomService;
 use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
+use App\Services\TagService;
 use App\Services\UserService;
 use Psr\Container\ContainerInterface;
 
@@ -83,5 +84,10 @@ class MapService
     public function bannerService(): BannerService
     {
         return c(BannerService::class);
+    }
+
+    public function tagService(): TagService
+    {
+        return c(TagService::class);
     }
 }

@@ -24,43 +24,17 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Ảnh</th>
-                        <th>Người tạo</th>
-                        <th>Trạng thái</th>
-                        <th>Nổi bật</th>
                         <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
                         @if(isset($data, $status) && $status)
-                            @foreach($data as $stt => $post)
-                                <tr id="sid{{$post['id']}}">
+                            @foreach($data as $stt => $tag)
+                                <tr id="sid{{$tag['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$post['title']}}</td>
-                                    <td style="">
-                                        <img src="{{$post['avatar']}}" width="100px" height="100px" alt="">
-                                    </td>
-                                    <td style="">{{$post['creator']['name']}}</td>
-                                    <td style="">
-                                        <a class="badge badge-pill {{$post['arr_active']['class']}}" href="{{route('admin.get.action.post', ['active', $post['id']])}}">
-                                            {{$post['arr_active']['name']}}
-                                        </a>
-                                    </td>
-                                    <td style="">
-                                        <a class="badge badge-pill {{$post['arr_hot']['class']}}" href="{{route('admin.get.action.post', ['hot', $post['id']])}}">
-                                            {{$post['arr_hot']['name']}}
-                                        </a>
-                                    </td>
+                                    <td>{{$tag['title']}}</td>
                                     <td style="display: none;">
-                                        <a href="#" class="item-detail" data-title="{{$post['title']}}" data-content="{{$post['content']}}" data-toggle="modal" data-target="#detail-post">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50">
-                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                                <polyline points="14 2 14 8 20 8"></polyline>
-                                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                                <polyline points="10 9 9 9 8 9"></polyline></svg>
-                                        </a>
-                                        <a href="{{route('admin.get.action.post', ['delete', $post['id']])}}" class="delete-record"  id="confirm-color" data-id="{{$post['id']}}">
+                                        <a href="{{route('admin.get.action.tag', ['delete', $tag['id']])}}" class="delete-record"  id="confirm-color" data-id="{{$tag['id']}}">
                                             <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     width="24"
@@ -79,7 +53,7 @@
                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
                                             </svg>
                                         </a>
-                                        <a href="{{route('admin.get.find.post', $post['id'])}}" data-url-update="{{route('admin.update.post', $post['id'])}}" class="item-edit" data-toggle="modal" data-target="#modals-slide-in">
+                                        <a href="{{route('admin.get.find.tag', $tag['id'])}}" data-url-update="{{route('admin.update.tag', $tag['id'])}}" class="item-edit" data-toggle="modal" data-target="#modals-slide-in">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4">
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -95,33 +69,22 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Ảnh</th>
-                        <th>Người tạo</th>
-                        <th>Trạng thái</th>
-                        <th>Nổi bật</th>
                         <th>Hành động</th>
                     </tr>
                     </tfoot>
                 </table>
+                @include("admin::tag.form")
             </div>
 
         </div>
     </div>
-    @include("admin::post.form")
-    @include("admin::post.detail")
+
 @stop
 @section('script')
-    <script>
-        CKEDITOR.replace('content');
-    </script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
-            });
-            $(".select-multi").select2({
-                // placeholder: "Chọn danh mục cha",
-                // tags: true,
             });
         });
         // ClassicEditor
@@ -210,22 +173,6 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
-                            $('#slug').val(response.data.slug);
-                            $('#description').val(response.data.description);
-                            $("#tag_ids").val(response.data.tag_ids).change();
-                            // $('#content').text(response.data.content);
-                            // $("textarea#content").html(response.data.content);
-                            CKEDITOR.instances.content.setData( response.data.content);
-                            $('#description_seo').val(response.data.description_seo);
-                            $('#title_seo').val(response.data.title_seo);
-                            $('#output_image').attr('src', response.data.avatar);
-                            // $('#input_image').val(response.data.avatar);
-                            if(response.data.active == '1'){
-                                $("form #checkbox_active").attr('checked', true)
-                            }
-                            if(response.data.hot == '1'){
-                                $("form #checkbox_hot").attr('checked', true)
-                            }
                             $('#exampleModalLabel').text('Cập nhật');
                             $('#form-crud').attr('action', data_url_update);
                         }
@@ -248,36 +195,18 @@
             });
         });
 
-        // show item detail
-        $(document).ready(function() {
-            function detail(title, content) {
-                $(".content__title").text(title);
-                $(".content__body").html(content);
-            }
-            $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                detail($this.attr('data-title'), $this.attr('data-content'));
-            });
-            $(".item-detail").click(function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                detail($this.attr('data-title'), $this.attr('data-content'));
-                // $("#detail-post").modal('show');
-            });
-        });
 
         // form add
         $(document).ready(function() {
             $(".item-add").click(function (event) {
-                if($('#form-crud').attr('action') !== '{{route('admin.store.post')}}'){
+                if($('#form-crud').attr('action') !== '{{route('admin.store.tag')}}'){
                     $('#form-crud').trigger("reset");
-                    CKEDITOR.instances.content.setData('<p>Viết nội dung ở đây</p>');
+                    $('#title').val('#');
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
-                $('#form-crud').attr('action', '{{route('admin.store.post')}}');
+                $('#form-crud').attr('action', '{{route('admin.store.tag')}}');
                 $('#exampleModalLabel').text('Thêm mới');
             });
 
@@ -291,15 +220,9 @@
                         title: {
                             required: true,
                         },
-                        slug: {
-                            required: true,
-                        },
                     },
                     messages: {
                         title: {
-                            required: "Vui lòng không bỏ trống!"
-                        },
-                        slug: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

@@ -178,7 +178,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{asset('admin_template/app-assets/js/scripts/forms/form-select2.js')}}"></script>
+{{--<script src="{{asset('admin_template/app-assets/js/scripts/forms/form-select2.js')}}"></script>--}}
 <script src="{{asset('admin_template/app-assets/js/scripts/forms/form-validation.js')}}"></script>
 <script src="{{asset('admin_template/app-assets/js/scripts/forms/form-number-input.js')}}"></script>
 {{--<script src="{{asset('admin_template/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>--}}

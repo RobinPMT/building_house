@@ -11,7 +11,7 @@ class PostService extends ApiService
     protected $model = Post::class;
 
     protected $relations = [
-        'creator'
+        'creator', 'tags'
     ];
 
     protected $fieldsName = '_post_fields';
@@ -31,7 +31,7 @@ class PostService extends ApiService
         return [
             'title', 'slug', 'description', 'content', 'active', 'hot',
             'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
-            'arr_active', 'arr_hot', 'slug'
+            'arr_active', 'arr_hot', 'slug', 'tag_ids'
         ];
     }
 
@@ -56,9 +56,21 @@ class PostService extends ApiService
         }];
     }
 
+    public function includeTags()
+    {
+        return [services()->tagService(), 'items', function (Post $model) {
+            return $model->tags;
+        }];
+    }
+
     public function get_arr_active_value($record, Post $model)
     {
         return $model->getStatus();
+    }
+
+    public function get_tag_ids_value($record, Post $model)
+    {
+        return $model->tags->pluck('id');
     }
 
     public function get_arr_hot_value($record, Post $model)
@@ -88,6 +100,12 @@ class PostService extends ApiService
             $model->active = $model->active == 'on' ? true : false;
             $model->hot = $model->hot == 'on' ? true : false;
             $this->uploadFile($model);
+        });
+        $this->on('saved', function ($model) use ($user) {
+            $tag_ids = $model->getRaw('tag_ids');
+            if (is_array($tag_ids) && count($tag_ids) > 0) {
+                $model->tags()->sync($tag_ids);
+            }
         });
     }
 

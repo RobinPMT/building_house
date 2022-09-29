@@ -29,9 +29,10 @@ class AdminPostController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot',
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids',
             '_relations' => 'creator',
-            '_admin_fields' => 'name'
+            '_admin_fields' => 'name',
+//            '_tag_fields' => 'id'
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::post.index');
@@ -47,8 +48,9 @@ class AdminPostController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug',
-            '_relations' => 'creator'
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug,tag_ids',
+            '_relations' => 'creator',
+//            '_tag_fields' => 'id'
         ]);
         return parent::__find($request, true);
     }

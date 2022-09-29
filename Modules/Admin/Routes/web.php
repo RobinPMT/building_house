@@ -23,6 +23,7 @@ use Modules\Admin\Http\Controllers\AdminProductController;
 use Modules\Admin\Http\Controllers\AdminRoomController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
+use Modules\Admin\Http\Controllers\AdminTagController;
 use Modules\Admin\Http\Controllers\HomeController;
 
 //Route::prefix('admin')->group(function () {
@@ -144,5 +145,13 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminBannerController::class, '__create'])->name('admin.store.banner');
         Route::post('/{id}', [AdminBannerController::class, '__update'])->name('admin.update.banner');
         Route::get('/{action}/{id}', [AdminBannerController::class, 'action'])->name('admin.get.action.banner');
+    });
+
+    Route::group(['prefix' => 'tag'], function () {
+        Route::get('/', [AdminTagController::class, '__list'])->name('admin.get.list.tag');
+        Route::get('/{id}', [AdminTagController::class, '__find'])->name('admin.get.find.tag');
+        Route::post('/', [AdminTagController::class, '__create'])->name('admin.store.tag');
+        Route::post('/{id}', [AdminTagController::class, '__update'])->name('admin.update.tag');
+        Route::get('/{action}/{id}', [AdminTagController::class, 'action'])->name('admin.get.action.tag');
     });
 });

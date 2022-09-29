@@ -36,15 +36,20 @@
                     <textarea type="text" name="content" id="content" rows="3" class="form-control dt-post" placeholder="Nội dung" aria-label="Nội dung">
                     </textarea>
                 </div>
+{{--                <div class="form-group">--}}
+{{--                    <label class="form-label" for="title_seo">Meta Title</label>--}}
+{{--                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />--}}
+{{--                </div>--}}
+{{--                <div class="form-group">--}}
+{{--                    <label class="form-label" for="description_seo">Meta Description</label>--}}
+{{--                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />--}}
+{{--                </div>--}}
+
                 <div class="form-group">
-                    <label class="form-label" for="title_seo">Meta Title</label>
-                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />
-{{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="description_seo">Meta Description</label>
-                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />
-                    {{--                    <small class="form-text text-muted"> Dùng email này để đăng nhập </small>--}}
+                    <label class="form-label" for="tag_ids">Tags</label>
+                    <select class="select2-size-lg form-control select-multi" name="tag_ids[]" multiple="multiple" id="tag_ids" >
+                        @php echo Modules\Admin\Http\Controllers\AdminTagController::showTags();  @endphp
+                    </select>
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">

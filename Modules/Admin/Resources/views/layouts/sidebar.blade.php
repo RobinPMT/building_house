@@ -99,7 +99,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ \Request::route()->getName() == 'admin.get.list.post' ? 'active' : '' }}  nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.post')}}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Post">Bài viết</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.post')}}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Post">Bài viết</span></a>
+                <ul class="menu-content">
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.tag' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.tag')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Tags</span></a>
+                    </li>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.post' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.post')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Quản lý bài viết</span></a>
+                    </li>
+                </ul>
             </li>
             <li class="{{ \Request::route()->getName() == 'admin.get.list.contact' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.contact')}}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Contact">Liên hệ</span></a>
             </li>
