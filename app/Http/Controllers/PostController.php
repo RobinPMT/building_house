@@ -19,10 +19,16 @@ class PostController extends FrontendController
         $post = services()->postService()->where([
             'active' => Post::ACTIVE,
             'slug' => $slug
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->first();
-        $postsRelated  = services()->postService()->where([
-            'active' => Post::ACTIVE,
-        ])->where('slug', 'like', "%$slug%")->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->limit(3)->get();
+        ])->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->first();
+        $tag_ids = $post->tags->pluck('id')->toArray();
+        $postsRelated  = services()->postService()
+            ->where(['active' => Post::ACTIVE])
+            ->whereKeyNot($post->id)
+            ->whereHas('tags', function ($query) use ($tag_ids) {
+                $query->whereIn('tag_id', $tag_ids);
+            })
+            ->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->limit(3)->get();
+
         $viewData = [
             'post' => $post,
             'postsRelated' => $postsRelated

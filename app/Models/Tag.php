@@ -31,4 +31,9 @@ class Tag extends Base
     {
         return Arr::get($this->_active, $this->active, '[N\A]');
     }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class, 'post_tags', 'tag_id', 'post_id')->withPivot('post_id', 'tag_id');
+    }
 }
