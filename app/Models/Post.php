@@ -61,7 +61,7 @@ class Post extends Base
 
     public function creator()
     {
-        return $this->belongsTo(Admin::class, 'author_id');
+        return $this->belongsTo(Admin::class, 'author_id')->select('id', 'name');
     }
 
     /**

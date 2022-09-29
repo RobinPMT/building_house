@@ -5621,50 +5621,22 @@
         </div>
         <div class="news-slider">
             <div class="owl-carousel">
-                <div class="news-item">
-                    <a href="news.html" class="news-thumb">
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/news/1.jpg')}}"> <!-- 500x620 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/news/1.jpg')}}"> <!-- 370x465 -->
-                            <img class="owl-lazy" data-src="{{asset('fe_template/images/news/1.jpg')}}" alt="450x560" />
-                        </picture>
-                    </a>
-                    <a href="news.html" class="news-title limit-two-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod</a>
-                    <span>20/04/2022 • admin</span>
-                </div>
-                <div class="news-item">
-                    <a href="news.html" class="news-thumb">
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/news/2.jpg')}}"> <!-- 500x620 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/news/2.jpg')}}"> <!-- 370x465 -->
-                            <img class="owl-lazy" data-src="{{asset('fe_template/images/news/2.jpg')}}" alt="450x560" />
-                        </picture>
-                    </a>
-                    <a href="news.html" class="news-title limit-two-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod</a>
-                    <span>20/04/2022 • admin</span>
-                </div>
-                <div class="news-item">
-                    <a href="news.html" class="news-thumb">
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/news/3.jpg')}}"> <!-- 500x620 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/news/3.jpg')}}"> <!-- 370x465 -->
-                            <img class="owl-lazy" data-src="{{asset('fe_template/images/news/3.jpg')}}" alt="450x560" />
-                        </picture>
-                    </a>
-                    <a href="news.html" class="news-title limit-two-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod</a>
-                    <span>20/04/2022 • admin</span>
-                </div>
-                <div class="news-item">
-                    <a href="news.html" class="news-thumb">
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/news/4.jpg')}}"> <!-- 500x620 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/news/4.jpg')}}"> <!-- 370x465 -->
-                            <img class="owl-lazy" data-src="{{asset('fe_template/images/news/4.jpg')}}" alt="450x560" />
-                        </picture>
-                    </a>
-                    <a href="news.html" class="news-title limit-two-line">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod</a>
-                    <span>20/04/2022 • admin</span>
-                </div>
+                @if(isset($posts))
+                    @foreach($posts as $key => $post)
+                        <div class="news-item">
+                            <a href="{{route('get.detail.post', [$post->slug])}}" class="news-thumb">
+                                <picture>
+                                    <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 500, 620, 100, 1)}}"> <!-- 500x620 -->
+                                    <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 370, 465, 100, 1)}}"> <!-- 370x465 -->
+                                    <img class="owl-lazy" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 450, 560, 100, 1)}}" alt="450x560" />
+                                </picture>
+                            </a>
+                            <a href="{{route('get.detail.post', [$post->slug])}}" class="news-title limit-two-line">{{$post->title}}</a>
+                            <span>{{$post->created_at->format('d/m/Y')}} • {{$post->creator->name ?? ''}}</span>
+                        </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
         <div class="container">

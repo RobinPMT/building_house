@@ -7,7 +7,7 @@
                 <a href="#" class="mobile-logo hidden-desktop"><img src="{{asset('fe_template/images/logo.png')}}" height="50" alt="logo" /></a>
                 <nav class="navbar-menu navbar-collapse clearfix" id="dropmenu">
                     <ul class="navbar-nav clearfix">
-                        <li class="active"><a href="#">Trang chủ</a></li>
+                        <li class="{{ \Request::route()->getName() == 'home' ? 'active' : '' }}"><a href="{{route('home')}}">Trang chủ</a></li>
                         <li class="dropdown">
                             <a href="#">Consolar Housing</a>
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
@@ -20,11 +20,11 @@
                         <li><a href="#">Consolar Decor</a></li>
                         <li><a href="#">Consolar Coffee & Food</a></li>
                         <li><a href="#">Kênh đại lý</a></li>
-                        <li class="dropdown">
-                            <a href="#">News & Gallery</a>
+                        <li class="dropdown {{ \Request::route()->getName() == 'get.list.post' ? 'active' : '' }}">
+                            <a href="#" >News & Gallery</a>
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
                             <ul class="dropdown-menu mini-submenu">
-                                <li><a href="#">Tin tức</a></li>
+                                <li class="{{ \Request::route()->getName() == 'get.list.post' ? 'active' : '' }}"><a href="{{route('get.list.post')}}">Tin tức</a></li>
                                 <li><a href="#">Thư viện ảnh</a></li>
                             </ul>
                         </li>

@@ -13,7 +13,7 @@
     <link href="{{asset('fe_template/css/style.css')}}" rel="stylesheet" />
     <link href="{{asset('fe_template/css/font-awesome.min.css')}}" rel="stylesheet" />
 {{--    file css theo componet--}}
-    <link href="{{asset('fe_template/css/'.\Request::route()->getName().'.css')}}" rel="stylesheet" />
+    <link href="{{asset('fe_template/css/'.get_name_route(\Request::route()->getName()).'.css')}}" rel="stylesheet" />
 {{--    file css theo componet--}}
 </head>
 <body>
@@ -30,5 +30,14 @@
 <script type="text/javascript" src="{{asset('fe_template/js/lazyload.js')}}"></script>
 <link href="{{asset('fe_template/css/animate.css')}}" rel="stylesheet" />
 @yield('script')
+<script>
+    $(document).ready(function() {
+        $('.share').click(function(e) {
+            e.preventDefault();
+            window.open($(this).attr('href'), 'fbShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0,         directories=0, scrollbars=0');
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

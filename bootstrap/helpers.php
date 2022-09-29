@@ -46,7 +46,6 @@ if (!function_exists('upload_image')) {
      */
     function upload_image($file, $folder = '', array $extend = [], $tmp_name_file = null)
     {
-
         $code = 1;
         // lay duong dan anh
         if (isset($_FILES[$file])) {
@@ -90,7 +89,6 @@ if (!function_exists('upload_image')) {
     }
 }
 if (!function_exists('upload_images')) {
-
     function upload_images($files, $folder = '')
     {
         $data = [];
@@ -119,5 +117,42 @@ if (!function_exists('get_data_user')) {
     function get_data_user($type, $field = 'id')
     {
         return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';
+    }
+}
+if (!function_exists('get_name_route')) {
+    function get_name_route($name)
+    {
+        $data = explode('.', $name);
+
+        return array_pop($data);
+    }
+}
+if (!function_exists('imageUrl')) {
+    function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
+    {
+        if (!$width && !$height) {
+            $url = env('IMAGE_URL') . $path;
+        } else {
+            $url = url('/') . '/timthumb.php?src=' . env('IMAGE_URL') . $path;
+
+            if (isset($width)) {
+                $url .= '&w=' . $width;
+            }
+            if (isset($height) && $height>0) {
+                $url .= '&h=' .$height;
+            }
+            if (isset($crop)) {
+                $url .= "&zc=".$crop;
+            } else {
+                $url .= "&zc=1";
+            }
+            if (isset($quality)) {
+                $url .='&q='.$quality.'&s=1';
+            } else {
+                $url .='&q=95&s=1';
+            }
+        }
+
+        return $url;
     }
 }
