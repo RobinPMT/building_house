@@ -36,7 +36,7 @@ class AdminLibraryController extends WebController
             $view = 'admin::library.index';
         }
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url,arr_hot',
             '_relations' => 'creator',
             '_filter' => 'freedom:'."$value",
             '_admin_fields' => 'name',
@@ -48,7 +48,7 @@ class AdminLibraryController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active,arr_hot,hot',
 //            '_relations' => 'creator'
         ]);
         return parent::__find($request, true);
@@ -106,6 +106,11 @@ class AdminLibraryController extends WebController
                     break;
                 case 'banner_product':
                     $image->banner_product = $image->banner_product ? 0 : 1;
+                    $image->save();
+                    $messages = 'Cập nhật thành công!';
+                    break;
+                case 'hot':
+                    $image->hot = $image->hot ? 0 : 1;
                     $image->save();
                     $messages = 'Cập nhật thành công!';
                     break;

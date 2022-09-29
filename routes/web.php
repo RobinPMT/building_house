@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('bai-viet/', [PostController::class, 'listPost'])->name('get.list.post');
 Route::get('bai-viet/{slug}', [PostController::class, 'postDetail'])->name('get.detail.post');
+
+Route::get('thu-vien/', [LibraryController::class, 'listLibrary'])->name('get.list.library');
+Route::get('thu-vien/{slug}', [LibraryController::class, 'libraryDetail'])->name('get.detail.library');

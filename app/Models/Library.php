@@ -15,7 +15,7 @@ class Library extends Base
 
     protected $fillable = [
         'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product','created_at',
-        'updated_at'
+        'updated_at', 'slug', 'hot'
     ];
 
     const FREEDOM = 1;
@@ -27,6 +27,10 @@ class Library extends Base
     const BANNER_PUBLIC = 1;
 
     const BANNER_PRIVATE = 0;
+
+    const HOT = 1;
+
+    const NOT_HOT = 0;
 
     protected $_active = [
         1 => [
@@ -72,6 +76,17 @@ class Library extends Base
         ],
     ];
 
+    protected $_hot = [
+        1 => [
+            'name' => 'Nổi bật',
+            'class' => 'badge-light-danger'
+        ],
+        0 => [
+            'name' => 'Không',
+            'class' => 'badge-light-secondary'
+        ],
+    ];
+
     public function getFreedom()
     {
         return Arr::get($this->_freedom, $this->freedom, '[N\A]');
@@ -80,6 +95,11 @@ class Library extends Base
     public function getStatus()
     {
         return Arr::get($this->_active, $this->active, '[N\A]');
+    }
+
+    public function getHot()
+    {
+        return Arr::get($this->_hot, $this->hot, '[N\A]');
     }
 
     public function getBannerHome()

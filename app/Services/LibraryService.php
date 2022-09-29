@@ -29,7 +29,7 @@ class LibraryService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom',
+            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom', 'arr_hot', 'hot',
             'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url', 'slug'
         ];
     }
@@ -66,6 +66,11 @@ class LibraryService extends ApiService
     public function get_arr_active_value($record, Library $model)
     {
         return $model->getStatus();
+    }
+
+    public function get_arr_hot_value($record, Library $model)
+    {
+        return $model->getHot();
     }
 
     public function get_arr_banner_home_value($record, Library $model)
@@ -110,6 +115,7 @@ class LibraryService extends ApiService
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
+            $model->hot = $model->hot == 'on' ? true : false;
             if (isset($model->title)) {
                 $model->freedom = false;
             }
@@ -120,7 +126,6 @@ class LibraryService extends ApiService
                 $newImages = array_merge($data, $oldImages ?? []);
                 $model->arr_image = json_encode($newImages);
             }
-
         });
     }
 

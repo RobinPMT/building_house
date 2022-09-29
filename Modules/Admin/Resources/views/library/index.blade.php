@@ -28,6 +28,7 @@
                         <th>List ảnh</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
+                        <th>Nổi bật</th>
                         <th>Hành động</th>
                     </tr>
                     </thead>
@@ -55,11 +56,11 @@
                                         {{$item['arr_active']['name']}}
                                     </a>
                                 </td>
-{{--                                <td style="">--}}
-{{--                                    <a class="badge badge-pill {{$item['arr_hot']['class']}}" href="{{route('admin.get.action.slide', ['hot', $item['id']])}}">--}}
-{{--                                        {{$item['arr_hot']['name']}}--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
+                                <td style="">
+                                    <a class="badge badge-pill {{$item['arr_hot']['class']}}" href="{{route('admin.get.action.slide', ['hot', $item['id']])}}">
+                                        {{$item['arr_hot']['name']}}
+                                    </a>
+                                </td>
                                 <td style="display: none;">
 {{--                                    <a href="#" class="item-detail" data-title="{{$item['title']}}" data-content="{{$item['content']}}" data-toggle="modal" data-target="#detail-library">--}}
 {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50">--}}
@@ -108,6 +109,7 @@
                         <th>List ảnh</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
+                        <th>Nổi bật</th>
                         <th>Hành động</th>
                     </tr>
                     </tfoot>
@@ -371,6 +373,9 @@
                             $('#output_image').attr('src', response.data.avatar_url);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
+                            }
+                            if(response.data.hot == '1'){
+                                $("form #checkbox_hot").attr('checked', true)
                             }
                             $('#exampleModalLabel').text('Cập nhật');
                             $('#form-crud').attr('action', data_url_update);

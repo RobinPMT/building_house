@@ -57,12 +57,12 @@
                         <label class="custom-control-label" for="checkbox_active">Public</label>
                     </div>
                 </div>
-{{--                <div class="form-group">--}}
-{{--                    <div class="custom-control custom-checkbox">--}}
-{{--                        <input type="checkbox" name="hot" class="custom-control-input" id="checkbox_hot">--}}
-{{--                        <label class="custom-control-label" for="checkbox_hot">Nổi bật</label>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="hot" class="custom-control-input" id="checkbox_hot">
+                        <label class="custom-control-label" for="checkbox_hot">Nổi bật</label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary data-submit mr-1 waves-effect waves-float waves-light">Lưu</button>
                 <button type="reset" class="btn btn-outline-secondary waves-effect" aria-hidden="true" data-dismiss="modal">Hủy</button>
             </div>

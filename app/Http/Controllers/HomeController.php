@@ -24,17 +24,23 @@ class HomeController extends FrontendController
         ])->get();
         $banners = services()->bannerService()->where([
             'active' => Setting::ACTIVE,
-        ])->get();
+        ])->orderByDesc('id')->get();
 
         $posts = services()->postService()->where([
             'active' => Post::ACTIVE,
             'hot' => Post::HOT
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id')->get();
+        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id')->orderByDesc('id')->get();
+
+        $libraries = services()->libraryService()->where([
+            'active' => Post::ACTIVE,
+            'hot' => Post::HOT
+        ])->select('id', 'title', 'slug', 'avatar', 'created_at', 'author_id')->limit(6)->orderByDesc('id')->get();
 
         $viewData = [
             'housing_settings' => $housing_settings,
             'banners' => $banners,
-            'posts' => $posts
+            'posts' => $posts,
+            'libraries' => $libraries
         ];
         return view('home.index', $viewData);
     }
