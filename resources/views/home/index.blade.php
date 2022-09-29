@@ -2,28 +2,21 @@
 @section('content')
     <section class="slideshow">
         <div class="owl-carousel">
-            <div class="owl-itemct">
-                <img class="bg-banner" src="{{asset('fe_template/images/banner/bg1.jpg')}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
-                <img class="detail-banner" src="{{asset('fe_template/images/banner/1.png')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
-                <div class="banner-descr">
-                    <h2>Lợi ích đến từ Consolar Housing</h2>
-                    <p>{{isset($settings['housing']) ? $settings['housing'] : ''}}</p>
-                    <a href="#" class="button-link bg-green">Xem thêm <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
-                        </svg></a>
-                </div>
-            </div>
-            <div class="owl-itemct">
-                <img class="bg-banner" src="{{asset('fe_template/images/banner/bg2.jpg')}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
-                <img class="detail-banner" src="{{asset('fe_template/images/banner/2.png')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
-                <div class="banner-descr">
-                    <h2>Lợi ích đến từ Consolar Housing</h2>
-                    <p>{{isset($settings['housing']) ? $settings['housing'] : ''}}</p>
-                    <a href="#" class="button-link bg-green">Xem thêm <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
-                        </svg></a>
-                </div>
-            </div>
+            @if(isset($banners))
+                @foreach($banners as $key => $banner)
+                    <div class="owl-itemct">
+                        <img class="bg-banner" src="{{pare_url_file($banner->avatar_not_main, 'banners')}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
+                        <img class="detail-banner" src="{{pare_url_file($banner->avatar_main, 'banners')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
+                        <div class="banner-descr">
+                            <h2>{{$banner->title}}</h2>
+                            <p>{{$banner->description}}</p>
+                            <a href="{{$banner->link}}" class="button-link bg-green">Xem thêm <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </section>
     <section class="benefit-section">

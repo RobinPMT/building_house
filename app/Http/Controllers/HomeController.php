@@ -21,8 +21,12 @@ class HomeController extends FrontendController
             'active' => Setting::ACTIVE,
             'type' => Setting::TYPE_HOME,
         ])->get();
+        $banners = services()->bannerService()->where([
+            'active' => Setting::ACTIVE,
+        ])->get();
         $viewData = [
-            'housing_settings' => $housing_settings
+            'housing_settings' => $housing_settings,
+            'banners' => $banners
         ];
         return view('home.index', $viewData);
     }
