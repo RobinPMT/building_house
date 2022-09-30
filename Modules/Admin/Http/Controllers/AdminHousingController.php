@@ -4,6 +4,7 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\WebController;
 use App\Models\Housing;
+use App\Models\Setting;
 use App\Services\HousingService;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,11 @@ class AdminHousingController extends WebController
             '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active',
             '_noPagination' => 1,
         ]);
-        return parent::__list($request, 'admin::housing.index');
+        $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first()->toArray();
+        $data = [
+            'setting' => $setting,
+        ];
+        return parent::__lists($request, $data, 'admin::housing.index');
     }
 
     public function __create(Request $request, $route = null)

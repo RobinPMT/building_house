@@ -24,7 +24,7 @@ class SettingService extends ApiService
 
     protected function getFilterableFields(): array
     {
-        return [];
+        return ['not_coffee'];
     }
 
     protected function fields(): array
@@ -37,6 +37,13 @@ class SettingService extends ApiService
     protected function mapFilters(): array
     {
         return [
+            'not_coffee' => function ($value) {
+                if ($value == 1) {
+                    return function ($query) use ($value) {
+                        $query->where('type', '!=', Setting::TYPE_COFFEE);
+                    };
+                }
+            },
         ];
     }
 
@@ -139,7 +146,10 @@ class SettingService extends ApiService
     public function uploadAvatar(Setting $model)
     {
         if ($this->getApiRequest()->hasFile('avatar')) {
-            $model->type = Setting::TYPE_HOME;
+            if (!$model->type == Setting::TYPE_COFFEE) {
+                $model->type = Setting::TYPE_HOME;
+            }
+
             $file = upload_image('avatar', 'settings');
             if (isset($file['name'])) {
                 $model->avatar = $file['name'];

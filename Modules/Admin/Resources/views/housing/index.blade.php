@@ -1,6 +1,60 @@
 @extends('admin::layouts.master')
 @section('content')
-<div class="row">
+    <section class="form-control-repeater">
+        <div class="row">
+            <!-- Invoice repeater -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Mô tả Consolar Coffee & Food</h4>
+                    </div>
+                    <div class="card-body">
+                        @if(isset($setting))
+                            <form action="{{route('admin.update.setting', [$setting['id']])}}"  method="POST" role="form" enctype="multipart/form-data">
+                                @csrf
+                                <div>
+                                    <div id="sid{{$setting['id']}}" data-id="{{$setting['id']}}">
+                                        <div class="row d-flex align-items-end">
+                                            <div class="col-md-8 col-12">
+                                                <div class="form-group">
+                                                    <label for="value">Đoạn header Consolar Coffee & Food</label>
+                                                    <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <img id="output_image_extra" src="{{isset($setting['avatar']) ? pare_url_file($setting['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input_image_extra">Ảnh Banner</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar">
+                                                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="btn btn-icon btn-primary submit__items" type="submit">
+                                            <i data-feather="save" class="mr-25"></i>
+                                            <span>Lưu</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <!-- /Invoice repeater -->
+        </div>
+    </section>
+    <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header border-bottom p-1">

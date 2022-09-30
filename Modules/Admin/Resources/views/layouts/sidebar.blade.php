@@ -130,7 +130,7 @@
                     </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.setting_key_product' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting_key_product')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Cài đặt sản phẩm</span></a>
                     </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.housing' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.housing')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Todo">Consolar Housing</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.housing' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.housing')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Todo">Coffee & Food</span></a>
                     </li>
                 </ul>
             </li>

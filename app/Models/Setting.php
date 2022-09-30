@@ -25,6 +25,8 @@ class Setting extends Base
 
     const TYPE_BANNER = 'banner';
 
+    const TYPE_COFFEE = 'coffee';
+
     protected $_active = [
         1 => [
             'name' => 'Hoạt động',

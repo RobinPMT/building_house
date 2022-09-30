@@ -53,7 +53,7 @@ class AdminSettingController extends WebController
 
     public function __update($id, $route = null)
     {
-        return parent::__update($id, 'admin.get.list.setting');
+        return parent::__update($id, null);
     }
 
 //    public function updateSettingHome(Request $request) //lợi ích housing
@@ -69,6 +69,7 @@ class AdminSettingController extends WebController
     {
         $request->merge([
             '_setting_fields' => 'name,key,value,active,icon',
+            '_filter' => 'not_coffee:1',
             '_noPagination' => 1,
             '_orderBy' => 'id:asc',
         ]);
