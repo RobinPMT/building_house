@@ -7,9 +7,11 @@ use App\Services\AttributeService;
 use App\Services\BannerService;
 use App\Services\CategoryService;
 use App\Services\ContactService;
+use App\Services\HousingService;
 use App\Services\LibraryService;
 use App\Services\PostService;
 use App\Services\ProductService;
+use App\Services\ProjectService;
 use App\Services\RoomService;
 use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
@@ -89,5 +91,15 @@ class MapService
     public function tagService(): TagService
     {
         return c(TagService::class);
+    }
+
+    public function projectService(): ProjectService
+    {
+        return c(ProjectService::class);
+    }
+
+    public function housingService(): HousingService
+    {
+        return c(HousingService::class);
     }
 }

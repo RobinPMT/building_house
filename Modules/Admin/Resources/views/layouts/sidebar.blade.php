@@ -51,9 +51,6 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-todo.html"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Todo</span></a>
-            </li>
-
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Invoice</span></a>
                 <ul class="menu-content">
                     <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a>
@@ -90,6 +87,8 @@
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.attribute' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.attribute')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List Library">Thuộc tính phòng</span></a>
                     </li>
                 </ul>
+            </li>
+            <li class="{{ \Request::route()->getName() == 'admin.get.list.project' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.project')}}"><i data-feather="box"></i><span class="menu-title text-truncate" data-i18n="Todo">Dự án</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="save"></i><span class="menu-title text-truncate" data-i18n="File Manager">Thư viện ảnh</span></a>
                 <ul class="menu-content">

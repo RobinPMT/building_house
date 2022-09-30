@@ -20,6 +20,7 @@ use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
+use Modules\Admin\Http\Controllers\AdminProjectController;
 use Modules\Admin\Http\Controllers\AdminRoomController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
@@ -153,5 +154,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminTagController::class, '__create'])->name('admin.store.tag');
         Route::post('/{id}', [AdminTagController::class, '__update'])->name('admin.update.tag');
         Route::get('/{action}/{id}', [AdminTagController::class, 'action'])->name('admin.get.action.tag');
+    });
+
+    Route::group(['prefix' => 'project'], function () {
+        Route::get('/', [AdminProjectController::class, '__list'])->name('admin.get.list.project');
+        Route::get('/list/{id}', [AdminProjectController::class, '__find'])->name('admin.get.find.project');
+        Route::post('/', [AdminProjectController::class, '__create'])->name('admin.store.project');
+        Route::post('/{id}', [AdminProjectController::class, '__update'])->name('admin.update.project');
+        Route::get('/check_slug', [AdminProjectController::class, 'checkSlug'])->name('admin.checkSlug.project');
+        Route::get('/{action}/{id}', [AdminProjectController::class, 'action'])->name('admin.get.action.project');
+        Route::delete('/delete_images/{id}/{image}', [AdminProjectController::class, 'deleteImages'])->name('admin.delete.images.project');
     });
 });
