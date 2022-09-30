@@ -25,7 +25,7 @@
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
                             <ul class="dropdown-menu mini-submenu">
                                 <li class="{{ \Request::route()->getName() == 'get.list.post' ? 'active' : '' }}"><a href="{{route('get.list.post')}}">Tin tức</a></li>
-                                <li><a href="#">Thư viện ảnh</a></li>
+                                <li class="{{ \Request::route()->getName() == 'get.list.library' ? 'active' : '' }}"><a href="{{route('get.list.library')}}">Thư viện ảnh</a></li>
                             </ul>
                         </li>
                         <!--<li><a href="#">Liên hệ</a></li>-->

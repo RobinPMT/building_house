@@ -14,35 +14,42 @@ class LibraryController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function listLibrary($slug)
+    public function libraryDetail($slug)
     {
         $library = services()->libraryService()->where([
             'active' => Library::ACTIVE,
+            'freedom' => Library::NOT_FREEDOM,
             'slug' => $slug
-        ])->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->first();
-        $tag_ids = $library->tags->pluck('id')->toArray();
-        $librarysRelated  = services()->libraryService()
-            ->where(['active' => Library::ACTIVE])
+        ])->select('id', 'title', 'slug', 'avatar', 'arr_image')->first();
+
+        $librariesRelated  = services()->libraryService()
+            ->where([
+                'active' => Library::ACTIVE,
+                'freedom' => Library::NOT_FREEDOM
+            ])
             ->whereKeyNot($library->id)
-            ->whereHas('tags', function ($query) use ($tag_ids) {
-                $query->whereIn('tag_id', $tag_ids);
-            })
-            ->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->limit(3)->get();
+            ->select('id', 'title', 'slug', 'avatar')->inRandomOrder()->limit(3)->get();
 
         $viewData = [
             'library' => $library,
-            'librarysRelated' => $librarysRelated
+            'librariesRelated' => $librariesRelated
         ];
         return view('library.detail', $viewData);
     }
 
-    public function libraryDetail()
+    public function listLibrary()
     {
-        $librarys = services()->libraryService()->where([
-            'active' => Library::ACTIVE
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id')->orderByDesc('id')->paginate(12);
+        $libraries = services()->libraryService()->where([
+            'active' => Library::ACTIVE,
+            'freedom' => Library::NOT_FREEDOM
+        ])->select('id', 'title', 'slug', 'avatar')->orderByDesc('id')->paginate(6);
+        $slides = services()->libraryService()->where([
+            'active' => Library::ACTIVE,
+            'freedom' => Library::FREEDOM
+        ])->select('id', 'avatar')->orderByDesc('id')->get();
         $viewData = [
-            'librarys' => $librarys
+            'libraries' => $libraries,
+            'slides' => $slides
         ];
         return view('library.list', $viewData);
     }
