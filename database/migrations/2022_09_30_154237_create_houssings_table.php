@@ -21,6 +21,7 @@ class CreateHoussingsTable extends Migration
             $table->string('author_id')->nullable();
             $table->string('avatar_main')->nullable();
             $table->string('avatar_not_main')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

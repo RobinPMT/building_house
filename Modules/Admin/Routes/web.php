@@ -17,6 +17,7 @@ use Modules\Admin\Http\Controllers\AdminBannerController;
 use Modules\Admin\Http\Controllers\AdminCategoryController;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AdminHousingController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
@@ -164,5 +165,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::get('/check_slug', [AdminProjectController::class, 'checkSlug'])->name('admin.checkSlug.project');
         Route::get('/{action}/{id}', [AdminProjectController::class, 'action'])->name('admin.get.action.project');
         Route::delete('/delete_images/{id}/{image}', [AdminProjectController::class, 'deleteImages'])->name('admin.delete.images.project');
+    });
+
+    Route::group(['prefix' => 'housing'], function () {
+        Route::get('/', [AdminHousingController::class, '__list'])->name('admin.get.list.housing');
+        Route::get('/list/{id}', [AdminHousingController::class, '__find'])->name('admin.get.find.housing');
+        Route::post('/', [AdminHousingController::class, '__create'])->name('admin.store.housing');
+        Route::post('/{id}', [AdminHousingController::class, '__update'])->name('admin.update.housing');
+//        Route::get('/check_slug', [AdminHousingController::class, 'checkSlug'])->name('admin.checkSlug.housing');
+        Route::get('/{action}/{id}', [AdminHousingController::class, 'action'])->name('admin.get.action.housing');
+//        Route::delete('/delete_images/{id}/{image}', [AdminHousingController::class, 'deleteImages'])->name('admin.delete.images.housing');
     });
 });
