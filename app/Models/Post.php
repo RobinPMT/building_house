@@ -16,8 +16,16 @@ class Post extends Base
     protected $fillable = [
         'title', 'slug', 'description', 'content', 'active', 'hot',
         'author_id', 'description_seo', 'title_seo', 'avatar', 'view','created_at',
-        'updated_at'
+        'updated_at', 'type'
     ];
+
+    const TYPE_EVENT = 'tin-tuc-su-kien';
+
+    const TYPE_PROMOTION = 'tin-khuyen-mai';
+
+    const TYPE_FINANCE = 'tin-tai-chinh';
+
+    const TYPE_NEW = 'tin-tuc';
 
     const ACTIVE = 1;
 

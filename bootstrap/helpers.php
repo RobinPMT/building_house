@@ -127,6 +127,15 @@ if (!function_exists('get_name_route')) {
         return array_pop($data);
     }
 }
+
+if (!function_exists('check_active_url')) {
+    function check_active_url($str, $char)
+    {
+        return strpos($str, $char);
+    }
+}
+
+
 if (!function_exists('imageUrl')) {
     function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
     {

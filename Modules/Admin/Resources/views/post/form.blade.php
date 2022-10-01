@@ -18,6 +18,18 @@
                     <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
                 </div>
                 <div class="form-group">
+                    <label for="type">Chọn mục tin tức <span style="color: red">*</span></label>
+
+                    <select name="type" id="type" class="select2 form-control form-control-lg select-single">
+                        <option value="" selected>Chọn mục tin tức</option>
+                        <option value="tin-tuc">Tin tức</option>
+                        <option value="tin-tuc-su-kien">Tin tức - Sự kiện</option>
+                        <option value="tin-tai-chinh">Tin tài chính</option>
+                        <option value="tin-khuyen-mai">Tin khuyến mãi</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
                     <label class="form-label" for="description">Mô tả</label>
                     <input type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả" />
                 </div>

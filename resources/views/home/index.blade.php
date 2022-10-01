@@ -5600,14 +5600,14 @@
                 @if(isset($posts))
                     @foreach($posts as $key => $post)
                         <div class="news-item">
-                            <a href="{{route('get.detail.post', [$post->slug])}}" class="news-thumb">
+                            <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-thumb">
                                 <picture>
                                     <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 500, 620, 100, 1)}}"> <!-- 500x620 -->
                                     <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 370, 465, 100, 1)}}"> <!-- 370x465 -->
                                     <img class="owl-lazy" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 450, 560, 100, 1)}}" alt="450x560" />
                                 </picture>
                             </a>
-                            <a href="{{route('get.detail.post', [$post->slug])}}" class="news-title limit-two-line">{{$post->title}}</a>
+                            <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-title limit-two-line">{{$post->title}}</a>
                             <span>{{$post->created_at->format('d/m/Y')}} • {{$post->creator->name ?? ''}}</span>
                         </div>
                     @endforeach

@@ -25,6 +25,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Ảnh</th>
+                        <th>Loại tin</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
@@ -40,6 +41,7 @@
                                     <td style="">
                                         <img src="{{$post['avatar']}}" width="100px" height="100px" alt="">
                                     </td>
+                                    <td style="">{{$post['type_name']}}</td>
                                     <td style="">{{$post['creator']['name']}}</td>
                                     <td style="">
                                         <a class="badge badge-pill {{$post['arr_active']['class']}}" href="{{route('admin.get.action.post', ['active', $post['id']])}}">
@@ -96,6 +98,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Ảnh</th>
+                        <th>Loại tin</th>
                         <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
@@ -122,6 +125,16 @@
             $(".select-multi").select2({
                 // placeholder: "Chọn danh mục cha",
                 // tags: true,
+            });
+            $(".select-single").select2({
+                // placeholder: "Chọn danh mục cha",
+                // tags: true,
+                allowClear: true,
+                language: {
+                    noResults: function (params) {
+                        return "Không tìm thấy kết quả!";
+                    }
+                }
             });
         });
         // ClassicEditor
@@ -213,6 +226,7 @@
                             $('#slug').val(response.data.slug);
                             $('#description').val(response.data.description);
                             $("#tag_ids").val(response.data.tag_ids).change();
+                            $("#type").val(response.data.type).change();
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
                             CKEDITOR.instances.content.setData( response.data.content);
@@ -291,12 +305,18 @@
                         title: {
                             required: true,
                         },
+                        type: {
+                            required: true,
+                        },
                         slug: {
                             required: true,
                         },
                     },
                     messages: {
                         title: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        type: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {

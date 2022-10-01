@@ -45,8 +45,8 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('bai-viet/', [PostController::class, 'listPost'])->name('get.list.post');
-Route::get('bai-viet/{slug}', [PostController::class, 'postDetail'])->name('get.detail.post');
+Route::get('bai-viet-{type}/', [PostController::class, 'listPost'])->name('get.list.post');
+Route::get('bai-viet-{type}/{slug}', [PostController::class, 'postDetail'])->name('get.detail.post');
 
 Route::get('thu-vien/', [LibraryController::class, 'listLibrary'])->name('get.list.library');
 Route::get('thu-vien/{slug}', [LibraryController::class, 'libraryDetail'])->name('get.detail.library');

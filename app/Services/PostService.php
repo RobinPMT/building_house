@@ -31,7 +31,7 @@ class PostService extends ApiService
         return [
             'title', 'slug', 'description', 'content', 'active', 'hot',
             'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
-            'arr_active', 'arr_hot', 'slug', 'tag_ids'
+            'arr_active', 'arr_hot', 'slug', 'tag_ids', 'type', 'type_name'
         ];
     }
 
@@ -66,6 +66,20 @@ class PostService extends ApiService
     public function get_arr_active_value($record, Post $model)
     {
         return $model->getStatus();
+    }
+
+    public function get_type_name_value($record, Post $model)
+    {
+        if ($model->type == Post::TYPE_FINANCE) {
+            return 'Tin tài chính';
+        } elseif ($model->type == Post::TYPE_EVENT) {
+            return 'Tin tức - Sự kiện';
+        } elseif ($model->type == Post::TYPE_PROMOTION) {
+            return 'Tin khuyến mãi';
+        } elseif ($model->type == Post::TYPE_NEW) {
+            return 'Tin tức';
+        }
+        return 'Không rõ';
     }
 
     public function get_tag_ids_value($record, Post $model)

@@ -8,13 +8,18 @@
                 <nav class="navbar-menu navbar-collapse clearfix" id="dropmenu">
                     <ul class="navbar-nav clearfix">
                         <li class="{{ \Request::route()->getName() == 'home' ? 'active' : '' }}"><a href="{{route('home')}}">Trang chủ</a></li>
-                        <li class="dropdown">
+                        <li class="dropdown {{
+                        (   request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || request()->getUri() == route('get.list.post', ['tin-tai-chinh']) ||
+                            request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ||
+                            check_active_url(request()->getUri(), 'tin-tai-chinh') || check_active_url(request()->getUri(), 'tin-tuc-su-kien')
+                        ) ? 'active' : '' }}"
+                        >
                             <a href="#">Consolar Housing</a>
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Tin khuyến mãi</a></li>
-                                <li><a href="#">Tin tài chính</a></li>
-                                <li><a href="#">Tin tức - Sự kiện</a></li>
+                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Tin khuyến mãi</a></li>
+                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tai-chinh']) || check_active_url(request()->getUri(), 'tin-tai-chinh') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tai-chinh'])}}">Tin tài chính</a></li>
+                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-tuc-su-kien') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc-su-kien'])}}">Tin tức - Sự kiện</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Consolar Decor</a></li>
@@ -26,13 +31,13 @@
                             <a href="{{route('get.list.project')}}">Dự án của chúng tôi</a>
                         </li>
                         <li class="dropdown {{
-                            (   \Request::route()->getName() == 'get.list.post' || \Request::route()->getName() == 'get.list.library' ||
-                                \Request::route()->getName() == 'get.detail.post' || \Request::route()->getName() == 'get.detail.library'
+                            (   request()->getUri() == route('get.list.post', ['tin-tuc']) || \Request::route()->getName() == 'get.list.library' ||
+                                \Request::route()->getName() == 'get.detail.library' || check_active_url(request()->getUri(), 'tin-tuc/')
                             ) ? 'active' : '' }}">
                             <a href="#" >News & Gallery</a>
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
                             <ul class="dropdown-menu mini-submenu">
-                                <li class="{{ (\Request::route()->getName() == 'get.list.post' || \Request::route()->getName() == 'get.detail.post' ) ? 'active' : '' }}"><a href="{{route('get.list.post')}}">Tin tức</a></li>
+                                <li class="{{  (request()->getUri() == route('get.list.post', ['tin-tuc']) || check_active_url(request()->getUri(), 'tin-tuc/')) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc'])}}">Tin tức</a></li>
 
                                 <li class="{{ (\Request::route()->getName() == 'get.list.library' || \Request::route()->getName() == 'get.detail.library' ) ? 'active' : '' }}"><a href="{{route('get.list.library')}}">Thư viện ảnh</a></li>
                             </ul>

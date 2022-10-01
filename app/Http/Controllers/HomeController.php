@@ -29,7 +29,7 @@ class HomeController extends FrontendController
         $posts = services()->postService()->where([
             'active' => Post::ACTIVE,
             'hot' => Post::HOT
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id')->orderByDesc('id')->get();
+        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderByDesc('id')->get();
 
         $libraries = services()->libraryService()->where([
             'active' => Post::ACTIVE,

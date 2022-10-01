@@ -14,12 +14,12 @@ class PostController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function postDetail($slug)
+    public function postDetail($type, $slug)
     {
         $post = services()->postService()->where([
             'active' => Post::ACTIVE,
             'slug' => $slug
-        ])->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->first();
+        ])->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content', 'type')->first();
         $tag_ids = $post->tags->pluck('id')->toArray();
         $postsRelated  = services()->postService()
             ->where(['active' => Post::ACTIVE])
@@ -27,7 +27,7 @@ class PostController extends FrontendController
             ->whereHas('tags', function ($query) use ($tag_ids) {
                 $query->whereIn('tag_id', $tag_ids);
             })
-            ->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content')->limit(3)->get();
+            ->with('creator')->select('id', 'title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'content', 'type')->limit(3)->get();
 
         $viewData = [
             'post' => $post,
@@ -36,11 +36,12 @@ class PostController extends FrontendController
         return view('post.detail', $viewData);
     }
 
-    public function listPost()
+    public function listPost($type)
     {
         $posts = services()->postService()->where([
-            'active' => Post::ACTIVE
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id')->orderByDesc('id')->paginate(12);
+            'active' => Post::ACTIVE,
+            'type' => $type
+        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderByDesc('id')->paginate(12);
         $viewData = [
             'posts' => $posts
         ];
