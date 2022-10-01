@@ -116,7 +116,8 @@ class AdminProductController extends WebController
                             unset($arr[$key]);
                         }
                     }
-                    $product->arr_image = json_encode($arr);
+//                    dd(array_values($arr));
+                    $product->arr_image = json_encode(array_values($arr));
                     $product->save();
                     return response()->json(['status' => true]);
                 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -36,11 +38,22 @@ class HomeController extends FrontendController
             'hot' => Post::HOT
         ])->select('id', 'title', 'slug', 'avatar', 'created_at', 'author_id')->limit(6)->orderByDesc('id')->get();
 
+        $categories = services()->categoryService()->where([
+            'active' => Category::STATUS_PUBLIC,
+        ])->whereHas('products', function ($query) {
+            $query->where(['active' => Product::ACTIVE]);
+        })->with(['products' => function ($query) {
+            $query->with('keys')->where([
+                'active' => Product::ACTIVE,
+                'hot' => Product::HOT,
+            ])->limit(6);
+        }])->get();
         $viewData = [
             'housing_settings' => $housing_settings,
             'banners' => $banners,
             'posts' => $posts,
-            'libraries' => $libraries
+            'libraries' => $libraries,
+            'categories' => $categories
         ];
         return view('home.index', $viewData);
     }
