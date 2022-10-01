@@ -12,12 +12,16 @@ class Contact extends Base
 
     protected $fillable = [
         'name', 'email', 'phone', 'active', 'author_id','created_at',
-        'updated_at'
+        'updated_at', 'content', 'product_id', 'type'
     ];
 
     const ACTIVE = 1;
 
     const NOT_ACTIVE = 0;
+
+    const TYPE_PRODUCT = 'product';
+
+    const TYPE_HOUSING = 'housing';
 
     protected $_active = [
         1 => [

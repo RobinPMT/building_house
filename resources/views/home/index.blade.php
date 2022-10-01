@@ -35,17 +35,17 @@
                                 <div class="col-xs-12 benefit-item">
                                     <div class="benefit-item-content">
                                         <picture>
-{{--                                            <source media="(min-width: 1500px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 1440x410 -->--}}
-{{--                                            <source media="(min-width: 1230px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 1170x335 -->--}}
-{{--                                            <source media="(min-width: 992px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 940x270 -->--}}
-{{--                                            <source media="(min-width: 571px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 970x280 -->--}}
+                                            <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 1440, 410, 100, 1)}}"> <!-- 1440x410 -->
+                                            <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 1170, 335, 100, 1)}}"> <!-- 1170x335 -->
+                                            <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 940, 270, 100, 1)}}"> <!-- 940x270 -->
+                                            <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 970, 280, 100, 1)}}"> <!-- 970x280 -->
                                             <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
                                             <strong>{{$housing_setting->value}}
                                             </strong>
-                                            <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
+                                            <div class="behotline"><a href="{{route('get.list.contact')}}"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,17 +53,17 @@
                                 <div class="col-xs-6 benefit-item">
                                     <div class="benefit-item-content">
                                         <picture>
-{{--                                            <source media="(min-width: 1500px)" srcset="{{ pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 690x840 -->--}}
-{{--                                            <source media="(min-width: 1230px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 570x700 -->--}}
-{{--                                            <source media="(min-width: 992px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 455x560 -->--}}
-{{--                                            <source media="(min-width: 571px)" srcset="{{pare_url_file($housing_setting->avatar, 'settings')}}"> <!-- 470x570 -->--}}
+                                            <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 690, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 600  : 405) : 840 , 100, 1)}}"> <!-- 690x840 -->
+                                            <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 570, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 495  : 335) : 700 , 100, 1)}}"> <!-- 570x700 -->
+                                            <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 455, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 265) : 560 , 100, 1)}}"> <!-- 455x560 -->
+                                            <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 470, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 275) : 570 , 100, 1)}}"> <!-- 470x570 -->
                                             <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
                                             <strong>{{$housing_setting->value}}
                                             </strong>
-                                            <div class="behotline"><a href="contact.html"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
+                                            <div class="behotline"><a href="{{route('get.list.contact')}}"><i class="fa fa-phone"></i> Liên hệ tư vấn</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -5511,7 +5511,7 @@
         <div class="container">
             <div class="coffee-left">
                 <h3 class="coffee-title">Giải pháp kinh doanh <span>trọn gói chỉ với</span> <strong>180 triệu</strong></h3>
-                <a href="coffee.html" class="button-link">Tìm hiểu ngay</a>
+                <a href="{{route('get.list.coffee')}}" class="button-link">Tìm hiểu ngay</a>
                 <div class="nav-coffee-slider clearfix">
                     <button type="button" role="presentation" class="customPrevBtn slideraction">
                         <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -5585,7 +5585,7 @@
             @endif
 
         </div>
-        <div class="text-center container"><a href="#" class="button-link">Xem tất cả <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="text-center container"><a href="{{route('get.list.library')}}" class="button-link">Xem tất cả <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"/>
                 </svg></a></div>
     </section>
@@ -5627,7 +5627,7 @@
                             <path d="M21 7.99998L21.7071 7.29287L22.4142 7.99998L21.7071 8.70709L21 7.99998ZM1 8.99998C0.447716 8.99998 0 8.55226 0 7.99998C0 7.44769 0.447716 6.99998 1 6.99998V8.99998ZM15.0404 0.626206L21.7071 7.29287L20.2929 8.70709L13.6262 2.04042L15.0404 0.626206ZM21.7071 8.70709L15.0404 15.3738L13.6262 13.9595L20.2929 7.29287L21.7071 8.70709ZM21 8.99998H1V6.99998H21V8.99998Z" fill="#fff"></path></svg>
                     </button>
                 </div>
-                <a href="#" class="button-link">Xem tất cả <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="{{route('get.list.post', ['tin-tuc'])}}" class="button-link">Xem tất cả <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13 5L13.7071 4.29289L14.4142 5L13.7071 5.70711L13 5ZM1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4V6ZM9.70711 0.292893L13.7071 4.29289L12.2929 5.70711L8.29289 1.70711L9.70711 0.292893ZM13.7071 5.70711L9.70711 9.70711L8.29289 8.29289L12.2929 4.29289L13.7071 5.70711ZM13 6H1V4H13V6Z" fill="#161E31"></path>
                     </svg>
                 </a>
@@ -5638,7 +5638,7 @@
         <div class="container">
             <h2 class="contact-title">Để lại thông tin</h2>
             <p class="contact-desc">Chúng tôi sẽ liên hệ với bạn</p>
-            <a href="contact.html" class="button-link bg-white">Liên hệ với Consolar</a>
+            <a href="{{route('get.list.contact')}}" class="button-link bg-white">Liên hệ với Consolar</a>
         </div>
     </section>
 
@@ -5650,12 +5650,16 @@
                 </button>
                 <div class="modal-body">
                     <h3 class="contact-popup-title">Liên hệ với chúng tôi <span>để nhận tư vấn</span></h3>
-                    <div class="contact-popup-form">
-                        <input type="text" name="name" required placeholder="Họ tên *" />
-                        <input type="text" name="phone" required placeholder="Số điện thoại *" />
-                        <input type="email" name="email" required placeholder="Email *" />
-                        <div class="text-center"><button type="submit" class="button-link bg-green">Gửi thông tin</button></div>
-                    </div>
+                    <form  action="{{route('get.store.contact')}}" method="POST" role="form" >
+                        @csrf
+                        <div class="contact-popup-form">
+                            <input type="text" name="name" required placeholder="Họ tên *" />
+                            <input type="text" name="phone" required placeholder="Số điện thoại *" />
+                            <input type="email" name="email" required placeholder="Email *" />
+                            <input type="text" name="type" value="product" hidden />
+                            <div class="text-center"><button type="submit" class="button-link bg-green">Gửi thông tin</button></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -23,20 +23,25 @@
             <div class="container">
                 <div class="contact-form clearfix">
                     <h3>Liên hệ với chúng tôi <span>để nhận tư vấn</span></h3>
-                    <div class="contact-row clearfix">
-                        <div class="contact-column">
-                            <input type="text" name="name" required placeholder="Họ tên *" />
+                    <form  action="{{route('get.store.contact')}}" method="POST" role="form" >
+                        @csrf
+                        <div class="contact-row clearfix">
+                            <div class="contact-column">
+                                <input type="text" name="name" required placeholder="Họ tên *" />
+                            </div>
+                            <div class="contact-column">
+                                <input type="text" name="phone" required placeholder="Điện thoại *" />
+                            </div>
+                            <div class="contact-column">
+                                <input type="email" name="email" required placeholder="Email" />
+                            </div>
+                            <input type="text" name="type" value="housing" hidden />
+                            <div class="contact-column">
+                                <button type="submit">Gửi thông tin</button>
+                            </div>
                         </div>
-                        <div class="contact-column">
-                            <input type="text" name="phone" required placeholder="Điện thoại *" />
-                        </div>
-                        <div class="contact-column">
-                            <input type="email" name="email" required placeholder="Email" />
-                        </div>
-                        <div class="contact-column">
-                            <button type="submit">Gửi thông tin</button>
-                        </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -63,7 +68,7 @@
 
                             </ul>
                         </div>
-                        <a href="#" class="button-link bg-green">Liên hệ nhận tư vấn</a>
+                        <a href="{{route('get.list.contact')}}" class="button-link bg-green">Liên hệ nhận tư vấn</a>
                     </div>
                     <div class="col-lg-7 col-sm-6">
                         <div class="opportunity-thumbnail">
@@ -129,7 +134,7 @@
         <div class="container">
             <h2 class="contact-title">Để lại thông tin</h2>
             <p class="contact-desc">Chúng tôi sẽ liên hệ với bạn</p>
-            <a href="#" class="button-link bg-white">Liên hệ với Consolar</a>
+            <a href="{{route('get.list.contact')}}" class="button-link bg-white">Liên hệ với Consolar</a>
         </div>
     </section>
 @stop

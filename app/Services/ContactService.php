@@ -4,10 +4,7 @@ namespace App\Services;
 
 use App\Models\Admin;
 use App\Models\Contact;
-use App\Models\Post;
-use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
-use function Aws\boolean_value;
 
 class ContactService extends ApiService
 {
@@ -32,7 +29,7 @@ class ContactService extends ApiService
     protected function fields(): array
     {
         return [
-            'name', 'email', 'phone', 'active', 'author_id', 'arr_active'
+            'name', 'email', 'phone', 'active', 'author_id', 'arr_active', 'content', 'product_id', 'type', 'get_type'
         ];
     }
 
@@ -45,6 +42,16 @@ class ContactService extends ApiService
     public function get_arr_active_value($record, Contact $model)
     {
         return $model->getStatus();
+    }
+
+    public function get_get_type_value($record, Contact $model)
+    {
+        if ($model->type == Contact::TYPE_PRODUCT) {
+            return 'Sản phẩm';
+        } elseif ($model->type == Contact::TYPE_HOUSING) {
+            return 'Giải pháp kinh doanh';
+        }
+        return 'Không rõ';
     }
 
     public function includeHandler()
@@ -66,9 +73,19 @@ class ContactService extends ApiService
     {
         parent::boot();
         $user = auth('admins')->user();
-        $this->on('saving', function ($model) use ($user) {
+        $this->on('creating', function ($model) use ($user) {
+            if (!isset($model->type)) {
+                $model->type = isset($model->product_id) ? Contact::TYPE_PRODUCT : Contact::TYPE_HOUSING;
+            }
+        });
+        $this->on('updating', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
+        });
+
+
+        $this->on('created', function ($model) use ($user) {
+            //TODO: gửi mail
         });
     }
 }

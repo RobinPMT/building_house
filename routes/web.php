@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CoffeeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PostController;
@@ -55,3 +56,6 @@ Route::get('giai-phap-kinh-doanh/', [CoffeeController::class, 'index'])->name('g
 
 Route::get('du-an/', [ProjectController::class, 'listProject'])->name('get.list.project');
 Route::get('du-an/{slug}', [ProjectController::class, 'projectDetail'])->name('get.detail.project');
+
+Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.contact');
+Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');

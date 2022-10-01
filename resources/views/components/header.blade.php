@@ -42,7 +42,7 @@
                                 <li class="{{ (\Request::route()->getName() == 'get.list.library' || \Request::route()->getName() == 'get.detail.library' ) ? 'active' : '' }}"><a href="{{route('get.list.library')}}">Thư viện ảnh</a></li>
                             </ul>
                         </li>
-                        <!--<li><a href="#">Liên hệ</a></li>-->
+                        <li class="{{ \Request::route()->getName() == 'get.list.contact' ? 'active' : '' }}"><a href="{{route('get.list.contact')}}">Liên hệ</a></li>
                     </ul>
                 </nav>
                 <span class="mobile-hotline hidden-desktop clearfix">

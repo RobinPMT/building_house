@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-gd": "*",
         "ext-json": "*",
         "artesaos/seotools": "^0.22.0",
         "aws/aws-sdk-php": "^3.222",
+        "biscolab/laravel-recaptcha": "^5.4",
         "cviebrock/eloquent-sluggable": "^8.0",
         "evenement/evenement": "^3.0",
         "firebase/php-jwt": "^5.0",
@@ -22,8 +24,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
-        "nwidart/laravel-modules": "^8.3",
-        "ext-gd": "*"
+        "nwidart/laravel-modules": "^8.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

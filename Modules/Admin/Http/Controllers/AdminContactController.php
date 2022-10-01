@@ -29,7 +29,7 @@ class AdminContactController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_contact_fields' => 'phone,active,name,email,arr_active',
+            '_contact_fields' => 'phone,active,name,email,arr_active,type,product_id,get_type,content',
             '_relations' => 'handler',
             '_admin_fields' => 'name'
         ]);

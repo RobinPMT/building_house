@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header border-bottom p-1">
-                    <div class="head-label"><h6 class="mb-0">DataTable with Buttons</h6></div>
+                    <div class="head-label"><h6 class="mb-0">Danh sách liên hệ</h6></div>
 {{--                    <div class="dt-action-buttons text-right">--}}
 {{--                        <div class="dt-buttons d-inline-flex">--}}
 {{--                            <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in">--}}
@@ -23,8 +23,9 @@
                     <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Người dùng</th>
-                        <th>Email</th>
+                        <th>Khách hàng</th>
+                        <th>Lời nhắn</th>
+                        <th>Loại</th>
                         <th>Người xử lý</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -39,11 +40,21 @@
                                     <div class="d-flex justify-content-left align-items-center">
                                         <div class="d-flex flex-column">
                                             <span class="emp_name text-truncate font-weight-bold">{{$user['name']}}</span>
-                                            <small class="emp_post text-truncate text-muted">Số điện thoại: {{$user['phone']}}</small>
+                                            <small class="emp_post text-truncate text-muted">Email: <strong style="color: brown;">{{$user['email']}}</strong></small>
+                                            <small class="emp_post text-truncate text-muted">Số điện thoại: <strong style="color: brown;">{{$user['phone']}}</strong></small>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{$user['email']}}</td>
+                                <td style="">
+                                    <a class="badge badge-pill badge-light-primary item-detail" data-content="{{$user['content']}}"  data-toggle="modal" data-target="#detail">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50">
+                                            <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                            <rect x="1" y="3" width="22" height="5"></rect>
+                                            <line x1="10" y1="12" x2="14" y2="12"></line>
+                                        </svg>Xem
+                                    </a>
+                                </td>
+                                <td>{{$user['get_type']}}</td>
                                 <td style="">{{$user['handler']['name'] ?? ''}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$user['arr_active']['class']}}" href="{{route('admin.get.action.contact', ['active', $user['id']])}}">
@@ -85,8 +96,9 @@
                     <tfoot>
                     <tr>
                         <th>STT</th>
-                        <th>Người dùng</th>
-                        <th>Email</th>
+                        <th>Khách hàng</th>
+                        <th>Lời nhắn</th>
+                        <th>Loại</th>
                         <th>Người xử lý</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -97,6 +109,27 @@
 
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detail" role="dialog" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title content__title">Lời nhắn</h5>
+                    {{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+                    {{--                    <span aria-hidden="true">&times;</span>--}}
+                    {{--                </button>--}}
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body content__body" style=" word-break: break-all;">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary waves-effect" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -104,6 +137,31 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    null,
+                    { "width": "20%" },
+                    { "width": "10%" },
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            });
+        });
+
+        $(document).ready(function() {
+            function detail(content) {
+                $(".content__body").html(content);
+            }
+            $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                detail($this.attr('data-content'));
+            });
+            $(".item-detail").click(function (event) {
+                event.preventDefault();
+                let $this = $(this);
+                detail($this.attr('data-content'));
             });
         });
 
