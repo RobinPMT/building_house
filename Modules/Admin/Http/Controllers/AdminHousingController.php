@@ -30,8 +30,10 @@ class AdminHousingController extends WebController
             '_noPagination' => 1,
         ]);
         $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first()->toArray();
+        $settingHousing = services()->settingService()->where(['key' =>'coffee_housing', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value', 'avatar_not_main')->first()->toArray();
         $data = [
             'setting' => $setting,
+            'settingHousing' => $settingHousing
         ];
         return parent::__lists($request, $data, 'admin::housing.index');
     }

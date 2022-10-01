@@ -54,6 +54,73 @@
             <!-- /Invoice repeater -->
         </div>
     </section>
+    <section class="form-control-repeater">
+        <div class="row">
+            <!-- Invoice repeater -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Cơ hội kinh doanh tiềm năng cùng Consolar Housing</h4>
+                    </div>
+                    <div class="card-body">
+                        @if(isset($settingHousing))
+                            <form action="{{route('admin.update.setting', [$settingHousing['id']])}}"  method="POST" role="form" enctype="multipart/form-data">
+                                @csrf
+                                <div>
+                                    <div id="sid{{$settingHousing['id']}}" data-id="{{$settingHousing['id']}}">
+                                        <div class="row d-flex align-items-end">
+                                            <div class="col-md-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="value">Mô tả cơ hội kinh doanh tiềm năng cùng Consolar Housing</label>
+                                                    <textarea class="form-control" name="value" value="{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <img id="output_image_extra_setting_main" src="{{isset($settingHousing['avatar']) ? pare_url_file($settingHousing['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input_image_extra_setting_main">Ảnh Chính</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting_main" name="avatar">
+                                                        <label class="custom-file-label" for="input_image_extra_setting_main">Chọn ảnh</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <img id="output_image_extra_setting" src="{{isset($settingHousing['avatar_not_main']) ? pare_url_file($settingHousing['avatar_not_main'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input_image_extra_setting">Ảnh Phụ</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting" name="avatar_not_main">
+                                                        <label class="custom-file-label" for="input_image_extra_setting">Chọn ảnh</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="btn btn-icon btn-primary submit__items" type="submit">
+                                            <i data-feather="save" class="mr-25"></i>
+                                            <span>Lưu</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <!-- /Invoice repeater -->
+        </div>
+    </section>
     <div class="row">
     <div class="col-12">
         <div class="card">

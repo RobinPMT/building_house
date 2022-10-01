@@ -234,6 +234,34 @@
         readUrlExtra(this);
     });
 
+    {{--hiện ảnh phụ--}}
+    function readUrlExtraSetting(input) {
+        if (input.files && input.files[0] ){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#output_image_extra_setting').attr('src',e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#input_image_extra_setting").change(function () {
+        readUrlExtraSetting(this);
+    });
+
+    {{--hiện ảnh phụ--}}
+    function readUrlExtraSettingMain(input) {
+        if (input.files && input.files[0] ){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#output_image_extra_setting_main').attr('src',e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#input_image_extra_setting_main").change(function () {
+        readUrlExtraSettingMain(this);
+    });
+
 
     //check slug
     $('#title').change(function (event) {

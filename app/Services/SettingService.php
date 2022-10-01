@@ -30,7 +30,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active'
+            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active', 'avatar_not_main'
         ];
     }
 
@@ -57,6 +57,11 @@ class SettingService extends ApiService
         return pare_url_file($model->avatar, 'settings');
     }
 
+    public function get_avatar_not_main_value($record, Setting $model)
+    {
+        return pare_url_file($model->avatar_not_main, 'settings');
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();
@@ -71,7 +76,8 @@ class SettingService extends ApiService
         $user = auth('admins')->user();
         $this->on('saving', function ($model) use ($user) {
             $model->active = $model->active == 'on' ? true : false;
-            $this->uploadAvatar($model);
+            $this->uploadAvatar($model, 'avatar');
+            $this->uploadAvatar($model, 'avatar_not_main');
         });
         $this->on('updating', function ($model) use ($user) {
 //            $this->updateSettingHome($model);
@@ -143,16 +149,16 @@ class SettingService extends ApiService
         ];
     }
 
-    public function uploadAvatar(Setting $model)
+    public function uploadAvatar(Setting $model, $field)
     {
-        if ($this->getApiRequest()->hasFile('avatar')) {
+        if ($this->getApiRequest()->hasFile($field)) {
             if (!$model->type == Setting::TYPE_COFFEE) {
                 $model->type = Setting::TYPE_HOME;
             }
 
-            $file = upload_image('avatar', 'settings');
+            $file = upload_image($field, 'settings');
             if (isset($file['name'])) {
-                $model->avatar = $file['name'];
+                $model->$field = $file['name'];
             }
         }
     }
