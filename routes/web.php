@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +50,8 @@ Route::get('bai-viet/{slug}', [PostController::class, 'postDetail'])->name('get.
 
 Route::get('thu-vien/', [LibraryController::class, 'listLibrary'])->name('get.list.library');
 Route::get('thu-vien/{slug}', [LibraryController::class, 'libraryDetail'])->name('get.detail.library');
+
+Route::get('giai-phap-kinh-doanh/', [CoffeeController::class, 'index'])->name('get.list.coffee');
+
+Route::get('du-an/', [ProjectController::class, 'listProject'])->name('get.list.project');
+Route::get('du-an/{slug}', [ProjectController::class, 'projectDetail'])->name('get.detail.project');

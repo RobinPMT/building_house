@@ -18,14 +18,23 @@
                             </ul>
                         </li>
                         <li><a href="#">Consolar Decor</a></li>
-                        <li><a href="#">Consolar Coffee & Food</a></li>
-                        <li><a href="#">Kênh đại lý</a></li>
-                        <li class="dropdown {{ \Request::route()->getName() == 'get.list.post' ? 'active' : '' }}">
+                        <li class="{{ \Request::route()->getName() == 'get.list.coffee' ? 'active' : '' }}">
+                            <a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a>
+                        </li>
+{{--                        <li><a href="#">Kênh đại lý</a></li>--}}
+                        <li class="{{ (\Request::route()->getName() == 'get.list.project' || \Request::route()->getName() == 'get.detail.project') ? 'active' : '' }}">
+                            <a href="{{route('get.list.project')}}">Dự án của chúng tôi</a>
+                        </li>
+                        <li class="dropdown {{
+                            (   \Request::route()->getName() == 'get.list.post' || \Request::route()->getName() == 'get.list.library' ||
+                                \Request::route()->getName() == 'get.detail.post' || \Request::route()->getName() == 'get.detail.library'
+                            ) ? 'active' : '' }}">
                             <a href="#" >News & Gallery</a>
                             <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
                             <ul class="dropdown-menu mini-submenu">
-                                <li class="{{ \Request::route()->getName() == 'get.list.post' ? 'active' : '' }}"><a href="{{route('get.list.post')}}">Tin tức</a></li>
-                                <li class="{{ \Request::route()->getName() == 'get.list.library' ? 'active' : '' }}"><a href="{{route('get.list.library')}}">Thư viện ảnh</a></li>
+                                <li class="{{ (\Request::route()->getName() == 'get.list.post' || \Request::route()->getName() == 'get.detail.post' ) ? 'active' : '' }}"><a href="{{route('get.list.post')}}">Tin tức</a></li>
+
+                                <li class="{{ (\Request::route()->getName() == 'get.list.library' || \Request::route()->getName() == 'get.detail.library' ) ? 'active' : '' }}"><a href="{{route('get.list.library')}}">Thư viện ảnh</a></li>
                             </ul>
                         </li>
                         <!--<li><a href="#">Liên hệ</a></li>-->
