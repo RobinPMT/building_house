@@ -38,7 +38,7 @@ class ProjectController extends FrontendController
     {
         $projects = services()->projectService()->where([
             'active' => project::ACTIVE
-        ])->select('title', 'slug', 'avatar')->orderByDesc('id')->paginate(1);
+        ])->select('title', 'slug', 'avatar')->orderByDesc('id')->paginate(12);
         $viewData = [
             'projects' => $projects
         ];
