@@ -45,7 +45,7 @@ footer .container{position: relative;}.gotoppage{position: absolute;right: 15px;
 	.navbar-nav ul li{position: relative;}.navbar-nav>li ul li a{display: block;padding: 9px 15px 8px 15px;border-top: 1px solid #e7e7e7;white-space: normal;font-size: 15px;}.navbar-nav li ul li a:hover{color: #014C47;}.navbar-nav>li ul li:first-child>a{border-top:none;}
 }
 @media (max-width: 1499px){
-	body{font-size: 15px;}.header-center{width: calc(100% - 200px);}.navbar-menu{text-align: left;}.header-member>li>span>strong{display: none;}.header-member>li>span i{margin-left: 0;}.button-link{font-size: 16px;}footer{font-size: 16px;}.page-title{font-size: 36px;}.gotoppage svg{height: 50px;width: 50px;}
+	body{font-size: 15px;}.header-center{width: calc(100% - 0px);}.navbar-menu{text-align: left;}.header-member>li>span>strong{display: none;}.header-member>li>span i{margin-left: 0;}.button-link{font-size: 16px;}footer{font-size: 16px;}.page-title{font-size: 36px;}.gotoppage svg{height: 50px;width: 50px;}
 }
 @media (max-width: 1229px){a.header-logo{width: auto !important;}}
 @media (min-width: 992px) and (max-width:1199px){

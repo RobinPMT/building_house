@@ -23,9 +23,9 @@
                                 <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-tuc-su-kien') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc-su-kien'])}}">Tin tức - Sự kiện</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Consolar Decor</a></li>
+                        <li><a href="#">Tự thiết kế</a></li>
                         <li class="{{ \Request::route()->getName() == 'get.list.coffee' ? 'active' : '' }}">
-                            <a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a>
+                            <a href="{{route('get.list.coffee')}}">Coffee & Food</a>
                         </li>
 {{--                        <li><a href="#">Kênh đại lý</a></li>--}}
                         <li class="{{ (\Request::route()->getName() == 'get.list.project' || \Request::route()->getName() == 'get.detail.project') ? 'active' : '' }}">
