@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,9 @@ Route::get('giai-phap-kinh-doanh/', [CoffeeController::class, 'index'])->name('g
 
 Route::get('du-an/', [ProjectController::class, 'listProject'])->name('get.list.project');
 Route::get('du-an/{slug}', [ProjectController::class, 'projectDetail'])->name('get.detail.project');
+
+Route::get('san-pham/', [ProductController::class, 'listProduct'])->name('get.list.product');
+Route::get('san-pham/{slug}', [ProductController::class, 'productDetail'])->name('get.detail.product');
 
 Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.contact');
 Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');

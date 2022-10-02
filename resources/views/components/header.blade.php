@@ -8,6 +8,7 @@
                 <nav class="navbar-menu navbar-collapse clearfix" id="dropmenu">
                     <ul class="navbar-nav clearfix">
                         <li class="{{ \Request::route()->getName() == 'home' ? 'active' : '' }}"><a href="{{route('home')}}">Trang chủ</a></li>
+                        <li class="{{ (\Request::route()->getName() == 'get.list.product' || \Request::route()->getName() == 'get.detail.product') ? 'active' : '' }}"><a href="{{route('get.list.product')}}">Sản phẩm</a></li>
                         <li class="dropdown {{
                         (   request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || request()->getUri() == route('get.list.post', ['tin-tai-chinh']) ||
                             request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ||
@@ -28,7 +29,7 @@
                         </li>
 {{--                        <li><a href="#">Kênh đại lý</a></li>--}}
                         <li class="{{ (\Request::route()->getName() == 'get.list.project' || \Request::route()->getName() == 'get.detail.project') ? 'active' : '' }}">
-                            <a href="{{route('get.list.project')}}">Dự án của chúng tôi</a>
+                            <a href="{{route('get.list.project')}}">Dự án</a>
                         </li>
                         <li class="dropdown {{
                             (   request()->getUri() == route('get.list.post', ['tin-tuc']) || \Request::route()->getName() == 'get.list.library' ||
