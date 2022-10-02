@@ -9,36 +9,39 @@
             </div>
             <div class="product-filter clearfix">
                 <div class="row row_5">
-                    <div class="product-filter-col">
-                        <select name="category">
-                            <option value="0">Chọn loại nhà</option>
-                            <option value="1">Trio House</option>
-                            <option value="2">Cubic House</option>
-                            <option value="3">Diamond House</option>
-                            <option value="4">Oval House</option>
-                            <option value="5">Rectro House</option>
-                        </select>
-                    </div>
-                    <div class="product-filter-col">
-                        <select name="category">
-                            <option value="0">Chọn diện tích</option>
-                            <option value="1">Trio House</option>
-                            <option value="2">Cubic House</option>
-                            <option value="3">Diamond House</option>
-                            <option value="4">Oval House</option>
-                            <option value="5">Rectro House</option>
-                        </select>
-                    </div>
-                    <div class="product-filter-col">
-                        <select name="category">
-                            <option value="0">Chọn diện tích</option>
-                            <option value="1">Trio House</option>
-                            <option value="2">Cubic House</option>
-                            <option value="3">Diamond House</option>
-                            <option value="4">Oval House</option>
-                            <option value="5">Rectro House</option>
-                        </select>
-                    </div>
+                    <form class="tree-most" id="form_filter" method="get">
+                        <div class="product-filter-col">
+                            <select name="category_id" class="category_id">
+                                <option {{\Request::get('category_id') == "0" || !\Request::get('category_id') ? "selected=selected" : ""}} value="0" selected>Chọn loại nhà</option>
+                                @if(isset($categories))
+                                    @foreach($categories as $key => $category)
+                                        <option {{\Request::get('category_id') == $category->id ? "selected=selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="product-filter-col">
+                            <select name="area" class="area">
+                                <option {{\Request::get('area') == "0" || !\Request::get('area') ? "selected=selected" : ""}} value="0" selected>Chọn diện tích</option>
+                                <option {{\Request::get('area') == "0_20" ? "selected=selected" : ""}} value="0_20">Từ 0<sup>m2</sup> đến 20<sup>m2</sup></option>
+                                <option {{\Request::get('area') == "20_50" ? "selected=selected" : ""}} value="20_50">Từ 20<sup>m2</sup> đến 50<sup>m2</sup></option>
+                                <option {{\Request::get('area') == "50_80"  ? "selected=selected" : ""}} value="50_80">Từ 50<sup>m2</sup> đến 80<sup>m2</sup></option>
+                                <option {{\Request::get('area') == "80_100"  ? "selected=selected" : ""}} value="80_100">Từ 80<sup>m2</sup> đến 100<sup>m2</sup></option>
+                                <option {{\Request::get('area') == "100_"  ? "selected=selected" : ""}} value="100_">Trên 100<sup>m2</sup></option>
+                            </select>
+                        </div>
+                        <div class="product-filter-col">
+                            <select name="room_number" class="room_number">
+                                <option {{\Request::get('room_number') == "0" || !\Request::get('room_number') ? "selected=selected" : ""}} value="0" selected>Chọn số phòng</option>
+                                <option {{\Request::get('room_number') == "1" ? "selected=selected" : ""}} value="1">1 phòng</option>
+                                <option {{\Request::get('room_number') == "2" ? "selected=selected" : ""}} value="2">2 phòng</option>
+                                <option {{\Request::get('room_number') == "3" ? "selected=selected" : ""}} value="3">3 phòng</option>
+                                <option {{\Request::get('room_number') == "4" ? "selected=selected" : ""}} value="4">4 phòng</option>
+                                <option {{\Request::get('room_number') == "5" ? "selected=selected" : ""}} value="5">5 phòng</option>
+                                <option {{\Request::get('room_number') == "6" ? "selected=selected" : ""}} value="6">Trên 5 phòng</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="row row_sm_10 product-list">
@@ -75,11 +78,26 @@
             </div>
             <!--12 item/page-->
             <div class="wrapper-pagination text-center">
-                {{$products->links('vendor.pagination.default')}}
+                @if(isset($products))
+                    {{ $products->appends(Request::all())->links('vendor.pagination.default') }}
+                @endif
             </div>
         </div>
     </section>
 @stop
 
 @section('script')
+    <script>
+        $(function () {
+            $('.room_number').change(function () {
+                $("#form_filter").submit();
+            });
+            $('.category_id').change(function () {
+                $("#form_filter").submit();
+            });
+            $('.area').change(function () {
+                $("#form_filter").submit();
+            });
+        });
+    </script>
 @stop

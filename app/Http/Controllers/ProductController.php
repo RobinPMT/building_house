@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends FrontendController
 {
@@ -45,11 +46,33 @@ class ProductController extends FrontendController
         return view('product.detail', $viewData);
     }
 
-    public function listProduct()
+    public function listProduct(Request $request)
     {
+        if ($request->area) {
+            $areas = explode('_', $request->area);
+        }
         $products = services()->productService()->where([
             'active' => Product::ACTIVE
-        ])->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(12);
+        ])->where(function ($query) use ($request, $areas) {
+            if (isset($request->category_id) && $request->category_id > 0) {
+                $query->where('category_id', $request->category_id);
+            }
+            if (isset($request->room_number) && $request->room_number > 0) {
+                if ($request->room_number > 5) {
+                    $query->where('room_number', '>=', $request->room_number);
+                } else {
+                    $query->where('room_number', $request->room_number);
+                }
+            }
+            if (isset($areas) && is_array($areas)) {
+                if ($areas[0] >=100) {
+                    $query->where('area', '>', $areas[0]);
+                } else {
+                    $query->whereIn('area', $areas);
+                }
+            }
+        })
+        ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(12);
         $viewData = [
             'products' => $products
         ];

@@ -11,14 +11,14 @@ abstract class FrontendController extends WebController
     public function __construct()
     {
         $dataSettings = [];
-//        $categories = Category::where([
-//            'c_active' => Category::STATUS_PUBLIC
-//        ])->get();
+        $categories = Category::where([
+            'active' => Category::STATUS_PUBLIC
+        ])->get();
         $settings = Setting::where([
             'active' => Setting::ACTIVE,
             'type' => 'setting'
         ])->get();
-//        View::share('categories', $categories);
+        View::share('categories', $categories);
         foreach ($settings as $setting) {
             $dataSettings[$setting->key] = $setting->value;
         }
