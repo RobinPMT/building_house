@@ -48,6 +48,7 @@ class ProductController extends FrontendController
 
     public function listProduct(Request $request)
     {
+        $areas = [];
         if ($request->area) {
             $areas = explode('_', $request->area);
         }
@@ -64,7 +65,7 @@ class ProductController extends FrontendController
                     $query->where('room_number', $request->room_number);
                 }
             }
-            if (isset($areas) && is_array($areas)) {
+            if (isset($areas) && is_array($areas) && count($areas) > 0) {
                 if ($areas[0] >=100) {
                     $query->where('area', '>', $areas[0]);
                 } else {
