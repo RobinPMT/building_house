@@ -52,7 +52,7 @@
     });
     $(document).ready(function() {
         toastr.options.timeOut = 10000;
-        @if (Session::has('error'))
+        @if (Session::has('danger'))
             setTimeout(function () {
                 toastr['error'](
                     "{{\Session::get('danger')}}",
@@ -75,6 +75,20 @@
                 );
             }, 300);
         @endif
+
+        {{--hiện ảnh--}}
+        function readUrl(input) {
+            if (input.files && input.files[0] ){
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#output_image').attr('src',e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#input_image").change(function () {
+            readUrl(this);
+        });
 
     });
 </script>

@@ -54,19 +54,33 @@
         </div>
         <div class="right-header clearfix">
             <ul class="header-member">
-                <li>
-                    <span class="clearfix">
-                        <img src="{{asset('fe_template/images/avatar.jpg')}}" height="50" alt="user" />
-                        <strong>Vũ Ngọc Tú</strong>
-                        <i class="fa fa-caret-down"></i>
+
+
+                @if(Auth::check())
+                    <li>
+                        <span class="clearfix">
+                            <img src="{{get_data_user('web','avatar') ? pare_url_file(get_data_user('web','avatar'), 'avatars') : asset('fe_template/images/avatar.jpg')}}" height="50" width="50" alt="user" />
+                            <strong>{{ Auth::user()->name}}</strong>
+                            <i class="fa fa-caret-down"></i>
+                        </span>
+                        <ul>
+                            <li><a href="{{route('get.change.profile.auth')}}">Quản lý tài khoản</a></li>
+                            <li><a href="#">Danh sách đã lưu</a></li>
+                            <li><a href="{{route('get.change.password.auth')}}">Đổi mật khẩu</a></li>
+                            <li><a href="{{route('get.logout.user.auth')}}">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li>
+                    <span class="clearfix" style="margin-top: 15px">
+                        <strong>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <a href="{{route('get.register.auth')}}" style="padding: 5px">Đăng kí</a>
+                            <a href="{{route('get.login.auth')}}">Đăng nhập</a>
+                        </strong>
                     </span>
-                    <ul>
-                        <li><a href="#">Quản lý tài khoản</a></li>
-                        <li><a href="#">Danh sách đã lưu</a></li>
-                        <li><a href="#">Đổi mật khẩu</a></li>
-                        <li><a href="#">Đăng xuất</a></li>
-                    </ul>
-                </li>
+                    </li>
+                @endif
             </ul>
             <button class="hidden-desktop open-menu" type="button">
                 <i class="fa fa-bars"></i>

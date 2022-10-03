@@ -30,17 +30,18 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 
 Route::group(['namespace' => 'Auth'], function () {
-    Route::get('dang-ki', [AuthController::class, 'getRegister'])->name('get.register');
-    Route::post('dang-ki', [AuthController::class, 'postRegister'])->name('post.register');
-    Route::get('xac-nhan-tai-khoan', [AuthController::class, 'verifyAccount'])->name('get.verifyaccount.register');
+    Route::get('dang-ki', [AuthController::class, 'getRegister'])->name('get.register.auth');
+    Route::post('dang-ki', [AuthController::class, 'postRegister'])->name('post.register.auth');
+    Route::get('xac-nhan-tai-khoan', [AuthController::class, 'verifyAccount'])->name('get.verifyaccount.register.auth');
 
-    Route::get('dang-nhap', [AuthController::class, 'getLogin'])->name('get.login');
-    Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('post.login');
-    Route::get('dang-xuat', [AuthController::class, 'getLogout'])->name('get.logout.user');
+    Route::get('dang-nhap', [AuthController::class, 'getLogin'])->name('get.login.auth');
+    Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('post.login.auth');
 
-    Route::get('/lay-lai-mat-khau', [AuthController::class, 'getForgotPassword'])->name('get.forget.password');
+    Route::get('dang-xuat', [AuthController::class, 'getLogout'])->name('get.logout.user.auth');
+
+    Route::get('/lay-lai-mat-khau', [AuthController::class, 'getForgotPassword'])->name('get.forget.password.auth');
     Route::post('/lay-lai-mat-khau', [AuthController::class, 'sendCoderesetPassword']);
-    Route::get('/khoi-phuc-mat-khau', [AuthController::class, 'getresetPassword'])->name('get.reset.password');
+    Route::get('/khoi-phuc-mat-khau', [AuthController::class, 'getresetPassword'])->name('get.reset.password.auth');
     Route::post('/khoi-phuc-mat-khau', [AuthController::class, 'resetPassword']);
 });
 
@@ -63,3 +64,10 @@ Route::get('san-pham/{slug}', [ProductController::class, 'productDetail'])->name
 
 Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.contact');
 Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');
+
+Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
+    Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');
+    Route::post('thay-doi-mat-khau', [AuthController::class, 'postChangePassword'])->name('post.change.password.auth');
+    Route::get('thong-tin-ca-nhan', [AuthController::class, 'getProfile'])->name('get.change.profile.auth');
+    Route::post('thong-tin-ca-nhan', [AuthController::class, 'postProfile'])->name('post.change.profile.auth');
+});
