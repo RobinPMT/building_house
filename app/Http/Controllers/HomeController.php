@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\SettingKeyProduct;
 use Illuminate\Http\Request;
 
 class HomeController extends FrontendController
@@ -43,7 +44,10 @@ class HomeController extends FrontendController
         ])->whereHas('products', function ($query) {
             $query->where(['active' => Product::ACTIVE]);
         })->with(['products' => function ($query) {
-            $query->with('keys')->where([
+            $query->with(['keys' => function ($query) {
+                $query->where('active', SettingKeyProduct::ACTIVE);
+            }])
+            ->where([
                 'active' => Product::ACTIVE,
                 'hot' => Product::HOT,
             ])->limit(6);

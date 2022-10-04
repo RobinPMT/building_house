@@ -60,6 +60,8 @@ Route::get('du-an/', [ProjectController::class, 'listProject'])->name('get.list.
 Route::get('du-an/{slug}', [ProjectController::class, 'projectDetail'])->name('get.detail.project');
 
 Route::get('san-pham/', [ProductController::class, 'listProduct'])->name('get.list.product');
+Route::get('san-pham-ajax/{id}', [ProductController::class, 'listProductAjax'])->name('get.list.ajax.product');
+Route::get('chi-tiet-san-pham-ajax/{id}', [ProductController::class, 'detailProductAjax'])->name('get.detail.ajax.product');
 Route::get('san-pham/{slug}', [ProductController::class, 'productDetail'])->name('get.detail.product');
 
 Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.contact');

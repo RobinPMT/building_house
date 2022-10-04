@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\SettingKeyProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends FrontendController
@@ -20,7 +21,9 @@ class ProductController extends FrontendController
         $product = services()->productService()->where([
             'active' => Product::ACTIVE,
             'slug' => $slug
-        ])->select(
+        ])->with(['keys' => function ($query) {
+            $query->where('active', SettingKeyProduct::ACTIVE);
+        }])->select(
             'id',
             'title',
             'slug',
@@ -88,5 +91,59 @@ class ProductController extends FrontendController
             echo  $item['title'];
             echo '</option>';
         }
+    }
+
+    public function listProductAjax($id)
+    {
+        $productsAjax = services()->productService()->where([
+            'active' => Product::ACTIVE
+        ])->with(['keys' => function ($query) {
+            $query->where('active', SettingKeyProduct::ACTIVE);
+        }])->whereKeyNot($id)->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(3);
+//        $viewData = [
+//            'productsAjax' => $productsAjax
+//        ];
+//        return response()->json($viewData);
+
+        $html = view('product.list_ajax', compact('productsAjax'))->render();
+        $pagination_html = view('product.pagination', compact('productsAjax'))->render();
+        $viewData = [
+            'html' => $html,
+            'pagination_html' => $pagination_html
+        ];
+        return response()->json($viewData);
+    }
+
+    public function detailProductAjax($id, Request $request)
+    {
+        $product = services()->productService()->where([
+            'active' => Product::ACTIVE
+        ])->with(['keys' => function ($query) {
+            $query->where('active', SettingKeyProduct::ACTIVE);
+        }])->find($id);
+        if ($request->product1) {
+            $product1 = services()->productService()->where([
+                'active' => Product::ACTIVE
+            ])->with(['keys' => function ($query) {
+                $query->where('active', SettingKeyProduct::ACTIVE);
+            }])->find($request->product1);
+        }
+        if ($request->product2) {
+            $product2 = services()->productService()->where([
+                'active' => Product::ACTIVE
+            ])->with(['keys' => function ($query) {
+                $query->where('active', SettingKeyProduct::ACTIVE);
+            }])->find($request->product2);
+        }
+        $keys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->get();
+        $viewData = [
+            'product' => $product,
+            'product1' => $product1 ?? null,
+            'product2' => $product2 ?? null,
+            'keys' => $keys ?? null,
+        ];
+//        return response()->json($viewData);
+        $html = view('product.compare', $viewData)->render();
+        return response()->json($html);
     }
 }

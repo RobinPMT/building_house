@@ -107,14 +107,15 @@
                 </div>
             </div>
         </section>
-        <div class="modal fade product-popup" id="product-compare" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade product-popup" id="product-compare" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y: auto;">
             <div class="container">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" onclick="showScroll()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="modal-body">
+                        <div class="modal-body compare_item">
+
                             <!---->
                             <div class="row-compare header-row clearfix">
                                 <label class="compare-label"></label>
@@ -126,19 +127,30 @@
                                 <div class="row-sub-compare">
                                     <div class="compare-column">
                                         <div class="compare-thumb">
-                                            <a href="#"><img src="{{asset('fe_template/images/product/cp-1.jpg')}}" alt="420x250" /></a>
-                                            <a href="#"><i class="fa fa-times"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="compare-column">
-                                        <div class="compare-thumb">
-                                            <a href="#"><img src="{{asset('fe_template/images/product/cp-1.jpg')}}" alt="420x250" /></a>
-                                            <a href="#"><i class="fa fa-times"></i></a>
+                                            @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
+                                                @foreach($images as $key => $image)
+                                                    @if($image->status)
+                                                        <a href="#"><img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="420x250" /></a>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="420x250" /></a>
+                                            @endif
+                                            <a href="#" hidden><i class="fa fa-times"></i></a>
                                         </div>
                                     </div>
                                     <div class="compare-column">
                                         <div class="compare-thumb not-product">
-                                            <span onclick="window.location='link-trang-san-pham'"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></span>
+                                            <span>
+                                                <button data-toggle="modal" data-target="#image_modal"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="compare-column">
+                                        <div class="compare-thumb product2 not-product">
+                                            <span>
+                                                <button data-toggle="modal" data-target="#image_modal"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -148,36 +160,12 @@
                                 <label class="compare-label">Tên sản phẩm</label>
                                 <div class="row-sub-compare">
                                     <div class="compare-column">
-                                        <a href="#">Căn Trio</a>
+                                        @if(isset($product))
+                                            <a href="#">{{$product->title}}</a>
+                                        @endif
                                     </div>
                                     <div class="compare-column">
-                                        <a href="#">Căn Diamond</a>
-                                    </div>
-                                    <div class="compare-column">
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Công nghệ</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                            <li>Hoàn thiện ngoài: Bitum/Tole/Gỗ/Bê tông</li>
-                                            <li>Lớp tạo hình trong: Ván ép/gỗ</li>
-                                            <li>Hoàn thiện trong: Kính/Tấm PVC/Gỗ</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Lớp tạo hình trong: Ván ép/gỗ</li>
-                                            <li>Hoàn thiện trong: Kính/Tấm PVC/Gỗ</li>
-                                        </ul>
+
                                     </div>
                                     <div class="compare-column">
                                     </div>
@@ -185,210 +173,32 @@
                             </div>
                             <!---->
                             <div class="row-compare clearfix">
-                                <label class="compare-label">Hệ thống nước</label>
+                                <label class="compare-label">Diện tích</label>
                                 <div class="row-sub-compare">
                                     <div class="compare-column">
-                                        Hoàn thiện
+                                        {{$product->area}}<sup>m2</sup>
                                     </div>
                                     <div class="compare-column">
-                                        Hoàn thiện
+
                                     </div>
                                     <div class="compare-column">
 
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Hệ thống điện</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        Hoàn thiện
-                                    </div>
-                                    <div class="compare-column">
-                                        Hoàn thiện
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Công năng</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Bếp</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        Có
-                                    </div>
-                                    <div class="compare-column">
-                                        Có
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Thiết bị</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Thiết bị vệ sinh</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Vật dụng khác</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Vận chuyển</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        Container
-                                    </div>
-                                    <div class="compare-column">
-                                        Container
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Bảo hành</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-                                        <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
-                                        </ul>
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Diện tích sàn</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        7.2 m2
-                                    </div>
-                                    <div class="compare-column">
-                                        7.2 m2
-                                    </div>
-                                    <div class="compare-column">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
                             <div class="row-compare clearfix">
                                 <label class="compare-label">Kích thước</label>
                                 <div class="row-sub-compare">
                                     <div class="compare-column">
                                         <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
+                                            <li>Dài: {{$product->longs}}<sup>m</sup></li>
+                                            <li>Rộng: {{$product->width}}<sup>m</sup></li>
+                                            <li>Cao: {{$product->height}}<sup>m</sup></li>
                                         </ul>
                                     </div>
                                     <div class="compare-column">
                                         <ul>
-                                            <li>Khung kết cấu thép</li>
-                                            <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                            <li>Chông thấm: Tole</li>
+
                                         </ul>
                                     </div>
                                     <div class="compare-column">
@@ -396,56 +206,85 @@
                                     </div>
                                 </div>
                             </div>
-                            <!---->
                             <div class="row-compare clearfix">
-                                <label class="compare-label">Độ cao trần</label>
+                                <label class="compare-label">Số phòng</label>
                                 <div class="row-sub-compare">
                                     <div class="compare-column">
-                                        3.16m
+                                        {{$product->room_number}} {{isset($product->room_description) ? '(' .$product->room_description. ')' : '' }}
                                     </div>
                                     <div class="compare-column">
-                                        3.16m
+
                                     </div>
                                     <div class="compare-column">
 
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Sức chứa</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        2 người lớn
-                                    </div>
-                                    <div class="compare-column">
-                                        2 người lớn
-                                    </div>
-                                    <div class="compare-column">
+                            @if(isset($product->keys) && $keys = $product->keys)
+                                @if(isset($keys))
+                                    @foreach($keys as $key => $item)
+                                        @if($item->tag_type === 'input')
+                                            <div class="row-compare clearfix">
+                                                <label class="compare-label">{{$item->name}}</label>
+                                                <div class="row-sub-compare">
+                                                    <div class="compare-column">
+                                                        {{$item->value}}
+                                                    </div>
+                                                    <div class="compare-column">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
-                            <div class="row-compare clearfix">
-                                <label class="compare-label">Giao hàng</label>
-                                <div class="row-sub-compare">
-                                    <div class="compare-column">
-                                        Giao hàng có thu phí
-                                    </div>
-                                    <div class="compare-column">
-                                        Giao hàng có thu phí
-                                    </div>
-                                    <div class="compare-column">
+                                                    </div>
+                                                    <div class="compare-column">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <!---->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @elseif($item->tag_type === 'checkbox')
+                                            <div class="row-compare clearfix">
+                                                <label class="compare-label">{{$item->name}}</label>
+                                                <div class="row-sub-compare">
+                                                    <div class="compare-column">
+                                                        {{$item->value == 1 ? 'Có' : 'Không'}}
+                                                    </div>
+                                                    <div class="compare-column">
+
+                                                    </div>
+                                                    <div class="compare-column">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @elseif($item->tag_type === 'textarea')
+                                            <div class="row-compare clearfix">
+                                                <label class="compare-label">{{$item->name}}</label>
+                                                <div class="row-sub-compare">
+                                                    <div class="compare-column">
+                                                        <ul>
+                                                            {!! $item->value !!}
+                                                        </ul>
+                                                    </div>
+                                                    <div class="compare-column">
+                                                        <ul>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="compare-column">
+                                                        <ul>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endif
+
+
                             <div style="padding-top:20px">
                                 <a href="#" class="button-link bg-green">Tự thiết kế</a>
-                                <a href="#" class="button-link">Tiếp tục khám phá</a>
+                                <a href="{{route('get.list.product')}}" class="button-link">Tiếp tục khám phá</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -453,7 +292,34 @@
         </div>
     @endif
 
+    <div id="image_modal" role="dialog" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="image_modal" style="z-index: 10000000!important;display: none;" aria-hidden="true">
+        <div class="container">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px !important;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="container product_list" style="margin-left: -15px;">
+
+                        </div>
+
+                        <div class="wrapper-pagination text-center pagination_list">
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -462,6 +328,10 @@
     <script type="text/javascript" src="{{asset('fe_template/js/jquery.fancybox.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('fe_template/css/jquery.fancybox.css')}}" media="screen" />
     <script type="text/javascript">
+        function showScroll() {
+            $("html").css({"overflow-y": "auto"});
+        }
+
         $(document).ready(function(){
             sync1 = $('.product-larger-thumb .owl-carousel');
             sync2 = $('.product-small-thumb .owl-carousel');
@@ -502,19 +372,179 @@
                 var number = $(this).index();
                 sync1.data('owl.carousel').to(number, 300, true);
             });
-            $('.compare-thumb a:last-child').click(function(e){
+
+
+            localStorage.removeItem("product1");
+            localStorage.removeItem("product2");
+            let arr = [];
+            $(document).on('click', 'div .product_item a', function(event){
+                event.preventDefault();
+
+                // $('#product-compare').modal('hide');
+                let id = '{{$product->id}}';
+                let id1 = $(this).attr('data-ids');
+                arr.push(id1);
+                arr = [...new Set(arr)];
+                // console.log(arr)
+                if(arr.length > 1){
+                    localStorage.setItem("product1", arr[arr.length - 2]);
+                    localStorage.setItem("product2", arr[arr.length - 1]);
+                } else {
+                    localStorage.setItem("product1", arr[arr.length - 1]);
+                }
+                let product1 = null;
+                let product2 = null;
+                if(localStorage.getItem("product1")) {
+                    product1 = localStorage.getItem("product1");
+                }
+                if(localStorage.getItem("product2")) {
+                    product2 = localStorage.getItem("product2");
+                }
+
+                let url = "/chi-tiet-san-pham-ajax/"+id;
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {product1: product1, product2: product2},
+                    success: function (response) {
+                        $(".compare_item").html(response);
+                        $("html").css({"overflow-y": "hidden"});
+                        $('#image_modal').modal('hide');
+                        $('#product-compare').modal('show');
+                    }
+                });
+
+
+            });
+
+
+            $(document).on('click', '.compare-thumb a:last-child', function(e){
                 e.preventDefault();
+
+                let product_id = $(this).attr('data-product-id');
+
+                arr = arr.filter(item => item !== product_id);
+                console.log(product_id, arr);
+                if($(this).attr('data-product-item') === 'product2') {
+                    localStorage.removeItem($(this).attr('data-product-item'));
+                } else {
+                    localStorage.setItem("product1", localStorage.getItem("product2"));
+                    localStorage.removeItem('product2');
+                }
+
                 var parent = $(this).parent().parent(), idx = parent.index();
                 $('.row-sub-compare').each(function(){
                     $(this).children('.compare-column').eq(idx).remove();
                     var par = $(this).parent();
                     if(par.hasClass('header-row')){
-                        $(this).append('<div class="compare-column"><div class="compare-thumb not-product"><span onclick="window.location=\'link-trang-san-pham\'"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></span></div></div>');
+                        $(this).append('<div class="compare-column"><div class="compare-thumb not-product"><span><button data-toggle="modal" data-target="#image_modal"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></button></span></div></div>');
                     }else{
                         $(this).append('<div class="compare-column"></div>');
                     }
                 });
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            fetch_data(1);
+            $(document).on('click', '.pagination a', function(event){
+                event.preventDefault();
+                let page = $(this).attr('href').split('page=')[1];
+                fetch_data(page);
+            });
+            function fetch_data(page)
+            {
+                let url = '{{route('get.list.ajax.product', [$product->id])}}';
+                $.ajax({
+                    type: 'GET',
+                    url: url+"?page="+page,
+                    success: function (response) {
+                        // console.log(response);
+                        $(".product_list").html(response.html);
+                        $(".pagination_list").html(response.pagination_html);
+                        // if(response.productsAjax.data) {
+                        //     let products = response.productsAjax.data;
+                        //     let paginations = response.productsAjax.links;
+                        //     let htmlPaginations = '';
+                        //     let html = '';
+                        //     for (let i = 0; i < products.length; i++) {
+                        //         html += `
+                        //             <div>
+                        //                 <div class="col-sm-4 col-xs-6 product-item">
+                        //                     <div class="product-item-ctn">
+                        //                         <a href="" class="product-item-title"></a>
+                        //                         <ul class="product-item-properties clearfix">
+                        //                             <li>Chiều dài <strong> <sup>m</sup></strong></li>
+                        //                             <li>Chiều rộng <strong> <sup>m</sup></strong></li>
+                        //                             <li>Chiều cao <strong> <sup>m</sup></strong></li>
+                        //                             <li>Diện tích <strong> <sup>m2</sup></strong></li>
+                        //                         </ul>
+                        //                     </div>
+                        //                 </div>
+                        //             </div>
+                        //         `;
+                        //     }
+                        //     for (let j = 0; j < paginations.length; j++) {
+                        //         htmlPaginations += `
+                        //
+                        //         `;
+                        //     }
+                        //     $(".product_list").html(html);
+                        // }
+                    }
+                })
+
+            }
+        });
+    </script>
+    <script>
+        {{--$(document).ready(function(){--}}
+        {{--    localStorage.removeItem("product1");--}}
+        {{--    localStorage.removeItem("product2");--}}
+        {{--    let arr = [];--}}
+        {{--    $(document).on('click', 'div .product_item a', function(event){--}}
+        {{--        event.preventDefault();--}}
+
+        {{--        // $('#product-compare').modal('hide');--}}
+        {{--        let id = '{{$product->id}}';--}}
+        {{--        let id1 = $(this).attr('data-ids');--}}
+        {{--        arr.push(id1);--}}
+        {{--        arr = [...new Set(arr)];--}}
+        {{--        console.log(arr)--}}
+        {{--        if(arr.length > 1){--}}
+        {{--            localStorage.setItem("product1", arr[arr.length - 2]);--}}
+        {{--            localStorage.setItem("product2", arr[arr.length - 1]);--}}
+        {{--        } else {--}}
+        {{--            localStorage.setItem("product1", arr[arr.length - 1]);--}}
+        {{--        }--}}
+        {{--        let product1 = null;--}}
+        {{--        let product2 = null;--}}
+        {{--        if(localStorage.getItem("product1")) {--}}
+        {{--            product1 = localStorage.getItem("product1");--}}
+        {{--        }--}}
+        {{--        if(localStorage.getItem("product2")) {--}}
+        {{--            product2 = localStorage.getItem("product2");--}}
+        {{--        }--}}
+
+        {{--        let url = "/chi-tiet-san-pham-ajax/"+id;--}}
+
+        {{--        $.ajax({--}}
+        {{--            type: 'GET',--}}
+        {{--            url: url,--}}
+        {{--            data: {product1: product1, product2: product2},--}}
+        {{--            success: function (response) {--}}
+        {{--                $(".compare_item").html(response);--}}
+        {{--                $('#image_modal').modal('hide');--}}
+        {{--                $('#product-compare').modal('show');--}}
+        {{--            }--}}
+        {{--        });--}}
+
+
+        {{--    });--}}
+
+        {{--});--}}
     </script>
 @stop
