@@ -199,12 +199,23 @@
 
 {{--<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>--}}
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    var options = {
+        filebrowserImageBrowseUrl: '/admin/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/admin/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/admin/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/admin/laravel-filemanager/upload?type=Files&_token='
+    };
+    CKEDITOR.replace('content', options);
+    $('#lfm').filemanager();
 
     {{--hiện ảnh--}}
     function readUrl(input) {

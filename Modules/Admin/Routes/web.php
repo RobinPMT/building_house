@@ -29,6 +29,7 @@ use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
 use Modules\Admin\Http\Controllers\AdminTagController;
 use Modules\Admin\Http\Controllers\HomeController;
+use UniSharp\LaravelFilemanager\Lfm;
 
 //Route::prefix('admin')->group(function () {
 //    Route::get('/', 'HomeController@index');
@@ -199,5 +200,8 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminQuestionController::class, '__create'])->name('admin.store.question');
         Route::post('/{id}', [AdminQuestionController::class, '__update'])->name('admin.update.question');
         Route::get('/{action}/{id}', [AdminQuestionController::class, 'action'])->name('admin.get.action.question');
+    });
+    Route::group(['prefix' => 'laravel-filemanager'], function () {
+        Lfm::routes();
     });
 });
