@@ -13,15 +13,23 @@
                     <label class="form-label" for="title-system">Tên thuộc tính <span style="color: red">*</span></label>
                     <input type="text" name="title" class="form-control dt-full-name" id="title-system" placeholder="Tiêu đề" aria-label="Tiêu đề" />
                 </div>
+{{--                <div class="form-group">--}}
+{{--                    <label for="room_id-system">Chọn phòng <span style="color: red">*</span></label>--}}
+
+{{--                    <select name="room_id" id="room_id-system" class="select2 form-control form-control-lg select-single">--}}
+{{--                        <option value="" selected>Chọn phòng</option>--}}
+{{--                        @php echo Modules\Admin\Http\Controllers\AdminRoomController::showRooms();  @endphp--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
                 <div class="form-group">
-                    <label for="room_id-system">Chọn phòng <span style="color: red">*</span></label>
-
+                    <label for="room_id-system">Chọn tiện nghi <span style="color: red">*</span></label>
                     <select name="room_id" id="room_id-system" class="select2 form-control form-control-lg select-single">
-                        <option value="" selected>Chọn phòng</option>
-                        @php echo Modules\Admin\Http\Controllers\AdminRoomController::showRooms();  @endphp
+                        <option value="" selected>Chọn tiện nghi</option>
+                        @php echo Modules\Admin\Http\Controllers\AdminRoomController::showChildRooms();  @endphp
                     </select>
-
                 </div>
+
                 <div class="form-group">
                     <label class="form-label" for="attribute">Thuộc tính</label>
                     <hr />

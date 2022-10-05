@@ -97,8 +97,37 @@ class AdminRoomController extends WebController
                 echo '</option>';
 
                 unset($rooms[$key]);
-//                dd($rooms, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
                 self::showRooms($rooms, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+            }
+        }
+    }
+
+    public static function showChildRooms($rooms = null, $parent_id = null, $char = '')
+    {
+        if (!is_array($rooms)) {
+            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
+                ->with(['childs' => function ($query) {
+                    $query->where('active', Room::STATUS_PUBLIC);
+                }])
+                ->select('id', 'title', 'parent_id')->get()->toArray();
+        }
+//        if (!is_array($rooms)) {
+//            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title', 'parent_id')->get()->toArray();
+//        }
+        foreach ($rooms as $key => $item) {
+            if ($item['parent_id'] == $parent_id) {
+                if ($parent_id == null && count($item['childs']) == 0) {
+                    echo '<optgroup label="'.$item['title'].'">';
+                    echo '</optgroup>';
+                    unset($rooms[$key]);
+                } elseif (count($item['childs']) > 0) {
+                    echo '<optgroup label="'.$item['title'].'">';
+                    echo '</optgroup>';
+                    unset($rooms[$key]);
+                    self::showChildRooms($item['childs'], $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+                } else {
+                    AdminRoomController::showRooms([$rooms[$key]], $item['parent_id'], '');
+                }
             }
         }
     }

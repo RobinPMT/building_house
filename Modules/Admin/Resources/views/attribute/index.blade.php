@@ -43,6 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
+{{--                    {{dd(Modules\Admin\Http\Controllers\AdminRoomController::showChildRooms())}}--}}
                         @if(isset($data, $status) && $status)
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
@@ -200,8 +201,11 @@
                     }
                 }
             });
-            $( "#parent_id" ).change(function () {
-                $("#select2-parent_id-container").text($( "#parent_id option:selected" ).text().trim());
+            $( "#room_id-system" ).change(function () {
+                $("#select2-room_id-system-container").text($( "#room_id-system option:selected" ).text().trim());
+            });
+            $( "#room_id-style" ).change(function () {
+                $("#select2-room_id-style-container").text($( "#room_id-style option:selected" ).text().trim());
             });
             // form repeater jquery system
             $('.invoice-repeater').repeater({

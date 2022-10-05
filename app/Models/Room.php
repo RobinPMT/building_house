@@ -41,7 +41,7 @@ class Room extends Base
 
     public function childs()
     {
-        return $this->hasMany(Room::class, 'parent_id');
+        return $this->hasMany(Room::class, 'parent_id')->with('childs');
     }
 
     public function parent()
