@@ -22,6 +22,7 @@ use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
 use Modules\Admin\Http\Controllers\AdminProjectController;
+use Modules\Admin\Http\Controllers\AdminQuestionController;
 use Modules\Admin\Http\Controllers\AdminRoomController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
@@ -175,5 +176,13 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 //        Route::get('/check_slug', [AdminHousingController::class, 'checkSlug'])->name('admin.checkSlug.housing');
         Route::get('/{action}/{id}', [AdminHousingController::class, 'action'])->name('admin.get.action.housing');
 //        Route::delete('/delete_images/{id}/{image}', [AdminHousingController::class, 'deleteImages'])->name('admin.delete.images.housing');
+    });
+
+    Route::group(['prefix' => 'question'], function () {
+        Route::get('/', [AdminQuestionController::class, '__list'])->name('admin.get.list.question');
+        Route::get('/{id}', [AdminQuestionController::class, '__find'])->name('admin.get.find.question');
+        Route::post('/', [AdminQuestionController::class, '__create'])->name('admin.store.question');
+        Route::post('/{id}', [AdminQuestionController::class, '__update'])->name('admin.update.question');
+        Route::get('/{action}/{id}', [AdminQuestionController::class, 'action'])->name('admin.get.action.question');
     });
 });

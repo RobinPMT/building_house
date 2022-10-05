@@ -12,6 +12,7 @@ use App\Services\LibraryService;
 use App\Services\PostService;
 use App\Services\ProductService;
 use App\Services\ProjectService;
+use App\Services\QuestionService;
 use App\Services\RoomService;
 use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
@@ -101,5 +102,10 @@ class MapService
     public function housingService(): HousingService
     {
         return c(HousingService::class);
+    }
+
+    public function questionService(): QuestionService
+    {
+        return c(QuestionService::class);
     }
 }

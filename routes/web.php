@@ -8,6 +8,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +67,8 @@ Route::get('san-pham/{slug}', [ProductController::class, 'productDetail'])->name
 
 Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.contact');
 Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');
+
+Route::get('cau-hoi-thuong-gap/', [QuestionController::class, 'index'])->name('get.list.question');
 
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
     Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');

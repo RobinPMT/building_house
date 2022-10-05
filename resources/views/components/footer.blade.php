@@ -36,7 +36,7 @@
             <div class="col-md-4 col-sm-4 col-xs-6 footer-col">
                 <h4 class="footer-title">Hỗ trợ</h4>
                 <ul>
-                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="{{route('get.list.question')}}">Câu hỏi thường gặp</a></li>
                     <li><a href="#">Chính sách bảo mật thông tin</a></li>
                     <li><a href="#">Chính sách vận chuyển</a></li>
                     <li><a href="#">Chính sách bảo hành</a></li>
