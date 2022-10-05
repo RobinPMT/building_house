@@ -25,7 +25,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
-                        <th>Danh mục cha</th>
+{{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -37,9 +37,9 @@
                                     <td scope="row">{{$stt + 1}}</td>
                                     <td>{{$category['title']}}</td>
                                     <td style="">{{$category['creator']['name']}}</td>
-                                    <td style="">
-                                        {{isset($category['parent']['title']) ? $category['parent']['title'] : ''}}
-                                    </td>
+{{--                                    <td style="">--}}
+{{--                                        {{isset($category['parent']['title']) ? $category['parent']['title'] : ''}}--}}
+{{--                                    </td>--}}
                                     <td style="">
                                         <a class="badge badge-pill {{$category['arr_active']['class']}}" href="{{route('admin.get.action.category', ['active', $category['id']])}}">
                                             {{$category['arr_active']['name']}}
@@ -82,7 +82,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
-                        <th>Danh mục cha</th>
+{{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>

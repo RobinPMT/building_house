@@ -10,8 +10,18 @@
             </div>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
-                    <label class="form-label" for="title">Tên phòng <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tên phòng" aria-label="Tên phòng" />
+                    <label class="form-label" for="title">Tiêu đề<span style="color: red">*</span></label>
+                    <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
+                </div>
+                <div class="form-group">
+                    <label for="parent_id">Danh mục cha</label>
+
+                    <select name="parent_id" id="parent_id" class="select2 form-control form-control-lg select-single">
+                        <option value="" selected>Chọn danh mục cha</option>
+                        @if(isset($data, $status) && $status)
+                            @php echo Modules\Admin\Http\Controllers\AdminRoomController::showRooms();  @endphp
+                        @endif
+                    </select>
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">

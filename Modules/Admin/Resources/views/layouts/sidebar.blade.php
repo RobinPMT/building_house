@@ -82,7 +82,7 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="File Manager">Quản lý thuộc tính</span></a>
                 <ul class="menu-content">
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.room' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.room')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Slide">Phòng</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.room' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.room')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Slide">Phòng & tiện nghi</span></a>
                     </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.attribute' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.attribute')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List Library">Thuộc tính phòng</span></a>
                     </li>

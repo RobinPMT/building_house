@@ -98,7 +98,7 @@ class AdminCategoryController extends WebController
                 echo $char . $item['title'];
                 echo '</option>';
 
-                unset($categories[$item['id']]);
+                unset($categories[$key]);
 
                 self::showCategories($categories, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
             }

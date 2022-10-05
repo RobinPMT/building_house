@@ -38,7 +38,7 @@
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$item['title']}} - </td>
+                                    <td>{{$item['title']}} ({{isset($item['category']['title']) ? $item['category']['title'] : 'Không rõ'}})</td>
                                     <td style="">
                                         <img src="{{$item['avatar_design']}}" width="100px" height="100px" alt="">
                                     </td>

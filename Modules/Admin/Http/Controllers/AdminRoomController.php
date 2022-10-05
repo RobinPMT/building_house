@@ -26,10 +26,10 @@ class AdminRoomController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_room_fields' => 'title,active,author_id,arr_active',
-            '_relations' => 'creator',
+            '_room_fields' => 'title,active,author_id,arr_active,parent_id',
+            '_relations' => 'creator,parent',
             '_admin_fields' => 'name',
-//            '_noPagination' => 1,
+            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::room.index');
@@ -43,8 +43,8 @@ class AdminRoomController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_room_fields' => 'title,active,author_id,arr_active',
-            '_relations' => 'creator'
+            '_room_fields' => 'title,active,author_id,arr_active,parent_id',
+            '_relations' => 'creator,parent'
         ]);
         return parent::__find($request, true);
     }
@@ -75,13 +75,31 @@ class AdminRoomController extends WebController
         return redirect()->back()->with('success', $messages);
     }
 
-    public static function showRooms()
+//    public static function showRooms()
+//    {
+//        $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title')->get()->toArray();
+//        foreach ($rooms as $key => $item) {
+//            echo '<option value="'.$item['id'].'">';
+//            echo  $item['title'];
+//            echo '</option>';
+//        }
+//    }
+
+    public static function showRooms($rooms = null, $parent_id = null, $char = '')
     {
-        $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title')->get()->toArray();
+        if (!is_array($rooms)) {
+            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title', 'parent_id')->get()->toArray();
+        }
         foreach ($rooms as $key => $item) {
-            echo '<option value="'.$item['id'].'">';
-            echo  $item['title'];
-            echo '</option>';
+            if ($item['parent_id'] == $parent_id) {
+                echo '<option value="'.$item['id'].'">';
+                echo $char . $item['title'];
+                echo '</option>';
+
+                unset($rooms[$key]);
+//                dd($rooms, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+                self::showRooms($rooms, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+            }
         }
     }
 }

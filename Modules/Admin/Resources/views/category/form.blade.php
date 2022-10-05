@@ -17,17 +17,17 @@
                     <label for="slug">Slug <span style="color: red">*</span></label>
                     <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
                 </div>
-                <div class="form-group">
-                    <label for="parent_id">Danh mục cha</label>
+{{--                <div class="form-group">--}}
+{{--                    <label for="parent_id">Danh mục cha</label>--}}
 
-                    <select name="parent_id" id="parent_id" class="select2 form-control form-control-lg select-single">
-                        <option value="" selected>Chọn danh mục cha</option>
-                        @if(isset($data, $status) && $status)
-                            @php echo Modules\Admin\Http\Controllers\AdminCategoryController::showCategories($data);  @endphp
-                        @endif
-                    </select>
+{{--                    <select name="parent_id" id="parent_id" class="select2 form-control form-control-lg select-single">--}}
+{{--                        <option value="" selected>Chọn danh mục cha</option>--}}
+{{--                        @if(isset($data, $status) && $status)--}}
+{{--                            @php echo Modules\Admin\Http\Controllers\AdminCategoryController::showCategories($data);  @endphp--}}
+{{--                        @endif--}}
+{{--                    </select>--}}
 
-                </div>
+{{--                </div>--}}
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

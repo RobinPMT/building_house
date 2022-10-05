@@ -11,7 +11,7 @@ class RoomService extends ApiService
     protected $model = Room::class;
 
     protected $relations = [
-        'creator'
+        'creator', 'parent', 'childs',
     ];
 
     protected $fieldsName = '_room_fields';
@@ -29,7 +29,7 @@ class RoomService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'active', 'author_id', 'arr_active'
+            'title', 'active', 'author_id', 'arr_active', 'parent_id'
         ];
     }
 
@@ -57,6 +57,20 @@ class RoomService extends ApiService
     public function get_arr_active_value($record, Room $model)
     {
         return $model->getStatus();
+    }
+
+    public function includeParent()
+    {
+        return [services()->roomService(), 'item', function (Room $model) {
+            return $model->parent;
+        }];
+    }
+
+    public function includeChilds()
+    {
+        return [services()->roomService(), 'items', function (Room $model) {
+            return $model->childs;
+        }];
     }
 
     protected function newQuery()

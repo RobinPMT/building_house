@@ -23,8 +23,9 @@
                     <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên phòng</th>
+                        <th>Tiêu đề</th>
                         <th>Người tạo</th>
+                        <th>Danh mục cha</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -36,6 +37,9 @@
                                     <td scope="row">{{$stt + 1}}</td>
                                     <td>{{$item['title']}}</td>
                                     <td style="">{{$item['creator']['name']}}</td>
+                                    <td style="">
+                                        {{isset($item['parent']['title']) ? $item['parent']['title'] : ''}}
+                                    </td>
                                     <td style="">
                                         <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.room', ['active', $item['id']])}}">
                                             {{$item['arr_active']['name']}}
@@ -76,8 +80,9 @@
                     <tfoot>
                     <tr>
                         <th>STT</th>
-                        <th>Tên phòng</th>
+                        <th>Tiêu đề</th>
                         <th>Người tạo</th>
+                        <th>Danh mục cha</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -96,12 +101,26 @@
             $('#example').DataTable({
                 responsive: true,
             });
+            $(".select-single").select2({
+                // placeholder: "Chọn danh mục cha",
+                // tags: true,
+                allowClear: true,
+                language: {
+                    noResults: function (params) {
+                        return "Không tìm thấy kết quả!";
+                    }
+                }
+            });
+            $( "#parent_id" ).change(function () {
+                $("#select2-parent_id-container").text($( "#parent_id option:selected" ).text().trim());
+            });
         });
         // ClassicEditor
         //     .create( document.querySelector( '#content' ) )
         //     .catch( error => {
         //         console.error( error );
         // });
+
 
         //delete
         $(document).ready(function() {
@@ -182,6 +201,7 @@
                     success: function (response) {
                         console.log(response)
                         if(response.status) {
+                            $("#parent_id").val(response.data.parent_id).change();
                             $('#title').val(response.data.title);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
