@@ -71,9 +71,9 @@ if (!function_exists('upload_image')) {
         $nameFile = trim(str_replace('.'.$ext, '', strtolower($info->getFilename())));
         $filename = date('Y-m-d__').Str::slug($nameFile) . '.' . $ext;
         // thu muc goc de upload
-        $path = storage_path().'/app/public/files/';//.date('Y/m/d/');
+        $path = storage_path().'/app/public/files/'.date('Y/m/d/');
         if ($folder) {
-            $path = storage_path().'/app/public/files/'.$folder.'/';//.date('Y/m/d/');
+            $path = storage_path().'/app/public/files/'.$folder.'/'.date('Y/m/d/');
         }
         if (!\File::exists($path)) {
             mkdir($path, 0777, true);

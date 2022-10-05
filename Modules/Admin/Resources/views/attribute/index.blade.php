@@ -461,12 +461,15 @@
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
+                $('#form-crud-'+target).trigger("reset");
+                $(".data_new").html('');
+                $(".data_old_style").html('');
+                $(".data_new_style").html('');
                 $('#form-crud-'+target).attr('action', '{{route('admin.store.attribute')}}');
                 $('#exampleModalLabel').text('Thêm mới hệ thống');
                 $('#example-style').text('Thêm mới kiểu dáng');
 
                 let newUserForm = $(".add-new-record-"+target);
-                console.log(newUserForm);
                 // let newUserSidebar = $(".new-user-modal");
                 // Form Validation
                 if (newUserForm.length) {
