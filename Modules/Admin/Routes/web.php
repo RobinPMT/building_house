@@ -19,6 +19,7 @@ use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminHousingController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
+use Modules\Admin\Http\Controllers\AdminPolicyController;
 use Modules\Admin\Http\Controllers\AdminPostController;
 use Modules\Admin\Http\Controllers\AdminProductController;
 use Modules\Admin\Http\Controllers\AdminProjectController;
@@ -176,6 +177,20 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 //        Route::get('/check_slug', [AdminHousingController::class, 'checkSlug'])->name('admin.checkSlug.housing');
         Route::get('/{action}/{id}', [AdminHousingController::class, 'action'])->name('admin.get.action.housing');
 //        Route::delete('/delete_images/{id}/{image}', [AdminHousingController::class, 'deleteImages'])->name('admin.delete.images.housing');
+    });
+
+    Route::group(['prefix' => 'policy'], function () {
+        Route::get('/shopping', [AdminPolicyController::class, 'indexShopping'])->name('admin.get.list.shopping.policy');
+        Route::post('/shopping/{id}', [AdminPolicyController::class, 'updateShopping'])->name('admin.update.shopping.policy');
+
+        Route::get('/security', [AdminPolicyController::class, 'indexSecurity'])->name('admin.get.list.security.policy');
+        Route::post('/security/{id}', [AdminPolicyController::class, 'updateSecurity'])->name('admin.update.security.policy');
+
+        Route::get('/transport', [AdminPolicyController::class, 'indexTransport'])->name('admin.get.list.transport.policy');
+        Route::post('/transport/{id}', [AdminPolicyController::class, 'updateTransport'])->name('admin.update.transport.policy');
+
+        Route::get('/insurance', [AdminPolicyController::class, 'indexInsurance'])->name('admin.get.list.insurance.policy');
+        Route::post('/insurance/{id}', [AdminPolicyController::class, 'updateInsurance'])->name('admin.update.insurance.policy');
     });
 
     Route::group(['prefix' => 'question'], function () {

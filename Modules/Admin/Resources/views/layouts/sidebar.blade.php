@@ -136,9 +136,13 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Form Validation">Chính sách</span></a>
                 <ul class="menu-content">
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.banner' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.banner')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Mua hàng</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.shopping.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.shopping.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Mua hàng</span></a>
                     </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.setting' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo mật thông tin</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.security.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.security.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo mật thông tin</span></a>
+                    </li>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.transport.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.transport.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Vận chuyển</span></a>
+                    </li>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.insurance.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.insurance.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo hành</span></a>
                     </li>
                 </ul>
             </li>

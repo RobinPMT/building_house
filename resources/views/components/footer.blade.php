@@ -26,20 +26,24 @@
                 <h4 class="footer-title">Sitemap</h4>
                 <ul>
                     <li><a href="{{route('home')}}">Trang chủ</a></li>
-                    <li><a href="#">Consolar Housing</a></li>
+                    <li><a href="{{route('get.list.product')}}">Sản phẩm</a></li>
+                    <li><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Consolar Housing</a></li>
                     <li><a href="#">Consolar Decor</a></li>
-                    <li><a href="#">Consolar Coffee & Food</a></li>
-                    <li><a href="#">Trở thành đại lý</a></li>
-                    <li><a href="#">News & Gallery</a></li>
+                    <li><a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a></li>
+{{--                    <li><a href="#">Trở thành đại lý</a></li>--}}
+                    <li><a href="{{route('get.list.project')}}">Dự án</a></li>
+                    <li><a href="{{route('get.list.post', ['tin-tuc'])}}">News & Gallery</a></li>
+                    <li><a href="{{route('get.list.contact')}}">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-6 footer-col">
                 <h4 class="footer-title">Hỗ trợ</h4>
                 <ul>
                     <li><a href="{{route('get.list.question')}}">Câu hỏi thường gặp</a></li>
-                    <li><a href="#">Chính sách bảo mật thông tin</a></li>
-                    <li><a href="#">Chính sách vận chuyển</a></li>
-                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="{{route('get.list.security.policy')}}">Chính sách bảo mật thông tin</a></li>
+                    <li><a href="{{route('get.list.transport.policy')}}">Chính sách vận chuyển</a></li>
+                    <li><a href="{{route('get.list.insurance.policy')}}">Chính sách bảo hành</a></li>
+                    <li><a href="{{route('get.list.shopping.policy')}}">Chính sách mua hàng</a></li>
                 </ul>
             </div>
         </div>

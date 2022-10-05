@@ -5,6 +5,7 @@ use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
@@ -55,7 +56,7 @@ Route::get('bai-viet-{type}/{slug}', [PostController::class, 'postDetail'])->nam
 Route::get('thu-vien/', [LibraryController::class, 'listLibrary'])->name('get.list.library');
 Route::get('thu-vien/{slug}', [LibraryController::class, 'libraryDetail'])->name('get.detail.library');
 
-Route::get('giai-phap-kinh-doanh/', [CoffeeController::class, 'index'])->name('get.list.coffee');
+Route::get('giai-phap-kinh-doanh-coffee-food/', [CoffeeController::class, 'index'])->name('get.list.coffee');
 
 Route::get('du-an/', [ProjectController::class, 'listProject'])->name('get.list.project');
 Route::get('du-an/{slug}', [ProjectController::class, 'projectDetail'])->name('get.detail.project');
@@ -69,6 +70,10 @@ Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.cont
 Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');
 
 Route::get('cau-hoi-thuong-gap/', [QuestionController::class, 'index'])->name('get.list.question');
+Route::get('chinh-sach-bao-mat/', [PolicyController::class, 'indexSecurity'])->name('get.list.security.policy');
+Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->name('get.list.shopping.policy');
+Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
+Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
 
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
     Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');
