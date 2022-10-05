@@ -44,6 +44,8 @@ Route::prefix('authenticate')->group(function () {
 
 Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.home');
+    Route::get('/profile', [AdminController::class, 'getProfile'])->name('admin.get.list.profile');
+    Route::post('/profile', [AdminController::class, 'updateProfile'])->name('admin.update.profile');
 
     Route::group(['prefix' => 'employee'], function () {
         Route::get('/', [AdminController::class, '__list'])->name('admin.get.list.admin');

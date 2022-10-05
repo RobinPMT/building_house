@@ -251,7 +251,7 @@
                         },
                         password: {
                             // required: true,
-                            minlength: 4,
+                            minlength: 6,
                         },
                     },
                     messages: {
@@ -268,7 +268,7 @@
                         },
                         password: {
                             // required: "Vui lòng không bỏ trống!",
-                            minlength: jQuery.validator.format("Vui lòng nhập giá trị lớn hơn hoặc bằng {4} kí tự.")
+                            minlength: jQuery.validator.format("Vui lòng nhập giá trị lớn hơn hoặc bằng {6} kí tự.")
                         },
                     }
                 });

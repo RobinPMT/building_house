@@ -7,6 +7,7 @@ use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends WebController
 {
@@ -72,5 +73,33 @@ class AdminController extends WebController
             }
         }
         return redirect()->back()->with('success', $messages);
+    }
+
+    public function getProfile()
+    {
+        $user = auth('admins')->user();
+        $viewData = [
+            'user' => $user
+        ];
+        return view('admin::profile.index', $viewData);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth('admins')->user();
+        if ($request->name) {
+            $user->name = $request->name;
+        }
+        if ($request->name) {
+            $user->phone = $request->phone;
+        }
+        if ($request->password) {
+            if (Hash::check($request->password_old, $user->password)) {
+                $user->password = $request->password;
+            }
+        }
+        $user->save();
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
     }
 }

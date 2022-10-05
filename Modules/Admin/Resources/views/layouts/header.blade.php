@@ -92,14 +92,16 @@
 {{--                    <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a></li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
+{{--            {{dd(auth('admins')->user(), Auth::check())}}--}}
+
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">John Doe</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="{{asset('admin_template/app-assets/images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-status" style="margin-bottom: 5px;">Xin chào</span><span class="user-name font-weight-bolder">{{get_data_user('admins','name')}}</span></div><span class="avatar"><img class="round" src="{{asset('admin_template/app-assets/images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                    <a class="dropdown-item" href="page-profile.html"><i class="mr-50" data-feather="user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{route('admin.get.list.profile')}}"><i class="mr-50" data-feather="user"></i> Thông tin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="page-account-settings.html"><i class="mr-50" data-feather="settings"></i> Settings</a>
-                    <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="mr-50" data-feather="power"></i> Logout</a>
+                    <a class="dropdown-item" href="{{route('admin.get.list.setting')}}"><i class="mr-50" data-feather="settings"></i> Cài đặt</a>
+                    <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="mr-50" data-feather="power"></i> Đăng xuất</a>
                 </div>
             </li>
         </ul>

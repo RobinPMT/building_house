@@ -22,6 +22,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
+
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/charts/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
@@ -41,6 +44,9 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/forms/pickers/form-pickadate.css')}}">
+
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/pages/dashboard-ecommerce.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/charts/chart-apex.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/css/plugins/extensions/ext-component-toastr.css')}}">
