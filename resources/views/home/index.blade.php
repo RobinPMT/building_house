@@ -308,345 +308,47 @@
             </div>
         </div>
     </div>
-    <div class="modal fade product-popup" id="product-compare" tabindex="-2" role="dialog" aria-hidden="true">
+    <div class="modal fade product-popup" id="product-compare" tabindex="-2" role="dialog" aria-hidden="true" style="overflow-y: auto;">
         <div class="container">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" onclick="showScroll()" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <div class="modal-body compare_item">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="image_modal" role="dialog" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="image_modal" style="z-index: 10000000!important;display: none;" aria-hidden="true">
+        <div class="container">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px !important;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="modal-body">
-                        <!---->
-                        <div class="row-compare header-row clearfix">
-                            <label class="compare-label"></label>
-                            <h3 class="page-title">So sánh sản phẩm</h3>
-                        </div>
-                        <!---->
-                        <div class="row-compare header-row clearfix">
-                            <label class="compare-label"></label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <div class="compare-thumb">
-                                        <a href="#"><img src="{{asset('fe_template/images/product/cp-1.jpg')}}" alt="420x250" /></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                                <div class="compare-column">
-                                    <div class="compare-thumb">
-                                        <a href="#"><img src="{{asset('fe_template/images/product/cp-1.jpg')}}" alt="420x250" /></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                                <div class="compare-column">
-                                    <div class="compare-thumb not-product">
-                                        <span onclick="window.location='link-trang-san-pham'"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Tên sản phẩm</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <a href="#">Căn Trio</a>
-                                </div>
-                                <div class="compare-column">
-                                    <a href="#">Căn Diamond</a>
-                                </div>
-                                <div class="compare-column">
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Công nghệ</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                        <li>Hoàn thiện ngoài: Bitum/Tole/Gỗ/Bê tông</li>
-                                        <li>Lớp tạo hình trong: Ván ép/gỗ</li>
-                                        <li>Hoàn thiện trong: Kính/Tấm PVC/Gỗ</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Lớp tạo hình trong: Ván ép/gỗ</li>
-                                        <li>Hoàn thiện trong: Kính/Tấm PVC/Gỗ</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Hệ thống nước</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    Hoàn thiện
-                                </div>
-                                <div class="compare-column">
-                                    Hoàn thiện
-                                </div>
-                                <div class="compare-column">
 
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Hệ thống điện</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    Hoàn thiện
-                                </div>
-                                <div class="compare-column">
-                                    Hoàn thiện
-                                </div>
-                                <div class="compare-column">
+                        <div class="container product_list" style="margin-left: -15px;">
 
-                                </div>
-                            </div>
                         </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Công năng</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
 
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Bếp</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    Có
-                                </div>
-                                <div class="compare-column">
-                                    Có
-                                </div>
-                                <div class="compare-column">
+                        <div class="wrapper-pagination text-center pagination_list">
 
-                                </div>
-                            </div>
                         </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Thiết bị</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
+                    </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Thiết bị vệ sinh</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Vật dụng khác</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Vận chuyển</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    Container
-                                </div>
-                                <div class="compare-column">
-                                    Container
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Bảo hành</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Diện tích sàn</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    7.2 m2
-                                </div>
-                                <div class="compare-column">
-                                    7.2 m2
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Kích thước</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-                                    <ul>
-                                        <li>Khung kết cấu thép</li>
-                                        <li>Cách âm, nhiệt: Bông, Thủy tinh</li>
-                                        <li>Chông thấm: Tole</li>
-                                    </ul>
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Độ cao trần</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    3.16m
-                                </div>
-                                <div class="compare-column">
-                                    3.16m
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Sức chứa</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    2 người lớn
-                                </div>
-                                <div class="compare-column">
-                                    2 người lớn
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div class="row-compare clearfix">
-                            <label class="compare-label">Giao hàng</label>
-                            <div class="row-sub-compare">
-                                <div class="compare-column">
-                                    Giao hàng có thu phí
-                                </div>
-                                <div class="compare-column">
-                                    Giao hàng có thu phí
-                                </div>
-                                <div class="compare-column">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!---->
-                        <div style="padding-top:20px">
-                            <a href="#" class="button-link bg-green">Tự thiết kế</a>
-                            <a href="#" class="button-link">Tiếp tục khám phá</a>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -816,7 +518,20 @@
 <script type="text/javascript" src="{{asset('fe_template/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('fe_template/js/gallery/foundation.min.js')}}"></script>
 <script src="{{asset('fe_template/js/gallery/pycs-layout.jquery.js')}}"></script>
+<script type="text/javascript" src="{{asset('fe_template/js/jquery.fancybox.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('fe_template/css/jquery.fancybox.css')}}" media="screen" />
 <script type="text/javascript">
+    let arr = [];
+    $('#product-compare').on('hidden.bs.modal', function () {
+        showScroll();
+    });
+    function showScroll() {
+        $("html").css({"overflow-y": "auto"});
+        localStorage.removeItem("product0");
+        localStorage.removeItem("product1");
+        localStorage.removeItem("product2");
+        arr=[];
+    }
     $(document).ready(function(){
         var bannerSL = $('.slideshow .owl-carousel');
         bannerSL.on('initialized.owl.carousel', function(event) {
@@ -887,14 +602,89 @@
             var html = $('.product-item[data-id="'+parid+'"]').children('.hidden').html();
             $('#product-wrapper .modal-body').html(html);
         });
-        $('.compare-thumb a:last-child').click(function(e){
+
+        localStorage.removeItem("product0");
+        localStorage.removeItem("product1");
+        localStorage.removeItem("product2");
+
+        $(document).on('click', 'div .product-action a.get-compare-popup', function(event){
+            event.preventDefault();
+            let id = $(this).attr('data-id');
+            localStorage.setItem("product0", id);
+            fetch_data(1);
+            let url = "/chi-tiet-san-pham-ajax/"+id;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (response) {
+                    $(".compare_item").html(response);
+                    $("html").css({"overflow-y": "hidden"});
+                    $('#image_modal').modal('hide');
+                    $('#product-compare').modal('show');
+                }
+            });
+        });
+
+        $(document).on('click', 'div .product_item a', function(event){
+            event.preventDefault();
+
+            // $('#product-compare').modal('hide');
+            let id = localStorage.getItem("product0");
+            let id1 = $(this).attr('data-ids');
+            arr.push(id1);
+            arr = [...new Set(arr)];
+            // console.log(arr)
+            if(arr.length > 1){
+                localStorage.setItem("product1", arr[arr.length - 2]);
+                localStorage.setItem("product2", arr[arr.length - 1]);
+            } else {
+                localStorage.setItem("product1", arr[arr.length - 1]);
+            }
+            let product1 = null;
+            let product2 = null;
+            if(localStorage.getItem("product1")) {
+                product1 = localStorage.getItem("product1");
+            }
+            if(localStorage.getItem("product2")) {
+                product2 = localStorage.getItem("product2");
+            }
+
+            let url = "/chi-tiet-san-pham-ajax/"+id;
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {product1: product1, product2: product2},
+                success: function (response) {
+                    $(".compare_item").html(response);
+                    $("html").css({"overflow-y": "hidden"});
+                    $('#image_modal').modal('hide');
+                    $('#product-compare').modal('show');
+                }
+            });
+
+
+        });
+
+
+        $(document).on('click', '.compare-thumb a:last-child', function(e){
             e.preventDefault();
+            let product_id = $(this).attr('data-product-id');
+
+            arr = arr.filter(item => item !== product_id);
+            console.log(product_id, arr);
+            if($(this).attr('data-product-item') === 'product2') {
+                localStorage.removeItem($(this).attr('data-product-item'));
+            } else {
+                localStorage.setItem("product1", localStorage.getItem("product2"));
+                localStorage.removeItem('product2');
+            }
             var parent = $(this).parent().parent(), idx = parent.index();
             $('.row-sub-compare').each(function(){
                 $(this).children('.compare-column').eq(idx).remove();
                 var par = $(this).parent();
                 if(par.hasClass('header-row')){
-                    $(this).append('<div class="compare-column"><div class="compare-thumb not-product"><span onclick="window.location=\'link-trang-san-pham\'"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></span></div></div>');
+                    $(this).append('<div class="compare-column"><div class="compare-thumb not-product"><span><button data-toggle="modal" data-target="#image_modal"><strong>Thêm sản phẩm </strong><i class="fa fa-plus-circle"></i></button></span></div></div>');
                 }else{
                     $(this).append('<div class="compare-column"></div>');
                 }
@@ -945,6 +735,28 @@
         var win_h = $(window).height();
         //if(win_h > $('.bg-banner').height()) win_h = $('.bg-banner').height();
         $('.slideshow .owl-carousel .owl-itemct').css('height',win_h);
+    });
+    function fetch_data(page)
+    {
+        let url = "san-pham-ajax/"+localStorage.getItem("product0");
+        $.ajax({
+            type: 'GET',
+            url: url+"?page="+page,
+            success: function (response) {
+                $(".product_list").html(response.html);
+                $(".pagination_list").html(response.pagination_html);
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        fetch_data(1);
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+
     });
 </script>
 <!--end home page-->

@@ -1,8 +1,8 @@
 
 @if(isset($productsAjax))
     @foreach($productsAjax as $key => $product)
-        <div class="col-sm-4 col-xs-6 product-item" >
-            <div class="product-item-ctn">
+        <div class="col-sm-4 col-xs-6 product-item" style="margin: 0; padding: 10px; -webkit-box-shadow: none; box-shadow: none; background:none">
+            <div class="product-item-ctn" style="width: 100%">
                 @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                     @foreach($images as $key => $image)
                         @if($image->status)

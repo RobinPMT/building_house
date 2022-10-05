@@ -328,6 +328,9 @@
     <script type="text/javascript" src="{{asset('fe_template/js/jquery.fancybox.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('fe_template/css/jquery.fancybox.css')}}" media="screen" />
     <script type="text/javascript">
+        $('#product-compare').on('hidden.bs.modal', function () {
+            showScroll();
+        });
         function showScroll() {
             $("html").css({"overflow-y": "auto"});
         }

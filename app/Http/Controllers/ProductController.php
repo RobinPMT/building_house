@@ -99,7 +99,7 @@ class ProductController extends FrontendController
             'active' => Product::ACTIVE
         ])->with(['keys' => function ($query) {
             $query->where('active', SettingKeyProduct::ACTIVE);
-        }])->whereKeyNot($id)->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(3);
+        }])->whereKeyNot($id)->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(6);
 //        $viewData = [
 //            'productsAjax' => $productsAjax
 //        ];
