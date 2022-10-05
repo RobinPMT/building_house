@@ -26,12 +26,17 @@ class UserService extends ApiService
 
     protected function fields(): array
     {
-        return ['name',  'email'];
+        return ['name',  'email', 'phone', 'avatar', 'active', 'arr_active'];
     }
 
     protected function mapFilters(): array
     {
         return [];
+    }
+
+    public function get_avatar_value($record, User $model)
+    {
+        return pare_url_file($model->avatar, 'avatars');
     }
 
     protected function boot()

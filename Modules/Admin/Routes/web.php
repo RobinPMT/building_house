@@ -28,6 +28,7 @@ use Modules\Admin\Http\Controllers\AdminRoomController;
 use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
 use Modules\Admin\Http\Controllers\AdminTagController;
+use Modules\Admin\Http\Controllers\AdminUserController;
 use Modules\Admin\Http\Controllers\HomeController;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -54,6 +55,10 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/{id}', [AdminController::class, '__update'])->name('admin.update.admin');
 //        Route::delete('/delete/{id}', [AdminController::class, '__delete'])->name('admin.delete.admin');
         Route::get('/{action}/{id}', [AdminController::class, 'action'])->name('admin.get.action.admin');
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', [AdminUserController::class, '__list'])->name('admin.get.list.user');
     });
 
 

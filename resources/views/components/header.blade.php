@@ -23,7 +23,7 @@
                                 <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-tuc-su-kien') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc-su-kien'])}}">Tin tức - Sự kiện</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Tự thiết kế</a></li>
+                        <li class="{{ \Request::route()->getName() == 'get.list.design' ? 'active' : '' }}"><a href="{{route('get.list.design')}}">Tự thiết kế</a></li>
                         <li class="{{ \Request::route()->getName() == 'get.list.coffee' ? 'active' : '' }}">
                             <a href="{{route('get.list.coffee')}}">Coffee & Food</a>
                         </li>

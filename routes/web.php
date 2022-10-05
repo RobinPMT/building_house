@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DesignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PolicyController;
@@ -74,7 +75,7 @@ Route::get('chinh-sach-bao-mat/', [PolicyController::class, 'indexSecurity'])->n
 Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->name('get.list.shopping.policy');
 Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
 Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
-
+Route::get('tu-thiet-ke/', [DesignController::class, 'index'])->name('get.list.design');
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
     Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');
     Route::post('thay-doi-mat-khau', [AuthController::class, 'postChangePassword'])->name('post.change.password.auth');
