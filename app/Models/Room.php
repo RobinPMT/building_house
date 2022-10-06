@@ -48,4 +48,9 @@ class Room extends Base
     {
         return $this->belongsTo(Room::class, 'parent_id')->select('id', 'title');
     }
+
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class, 'room_id');
+    }
 }

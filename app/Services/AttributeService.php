@@ -91,6 +91,11 @@ class AttributeService extends ApiService
         }
     }
 
+    public function get_avatar_value($record, Attribute $model)
+    {
+        return pare_url_file($model->avatar, 'attributes');
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();
@@ -106,8 +111,7 @@ class AttributeService extends ApiService
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
-
-//            $this->uploadFile($model);
+            $this->uploadFile($model);
         });
 
         $this->on('saved', function ($model) use ($user) {
@@ -181,5 +185,15 @@ class AttributeService extends ApiService
             }, $files);
         }
         return null;
+    }
+
+    public function uploadFile(Attribute $model)
+    {
+        if ($this->getApiRequest()->hasFile('avatar')) {
+            $file = upload_image('avatar', 'attributes');
+            if (isset($file['name'])) {
+                $model->avatar = $file['name'];
+            }
+        }
     }
 }

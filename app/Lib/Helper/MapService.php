@@ -18,6 +18,7 @@ use App\Services\SettingKeyProductService;
 use App\Services\SettingService;
 use App\Services\TagService;
 use App\Services\UserService;
+use App\Services\WishlistService;
 use Psr\Container\ContainerInterface;
 
 class MapService
@@ -107,5 +108,10 @@ class MapService
     public function questionService(): QuestionService
     {
         return c(QuestionService::class);
+    }
+
+    public function wishlistService(): WishlistService
+    {
+        return c(WishlistService::class);
     }
 }

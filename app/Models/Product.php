@@ -25,7 +25,7 @@ class Product extends Base
 
     const HOT = 1;
 
-    const NOT_HOT = 1;
+    const NOT_HOT = 0;
 
     protected $_active = [
         1 => [

@@ -29,6 +29,7 @@ use Modules\Admin\Http\Controllers\AdminSettingController;
 use Modules\Admin\Http\Controllers\AdminSettingKeyProductController;
 use Modules\Admin\Http\Controllers\AdminTagController;
 use Modules\Admin\Http\Controllers\AdminUserController;
+use Modules\Admin\Http\Controllers\AdminWishlistController;
 use Modules\Admin\Http\Controllers\HomeController;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -88,6 +89,11 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::get('/', [AdminContactController::class, '__list'])->name('admin.get.list.contact');
         Route::post('/{id}', [AdminContactController::class, 'update'])->name('admin.get.update.contact');
         Route::get('/{action}/{id}', [AdminContactController::class, 'action'])->name('admin.get.action.contact');
+    });
+
+    Route::group(['prefix' => 'transaction'], function () {
+        Route::get('/', [AdminWishlistController::class, '__list'])->name('admin.get.list.transaction');
+        Route::get('/{action}/{id}', [AdminWishlistController::class, 'action'])->name('admin.get.action.transaction');
     });
 
     Route::group(['prefix' => 'library'], function () {

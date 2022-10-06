@@ -71,9 +71,9 @@ if (!function_exists('upload_image')) {
         $nameFile = trim(str_replace('.'.$ext, '', strtolower($info->getFilename())));
         $filename = date('Y-m-d__').Str::slug($nameFile) . '.' . $ext;
         // thu muc goc de upload
-        $path = storage_path().'/app/public/files/'.date('Y/m/d/');
+        $path = storage_path().'/app/public/files/';//.date('Y/m/d/');
         if ($folder) {
-            $path = storage_path().'/app/public/files/'.$folder.'/'.date('Y/m/d/');
+            $path = storage_path().'/app/public/files/'.$folder.'/';//.date('Y/m/d/');
         }
         if (!\File::exists($path)) {
             mkdir($path, 0777, true);
@@ -106,11 +106,12 @@ if (!function_exists('pare_url_file')) {
         if (!$image || $image == '') {
             return'/images/no_image.png';
         }
-        $explode = explode('__', $image);
-        if (isset($explode[0])) {
-            $time = str_replace('_', '/', $explode[0]);
-            return '/storage/files/'.$folder.'/' . date('Y/m/d', strtotime($time)) . '/' . $image;
-        }
+        return '/storage/files/'. $folder . '/' . $image;
+//        $explode = explode('__', $image);
+//        if (isset($explode[0])) {
+//            $time = str_replace('_', '/', $explode[0]);
+//            return '/storage/files/'.$folder.'/' . date('Y/m/d', strtotime($time)) . '/' . $image;
+//        }
     }
 }
 if (!function_exists('get_data_user')) {

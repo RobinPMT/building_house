@@ -308,6 +308,7 @@
                         if(response.status) {
                             $("#room_id-"+target).val(response.data.room_id).change();
                             $('#title-'+target).val(response.data.title);
+                            $('#output_image').attr('src', response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active-"+target).attr('checked', true)
                             }

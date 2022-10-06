@@ -76,6 +76,7 @@ Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->
 Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
 Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
 Route::get('tu-thiet-ke/', [DesignController::class, 'index'])->name('get.list.design');
+Route::post('tu-thiet-ke/', [DesignController::class, 'store'])->name('post.store.design');
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
     Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');
     Route::post('thay-doi-mat-khau', [AuthController::class, 'postChangePassword'])->name('post.change.password.auth');

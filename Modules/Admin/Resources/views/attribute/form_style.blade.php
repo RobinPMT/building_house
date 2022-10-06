@@ -30,6 +30,16 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
+                </div>
+                <div class="form-group">
+                    <label for="input_image">Ảnh mẫu</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="input_image" name="avatar">
+                        <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>Upload ảnh cho thư viện</label>
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="form-group">

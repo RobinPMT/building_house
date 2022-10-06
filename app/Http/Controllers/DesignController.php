@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Housing;
-use App\Models\Project;
-use App\Models\Setting;
+use App\Models\Attribute;
+use App\Models\Product;
+use App\Models\Room;
+use Illuminate\Http\Request;
 
 class DesignController extends FrontendController
 {
@@ -16,23 +17,33 @@ class DesignController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = services()->projectService()->where([
-            'active' => Project::ACTIVE,
-            'hot' => Project::HOT
-        ])->select('id', 'title', 'slug', 'avatar')->limit(5)->get();
-        $housings = services()->housingService()->where([
-            'active' => Housing::STATUS_PUBLIC,
-        ])->select('id', 'title', 'content', 'avatar_main')->orderBy('title')->get();
-        $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first();
-        $settingHousing = services()->settingService()->where(['key' =>'coffee_housing', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value', 'avatar_not_main')->first();
+        $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
+            ->with(['childs' => function ($query) {
+                $query->with(['attributes' => function ($query) {
+                    $query->where('active', Attribute::STATUS_PUBLIC);
+                }]);
+                $query->where('active', Room::STATUS_PUBLIC);
+            }])->select('id', 'title')->get();
+
+        $products = services()->productService()->where([
+            'active' => Product::ACTIVE
+        ])->where(function ($query) use ($request) {
+            if (isset($request->category_id) && $request->category_id > 0) {
+                $query->where('category_id', $request->category_id);
+            }
+        })->select('id', 'title', 'arr_image', 'image_back_ground_design')->orderByDesc('id')->paginate(3);
+
         $viewData = [
-            'setting' => $setting,
-            'settingHousing' => $settingHousing,
-            'projects' => $projects,
-            'housings' => $housings
+            'rooms' => $rooms,
+            'products' => $products
         ];
         return view('design.index', $viewData);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }

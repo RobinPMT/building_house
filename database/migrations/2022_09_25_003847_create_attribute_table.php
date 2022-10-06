@@ -15,7 +15,7 @@ class CreateAttributeTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string('title')->nullable();
             $table->string('type')->nullable();
             $table->bigInteger('author_id')->nullable();
             $table->bigInteger('room_id')->nullable();
