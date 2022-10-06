@@ -24,7 +24,8 @@
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Ảnh Design</th>
+                        <th>Ảnh bản vẽ</th>
+                        <th>Ảnh tự thiết kế</th>
                         <th>Kích thước</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
@@ -38,9 +39,19 @@
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$item['title']}} ({{isset($item['category']['title']) ? $item['category']['title'] : 'Không rõ'}})</td>
+                                    <td>
+                                        <div class="d-flex justify-content-left align-items-center">
+                                            <div class="d-flex flex-column">
+                                                <span class="emp_name text-truncate font-weight-bold">{{$item['title']}}</span>
+                                                <small class="emp_post text-truncate text-muted">{{isset($item['category']['title']) ? $item['category']['title'] : 'Không rõ'}}</small>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td style="">
                                         <img src="{{$item['avatar_design']}}" width="100px" height="100px" alt="">
+                                    </td>
+                                    <td style="">
+                                        <img src="{{$item['image_back_ground_design']}}" width="100px" height="100px" alt="">
                                     </td>
                                     <td style="">
                                         <ul>
@@ -114,7 +125,8 @@
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Ảnh Design</th>
+                        <th>Ảnh bản vẽ</th>
+                        <th>Ảnh tự thiết kế</th>
                         <th>Kích thước</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
@@ -453,6 +465,7 @@
                             $('#room_description').val(response.data.room_description);
                             $("#category_id").val(response.data.category_id).change();
                             $('#output_image').attr('src', response.data.avatar_design);
+                            $('#output_image_extra').attr('src', response.data.image_back_ground_design);
                             $("textarea#description").html(response.data.description);
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
@@ -473,7 +486,7 @@
                             }
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);
-                            $('#output_image').attr('src', response.data.avatar);
+                            // $('#output_image').attr('src', response.data.avatar);
                             // $('#input_image').val(response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)

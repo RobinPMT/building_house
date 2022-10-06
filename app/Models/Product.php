@@ -16,7 +16,7 @@ class Product extends Base
     protected $fillable = [
         'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'avatar_design', 'description',
         'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'created_at',
-        'updated_at', 'category_id'
+        'updated_at', 'category_id', 'image_back_ground_design'
     ];
 
     const ACTIVE = 1;

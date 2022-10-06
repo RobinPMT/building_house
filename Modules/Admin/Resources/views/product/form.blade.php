@@ -73,19 +73,35 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-12">
-                        <div class="form-group">
-                            <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
-                        </div>
-                        <div class="form-group">
-                            <label for="input_image">Ảnh Design</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
-                                <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_image">Ảnh bản vẽ</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
+                                        <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <img id="output_image_extra" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_image_extra">Ảnh tự thiết kế</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="input_image_extra" name="image_back_ground_design">
+                                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row">
-
                                     <div class="col-4">
                                         <div class="demo-inline-spacing">
                                             <div class="form-group">

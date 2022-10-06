@@ -31,7 +31,7 @@ class ProductService extends ApiService
     {
         return [
             'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price',
-            'arr_active', 'arr_hot', 'avatar_design', 'description',
+            'arr_active', 'arr_hot', 'avatar_design', 'description', 'image_back_ground_design',
             'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'category_id', 'setting_keys'
         ];
     }
@@ -91,6 +91,11 @@ class ProductService extends ApiService
         return pare_url_file($model->avatar_design, 'products');
     }
 
+    public function get_image_back_ground_design_value($record, Product $model)
+    {
+        return pare_url_file($model->image_back_ground_design, 'products');
+    }
+
     public function get_arr_image_value($record, Product $model)
     {
         if (isset($model->arr_image) && trim($model->arr_image) != '') {
@@ -119,7 +124,8 @@ class ProductService extends ApiService
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
             $model->hot = $model->hot == 'on' ? true : false;
-            $this->uploadFile($model);
+            $this->uploadFile($model, 'avatar_design');
+            $this->uploadFile($model, 'image_back_ground_design');
             $data = $this->uploadArrImages($model);
             if (isset($data)) {
                 $oldImages = json_decode($model->arr_image);
@@ -139,12 +145,12 @@ class ProductService extends ApiService
         });
     }
 
-    public function uploadFile(Product $model)
+    public function uploadFile(Product $model, $key)
     {
-        if ($this->getApiRequest()->hasFile('avatar_design')) {
-            $file = upload_image('avatar_design', 'products');
+        if ($this->getApiRequest()->hasFile($key)) {
+            $file = upload_image($key, 'products');
             if (isset($file['name'])) {
-                $model->avatar_design = $file['name'];
+                $model->$key = $file['name'];
             }
         }
     }
