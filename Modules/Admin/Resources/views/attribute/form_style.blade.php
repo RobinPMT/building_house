@@ -23,8 +23,8 @@
 
 {{--                </div>--}}
                 <div class="form-group">
-                    <label for="room_id-system">Chọn tiện nghi <span style="color: red">*</span></label>
-                    <select name="room_id" id="room_id-system" class="select2 form-control form-control-lg select-single" required>
+                    <label for="room_id-style">Chọn tiện nghi <span style="color: red">*</span></label>
+                    <select name="room_id" id="room_id-style" class="select2 form-control form-control-lg select-single" required>
                         <option value="" selected>Chọn tiện nghi</option>
                         @php echo Modules\Admin\Http\Controllers\AdminRoomController::showChildRooms();  @endphp
                     </select>
