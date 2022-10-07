@@ -52,12 +52,20 @@ class HomeController extends FrontendController
                 'hot' => Product::HOT,
             ])->limit(6);
         }])->get();
+
+        $coffee_home = services()->settingService()->where([
+            'active' => Setting::ACTIVE,
+            'type' => Setting::TYPE_COFFEE_HOME,
+            'key' => 'coffee_home'
+        ])->first();
+
         $viewData = [
             'housing_settings' => $housing_settings,
             'banners' => $banners,
             'posts' => $posts,
             'libraries' => $libraries,
-            'categories' => $categories
+            'categories' => $categories,
+            'coffee_home' => $coffee_home
         ];
         return view('home.index', $viewData);
     }

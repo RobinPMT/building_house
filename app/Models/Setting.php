@@ -27,6 +27,8 @@ class Setting extends Base
 
     const TYPE_COFFEE = 'coffee';
 
+    const TYPE_COFFEE_HOME = 'coffee_home';
+
     protected $_active = [
         1 => [
             'name' => 'Hoạt động',

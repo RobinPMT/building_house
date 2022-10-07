@@ -30,7 +30,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active', 'avatar_not_main'
+            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active', 'avatar_not_main', 'arr_avatar'
         ];
     }
 
@@ -62,6 +62,16 @@ class SettingService extends ApiService
         return pare_url_file($model->avatar_not_main, 'settings');
     }
 
+    public function get_arr_avatar_value($record, Setting $model)
+    {
+        if (isset($model->avatar) && trim($model->avatar) != '' && $model->type === Setting::TYPE_COFFEE_HOME) {
+            return json_encode(array_map(function ($item) {
+                return $item;
+            }, json_decode($model->avatar)));
+        }
+        return null;
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();
@@ -76,8 +86,18 @@ class SettingService extends ApiService
         $user = auth('admins')->user();
         $this->on('saving', function ($model) use ($user) {
             $model->active = $model->active == 'on' ? true : false;
-            $this->uploadAvatar($model, 'avatar');
-            $this->uploadAvatar($model, 'avatar_not_main');
+            if ($model->type === Setting::TYPE_COFFEE_HOME) {
+                $model->active = true;
+                $data = $this->uploadArrImages($model);
+                if (isset($data)) {
+                    $oldImages = json_decode($model->avatar);
+                    $newImages = array_merge($data, $oldImages ?? []);
+                    $model->avatar = json_encode($newImages);
+                }
+            } else {
+                $this->uploadAvatar($model, 'avatar');
+                $this->uploadAvatar($model, 'avatar_not_main');
+            }
         });
         $this->on('updating', function ($model) use ($user) {
 //            $this->updateSettingHome($model);
@@ -126,7 +146,7 @@ class SettingService extends ApiService
         $newData = $data['newData'];
         if (is_array($newData) && count($newData) > 0) {
             $keys = array_keys($newData);
-            $settings = services()->settingService()->whereIn('key', $keys)->get();
+            $settings = services()->settingService()->whereIn('key', $keys)->where('type', Setting::TYPE_SETTING)->get();
             foreach ($settings as $setting) {
                 $setting->name = $newData[$setting->key]['name'];
 //                if ($newData[$setting->key]['key'] == 'housing') {
@@ -161,5 +181,16 @@ class SettingService extends ApiService
                 $model->$field = $file['name'];
             }
         }
+    }
+
+    public function uploadArrImages(Setting $model)
+    {
+        if ($this->getApiRequest()->hasFile('images')) {
+            $files = upload_images('images', 'settings');
+            return array_map(function ($item) {
+                return $item['name'];
+            }, $files);
+        }
+        return null;
     }
 }

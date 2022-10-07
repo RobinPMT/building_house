@@ -362,7 +362,11 @@
     <section class="coffee-section">
         <div class="container">
             <div class="coffee-left">
-                <h3 class="coffee-title">Giải pháp kinh doanh <span>trọn gói chỉ với</span> <strong>180 triệu</strong></h3>
+                @if(isset($coffee_home))
+                    {!! $coffee_home->value !!}
+                @else
+                    {!! '<h3 class="coffee-title">Giải pháp kinh doanh <span>trọn gói chỉ với</span> <strong>180 triệu</strong></h3>' !!}
+                @endif
                 <a href="{{route('get.list.coffee')}}" class="button-link">Tìm hiểu ngay</a>
                 <div class="nav-coffee-slider clearfix">
                     <button type="button" role="presentation" class="customPrevBtn slideraction">
@@ -378,24 +382,19 @@
             <div class="coffee-right">
                 <div class="coffee-right-content">
                     <div class="owl-carousel">
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 1000x700 -->
-                            <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 680x520 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 730x510 -->
-                            <img src="{{asset('fe_template/images/coffee/1.jpg')}}" alt="590x410" />
-                        </picture>
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/coffee/2.jpg')}}"> <!-- 1000x700 -->
-                            <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/coffee/2.jpg')}}"> <!-- 680x520 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/coffee/2.jpg')}}"> <!-- 730x510 -->
-                            <img src="{{asset('fe_template/images/coffee/2.jpg')}}" alt="590x410" />
-                        </picture>
-                        <picture>
-                            <source media="(min-width: 1500px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 1000x700 -->
-                            <source media="(min-width: 1230px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 680x520 -->
-                            <source media="(min-width: 992px)" srcset="{{asset('fe_template/images/coffee/1.jpg')}}"> <!-- 730x510 -->
-                            <img src="{{asset('fe_template/images/coffee/1.jpg')}}" alt="590x410" />
-                        </picture>
+                        @if(isset($coffee_home))
+                            @if(isset($coffee_home) && $images = json_decode($coffee_home->avatar))
+                                @foreach($images as $image)
+                                    <picture>
+                                        <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 1000, 700, 100, 1)}}"> <!-- 1000x700 -->
+                                        <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 680, 520, 100, 1)}}"> <!-- 680x520 -->
+                                        <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 730, 510, 100, 1)}}"> <!-- 730x510 -->
+                                        <img src="{{pare_url_file($image, 'settings')}}" alt="590x410" />
+                                    </picture>
+                                @endforeach
+                            @endif
+                        @endif
+
                     </div>
                 </div>
             </div>

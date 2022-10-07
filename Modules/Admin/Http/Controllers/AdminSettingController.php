@@ -25,7 +25,7 @@ class AdminSettingController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active',
+            '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active,arr_avatar',
             '_noPagination' => 1,
             '_orderBy' => 'id:asc',
         ]);
@@ -96,5 +96,24 @@ class AdminSettingController extends WebController
         }
         return redirect()->back()->with('success', $messages);
 //        return response()->json(['success' => $messages]);
+    }
+
+    public function deleteImages($id, $image)
+    {
+        if (trim($image) != '') {
+            $setting = Setting::find($id);
+            if (isset($setting)) {
+                $arr = json_decode($setting->avatar);
+                if (($key = array_search($image, $arr)) !== false) {
+                    unset($arr[$key]);
+                    $setting->avatar = json_encode(array_values($arr));
+                    $setting->save();
+                    //TODO: xoa file ra khoi sourse
+                    return response()->json(['status' => true]);
+                }
+            }
+            return response()->json(['status' => false]);
+        }
+        return response()->json(['status' => false]);
     }
 }

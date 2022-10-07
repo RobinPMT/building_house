@@ -83,6 +83,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::get('/{id}', [AdminSettingController::class, '__find'])->name('admin.get.find.setting');
         Route::post('/{id}', [AdminSettingController::class, '__update'])->name('admin.update.setting');
         Route::get('/{action}/{id}', [AdminSettingController::class, 'action'])->name('admin.get.action.setting');
+        Route::get('/delete_images/{id}/{image}', [AdminSettingController::class, 'deleteImages'])->name('admin.delete.images.setting');
     });
 
     Route::group(['prefix' => 'contact'], function () {
