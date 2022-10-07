@@ -215,7 +215,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="product-action">
-                                                            <a href="#" class="button-link bg-green">Tự thiết kế</a>
+                                                            <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" class="button-link bg-green">Tự thiết kế</a>
                                                             <a href="#" data-id="{{$product->id}}" class="button-link get-detail-popup" data-toggle="modal" data-target="#product-wrapper">Thông số chi tiết</a>
                                                             <a href="#" data-id="{{$product->id}}" class="button-link get-compare-popup" data-toggle="modal" data-target="#product-compare">So sánh</a>
                                                         </div>

@@ -27,6 +27,17 @@ class DesignController extends FrontendController
                 }]);
                 $query->where('active', Room::STATUS_PUBLIC);
             }])->select('id', 'title')->get();
+        $item = 3;
+        if ($request->slug) {
+            $item = 2;
+            $product = services()->productService()->where([
+                'active' => Product::ACTIVE
+            ])->where(function ($query) use ($request) {
+                if (isset($request->category_id) && $request->category_id > 0) {
+                    $query->where('category_id', $request->category_id);
+                }
+            })->where('slug', $request->slug)->select('id', 'title', 'arr_image', 'image_back_ground_design')->first();
+        }
 
         $products = services()->productService()->where([
             'active' => Product::ACTIVE
@@ -34,11 +45,15 @@ class DesignController extends FrontendController
             if (isset($request->category_id) && $request->category_id > 0) {
                 $query->where('category_id', $request->category_id);
             }
-        })->select('id', 'title', 'arr_image', 'image_back_ground_design')->orderByDesc('id')->paginate(3);
-
+            if (isset($request->slug)) {
+                $query->where('slug', '<>', $request->slug);
+            }
+        })->select('id', 'title', 'arr_image', 'image_back_ground_design')->orderByDesc('id')->paginate($item);
+//        dd($products, $product);
         $viewData = [
             'rooms' => $rooms,
-            'products' => $products
+            'products' => $products,
+            'productSelect' => $product ?? null
         ];
         return view('design.index', $viewData);
     }

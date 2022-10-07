@@ -70,6 +70,22 @@
                     <div class="design-list category-list">
                         <div class="row row_sm_10">
                             @if(isset($products))
+                                @if($productSelect)
+                                    <div class="col-sm-4 col-xss-6 category-item active">
+                                        <a href="#" data-product-id="{{$productSelect->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
+                                            @if(isset($productSelect->arr_image) && $images = json_decode($productSelect->arr_image))
+                                                @foreach($images as $key => $image)
+                                                    @if($image->status)
+                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($productSelect->title, 'products')}}" alt="540x400" />
+                                            @endif
+                                            <strong>{{$productSelect->title}}</strong>
+                                        </a>
+                                    </div>
+                                @endif
                                 @foreach($products as $product)
                                     <div class="col-sm-4 col-xss-6 category-item">
                                         <a href="#" data-product-id="{{$product->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($product->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
@@ -180,6 +196,7 @@
         });
         $(document).ready(function(){
             let data = {};
+            data['product_id'] = '{{$productSelect->id ?? null}}';
             $('.larger-picture').addClass('loading');
 
             $('.design-tab-link ul li a').click(function(e){

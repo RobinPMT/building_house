@@ -39,7 +39,8 @@ class ProductController extends FrontendController
             'height',
             'area',
             'room_number',
-            'room_description'
+            'room_description',
+            'category_id'
         )->first();
 //        dd($product);
 
@@ -76,7 +77,7 @@ class ProductController extends FrontendController
                 }
             }
         })
-        ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(12);
+        ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area', 'category_id')->orderByDesc('id')->paginate(12);
         $viewData = [
             'products' => $products
         ];

@@ -102,7 +102,7 @@
                     </ul>
                 </div>
                 <div class="product-single-action">
-                    <a href="#" class="button-link bg-green">Tự thiết kế</a>
+                    <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" class="button-link bg-green">Tự thiết kế</a>
                     <a href="#" data-id="1" class="button-link get-compare-popup" data-toggle="modal" data-target="#product-compare">So sánh</a>
                 </div>
             </div>
