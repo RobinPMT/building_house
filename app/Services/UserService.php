@@ -26,7 +26,7 @@ class UserService extends ApiService
 
     protected function fields(): array
     {
-        return ['name',  'email', 'phone', 'avatar', 'active', 'arr_active'];
+        return ['name',  'email', 'phone', 'avatar', 'active', 'arr_active', 'address'];
     }
 
     protected function mapFilters(): array

@@ -76,13 +76,13 @@ Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->
 Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
 Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
 Route::get('tu-thiet-ke/', [DesignController::class, 'index'])->name('get.list.design');
-
+Route::post('tu-thiet-ke/', [DesignController::class, 'store'])->name('post.store.design');
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {
     Route::get('thay-doi-mat-khau', [AuthController::class, 'getChangePassword'])->name('get.change.password.auth');
     Route::post('thay-doi-mat-khau', [AuthController::class, 'postChangePassword'])->name('post.change.password.auth');
     Route::get('thong-tin-ca-nhan', [AuthController::class, 'getProfile'])->name('get.change.profile.auth');
     Route::post('thong-tin-ca-nhan', [AuthController::class, 'postProfile'])->name('post.change.profile.auth');
-    Route::post('tu-thiet-ke/', [DesignController::class, 'store'])->name('post.store.design');
+
 //    Route::post('tu-thiet-ke/{code}', [DesignController::class, 'store'])->name('post.update.design');
     Route::get('thiet-ke-cua-ban', [DesignController::class, 'listWishlist'])->name('get.list.wishlist.product');
     Route::get('thiet-ke-cua-ban/{slug}', [DesignController::class, 'detailWishlist'])->name('get.detail.wishlist.design');

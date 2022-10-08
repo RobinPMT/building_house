@@ -31,8 +31,8 @@ class AdminWishlistController extends WebController
             '_filter' => 'type:transaction;',
             '_relations' => 'handler,creator,product',
             '_admin_fields' => 'name',
-            '_user_fields' => 'name',
-            '_product_fields' => 'title'
+            '_user_fields' => 'name,email,phone,address',
+            '_product_fields' => 'title,slug'
         ]);
         return parent::__list($request, 'admin::transaction.index');
     }
@@ -50,7 +50,7 @@ class AdminWishlistController extends WebController
                     break;
                 case 'active':
                     $contact->status = $contact->status ? 0 : 1;
-                    $contact->author_id = $contact->active ? $user->getKey() : null;
+                    $contact->author_id = $contact->status ? $user->getKey() : null;
                     $contact->save();
                     $messages = 'Cập nhật thành công!';
                     break;

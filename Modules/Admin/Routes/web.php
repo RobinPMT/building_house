@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\DesignController;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminAttributeController;
 use Modules\Admin\Http\Controllers\AdminBannerController;
@@ -215,6 +216,8 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/{id}', [AdminQuestionController::class, '__update'])->name('admin.update.question');
         Route::get('/{action}/{id}', [AdminQuestionController::class, 'action'])->name('admin.get.action.question');
     });
+
+    Route::get('thiet-ke/{slug}', [DesignController::class, 'detailWishlist'])->name('get.detail.wishlists.design');
     Route::group(['prefix' => 'laravel-filemanager'], function () {
         Lfm::routes();
     });

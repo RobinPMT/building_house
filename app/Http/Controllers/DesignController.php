@@ -63,7 +63,6 @@ class DesignController extends FrontendController
     public function store(Request $request)
     {
         $data = $request->data;
-//        && get_data_user('web')
         if (trim(get_data_user('web')) === '') {
             return response()->json(['status' => false, 'message' => 'Vui lòng đăng nhập để sử dụng chức năng này!']);
         }
@@ -187,8 +186,11 @@ class DesignController extends FrontendController
 
     public function detailWishlist($slug, Request $request)
     {
-        $user_id = get_data_user('web');
-
+        if (get_data_user('admins') > 0) {
+            $user_id = $request->user_id ?? null;
+        } else {
+            $user_id = get_data_user('web');
+        }
         if ($request->code && $slug) {
             $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
                 ->with(['childs' => function ($query) use ($user_id, $request, $slug) {

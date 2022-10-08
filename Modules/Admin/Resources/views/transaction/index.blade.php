@@ -10,9 +10,10 @@
                     <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã Oder</th>
                         <th>Khách hàng</th>
-                        <th>Lời nhắn</th>
-                        <th>Loại</th>
+                        <th>Sản phẩm</th>
+                        <th>Link design</th>
                         <th>Người xử lý</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -23,17 +24,20 @@
                         @foreach($data as $stt => $user)
                             <tr id="sid{{$user['id']}}">
                                 <td scope="row">{{$stt + 1}}</td>
+                                <td>{{$user['title']}}</td>
                                 <td style="">
                                     <div class="d-flex justify-content-left align-items-center">
                                         <div class="d-flex flex-column">
-                                            <span class="emp_name text-truncate font-weight-bold">{{$user['name']}}</span>
-                                            <small class="emp_post text-truncate text-muted">Email: <strong style="color: brown;">{{$user['email']}}</strong></small>
-                                            <small class="emp_post text-truncate text-muted">Số điện thoại: <strong style="color: brown;">{{$user['phone']}}</strong></small>
+                                            <span class="emp_name text-truncate font-weight-bold">{{$user['creator']['name'] ?? 'Không rõ'}}</span>
+                                            <small class="emp_post text-truncate text-muted">Email: <strong style="color: brown;">{{$user['creator']['email'] ?? 'Không rõ'}}</strong></small>
+                                            <small class="emp_post text-truncate text-muted">Số điện thoại: <strong style="color: brown;">{{$user['creator']['phone'] ?? 'Không rõ'}}</strong></small>
+                                            <small class="emp_post text-truncate text-muted">Địa chỉ: <strong style="color: brown;">{{$user['creator']['address'] ?? 'Không rõ'}}</strong></small>
                                         </div>
                                     </div>
                                 </td>
+                                <td>{{$user['product']['title'] ?? 'Không rõ'}}</td>
                                 <td style="">
-                                    <a class="badge badge-pill badge-light-primary item-detail" data-content="{{$user['content']}}"  data-toggle="modal" data-target="#detail">
+                                    <a class="badge badge-pill badge-light-primary item-detail" href="{{route('get.detail.wishlists.design', [$user['product']['slug'], 'code' => $user['title'], 'user_id' => $user['creator_id']])}}" target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50">
                                             <polyline points="21 8 21 21 3 21 3 8"></polyline>
                                             <rect x="1" y="3" width="22" height="5"></rect>
@@ -41,15 +45,14 @@
                                         </svg>Xem
                                     </a>
                                 </td>
-                                <td>{{$user['get_type']}}</td>
                                 <td style="">{{$user['handler']['name'] ?? ''}}</td>
                                 <td style="">
-                                    <a class="badge badge-pill {{$user['arr_active']['class']}}" href="{{route('admin.get.action.contact', ['active', $user['id']])}}">
-                                        {{$user['arr_active']['name']}}
+                                    <a class="badge badge-pill {{$user['arr_status']['class']}}" href="{{route('admin.get.action.transaction', ['active', $user['id']])}}">
+                                        {{$user['arr_status']['name']}}
                                     </a>
                                 </td>
                                 <td style="display: none;">
-                                    <a href="{{route('admin.get.action.contact', ['delete', $user['id']])}}" class="delete-record"  id="confirm-color" data-id="{{$user['id']}}">
+                                    <a href="{{route('admin.get.action.transaction', ['delete', $user['id']])}}" class="delete-record"  id="confirm-color" data-id="{{$user['id']}}">
                                         <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="24"
@@ -83,9 +86,10 @@
                     <tfoot>
                     <tr>
                         <th>STT</th>
+                        <th>Mã Oder</th>
                         <th>Khách hàng</th>
-                        <th>Lời nhắn</th>
-                        <th>Loại</th>
+                        <th>Sản phẩm</th>
+                        <th>Link design</th>
                         <th>Người xử lý</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -94,27 +98,6 @@
                 </table>
             </div>
 
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="detail" role="dialog" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title content__title">Lời nhắn</h5>
-                    {{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-                    {{--                    <span aria-hidden="true">&times;</span>--}}
-                    {{--                </button>--}}
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">×</button>
-                </div>
-                <div class="modal-body content__body" style=" word-break: break-all;">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary waves-effect" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
         </div>
     </div>
 @stop
@@ -126,8 +109,9 @@
                 responsive: true,
                 "columns": [
                     null,
+                    null,
                     { "width": "20%" },
-                    { "width": "10%" },
+                    null,
                     null,
                     null,
                     null,
@@ -136,21 +120,6 @@
             });
         });
 
-        $(document).ready(function() {
-            function detail(content) {
-                $(".content__body").html(content);
-            }
-            $('table tbody').on( 'click', 'li span a.item-detail', function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                detail($this.attr('data-content'));
-            });
-            $(".item-detail").click(function (event) {
-                event.preventDefault();
-                let $this = $(this);
-                detail($this.attr('data-content'));
-            });
-        });
 
         //delete
         $(document).ready(function() {
