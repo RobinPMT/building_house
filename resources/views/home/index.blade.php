@@ -5,8 +5,8 @@
             @if(isset($banners))
                 @foreach($banners as $key => $banner)
                     <div class="owl-itemct">
-                        <img class="bg-banner" src="{{pare_url_file($banner->avatar_not_main, 'banners')}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
-                        <img class="detail-banner" src="{{pare_url_file($banner->avatar_main, 'banners')}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
+                        <img class="bg-banner" src="{{imageUrl(pare_url_file($banner->avatar_not_main, 'banners'), 1920, 1080, 100, 1)}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
+                        <img class="detail-banner" src="{{imageUrl(pare_url_file($banner->avatar_main, 'banners'), 1920, 1080, 100, 1)}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
                         <div class="banner-descr">
                             <h2>{{$banner->title}}</h2>
                             <p>{{$banner->description}}</p>
@@ -39,7 +39,7 @@
                                             <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 1170, 335, 100, 1)}}"> <!-- 1170x335 -->
                                             <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 940, 270, 100, 1)}}"> <!-- 940x270 -->
                                             <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 970, 280, 100, 1)}}"> <!-- 970x280 -->
-                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="540x320" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
@@ -57,7 +57,7 @@
                                             <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 570, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 495  : 335) : 700 , 100, 1)}}"> <!-- 570x700 -->
                                             <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 455, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 265) : 560 , 100, 1)}}"> <!-- 455x560 -->
                                             <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 470, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 275) : 570 , 100, 1)}}"> <!-- 470x570 -->
-                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($housing_setting->avatar, 'settings')}}" alt="540x320" />
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="540x320" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
@@ -389,7 +389,7 @@
                                         <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 1000, 700, 100, 1)}}"> <!-- 1000x700 -->
                                         <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 680, 520, 100, 1)}}"> <!-- 680x520 -->
                                         <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 730, 510, 100, 1)}}"> <!-- 730x510 -->
-                                        <img src="{{pare_url_file($image, 'settings')}}" alt="590x410" />
+                                        <img src="{{imageUrl(pare_url_file($image, 'settings'), 590, 410, 100, 1)}}" alt="590x410" />
                                     </picture>
                                 @endforeach
                             @endif
