@@ -112,6 +112,9 @@ class AttributeService extends ApiService
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
             $this->uploadFile($model);
+            if (!isset($model->type)) {
+                throw new \Exception('Lỗi hệ thống!');
+            }
         });
 
         $this->on('saved', function ($model) use ($user) {

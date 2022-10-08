@@ -47,4 +47,10 @@ class Attribute extends Base
     {
         return $this->belongsTo(Room::class, 'room_id')->select('id', 'title');
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(Wishlist::class, 'wishlists_attributes', 'attribute_id', 'wishlist_id')->withPivot('wishlist_id', 'attribute_id', 'key_choose')
+            ->select('wishlist_id', 'attribute_id', 'key_choose');
+    }
 }

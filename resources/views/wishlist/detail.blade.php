@@ -28,7 +28,7 @@
         <div class="design-tab-link">
             <div class="container">
                 <ul class="clearfix">
-                    <li class="active"><a href="#tabid-1">Mẫu căn hộ</a></li>
+{{--                    <li class="active"><a href="#tabid-1">Mẫu căn hộ</a></li>--}}
                     @if(isset($rooms))
                         @foreach($rooms as $room)
                             <li><a href="#tabid{{$room->id}}">{{$room->title}}</a></li>
@@ -50,68 +50,32 @@
     <section class="section-page">
         <div class="container">
             <div class="row-design" id="tabid-1">
-                <h3 class="design-list-title">Chọn mẫu căn hộ</h3>
+                <h3 class="design-list-title">Mẫu căn hộ của bạn</h3>
                 <div class="product-filter clearfix">
-                    <div class="row row_5" style="padding: 0px 0px 20px 5px;">
-                        <form class="tree-most" id="form_filter" method="get" action="{{route('get.list.design')}}">
-                            <div class="product-filter-col" style="margin-bottom: 15px;float: left;padding-left: 5px;padding-right: 5px;width: 15%;">
-                            <select name="category_id" class="category_id" style="line-height: 30px;padding: 12px 20px;font-size: 16px;color: #014C47;border: 1px solid #888B96;width: 100%;">
-                                <option {{\Request::get('category_id') == "0" || !\Request::get('category_id') ? "selected=selected" : ""}} value="0" selected>Chọn loại nhà</option>
-                                @if(isset($categories))
-                                    @foreach($categories as $key => $category)
-                                        <option {{\Request::get('category_id') == $category->id ? "selected=selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
-                                    @endforeach
-                                @endif
-                                </select>
-                            </div>
-                        </form>
-                    </div>
                 </div>
                     <div class="design-list category-list">
                         <div class="row row_sm_10">
-                            @if(isset($products))
-                                @if($productSelect)
-                                    <div class="col-sm-4 col-xss-6 category-item active">
-                                        <a href="#" data-product-id="{{$productSelect->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
-                                            @if(isset($productSelect->arr_image) && $images = json_decode($productSelect->arr_image))
-                                                @foreach($images as $key => $image)
-                                                    @if($image->status)
-                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
-                                                    @endif
-                                                @endforeach
-                                            @else
-                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($productSelect->title, 'products')}}" alt="540x400" />
-                                            @endif
-                                            <strong>{{$productSelect->title}}</strong>
-                                        </a>
-                                    </div>
-                                @endif
-                                @foreach($products as $product)
-                                    <div class="col-sm-4 col-xss-6 category-item">
-                                        <a href="#" data-product-id="{{$product->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($product->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
-                                            @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
-                                                @foreach($images as $key => $image)
-                                                    @if($image->status)
-                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
-                                                    @endif
-                                                @endforeach
-                                            @else
-                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($product->title, 'products')}}" alt="540x400" />
-                                            @endif
-                                            <strong>{{$product->title}}</strong>
-                                        </a>
-                                    </div>
-                                @endforeach
+                            @if(isset( $wishList->product) && $productSelect = $wishList->product)
+                                <div class="col-sm-4 col-xss-6 category-item active">
+                                    <a href="#" data-product-id="{{$productSelect->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
+                                        @if(isset($productSelect->arr_image) && $images = json_decode($productSelect->arr_image))
+                                            @foreach($images as $key => $image)
+                                                @if($image->status)
+                                                    <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{pare_url_file($productSelect->title, 'products')}}" alt="540x400" />
+                                        @endif
+                                        <strong>{{$productSelect->title}}</strong>
+                                    </a>
+                                </div>
                             @endif
-                        </div>
-                        <div class="wrapper-pagination text-center" style="z-index: -1">
-                            @if(isset($products))
-                                {{ $products->appends(Request::all())->links('vendor.pagination.default') }}
-                            @endif
+
                         </div>
                     </div>
             </div>
-
+{{--            {{dd($wishList->attributes()->where('type' , \App\Models\Attribute::TYPE_STYLE)->get())}}--}}
             @if(isset($rooms))
                 @foreach($rooms as $key => $room)
                     <div class="row-design {{$key > 0 ? 'not-active' : ''}}" id="tabid{{$room->id}}">
@@ -127,10 +91,11 @@
                                                     <div class="col-md-6">
                                                         <h5 class="design-list-sstitle">Kiểu dáng</h5>
                                                         <div class="row row_5 properties-list" data-propid="1">
-                                                            @foreach($attributes as $attribute)
+                                                            <?php $attr_id = 0?>
+                                                            @foreach($attributes as $key => $attribute)
                                                                 @if($attribute->type == \App\Models\Attribute::TYPE_STYLE)
                                                                     <div class="col-lg-3 col-md-4 col-sm-2 col-xs-3 col-xss-4 col-vsm-6 properties-item">
-                                                                        <div class="properties-item-ctx" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-attribute="{{$attribute->arr_image}}" data-image="{{pare_url_file($attribute->avatar, 'attributes')}}">
+                                                                        <div class="properties-item-ctx {{(in_array($attribute->id, $wishList->attributes->pluck('attribute_id')->toArray()) && $attr_id = $attribute->id) ? 'active' : ''}}" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-attribute="{{$attribute->arr_image}}" data-image="{{pare_url_file($attribute->avatar, 'attributes')}}">
                                                                             <span style="background-image: url({{pare_url_file($attribute->avatar, 'attributes')}});">{{$attribute->title}}</span>
                                                                             <strong>{{$attribute->title}}</strong>
                                                                         </div>
@@ -142,7 +107,22 @@
                                                     <div class="col-md-6">
                                                         <h5 class="design-list-sstitle">Màu sắc</h5>
                                                         <div class="row row_5 properties-list miss_attributes color__attributes{{$child->id}}" data-propid="2">
-
+                                                            @if($item = $attributes->find($attr_id))
+                                                                @if(isset($item))
+                                                                        @if(isset($item->arr_image) && $arr_images = json_decode($item->arr_image))
+                                                                            @if(is_array($arr_images))
+                                                                                @foreach($arr_images as $arr_image)
+                                                                                    <div class="col-lg-3 col-md-4 col-sm-2 col-xs-3 col-xss-4 col-vsm-6 properties-items">
+                                                                                        <div class="properties-item-ctx {{(in_array($arr_image->key, json_decode(isset($item->wishlists[0]->key_choose) ? $item->wishlists[0]->key_choose : '')) ? 'active' : '')}}" data-image="{{pare_url_file($arr_image->image, 'attributes')}}" data-key="{{$arr_image->key}}" data-attribute_id="{{$item->id}}" data-room_id="{{$child->id}}">
+                                                                                            <span style="background-color: {{$arr_image->color}};">{{$arr_image->value}}</span>
+                                                                                            <strong>{{$arr_image->value}}</strong>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        @endif
+                                                                @endif
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,9 +132,10 @@
                                                         @if($attribute->type == \App\Models\Attribute::TYPE_SYSTEM)
                                                             <h5 class="other-design-title">{{$attribute->title}}</h5>
                                                             <div class="row">
+{{--                                                                {{dd(json_decode($attribute->wishlists[0]->key_choose))}}--}}
                                                                 @if(isset($attribute->arr_value) && $systems = json_decode($attribute->arr_value))
                                                                     @foreach($systems as $system)
-                                                                        <div class="col-xs-6 other-design-item" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-key="{{$system->key}}">
+                                                                        <div class="col-xs-6 other-design-item {{(in_array($system->key, json_decode(isset($attribute->wishlists[0]->key_choose) ? $attribute->wishlists[0]->key_choose : '[""]')) ? 'active' : '')}}" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-key="{{$system->key}}">
                                                                             <span>
                                                                                 {{$system->value}}
                                                                             </span>
@@ -181,8 +162,6 @@
 
 @section('script')
     <script defer>
-
-
         $(function () {
             // $('.room_number').change(function () {
             //     $("#form_filter").submit();
@@ -203,6 +182,8 @@
                 $('.larger-picture .main-picture').attr('src', image);
                 $('.larger-picture').removeClass('loading');
             }
+{{--            {{dd($wishList->attributes()->where('type' , \App\Models\Attribute::TYPE_STYLE)->get())}}--}}
+            //TODO: chồng mấy hình đã active lên
 
             $('.design-tab-link ul li a').click(function(e){
                 e.preventDefault();
@@ -394,6 +375,9 @@
 
                 console.log(result_arr_system, result_arr_system.length)
             });
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
             function store(data){
                 let url = '{{route('post.store.design')}}';
@@ -403,8 +387,8 @@
                     data: {data},
                     success: function (response) {
                         if(response.status) {
-                            setTimeout(function () {
-                                toastr['success'](
+                            setTimeout(async function () {
+                                await toastr['success'](
                                     response.message,
                                     '👋 Thành công!',
                                     {
@@ -413,7 +397,9 @@
                                         // rtl: isRtl
                                     }
                                 );
-                            }, 300);
+                                await sleep(2000);
+                                window.location.reload()
+                            }, 1000);
                         } else {
                             setTimeout(function () {
                                 toastr['error'](
@@ -435,10 +421,10 @@
                 data['arr_style'] = result_arr_style.filter(el => {
                     return el;
                 });
+                data['code'] = '{{$wishList->title}}';
                 data['type'] = 'wishlist';
                 data['arr_system'] = result_arr_system;
                 store(data);
-
             });
 
             $('#submit-data-transaction').click(function(e){
@@ -446,6 +432,7 @@
                 data['arr_style'] = result_arr_style.filter(el => {
                     return el;
                 });
+                data['code'] = '{{$wishList->title}}';
                 data['type'] = 'transaction';
                 data['arr_system'] = result_arr_system;
                 store(data);

@@ -47,7 +47,7 @@
                     </ul>
                 </nav>
                 <span class="mobile-hotline hidden-desktop clearfix">
-                    <a href="tel:086.7107.086"><i class="fa fa-phone"></i> Hotline: 086.7107.086</a>
+                    <a href="tel:{{isset($settings['phone']) ? $settings['phone'] : ''}}"><i class="fa fa-phone"></i> Hotline: {{isset($settings['phone']) ? $settings['phone'] : ''}}</a>
                     <strong><i class="fa fa-times"></i></strong>
                 </span>
             </div>
@@ -65,7 +65,7 @@
                         </span>
                         <ul>
                             <li><a href="{{route('get.change.profile.auth')}}">Quản lý tài khoản</a></li>
-                            <li><a href="#">Danh sách đã lưu</a></li>
+                            <li><a href="{{route('get.list.wishlist.product')}}">Danh sách đã lưu</a></li>
                             <li><a href="{{route('get.change.password.auth')}}">Đổi mật khẩu</a></li>
                             <li><a href="{{route('get.logout.user.auth')}}">Đăng xuất</a></li>
                         </ul>

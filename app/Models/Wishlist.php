@@ -57,6 +57,18 @@ class Wishlist extends Base
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class, 'wishlists_attributes', 'wishlist_id', 'attribute_id')->withPivot('wishlist_id', 'attribute_id', 'key_choose')
-            ->select('wishlist_id', 'attribute_id', 'key_choose');
+            ->select(
+                'wishlist_id',
+                'attribute_id',
+                'key_choose',
+                'title',
+                'type',
+                'room_id',
+                'avatar',
+                'active',
+                'author_id',
+                'arr_value',
+                'arr_image'
+            );
     }
 }

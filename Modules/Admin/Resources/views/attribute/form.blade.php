@@ -32,9 +32,9 @@
 
                 <div class="form-group">
                     <label class="form-label" for="attribute">Thuộc tính</label>
+                    <input type="text" name="type" value="{{\App\Models\Attribute::TYPE_SYSTEM}}" class="form-control" hidden/>
                     <hr />
                     <div data-repeater-list="data_new" class="data_new">
-                        <input type="text" name="type" value="{{\App\Models\Attribute::TYPE_SYSTEM}}" class="form-control" hidden/>
                         <div data-repeater-item>
                             <div class="row d-flex align-items-end">
                                 <div class="col-md-10 col-12">
