@@ -199,7 +199,7 @@ class DesignController extends FrontendController
 //                            });
                             $query->where([
                                 'creator_id' => $user_id,
-                                'type' => Wishlist::TYPE_WISHLIST,
+//                                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
                                 'title' => $request->code
                             ]);
                         }]);
@@ -210,7 +210,7 @@ class DesignController extends FrontendController
 
             $wishList = services()->wishlistService()->where([
                 'creator_id' => $user_id,
-                'type' => Wishlist::TYPE_WISHLIST,
+//                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
                 'title' => $request->code
             ])->whereHas('product', function ($query) use ($slug) {
                 $query->where('slug', $slug);
