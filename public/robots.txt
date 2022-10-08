@@ -1,2 +1,4 @@
-User-agent: *
-Disallow:
+User-Agent: *
+Disallow: /admin
+Allow: /
+Sitemap: https://demo.consolar.vn/sitemap.xml
