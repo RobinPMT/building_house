@@ -52,8 +52,8 @@ class CreateSiteMap extends Command
         $sitemap->add(route('get.register.auth'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.login.auth'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.logout.user.auth'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.forget.password.auth'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.reset.password.auth'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.forget.password.auth'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.reset.password.auth'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.change.password.auth'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.change.profile.auth'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.list.wishlist.product'), Carbon::now(), '1.0', 'daily');
