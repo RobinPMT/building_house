@@ -16,7 +16,7 @@ class Post extends Base
     protected $fillable = [
         'title', 'slug', 'description', 'content', 'active', 'hot',
         'author_id', 'description_seo', 'title_seo', 'avatar', 'view','created_at',
-        'updated_at', 'type'
+        'updated_at', 'type', 'keyword_seo'
     ];
 
     const TYPE_EVENT = 'tin-tuc-su-kien';

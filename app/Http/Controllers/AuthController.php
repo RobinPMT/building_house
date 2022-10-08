@@ -6,6 +6,7 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +21,12 @@ class AuthController extends FrontendController
         return services()->userService();
     }
 
-    public function getLogin()
+    public function getLogin(Request $request)
     {
+        SEOTools::setTitle('Đăng nhập');
+        SEOTools::setDescription('Đăng nhập với Consolar Housing');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         return view('auth.login');
     }
 
@@ -47,8 +52,12 @@ class AuthController extends FrontendController
         return redirect()->route('home')->with('success', 'Đăng xuất thành công');
     }
 
-    public function getRegister()
+    public function getRegister(Request $request)
     {
+        SEOTools::setTitle('Đăng kí');
+        SEOTools::setDescription('Đăng kí với Consolar Housing');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         return view('auth.register');
     }
 
@@ -100,8 +109,12 @@ class AuthController extends FrontendController
         return redirect()->route('home')->with('success', 'Tài khoản đã được kích hoạt...Xin chúc mừng!!!');
     }
 
-    public function getChangePassword()
+    public function getChangePassword(Request $request)
     {
+        SEOTools::setTitle('Đổi mật khẩu');
+        SEOTools::setDescription('Đổi mật khẩu với Consolar Housing');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         return view('auth.change_password');
     }
 
@@ -117,8 +130,12 @@ class AuthController extends FrontendController
         return redirect()->back()->with('danger', 'Mật khẩu cũ không đúng!');
     }
 
-    public function getProfile()
+    public function getProfile(Request $request)
     {
+        SEOTools::setTitle('Thông tin cá nhân');
+        SEOTools::setDescription('Thông tin cá nhân');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         return view('auth.profile');
     }
 

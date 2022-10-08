@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Library;
+use App\Models\Tag;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
 
 class LibraryController extends FrontendController
 {
@@ -14,13 +19,20 @@ class LibraryController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function libraryDetail($slug)
+    public function libraryDetail($slug, Request $request)
     {
         $library = services()->libraryService()->where([
             'active' => Library::ACTIVE,
             'freedom' => Library::NOT_FREEDOM,
             'slug' => $slug
-        ])->select('id', 'title', 'slug', 'avatar', 'arr_image')->first();
+        ])->first();
+
+        SEOTools::setTitle($library->title_seo);
+        SEOTools::setDescription($library->description_seo);
+        SEOMeta::addKeyword($library->keyword_seo);
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+        OpenGraph::addImage(env('APP_URL') . pare_url_file($library->avatar, 'libraries'), ['height' => 300, 'width' => 300]);
 
         $librariesRelated  = services()->libraryService()
             ->where([
@@ -37,8 +49,16 @@ class LibraryController extends FrontendController
         return view('library.detail', $viewData);
     }
 
-    public function listLibrary()
+    public function listLibrary(Request $request)
     {
+//        $tags = services()->tagService()->where('active', Tag::STATUS_PUBLIC)->inRandomOrder()->limit(10)->get();
+        SEOTools::setTitle('Thư viện ảnh');
+        SEOTools::setDescription('Nơi lưu giữ lại những khoảnh khắc của dự án');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+//        foreach ($tags as $tag) {
+//            SEOMeta::addKeyword([$tag->title]);
+//        }
         $libraries = services()->libraryService()->where([
             'active' => Library::ACTIVE,
             'freedom' => Library::NOT_FREEDOM

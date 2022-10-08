@@ -27,7 +27,7 @@ class AdminProjectController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot',
+            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo',
 //            '_relations' => 'creator',
 //            '_admin_fields' => 'name',
         ]);
@@ -42,7 +42,7 @@ class AdminProjectController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot',
+            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo',
 //            '_relations' => 'creator',
 //            '_tag_fields' => 'id'
         ]);

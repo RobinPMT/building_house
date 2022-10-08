@@ -15,7 +15,7 @@ class Library extends Base
 
     protected $fillable = [
         'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product','created_at',
-        'updated_at', 'slug', 'hot'
+        'updated_at', 'slug', 'hot', 'title_seo', 'description_seo', 'keyword_seo'
     ];
 
     const FREEDOM = 1;

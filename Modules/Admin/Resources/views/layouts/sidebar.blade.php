@@ -37,7 +37,8 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="{{ \Request::route()->getName() == 'admin.home' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.home')}}"><i data-feather="home"></i>
                     <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
-{{--                    <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>--}}
+{{--                    <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span>--}}
+                </a>
 {{--                <ul class="menu-content">--}}
 {{--                    <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Analytics</span></a>--}}
 {{--                    </li>--}}

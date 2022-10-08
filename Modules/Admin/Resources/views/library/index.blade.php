@@ -377,6 +377,9 @@
                             if(response.data.hot == '1'){
                                 $("form #checkbox_hot").attr('checked', true)
                             }
+                            $('#description_seo').val(response.data.description_seo);
+                            $('#title_seo').val(response.data.title_seo);
+                            $('#keyword_seo').val(response.data.keyword_seo);
                             $('#exampleModalLabel').text('Cập nhật');
                             $('#form-crud').attr('action', data_url_update);
                         }

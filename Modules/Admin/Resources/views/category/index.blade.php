@@ -203,6 +203,9 @@
                             $("#parent_id").val(response.data.parent_id).change();
                             $('#title').val(response.data.title);
                             $('#slug').val(response.data.slug);
+                            $('#description_seo').val(response.data.description_seo);
+                            $('#title_seo').val(response.data.title_seo);
+                            $('#keyword_seo').val(response.data.keyword_seo);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }

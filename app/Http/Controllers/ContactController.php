@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class ContactController extends FrontendController
@@ -19,8 +20,12 @@ class ContactController extends FrontendController
         return services()->contactService();
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        SEOTools::setTitle('Liên hệ');
+        SEOTools::setDescription('Liên hệ với chúng tôi để được hỗ trợ sớm nhất');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         return view('contact.index');
     }
 

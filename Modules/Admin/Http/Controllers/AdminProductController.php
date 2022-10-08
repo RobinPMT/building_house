@@ -32,7 +32,7 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
             '_admin_fields' => 'name',
@@ -58,7 +58,7 @@ class AdminProductController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
 //            '_admin_fields' => 'name'

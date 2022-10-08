@@ -29,7 +29,7 @@ class AdminPostController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids,type,type_name',
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids,type,type_name,keyword_seo',
             '_relations' => 'creator',
             '_admin_fields' => 'name',
 //            '_tag_fields' => 'id'
@@ -48,7 +48,7 @@ class AdminPostController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug,tag_ids,type,type_name',
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug,tag_ids,type,type_name,keyword_seo',
             '_relations' => 'creator',
 //            '_tag_fields' => 'id'
         ]);

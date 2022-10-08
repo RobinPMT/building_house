@@ -30,7 +30,8 @@ class LibraryService extends ApiService
     {
         return [
             'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom', 'arr_hot', 'hot',
-            'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url', 'slug'
+            'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url', 'slug','title_seo', 'description_seo', 'keyword_seo'
+
         ];
     }
 

@@ -30,7 +30,7 @@ class ProjectService extends ApiService
     {
         return [
             'title', 'slug', 'content', 'active', 'hot',
-            'author_id', 'avatar', 'arr_image', 'arr_active', 'arr_hot',
+            'author_id', 'avatar', 'arr_image', 'arr_active', 'arr_hot', 'title_seo', 'description_seo', 'keyword_seo'
         ];
     }
 

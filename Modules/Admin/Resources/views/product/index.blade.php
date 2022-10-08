@@ -467,6 +467,7 @@
                             $('#output_image').attr('src', response.data.avatar_design);
                             $('#output_image_extra').attr('src', response.data.image_back_ground_design);
                             $("textarea#description").html(response.data.description);
+                            $('#keyword_seo').val(response.data.keyword_seo);
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
                             // CKEDITOR.instances.content.setData( response.data.content);

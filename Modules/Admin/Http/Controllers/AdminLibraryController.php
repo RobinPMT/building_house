@@ -36,7 +36,7 @@ class AdminLibraryController extends WebController
             $view = 'admin::library.index';
         }
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url,arr_hot',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url,arr_hot,title_seo,description_seo,keyword_seo',
             '_relations' => 'creator',
             '_filter' => 'freedom:'."$value",
             '_admin_fields' => 'name',
@@ -48,7 +48,7 @@ class AdminLibraryController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active,arr_hot,hot',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active,arr_hot,hot,title_seo,description_seo,keyword_seo',
 //            '_relations' => 'creator'
         ]);
         return parent::__find($request, true);

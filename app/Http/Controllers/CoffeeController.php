@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Housing;
 use App\Models\Project;
 use App\Models\Setting;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
 
 class CoffeeController extends FrontendController
 {
@@ -16,8 +18,12 @@ class CoffeeController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        SEOTools::setTitle('Consolar Coffee & Food');
+        SEOTools::setDescription('Giải pháp kinh doanh với Consolar Coffee & Food!');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
         $projects = services()->projectService()->where([
             'active' => Project::ACTIVE,
             'hot' => Project::HOT

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\SettingKeyProduct;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class ProductController extends FrontendController
@@ -16,33 +20,31 @@ class ProductController extends FrontendController
         // TODO: Implement getService() method.
     }
 
-    public function productDetail($slug)
+    public function productDetail($slug, Request $request)
     {
         $product = services()->productService()->where([
             'active' => Product::ACTIVE,
             'slug' => $slug
         ])->with(['keys' => function ($query) {
             $query->where('active', SettingKeyProduct::ACTIVE);
-        }])->select(
-            'id',
-            'title',
-            'slug',
-            'active',
-            'hot',
-            'author_id',
-            'arr_image',
-            'price',
-            'avatar_design',
-            'description',
-            'longs',
-            'width',
-            'height',
-            'area',
-            'room_number',
-            'room_description',
-            'category_id'
-        )->first();
-//        dd($product);
+        }])->first();
+        SEOTools::setTitle($product->title_seo);
+        SEOTools::setDescription($product->description_seo);
+        SEOMeta::addKeyword($product->keyword_seo);
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+
+        if (isset($product->arr_image) && $images = json_decode($product->arr_image)) {
+            foreach ($images as $image) {
+                if ($image->status) {
+                    OpenGraph::addImage(env('APP_URL') . pare_url_file($image->image, 'products'), ['height' => 300, 'width' => 300]);
+                }
+            }
+        } else {
+            OpenGraph::addImage(env('APP_URL') . pare_url_file($product->avatar_design, 'products'), ['height' => 300, 'width' => 300]);
+        }
+
+
 
         $viewData = [
             'product' => $product,
@@ -52,6 +54,17 @@ class ProductController extends FrontendController
 
     public function listProduct(Request $request)
     {
+        SEOTools::setTitle('Sản phẩm');
+        SEOTools::setDescription('Khám phá ngôi nhà mơ ước của bạn!');
+        if ($request->category_id) {
+            $cate = Category::find($request->category_id);
+            SEOTools::setTitle($cate->title_seo);
+            SEOTools::setDescription($cate->description_seo);
+            SEOMeta::addKeyword($cate->keyword_seo);
+        }
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+
         $areas = [];
         if ($request->area) {
             $areas = explode('_', $request->area);

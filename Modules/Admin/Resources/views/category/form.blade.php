@@ -1,6 +1,6 @@
 
 <div class="modal modal-slide-in new-record-modal fade" id="modals-slide-in" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog sidebar-sm">
+    <div class="modal-dialog sidebar-lg">
         <form class="add-new-record modal-content pt-0" action="" id="form-crud" method="POST" role="form" enctype="multipart/form-data">
             @csrf
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
@@ -28,6 +28,18 @@
 {{--                    </select>--}}
 
 {{--                </div>--}}
+                <div class="form-group">
+                    <label class="form-label" for="title_seo">Meta Title</label>
+                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="description_seo">Meta Description</label>
+                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="keyword_seo">Keyword Seo</label>
+                    <input type="text" name="keyword_seo" id="keyword_seo" class="form-control dt-email" placeholder="Keyword Seo" aria-label="Keyword Seo" />
+                </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

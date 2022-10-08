@@ -4,9 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{asset('fe_template/favicon.ico')}}" rel="icon" type="image/x-icon" />
-    <title>Consolar housing</title>
-    <meta name="description" content="Consolar housing" />
-    <meta name="keywords" content="Consolar housing" />
+{{--    <title>Consolar housing</title>--}}
+{{--    <meta name="description" content="Consolar housing" />--}}
+{{--    <meta name="keywords" content="Consolar housing" />--}}
+    {!! SEO::generate() !!}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="{{asset('fe_template/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{{asset('admin_template/app-assets/vendors/css/extensions/toastr.min.css')}}">

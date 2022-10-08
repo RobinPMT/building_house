@@ -16,7 +16,7 @@ class Project extends Base
     protected $fillable = [
         'title', 'slug', 'content', 'active', 'hot',
         'author_id', 'avatar', 'arr_image','created_at',
-        'updated_at'
+        'updated_at', 'title_seo', 'description_seo', 'keyword_seo'
     ];
 
     const ACTIVE = 1;

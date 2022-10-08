@@ -6,6 +6,9 @@ use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\Room;
 use App\Models\Wishlist;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +54,18 @@ class DesignController extends FrontendController
                 $query->where('slug', '<>', $request->slug);
             }
         })->select('id', 'title', 'arr_image', 'image_back_ground_design')->orderByDesc('id')->paginate($item);
+
+        SEOTools::setTitle('Tự thiết kế');
+        SEOTools::setDescription('Thiết kế, khám phá ngôi nhà mơ ước của bạn!');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+        if ($item > 2) {
+            foreach ($products as $productSEO) {
+                SEOMeta::addKeyword([$productSEO->title]);
+            }
+        } else {
+            SEOMeta::addKeyword([$product->title]);
+        }
 //        dd($products, $product);
         $viewData = [
             'rooms' => $rooms,
@@ -170,8 +185,13 @@ class DesignController extends FrontendController
         return response()->json(['status' => false, 'message' => 'Đã xảy ra lỗi vui lòng thử lại!']);
     }
 
-    public function listWishlist()
+    public function listWishlist(Request $request)
     {
+        SEOTools::setTitle('Dự án của bạn');
+        SEOTools::setDescription('Thiết kế, khám phá ngôi nhà mơ ước của bạn!');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+
         $user_id = get_data_user('web');
         $wishLists = services()->wishlistService()->where([
             'creator_id' =>$user_id,
@@ -187,7 +207,7 @@ class DesignController extends FrontendController
     public function detailWishlist($slug, Request $request)
     {
         if (get_data_user('admins') > 0) {
-            $user_id = $request->user_id ?? null;
+            $user_id = $request->user_id ?? (trim(get_data_user('web') == '' ? null : get_data_user('web')));
         } else {
             $user_id = get_data_user('web');
         }
@@ -228,6 +248,11 @@ class DesignController extends FrontendController
             if (!$wishList) {
                 return redirect()->back();
             }
+            SEOTools::setTitle('Thiết kế '. $wishList->product->title);
+            SEOTools::setDescription('Thiết kế, khám phá ngôi nhà mơ ước của bạn!');
+            SEOTools::opengraph()->setUrl($request->url());
+            SEOTools::setCanonical($request->url());
+            OpenGraph::addImage(env('APP_URL') . pare_url_file($wishList->product->image_back_ground_design, 'products'), ['height' => 300, 'width' => 300]);
             $viewData = [
                 'wishList' => $wishList,
                 'rooms' => $rooms

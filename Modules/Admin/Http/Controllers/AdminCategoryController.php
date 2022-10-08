@@ -27,7 +27,7 @@ class AdminCategoryController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,arr_active',
+            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active',
             '_relations' => 'creator,parent',
             '_admin_fields' => 'name',
             '_noPagination' => 1,
@@ -46,7 +46,7 @@ class AdminCategoryController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,arr_active',
+            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active',
             '_relations' => 'creator'
         ]);
         return parent::__find($request, true);

@@ -11,7 +11,7 @@
         "php": "^7.3|^8.0",
         "ext-gd": "*",
         "ext-json": "*",
-        "artesaos/seotools": "^0.22.0",
+        "artesaos/seotools": "^1.0",
         "aws/aws-sdk-php": "^3.222",
         "biscolab/laravel-recaptcha": "^5.4",
         "cviebrock/eloquent-sluggable": "^8.0",

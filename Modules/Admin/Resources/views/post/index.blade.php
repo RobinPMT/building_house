@@ -232,6 +232,7 @@
                             CKEDITOR.instances.content.setData( response.data.content);
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);
+                            $('#keyword_seo').val(response.data.keyword_seo);
                             $('#output_image').attr('src', response.data.avatar);
                             // $('#input_image').val(response.data.avatar);
                             if(response.data.active == '1'){

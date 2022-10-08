@@ -52,6 +52,18 @@
 {{--                    <input type="file" class="form-control" name="photos[]" multiple />--}}
                 </div>
                 <div class="form-group">
+                    <label class="form-label" for="title_seo">Meta Title</label>
+                    <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="description_seo">Meta Description</label>
+                    <input type="text" name="description_seo" id="description_seo" class="form-control dt-email" placeholder="Meta Description" aria-label="Meta Description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="keyword_seo">Keyword Seo</label>
+                    <input type="text" name="keyword_seo" id="keyword_seo" class="form-control dt-email" placeholder="Keyword Seo" aria-label="Keyword Seo" />
+                </div>
+                <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">
                         <label class="custom-control-label" for="checkbox_active">Public</label>

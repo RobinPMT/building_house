@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\SettingKeyProduct;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class HomeController extends FrontendController
@@ -21,6 +23,18 @@ class HomeController extends FrontendController
 
     public function index(Request $request)
     {
+        $categories = Category::where([
+            'active' => Category::STATUS_PUBLIC
+        ])->get();
+
+        SEOTools::setTitle('Trang chủ');
+        SEOTools::setDescription('Khám phá ngôi nhà mơ ước của bạn!');
+        SEOTools::opengraph()->setUrl($request->url());
+        SEOTools::setCanonical($request->url());
+        foreach ($categories as $category) {
+            SEOMeta::addKeyword([$category->title]);
+        }
+
         $housing_settings = services()->settingService()->where([
             'active' => Setting::ACTIVE,
             'type' => Setting::TYPE_HOME,

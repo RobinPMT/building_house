@@ -31,7 +31,7 @@ class PostService extends ApiService
         return [
             'title', 'slug', 'description', 'content', 'active', 'hot',
             'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
-            'arr_active', 'arr_hot', 'slug', 'tag_ids', 'type', 'type_name'
+            'arr_active', 'arr_hot', 'slug', 'tag_ids', 'type', 'type_name', 'keyword_seo'
         ];
     }
 
