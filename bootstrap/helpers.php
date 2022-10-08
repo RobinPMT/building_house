@@ -141,9 +141,9 @@ if (!function_exists('imageUrl')) {
     function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
     {
         if (!$width && !$height) {
-            $url = env('IMAGE_URL') . $path;
+            $url = env('APP_URL') . $path;
         } else {
-            $url = url('/') . '/timthumb.php?src=' . env('IMAGE_URL') . $path;
+            $url = url('/') . '/timthumb.php?src=' . env('APP_URL') . $path;
 
             if (isset($width)) {
                 $url .= '&w=' . $width;
