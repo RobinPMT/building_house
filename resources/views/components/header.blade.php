@@ -1,7 +1,7 @@
 <header>
     <div class="header-content">
         <div class="container">
-            <a href="index.html" class="header-logo"><img src="{{asset('fe_template/images/logo.png')}}" height="50" alt="logo" /></a>
+            <a href="{{route('home')}}" class="header-logo"><img src="{{asset('fe_template/images/logo.png')}}" height="50" alt="logo" /></a>
             <div class="header-center-ovelay hidden-desktop"></div>
             <div class="header-center">
                 <a href="#" class="mobile-logo hidden-desktop"><img src="{{asset('fe_template/images/logo.png')}}" height="50" alt="logo" /></a>
