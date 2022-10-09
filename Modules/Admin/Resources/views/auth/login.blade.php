@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
+    <title>Login Page - {{env('APP_NAME')}}</title>
     <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin_template/app-assets/images/ico/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
@@ -55,7 +55,7 @@
         <div class="content-body">
             <div class="auth-wrapper auth-v2">
                 <div class="auth-inner row m-0">
-                    <!-- Brand logo--><a class="brand-logo" href="javascript:void(0);">
+                    <!-- Brand logo--><a class="brand-logo" href="{{env('APP_URL')}}">
                         <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
                             <defs>
                                 <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
@@ -79,7 +79,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <h2 class="brand-text text-primary ml-1">Vuexy</h2>
+                        <h2 class="brand-text text-primary ml-1">{{env('APP_NAME')}}</h2>
                     </a>
                     <!-- /Brand logo-->
                     <!-- Left Text-->
@@ -90,8 +90,8 @@
                     <!-- Login-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h2 class="card-title font-weight-bold mb-1">Welcome to Vuexy! 👋</h2>
-                            <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                            <h2 class="card-title font-weight-bold mb-1">Chào mừng đến {{env('APP_NAME')}}! 👋</h2>
+                            <p class="card-text mb-2">Vui lòng đăng nhập vào tài khoản của bạn và bắt đầu cuộc phiêu lưu</p>
                             <form class="auth-login-form mt-2" action="" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
@@ -113,7 +113,7 @@
 {{--                                        <label class="custom-control-label" for="remember-me"> Remember Me</label>--}}
 {{--                                    </div>--}}
 {{--                                </div>--}}
-                                <button class="btn btn-primary btn-block" tabindex="4" type="submit">Sign in</button>
+                                <button class="btn btn-primary btn-block" tabindex="4" type="submit">Đăng nhập</button>
                             </form>
                         </div>
                     </div>
