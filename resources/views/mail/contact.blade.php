@@ -1,17 +1,18 @@
-@extends('mail.master')
+@extends('mail.master_contact')
 
 @section('title')
-    Bạn nhận được lời mời dạy thêm lớp
+    Khách hàng cần liên hệ
 @endsection
 
 @section('content1')
-    <p style="Margin: 0;line-height: 150%;"><br></p>
-{{--    <p style="Margin: 0;line-height: 150%;">Giáo viên <strong>{{$teacher_name}}</strong> vừa mời bạn dạy cùng lớp <strong>{{$class_name}}</strong>. Vui lòng nhấn vào <strong> link hot </strong> ở dưới để tham gia lớp học.<br>Không chia sẻ link mời của bạn với bất kỳ ai.</p>--}}
+    <p style="Margin: 0;line-height: 150%;">Khách hàng: <strong>{{ $name }}</strong> với email: <strong><a target="_blank" href="mailto:{{ $email }}" style="text-decoration: underline;">{{ $email }}</a></strong>cần được liên hệ tư vấn về <strong>{{$type}}</strong>. Vui lòng liên hệ với khách hàng qua số điện thoại: <strong><a target="_blank" href="tel:{{ $phone }}" style="text-decoration: underline;">{{ $phone }}</a></strong></p>
+    <p style="Margin: 0;line-height: 150%;">Lời nhắn:{{$content}}<br></p>
 @endsection
 
-@section('content_important')
-{{--    <a href="{{$link}}"> {{$link}} </a>--}}
-@endsection
+{{--@section('content_important')--}}
+
+
+{{--@endsection--}}
 
 @section('content2')
     <p style="Margin: 0;line-height: 150%; text-align: center;"><em>Đây là một tin nhắn tự động, vui lòng không trả lời.</em></p>

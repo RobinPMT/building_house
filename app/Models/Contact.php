@@ -43,4 +43,9 @@ class Contact extends Base
     {
         return $this->belongsTo(Admin::class, 'author_id');
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

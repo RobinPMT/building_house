@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Jobs\ContactSendMailJob;
 use App\Models\Admin;
 use App\Models\Contact;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
 class ContactService extends ApiService
@@ -11,7 +13,7 @@ class ContactService extends ApiService
     protected $model = Contact::class;
 
     protected $relations = [
-        'handler'
+        'handler', 'product'
     ];
 
     protected $fieldsName = '_contact_fields';
@@ -61,6 +63,13 @@ class ContactService extends ApiService
         }];
     }
 
+    public function includeProduct()
+    {
+        return [services()->productService(), 'item', function (Contact $model) {
+            return $model->product;
+        }];
+    }
+
     protected function newQuery()
     {
         $query = parent::newQuery();
@@ -86,6 +95,13 @@ class ContactService extends ApiService
 
         $this->on('created', function ($model) use ($user) {
             //TODO: gửi mail
+            $email = services()->settingService()->where(['key' => 'email', 'type' => Setting::TYPE_SETTING])->first()->value;
+            if (!isset($email)) {
+                $email = env('MAIL_RECEIVE');
+            }
+            if ($email) {
+                dispatch(new ContactSendMailJob($model, $email));
+            }
         });
     }
 }

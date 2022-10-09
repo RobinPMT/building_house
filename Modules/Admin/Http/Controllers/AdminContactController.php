@@ -30,8 +30,9 @@ class AdminContactController extends WebController
     {
         $request->merge([
             '_contact_fields' => 'phone,active,name,email,arr_active,type,product_id,get_type,content',
-            '_relations' => 'handler',
-            '_admin_fields' => 'name'
+            '_relations' => 'handler,product',
+            '_admin_fields' => 'name',
+            '_product_fields' => 'title',
         ]);
         return parent::__list($request, 'admin::contact.index');
 //        return view('admin::category.index', $viewData);

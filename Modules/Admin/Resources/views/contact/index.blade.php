@@ -42,6 +42,7 @@
                                             <span class="emp_name text-truncate font-weight-bold">{{$user['name']}}</span>
                                             <small class="emp_post text-truncate text-muted">Email: <strong style="color: brown;">{{$user['email']}}</strong></small>
                                             <small class="emp_post text-truncate text-muted">Số điện thoại: <strong style="color: brown;">{{$user['phone']}}</strong></small>
+                                            <small class="emp_post text-truncate text-muted">Ngày tạo: <strong style="color: brown;">{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user['created_at'])->format('H:i:s d/m/Y')}}</strong></small>
                                         </div>
                                     </div>
                                 </td>
@@ -54,7 +55,17 @@
                                         </svg>Xem
                                     </a>
                                 </td>
-                                <td>{{$user['get_type']}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-left align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <span class="emp_name text-truncate font-weight-bold">{{$user['get_type']}}</span>
+                                            @if($user['type'] === \App\Models\Contact::TYPE_PRODUCT)
+                                                <small class="emp_post text-truncate text-muted">Sản phẩm: <strong style="color: brown;">{{$user['product']['title'] ?? 'Không rõ'}}</strong></small>
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </td>
                                 <td style="">{{$user['handler']['name'] ?? ''}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$user['arr_active']['class']}}" href="{{route('admin.get.action.contact', ['active', $user['id']])}}">
