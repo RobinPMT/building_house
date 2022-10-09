@@ -72,13 +72,14 @@
                     </li>
                 @else
                     <li>
-                    <span class="clearfix" style="margin-top: 15px">
-                        <strong>
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <a href="{{route('get.register.auth')}}" style="padding: 5px">Đăng kí</a>
-                            <a href="{{route('get.login.auth')}}">Đăng nhập</a>
-                        </strong>
+                    <span class="clearfix">
+                        <i class="fa fa-user-o fa-2x" aria-hidden="true" style="margin-top: 10px"></i>
+                        <i class="fa fa-caret-down"></i>
                     </span>
+                        <ul>
+                            <li><a href="{{route('get.register.auth')}}">Đăng kí</a></li>
+                            <li><a href="{{route('get.login.auth')}}">Đăng nhập</a></li>
+                        </ul>
                     </li>
                 @endif
             </ul>
