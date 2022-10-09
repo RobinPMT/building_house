@@ -240,6 +240,6 @@
 
 
 <div style="padding-top:20px">
-    <a href="#" class="button-link bg-green">Tự thiết kế</a>
+    <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" class="button-link bg-green">Tự thiết kế</a>
     <a href="{{route('get.list.product')}}" class="button-link">Tiếp tục khám phá</a>
 </div>

@@ -28,7 +28,7 @@
                     <li><a href="{{route('home')}}">Trang chủ</a></li>
                     <li><a href="{{route('get.list.product')}}">Sản phẩm</a></li>
                     <li><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Consolar Housing</a></li>
-                    <li><a href="#">Consolar Decor</a></li>
+                    <li><a href="{{route('get.list.design')}}">Tự thiết kế</a></li>
                     <li><a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a></li>
 {{--                    <li><a href="#">Trở thành đại lý</a></li>--}}
                     <li><a href="{{route('get.list.project')}}">Dự án</a></li>

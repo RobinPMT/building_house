@@ -88,13 +88,15 @@
             </button>
             <div class="search-header">
                 <span><i class="fa fa-search"></i></span>
-                <div class="search-form">
-                    <input type="text" name="keyword" placeholder="Nhập từ khóa" value="" required />
-                    <div class="clearfix">
-                        <button type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
-                        <button type="button"><i class="fa fa-times"></i> Đóng lại</button>
+                <form action="{{route('get.list.product')}}"  method="get">
+                    <div class="search-form">
+                        <input type="text" name="keyword" placeholder="Nhập từ khóa" value="" required />
+                        <div class="clearfix">
+                            <button type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
+                            <button type="button"><i class="fa fa-times"></i> Đóng lại</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

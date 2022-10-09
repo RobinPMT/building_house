@@ -72,6 +72,10 @@ class ProductController extends FrontendController
         $products = services()->productService()->where([
             'active' => Product::ACTIVE
         ])->where(function ($query) use ($request, $areas) {
+            if (isset($request->keyword)) {
+                $query->where('title', 'like', "%$request->keyword%");
+            }
+
             if (isset($request->category_id) && $request->category_id > 0) {
                 $query->where('category_id', $request->category_id);
             }

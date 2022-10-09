@@ -275,7 +275,7 @@
                                                             <div class="col-sm-5">
                                                                 <div class="product-tech-img"><img src="{{pare_url_file($product->avatar_design, 'products')}}" alt="" /></div>
                                                                 <div class="popup-action">
-                                                                    <a href="#" class="button-link bg-green">Tự thiết kế</a>
+                                                                    <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" class="button-link bg-green">Tự thiết kế</a>
 
                                                                 </div>
                                                             </div>
