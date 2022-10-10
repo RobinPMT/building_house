@@ -117,6 +117,8 @@ class LibraryService extends ApiService
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
             $model->hot = $model->hot == 'on' ? true : false;
+            $model->title_seo = isset($model->title_seo) ? $model->title_seo : $model->title;
+            $model->description_seo = isset($model->description_seo) ? $model->description_seo : $model->title;
             if (isset($model->title)) {
                 $model->freedom = false;
             }

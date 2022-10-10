@@ -24,8 +24,8 @@
                 <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
-                    <th>Ảnh chính</th>
-                    <th>Ảnh phụ</th>
+                    <th>Ảnh nội dung</th>
+                    <th>Ảnh background</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -83,8 +83,8 @@
                 <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
-                    <th>Ảnh chính</th>
-                    <th>Ảnh phụ</th>
+                    <th>Ảnh nội dung</th>
+                    <th>Ảnh background</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>

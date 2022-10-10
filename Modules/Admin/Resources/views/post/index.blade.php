@@ -306,9 +306,9 @@
                         title: {
                             required: true,
                         },
-                        type: {
-                            required: true,
-                        },
+                        // type: {
+                        //     required: true,
+                        // },
                         slug: {
                             required: true,
                         },
@@ -317,9 +317,9 @@
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
-                        type: {
-                            required: "Vui lòng không bỏ trống!"
-                        },
+                        // type: {
+                        //     required: "Vui lòng không bỏ trống!"
+                        // },
                         slug: {
                             required: "Vui lòng không bỏ trống!"
                         },

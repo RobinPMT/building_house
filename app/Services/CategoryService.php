@@ -98,6 +98,8 @@ class CategoryService extends ApiService
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
+            $model->title_seo = isset($model->title_seo) ? $model->title_seo : $model->title;
+            $model->description_seo = isset($model->description_seo) ? $model->description_seo : $model->title;
             if ($model->getKey() == $model->parent_id) {
                 $model->parent_id = null;
             }

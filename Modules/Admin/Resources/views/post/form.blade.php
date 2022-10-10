@@ -17,27 +17,27 @@
                     <label for="slug">Slug <span style="color: red">*</span></label>
                     <input name="slug" type="text" class="form-control" id="slug" placeholder="Slug">
                 </div>
-                <div class="form-group">
-                    <label for="type">Chọn mục tin tức <span style="color: red">*</span></label>
+{{--                <div class="form-group">--}}
+{{--                    <label for="type">Chọn mục tin tức <span style="color: red">*</span></label>--}}
 
-                    <select name="type" id="type" class="select2 form-control form-control-lg select-single">
-                        <option value="" selected>Chọn mục tin tức</option>
-                        <option value="tin-tuc">Tin tức</option>
-                        <option value="tin-tuc-su-kien">Tin tức - Sự kiện</option>
-                        <option value="tin-tai-chinh">Tin tài chính</option>
-                        <option value="tin-khuyen-mai">Tin khuyến mãi</option>
-                    </select>
+{{--                    <select name="type" id="type" class="select2 form-control form-control-lg select-single">--}}
+{{--                        <option value="" selected>Chọn mục tin tức</option>--}}
+{{--                        <option value="tin-tuc">Tin tức</option>--}}
+{{--                        <option value="tin-tuc-su-kien">Tin tức - Sự kiện</option>--}}
+{{--                        <option value="tin-tai-chinh">Tin tài chính</option>--}}
+{{--                        <option value="tin-khuyen-mai">Tin khuyến mãi</option>--}}
+{{--                    </select>--}}
 
-                </div>
+{{--                </div>--}}
                 <div class="form-group">
                     <label class="form-label" for="description">Mô tả</label>
-                    <input type="text" name="description" id="description" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả" />
+                    <textarea type="text" name="description" id="description" rows="3" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
                 </div>
                 <div class="form-group">
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
-                    <label for="input_image">Ảnh</label>
+                    <label for="input_image">Ảnh <strong>(Kích thước: 1350x530 pixel)</strong></label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="input_image" name="avatar">
                         <label class="custom-file-label" for="input_image">Chọn ảnh</label>

@@ -11,8 +11,8 @@
     <meta name="author" content="PIXINVENT">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard - {{env('APP_NAME')}}</title>
-    <link rel="apple-touch-icon" href="{{asset('admin_template/app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="icon" type="image/x-icon" href="{{asset('admin_template/app-assets/images/ico/favicon.ico')}}">
+    <link rel="apple-touch-icon" href="{{asset('fe_template/favicon.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('fe_template/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->

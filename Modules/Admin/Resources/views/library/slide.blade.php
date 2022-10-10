@@ -19,7 +19,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Upload Slide ảnh</h4>
+                        <h4 class="card-title">Upload Slide ảnh <strong>(Kích thước: 1440x710 pixel)</strong></h4>
                     </div>
                     <div class="card-body">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">

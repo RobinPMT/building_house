@@ -79,7 +79,7 @@
                                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_image">Ảnh bản vẽ</label>
+                                    <label for="input_image">Ảnh bản vẽ <strong>(Kích thước: 540x320 pixel)</strong></label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
                                         <label class="custom-file-label" for="input_image">Chọn ảnh</label>
@@ -91,7 +91,7 @@
                                     <img id="output_image_extra" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_image_extra">Ảnh tự thiết kế</label>
+                                    <label for="input_image_extra">Ảnh tự thiết kế <strong>(Kích thước: 1170x550 pixel)</strong></label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="input_image_extra" name="image_back_ground_design">
                                         <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Upload ảnh cho thư viện</label>
+                    <label>Upload ảnh cho thư viện <strong>(Kích thước: 930x845 pixel)</strong></label>
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="form-group">
                         <input type="file" name="images[]" id="file-1" multiple class="filename"
