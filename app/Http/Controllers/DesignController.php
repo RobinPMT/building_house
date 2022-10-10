@@ -130,26 +130,39 @@ class DesignController extends FrontendController
                             foreach ($newSystem as $key => $item) {
                                 $syncData[$key] = ['key_choose' => json_encode($item)];
                             }
-                            $changes = $wishlist->attributes()->whereIn('attribute_id', array_keys($syncData))->get();
-//                            dd($changes);
+                            $attributes = $wishlist->attributes;
+                            $room_ids =  services()->attributeService()->whereIn('id', array_keys($newStyle))->pluck('room_id')->toArray();
                             $change_ids = [];
-                            foreach ($changes as $change) {
-                                if ($change->type == Attribute::TYPE_SYSTEM && in_array($change->attribute_id, array_keys($syncData))) {
-                                    $arr1 = json_decode($change->key_choose);
-                                    $arr2 = json_decode($syncData[$change->attribute_id]['key_choose']);
-                                    $sames = array_intersect($arr1, $arr2);
-                                    $_arr = array_unique(array_merge_recursive($arr1, $arr2));
-                                    foreach ($_arr as $key => $item) {
-                                        if (in_array($item, $sames)) {
-                                            unset($_arr[$key]);
+                            foreach ($attributes as $attribute) {
+                                if ($attribute->type == Attribute::TYPE_SYSTEM) {
+                                    if (in_array($attribute->attribute_id, array_keys($syncData))) {
+                                        $arr1 = json_decode($attribute->key_choose);
+                                        $arr2 = json_decode($syncData[$attribute->attribute_id]['key_choose']);
+                                        $sames = array_intersect($arr1, $arr2);
+                                        $_arr = array_unique(array_merge_recursive($arr1, $arr2));
+                                        foreach ($_arr as $key => $item) {
+                                            if (in_array($item, $sames)) {
+                                                unset($_arr[$key]);
+                                            }
+                                        }
+                                        $syncData[$attribute->attribute_id]['key_choose'] = json_encode(array_values($_arr));
+                                    }
+                                } else {
+                                    if (in_array($attribute->room_id, $room_ids)) {
+                                        if (!in_array($attribute->attribute_id, array_keys($newStyle)) && count($newStyle) > 0) {
+                                            $change_ids [] = $attribute->attribute_id;
+                                        } else {
+                                            $syncData[$attribute->attribute_id] = $newStyle[$attribute->attribute_id];
+                                            $change_ids [] = $attribute->attribute_id;
                                         }
                                     }
-                                    $syncData[$change->attribute_id]['key_choose'] = json_encode(array_values($_arr));
                                 }
-                                $change_ids [] = $change->id;
                             }
                             DB::table('wishlists_attributes')->where('wishlist_id', $wishlist->id)->whereIn('attribute_id', $change_ids)->delete();
                             //TODO: fix lại lỗi update system giữ lại value trong mảng trước khi xóa còn style thì ok r
+//                            foreach ($newStyle as $key => $item) {
+//                                $syncData[$key] = $item;
+//                            }
                             $wishlist->attributes()->syncWithoutDetaching($syncData);
                         }
                     }

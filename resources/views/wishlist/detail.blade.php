@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-push-8">
                         <div class="design-short-inf">
-                            @if(get_data_user('admins') < 1)
+                            @if(get_data_user('web') || get_data_user('admins') < 1)
                                 <h2>Thiết kế nội thất & tiện nghi theo ý thích của bạn </h2>
                                 <div class="design-short-inf-button clearfix">
                                     <a href="#" data-toggle="modal" data-target="#contact-wrapper" id="submit-data-transaction">
