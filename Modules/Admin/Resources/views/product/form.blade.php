@@ -142,15 +142,19 @@
                     {{--                    <input type="file" class="form-control" name="photos[]" multiple />--}}
                 </div>
                 <div class="content-element">
-
-                    @if(isset($settingkeys))
-                        @foreach($settingkeys as $settingkey)
-                            @if(isset($settingkey['html']))
-                                {!! $settingkey['html'] !!}
-                            @endif
-                        @endforeach
-                    @endif
-
+                    <strong>
+                        <label class="form-label" for="">Các Thuộc tính của sản phẩm</label>
+                    </strong>
+                    <hr/>
+                        @if(isset($settingkeys))
+                            @foreach($settingkeys as $settingkey)
+                                @if(isset($settingkey['html']))
+                                    {!! $settingkey['html'] !!}
+                                @endif
+                            @endforeach
+                        @endif
+                    <hr/>
+                    <br>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="title_seo">Meta Title</label>

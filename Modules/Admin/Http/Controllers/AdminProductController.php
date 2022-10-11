@@ -40,7 +40,7 @@ class AdminProductController extends WebController
 //            '_setting_key_product_fields' => 'name,key,value,product_id',
 //            '_filter' => 'user_not_myself:1;'
         ]);
-        $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->select('name', 'key', 'html')->get()->toArray();
+        $settingkeys = services()->settingKeyProductService()->where('active', SettingKeyProduct::ACTIVE)->orderByDesc('tag_type')->select('name', 'key', 'html')->get()->toArray();
         $categories = services()->categoryService()->where('active', Category::STATUS_PUBLIC)->select('title', 'id', 'parent_id')->get()->toArray();
         $data = [
             'settingkeys' => $settingkeys,
