@@ -30,7 +30,7 @@ class AdminCategoryController extends WebController
             '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active,order',
             '_relations' => 'creator,parent',
             '_admin_fields' => 'name',
-            '_noPagination' => 1,
+//            '_noPagination' => 1,
             '_orderBy' => 'order'
 //            '_filter' => 'user_not_myself:1;'
         ]);
