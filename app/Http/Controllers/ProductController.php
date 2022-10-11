@@ -94,7 +94,7 @@ class ProductController extends FrontendController
                 }
             }
         })
-        ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area', 'category_id')->orderByDesc('id')->paginate(12);
+        ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area', 'category_id')->orderBy('order')->paginate(12);
         $viewData = [
             'products' => $products
         ];
@@ -117,7 +117,7 @@ class ProductController extends FrontendController
             'active' => Product::ACTIVE
         ])->with(['keys' => function ($query) {
             $query->where('active', SettingKeyProduct::ACTIVE);
-        }])->whereKeyNot($id)->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderByDesc('id')->paginate(6);
+        }])->whereKeyNot($id)->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area')->orderBy('order')->paginate(6);
 //        $viewData = [
 //            'productsAjax' => $productsAjax
 //        ];

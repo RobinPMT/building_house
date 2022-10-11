@@ -27,7 +27,7 @@ class AdminSettingController extends WebController
         $request->merge([
             '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active,arr_avatar,order',
             '_noPagination' => 1,
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
         ]);
         return parent::__list($request, 'admin::setting.index');
     }

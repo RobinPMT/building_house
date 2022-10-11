@@ -28,7 +28,7 @@ class AdminHousingController extends WebController
         $request->merge([
             '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active,order',
             '_noPagination' => 1,
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
         ]);
         $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first()->toArray();
         $settingHousing = services()->settingService()->where(['key' =>'coffee_housing', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value', 'avatar_not_main')->first()->toArray();

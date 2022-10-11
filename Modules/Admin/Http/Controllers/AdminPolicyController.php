@@ -31,6 +31,7 @@ class AdminPolicyController extends WebController
             '_policy_fields' => 'title,slug,active,description_seo,title_seo,keyword_seo,arr_active,content,order',
             '_admin_fields' => 'name',
             '_noPagination' => 1,
+            '_orderBy' => 'order'
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::policy.index');

@@ -62,11 +62,11 @@ class LibraryController extends FrontendController
         $libraries = services()->libraryService()->where([
             'active' => Library::ACTIVE,
             'freedom' => Library::NOT_FREEDOM
-        ])->select('id', 'title', 'slug', 'avatar')->orderByDesc('id')->paginate(6);
+        ])->select('id', 'title', 'slug', 'avatar')->orderBy('order')->paginate(6);
         $slides = services()->libraryService()->where([
             'active' => Library::ACTIVE,
             'freedom' => Library::FREEDOM
-        ])->select('id', 'avatar')->orderByDesc('id')->get();
+        ])->select('id', 'avatar')->orderBy('order')->get();
         $viewData = [
             'libraries' => $libraries,
             'slides' => $slides

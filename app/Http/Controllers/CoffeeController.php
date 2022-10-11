@@ -27,10 +27,10 @@ class CoffeeController extends FrontendController
         $projects = services()->projectService()->where([
             'active' => Project::ACTIVE,
             'hot' => Project::HOT
-        ])->select('id', 'title', 'slug', 'avatar')->limit(5)->get();
+        ])->select('id', 'title', 'slug', 'avatar')->limit(5)->orderBy('order')->get();
         $housings = services()->housingService()->where([
             'active' => Housing::STATUS_PUBLIC,
-        ])->select('id', 'title', 'content', 'avatar_main')->orderBy('title')->get();
+        ])->select('id', 'title', 'content', 'avatar_main')->orderBy('order')->get();
         $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first();
         $settingHousing = services()->settingService()->where(['key' =>'coffee_housing', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value', 'avatar_not_main')->first();
         $viewData = [

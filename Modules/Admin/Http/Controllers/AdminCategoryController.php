@@ -31,7 +31,7 @@ class AdminCategoryController extends WebController
             '_relations' => 'creator,parent',
             '_admin_fields' => 'name',
             '_noPagination' => 1,
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::category.index');

@@ -32,7 +32,7 @@ class AdminPostController extends WebController
             '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids,type,type_name,keyword_seo,order',
             '_relations' => 'creator',
             '_admin_fields' => 'name',
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
 //            '_tag_fields' => 'id'
 //            '_filter' => 'user_not_myself:1;'
         ]);

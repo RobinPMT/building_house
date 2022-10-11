@@ -41,7 +41,7 @@ class AdminLibraryController extends WebController
             '_filter' => 'freedom:'."$value",
             '_admin_fields' => 'name',
             '_noPagination' => $value,
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
         ]);
         return parent::__list($request, $view);
     }

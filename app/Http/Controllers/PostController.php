@@ -78,7 +78,7 @@ class PostController extends FrontendController
         $posts = services()->postService()->where([
             'active' => Post::ACTIVE,
             'type' => $type
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderByDesc('id')->paginate(12);
+        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderBy('order')->paginate(12);
         $viewData = [
             'posts' => $posts
         ];

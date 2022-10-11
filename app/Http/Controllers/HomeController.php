@@ -25,7 +25,7 @@ class HomeController extends FrontendController
     {
         $categories = Category::where([
             'active' => Category::STATUS_PUBLIC
-        ])->get();
+        ])->orderBy('order')->get();
 
         SEOTools::setTitle('Trang chủ');
         SEOTools::setDescription('Khám phá ngôi nhà mơ ước của bạn!');
@@ -38,20 +38,20 @@ class HomeController extends FrontendController
         $housing_settings = services()->settingService()->where([
             'active' => Setting::ACTIVE,
             'type' => Setting::TYPE_HOME,
-        ])->get();
+        ])->orderBy('order')->get();
         $banners = services()->bannerService()->where([
             'active' => Setting::ACTIVE,
-        ])->orderByDesc('id')->get();
+        ])->orderBy('order')->get();
 
         $posts = services()->postService()->where([
             'active' => Post::ACTIVE,
             'hot' => Post::HOT
-        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderByDesc('id')->get();
+        ])->with('creator')->select('title', 'slug', 'description', 'avatar', 'created_at', 'author_id', 'type')->orderBy('order')->get();
 
         $libraries = services()->libraryService()->where([
             'active' => Post::ACTIVE,
             'hot' => Post::HOT
-        ])->select('id', 'title', 'slug', 'avatar', 'created_at', 'author_id')->limit(6)->orderByDesc('id')->get();
+        ])->select('id', 'title', 'slug', 'avatar', 'created_at', 'author_id')->limit(6)->orderBy('order')->get();
 
         $categories = services()->categoryService()->where([
             'active' => Category::STATUS_PUBLIC,
@@ -65,7 +65,7 @@ class HomeController extends FrontendController
                 'active' => Product::ACTIVE,
                 'hot' => Product::HOT,
             ])->limit(6);
-        }])->get();
+        }])->orderBy('order')->get();
 
         $coffee_home = services()->settingService()->where([
             'active' => Setting::ACTIVE,

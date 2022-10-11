@@ -14,7 +14,7 @@ abstract class FrontendController extends WebController
         $dataSettings = [];
         $categories = Category::where([
             'active' => Category::STATUS_PUBLIC
-        ])->get();
+        ])->orderBy('order')->get();
         $settings = Setting::where([
             'active' => Setting::ACTIVE,
             'type' => 'setting'

@@ -36,7 +36,7 @@ class AdminProductController extends WebController
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
             '_admin_fields' => 'name',
-            '_orderBy' => 'order:desc'
+            '_orderBy' => 'order'
 //            '_setting_key_product_fields' => 'name,key,value,product_id',
 //            '_filter' => 'user_not_myself:1;'
         ]);
