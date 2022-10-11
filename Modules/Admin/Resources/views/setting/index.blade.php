@@ -343,6 +343,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
+                    <th>Thứ tự</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -354,10 +355,11 @@
                         @if($item['type'] == 'home')
                             <tr id="sid{{$item['id']}}">
                                 <td scope="row">{{$i}}</td>
-                                <td>{{$item['value']}}</td>
+                                <td style="white-space: normal;">{{$item['value']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar']}}" width="100px" height="100px" alt="">
                                 </td>
+                                <td style="">{{$item['order']}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.setting', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -403,6 +405,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
+                    <th>Thứ tự</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -421,6 +424,15 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    { "width": "2%" },
+                    { "width": "30%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                ]
+
             });
 
             $("#file-1").fileinput({
@@ -432,7 +444,7 @@
                 allowedFileTypes: ['image'],
                 allowedFileExtensions: ['jpg','png','gif'],
                 overwriteInitial: false,
-                maxFileSize: 10000,
+                maxFileSize: 20000,
                 maxFileNum: 20,
                 minFileNum: 2,
             });
@@ -680,6 +692,7 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.value);
+                            $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
@@ -731,12 +744,18 @@
                         slug: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

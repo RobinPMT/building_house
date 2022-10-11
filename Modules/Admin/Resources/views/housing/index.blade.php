@@ -146,6 +146,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
+                    <th>Thứ tự</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -159,6 +160,7 @@
                                 <td style="">
                                     <img src="{{$item['avatar_main']}}" width="100px" height="100px" alt="">
                                 </td>
+                                <td style="">{{$item['order']}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.housing', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -201,6 +203,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
+                    <th>Thứ tự</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -297,12 +300,14 @@
                         if(response.status) {
                             $('#title').val(response.data.title);
                             $('#link').val(response.data.link);
+                            $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar_main);
                             $('#output_image_extra').attr('src', response.data.avatar_not_main);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }
-                            $("textarea#content").html(response.data.content);
+                            $('textarea#_content').val(response.data.content);
+                            // $("textarea#_content").html(response.data.content);
                             $('#exampleModalLabel').text('Cập nhật');
                             $('#form-crud').attr('action', data_url_update);
                         }
@@ -351,12 +356,18 @@
                         link: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         link: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

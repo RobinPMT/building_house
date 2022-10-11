@@ -26,8 +26,9 @@ class AdminHousingController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active',
+            '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active,order',
             '_noPagination' => 1,
+            '_orderBy' => 'order:desc'
         ]);
         $setting = services()->settingService()->where(['key' =>'coffee', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value')->first()->toArray();
         $settingHousing = services()->settingService()->where(['key' =>'coffee_housing', 'type' => Setting::TYPE_COFFEE])->select('id', 'name', 'key', 'avatar', 'value', 'avatar_not_main')->first()->toArray();
@@ -46,7 +47,7 @@ class AdminHousingController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active',
+            '_housing_fields' => 'title,active,avatar_main,avatar_not_main,author_id,content,arr_active,order',
         ]);
         return parent::__find($request, true);
     }
@@ -75,5 +76,11 @@ class AdminHousingController extends WebController
             }
         }
         return redirect()->back()->with('success', $messages);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 }

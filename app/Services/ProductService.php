@@ -19,7 +19,7 @@ class ProductService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -30,7 +30,7 @@ class ProductService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price',
+            'title', 'slug', 'active', 'hot', 'author_id', 'arr_image', 'price', 'order',
             'arr_active', 'arr_hot', 'avatar_design', 'description', 'image_back_ground_design',
             'longs', 'width', 'height', 'area', 'room_number', 'room_description', 'category_id', 'setting_keys',
             'title_seo', 'description_seo', 'keyword_seo'

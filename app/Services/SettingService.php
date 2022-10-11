@@ -19,7 +19,7 @@ class SettingService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -30,7 +30,7 @@ class SettingService extends ApiService
     protected function fields(): array
     {
         return [
-            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active', 'avatar_not_main', 'arr_avatar'
+            'key', 'value', 'active', 'name', 'icon', 'type', 'avatar', 'arr_active', 'avatar_not_main', 'order', 'arr_avatar'
         ];
     }
 

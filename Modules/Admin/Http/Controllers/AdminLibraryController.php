@@ -36,11 +36,12 @@ class AdminLibraryController extends WebController
             $view = 'admin::library.index';
         }
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url,arr_hot,title_seo,description_seo,keyword_seo',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_freedom,arr_banner_product,arr_active,arr_banner_home,avatar_url,arr_hot,title_seo,description_seo,keyword_seo,order',
             '_relations' => 'creator',
             '_filter' => 'freedom:'."$value",
             '_admin_fields' => 'name',
-            '_noPagination' => $value
+            '_noPagination' => $value,
+            '_orderBy' => 'order:desc'
         ]);
         return parent::__list($request, $view);
     }
@@ -48,7 +49,7 @@ class AdminLibraryController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active,arr_hot,hot,title_seo,description_seo,keyword_seo',
+            '_library_fields' => 'title,arr_image,avatar,freedom,author_id,arr_active,arr_banner_home,avatar_url,slug,active,arr_hot,hot,title_seo,description_seo,keyword_seo,order',
 //            '_relations' => 'creator'
         ]);
         return parent::__find($request, true);
@@ -123,6 +124,12 @@ class AdminLibraryController extends WebController
     {
         $slug = SlugService::createslug(Library::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->where('freedom', Library::NOT_FREEDOM)->count();
+        return response()->json(['order' => $count + 1]);
     }
 
     public function deleteImages($id, $image)

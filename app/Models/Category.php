@@ -12,7 +12,7 @@ class Category extends Base
     protected $table   = 'categories';
 
     protected $fillable = [
-        'title', 'slug', 'parent_id', 'icon', 'active',
+        'title', 'slug', 'parent_id', 'icon', 'active', 'order',
         'author_id', 'description_seo', 'title_seo', 'keyword_seo','created_at',
         'updated_at'
     ];

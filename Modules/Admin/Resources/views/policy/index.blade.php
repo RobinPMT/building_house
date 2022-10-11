@@ -248,12 +248,18 @@
                         slug: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

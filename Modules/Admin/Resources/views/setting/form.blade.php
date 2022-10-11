@@ -13,6 +13,14 @@
                     <label class="form-label" for="value">Tiêu đề <span style="color: red">*</span></label>
                     <input type="text" name="value" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
                 </div>
+                <div class="demo-inline-spacing">
+                    <div class="form-group">
+                        <label for="order" style="">Thứ tự <span style="color: red">*</span></label>
+                        <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                            <input type="text" class="touchspin" name="order" id="order" value="0" data-bts-step="1" data-bts-decimals="0" />
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
@@ -23,7 +31,7 @@
                         <label class="custom-file-label" for="input_image">Chọn ảnh</label>
                     </div>
                 </div>
-{{--                <input type="text" name="type" class="form-control dt-full-name" value="home" hidden />--}}
+                <input type="text" name="type" class="form-control dt-full-name" value="home" hidden />
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

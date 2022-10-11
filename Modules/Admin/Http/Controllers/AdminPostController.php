@@ -29,9 +29,10 @@ class AdminPostController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids,type,type_name,keyword_seo',
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,arr_active,arr_hot,tag_ids,type,type_name,keyword_seo,order',
             '_relations' => 'creator',
             '_admin_fields' => 'name',
+            '_orderBy' => 'order:desc'
 //            '_tag_fields' => 'id'
 //            '_filter' => 'user_not_myself:1;'
         ]);
@@ -48,7 +49,7 @@ class AdminPostController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug,tag_ids,type,type_name,keyword_seo',
+            '_post_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar,view,active,hot,slug,tag_ids,type,type_name,keyword_seo,order',
             '_relations' => 'creator',
 //            '_tag_fields' => 'id'
         ]);
@@ -91,5 +92,11 @@ class AdminPostController extends WebController
     {
         $slug = SlugService::createslug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 }

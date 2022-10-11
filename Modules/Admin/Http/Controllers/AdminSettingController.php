@@ -25,9 +25,9 @@ class AdminSettingController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active,arr_avatar',
+            '_setting_fields' => 'name,key,value,active,icon,type,avatar,arr_active,arr_avatar,order',
             '_noPagination' => 1,
-            '_orderBy' => 'id:asc',
+            '_orderBy' => 'order:desc'
         ]);
         return parent::__list($request, 'admin::setting.index');
     }
@@ -40,7 +40,7 @@ class AdminSettingController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_setting_fields' => 'value,active,type,avatar,arr_active',
+            '_setting_fields' => 'value,active,type,avatar,arr_active,order',
         ]);
         return parent::__find($request, true);
     }
@@ -115,5 +115,11 @@ class AdminSettingController extends WebController
             return response()->json(['status' => false]);
         }
         return response()->json(['status' => false]);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->where('type', Setting::TYPE_HOME)->count();
+        return response()->json(['order' => $count + 1]);
     }
 }

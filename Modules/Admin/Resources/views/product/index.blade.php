@@ -29,6 +29,7 @@
                         <th>Kích thước</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -39,7 +40,7 @@
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>
+                                    <td style="white-space: normal;">
                                         <div class="d-flex justify-content-left align-items-center">
                                             <div class="d-flex flex-column">
                                                 <span class="emp_name text-truncate font-weight-bold">{{$item['title']}}</span>
@@ -71,6 +72,7 @@
                                         </a>
                                     </td>
                                     <td style="">{{$item['creator']['name']}}</td>
+                                    <td style="">{{$item['order']}}</td>
                                     <td style="">
                                         <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.product', ['active', $item['id']])}}">
                                             {{$item['arr_active']['name']}}
@@ -130,6 +132,7 @@
                         <th>Kích thước</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -182,6 +185,19 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    { "width": "2%" },
+                    { "width": "15%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             });
             $(".select-single").select2({
                 // placeholder: "Chọn danh mục cha",
@@ -205,7 +221,7 @@
                 allowedFileTypes: ['image'],
                 allowedFileExtensions: ['jpg','png','gif'],
                 overwriteInitial: false,
-                maxFileSize: 2000,
+                maxFileSize: 20000,
                 maxFileNum: 20,
                 minFileNum: 2,
             });
@@ -468,6 +484,7 @@
                             $('#output_image_extra').attr('src', response.data.image_back_ground_design);
                             $("textarea#description").html(response.data.description);
                             $('#keyword_seo').val(response.data.keyword_seo);
+                            $('#order').val(response.data.order);
                             // $('#content').text(response.data.content);
                             // $("textarea#content").html(response.data.content);
                             // CKEDITOR.instances.content.setData( response.data.content);
@@ -563,12 +580,18 @@
                         slug: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

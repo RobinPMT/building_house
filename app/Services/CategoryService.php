@@ -19,7 +19,7 @@ class CategoryService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -30,7 +30,7 @@ class CategoryService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'slug', 'parent_id', 'icon', 'active',
+            'title', 'slug', 'parent_id', 'icon', 'active', 'order',
             'author_id', 'description_seo', 'title_seo', 'keyword_seo',
             'arr_active',
         ];

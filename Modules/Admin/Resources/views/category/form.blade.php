@@ -28,6 +28,14 @@
 {{--                    </select>--}}
 
 {{--                </div>--}}
+                <div class="demo-inline-spacing">
+                    <div class="form-group">
+                        <label for="order" style="">Thứ tự <span style="color: red">*</span></label>
+                        <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                            <input type="text" class="touchspin" name="order" id="order" value="0" data-bts-step="1" data-bts-decimals="0" />
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="form-label" for="title_seo">Meta Title</label>
                     <input type="text" name="title_seo" id="title_seo" class="form-control dt-email" placeholder="Meta Title" aria-label="Meta Title" />

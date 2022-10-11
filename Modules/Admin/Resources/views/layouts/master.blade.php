@@ -281,21 +281,23 @@
 
 
     //check slug
-    $('#title').change(function (event) {
-        console.log(234);
-        $.get('{{route('admin.checkSlug.'.get_name_route(\Request::route()->getName()))}}',
-            { 'title' : $(this).val()},
-            function (data) {
-                console.log(data);
-                $('#slug').val(data.slug);
-            }
-        );
+    $(document).ready(function (event) {
+        $('#title').change(function (event) {
+            console.log(234);
+            $.get('{{route('admin.checkSlug.'. (in_array(get_name_route(\Request::route()->getName()), ['policy', 'category', 'product', 'admin', 'post', 'library', 'project']) ? get_name_route(\Request::route()->getName()) : 'policy'))}}',
+                {'title': $(this).val()},
+                function (data) {
+                    console.log(data);
+                    $('#slug').val(data.slug);
+                }
+            );
+        });
     });
 
     //check slug
     $(document).ready(function (event) {
         $(".item-add").click(function (event) {
-            $.get('{{route('admin.checkOrder.'.get_name_route(\Request::route()->getName()))}}',
+            $.get('{{route('admin.checkOrder.'. (in_array(get_name_route(\Request::route()->getName()), ['policy', 'category', 'product', 'post', 'library', 'project', 'housing', 'setting']) ? get_name_route(\Request::route()->getName()) : 'policy'))}}',
                 function (data) {
                     console.log(data);
                     $('#order').val(data.order);

@@ -32,10 +32,11 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo,order',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
             '_admin_fields' => 'name',
+            '_orderBy' => 'order:desc'
 //            '_setting_key_product_fields' => 'name,key,value,product_id',
 //            '_filter' => 'user_not_myself:1;'
         ]);
@@ -58,7 +59,7 @@ class AdminProductController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo',
+            '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo,order',
             '_relations' => 'creator,category',
             '_category_fields' => 'title',
 //            '_admin_fields' => 'name'
@@ -102,6 +103,12 @@ class AdminProductController extends WebController
     {
         $slug = SlugService::createslug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 
     public function deleteImages($id, $image)

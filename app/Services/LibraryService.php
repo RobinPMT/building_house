@@ -18,7 +18,7 @@ class LibraryService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -29,7 +29,7 @@ class LibraryService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom', 'arr_hot', 'hot',
+            'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'arr_freedom', 'arr_hot', 'hot', 'order',
             'active', 'banner_home', 'banner_product', 'arr_active', 'arr_banner_product', 'arr_banner_home','avatar_url', 'slug','title_seo', 'description_seo', 'keyword_seo'
 
         ];

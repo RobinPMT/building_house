@@ -14,7 +14,7 @@ class Library extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product','created_at',
+        'title', 'avatar', 'arr_image', 'freedom', 'author_id', 'active', 'banner_home', 'banner_product','created_at', 'order',
         'updated_at', 'slug', 'hot', 'title_seo', 'description_seo', 'keyword_seo'
     ];
 

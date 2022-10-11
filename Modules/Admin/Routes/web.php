@@ -69,6 +69,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::group(['prefix' => 'post'], function () {
         Route::get('/', [AdminPostController::class, '__list'])->name('admin.get.list.post');
         Route::get('/check_slug', [AdminPostController::class, 'checkSlug'])->name('admin.checkSlug.post');
+        Route::get('/check_order', [AdminPostController::class, 'checkOrder'])->name('admin.checkOrder.post');
         Route::get('/{id}', [AdminPostController::class, '__find'])->name('admin.get.find.post');
         Route::post('/', [AdminPostController::class, '__create'])->name('admin.store.post');
         Route::post('/{id}', [AdminPostController::class, '__update'])->name('admin.update.post');
@@ -81,6 +82,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/update', [AdminSettingController::class, 'update'])->name('admin.get.update.setting');
         Route::post('/', [AdminSettingController::class, '__create'])->name('admin.store.setting');
         Route::get('/list', [AdminSettingController::class, 'listSetting'])->name('admin.get.list.setting.arr');
+        Route::get('/check_order', [AdminSettingController::class, 'checkOrder'])->name('admin.checkOrder.setting');
         Route::get('/{id}', [AdminSettingController::class, '__find'])->name('admin.get.find.setting');
         Route::post('/{id}', [AdminSettingController::class, '__update'])->name('admin.update.setting');
         Route::get('/{action}/{id}', [AdminSettingController::class, 'action'])->name('admin.get.action.setting');
@@ -107,6 +109,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 
 
         Route::get('/check_slug', [AdminLibraryController::class, 'checkSlug'])->name('admin.checkSlug.library');
+        Route::get('/check_order', [AdminLibraryController::class, 'checkOrder'])->name('admin.checkOrder.library');
         Route::get('/list', [AdminLibraryController::class, '__list'])->name('admin.get.list.library');
         Route::post('/list', [AdminLibraryController::class, '__create'])->name('admin.store.library');
         Route::post('/list/{id}', [AdminLibraryController::class, '__update'])->name('admin.update.library');
@@ -116,6 +119,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::group(['prefix' => 'product'], function () {
         Route::get('/', [AdminProductController::class, '__lists'])->name('admin.get.list.product');
         Route::get('/check_slug', [AdminProductController::class, 'checkSlug'])->name('admin.checkSlug.product');
+        Route::get('/check_order', [AdminProductController::class, 'checkOrder'])->name('admin.checkOrder.product');
         Route::get('/{id}', [AdminProductController::class, '__find'])->name('admin.get.find.product');
         Route::post('/', [AdminProductController::class, '__create'])->name('admin.store.product');
         Route::post('/{id}', [AdminProductController::class, '__update'])->name('admin.update.product');
@@ -127,6 +131,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::group(['prefix' => 'category'], function () {
         Route::get('/', [AdminCategoryController::class, '__list'])->name('admin.get.list.category');
         Route::get('/check_slug', [AdminCategoryController::class, 'checkSlug'])->name('admin.checkSlug.category');
+        Route::get('/check_order', [AdminCategoryController::class, 'checkOrder'])->name('admin.checkOrder.category');
         Route::get('/{id}', [AdminCategoryController::class, '__find'])->name('admin.get.find.category');
         Route::post('/', [AdminCategoryController::class, '__create'])->name('admin.store.category');
         Route::post('/{id}', [AdminCategoryController::class, '__update'])->name('admin.update.category');
@@ -181,12 +186,14 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminProjectController::class, '__create'])->name('admin.store.project');
         Route::post('/{id}', [AdminProjectController::class, '__update'])->name('admin.update.project');
         Route::get('/check_slug', [AdminProjectController::class, 'checkSlug'])->name('admin.checkSlug.project');
+        Route::get('/check_order', [AdminProjectController::class, 'checkOrder'])->name('admin.checkOrder.project');
         Route::get('/{action}/{id}', [AdminProjectController::class, 'action'])->name('admin.get.action.project');
         Route::delete('/delete_images/{id}/{image}', [AdminProjectController::class, 'deleteImages'])->name('admin.delete.images.project');
     });
 
     Route::group(['prefix' => 'housing'], function () {
         Route::get('/', [AdminHousingController::class, '__list'])->name('admin.get.list.housing');
+        Route::get('/check_order', [AdminHousingController::class, 'checkOrder'])->name('admin.checkOrder.housing');
         Route::get('/list/{id}', [AdminHousingController::class, '__find'])->name('admin.get.find.housing');
         Route::post('/', [AdminHousingController::class, '__create'])->name('admin.store.housing');
         Route::post('/{id}', [AdminHousingController::class, '__update'])->name('admin.update.housing');

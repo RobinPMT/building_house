@@ -14,7 +14,7 @@ class Post extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'slug', 'description', 'content', 'active', 'hot',
+        'title', 'slug', 'description', 'content', 'active', 'hot', 'order',
         'author_id', 'description_seo', 'title_seo', 'avatar', 'view','created_at',
         'updated_at', 'type', 'keyword_seo'
     ];

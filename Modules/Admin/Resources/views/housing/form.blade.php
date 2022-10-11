@@ -13,9 +13,17 @@
                     <label class="form-label" for="title">Tiêu đề <span style="color: red">*</span></label>
                     <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
                 </div>
+                <div class="demo-inline-spacing">
+                    <div class="form-group">
+                        <label for="order" style="">Thứ tự <span style="color: red">*</span></label>
+                        <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                            <input type="text" class="touchspin" name="order" id="order" value="0" data-bts-step="1" data-bts-decimals="0" />
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label class="form-label" for="content">Mô tả</label>
-                    <textarea type="text" name="content" id="content" rows="4" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
+                    <label class="form-label" for="_content">Mô tả</label>
+                    <textarea type="text" name="_content" id="_content" rows="4" class="form-control dt-post" placeholder="Mô tả" aria-label="Mô tả"></textarea>
                 </div>
                 <div class="form-group">
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">

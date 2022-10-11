@@ -27,6 +27,7 @@
                         <th>Ảnh</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -37,7 +38,7 @@
                         @foreach($data as $stt => $item)
                             <tr id="sid{{$item['id']}}">
                                 <td scope="row">{{$stt + 1}}</td>
-                                <td>{{$item['title']}}</td>
+                                <td style="white-space: normal;">{{$item['title']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar_url']}}" width="100px" height="100px" alt="">
                                 </td>
@@ -51,6 +52,7 @@
                                     </a>
                                 </td>
                                 <td style="">{{$item['creator']['name']}}</td>
+                                <td style="">{{$item['order']}}</td>
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.slide', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -108,6 +110,7 @@
                         <th>Ảnh</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -154,6 +157,17 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    { "width": "2%" },
+                    { "width": "20%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                ]
             });
             $("#file-1").fileinput({
                 theme: 'fa5',
@@ -164,7 +178,7 @@
                 allowedFileTypes: ['image'],
                 allowedFileExtensions: ['jpg','png','gif'],
                 overwriteInitial: false,
-                maxFileSize: 2000,
+                maxFileSize: 20000,
                 maxFileNum: 20,
                 minFileNum: 2,
             });
@@ -377,6 +391,7 @@
                             if(response.data.hot == '1'){
                                 $("form #checkbox_hot").attr('checked', true)
                             }
+                            $('#order').val(response.data.order);
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);
                             $('#keyword_seo').val(response.data.keyword_seo);
@@ -425,12 +440,18 @@
                         slug: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

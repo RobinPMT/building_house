@@ -27,10 +27,11 @@ class AdminCategoryController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active',
+            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active,order',
             '_relations' => 'creator,parent',
             '_admin_fields' => 'name',
             '_noPagination' => 1,
+            '_orderBy' => 'order:desc'
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::category.index');
@@ -46,7 +47,7 @@ class AdminCategoryController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active',
+            '_category_fields' => 'title,slug,parent_id,icon,active,avatar,author_id,description_seo,title_seo,keyword_seo,arr_active,order',
             '_relations' => 'creator'
         ]);
         return parent::__find($request, true);
@@ -103,5 +104,11 @@ class AdminCategoryController extends WebController
                 self::showCategories($categories, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
             }
         }
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 }

@@ -18,7 +18,7 @@ class ProjectService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -29,7 +29,7 @@ class ProjectService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'slug', 'content', 'active', 'hot',
+            'title', 'slug', 'content', 'active', 'hot', 'order',
             'author_id', 'avatar', 'arr_image', 'arr_active', 'arr_hot', 'title_seo', 'description_seo', 'keyword_seo'
         ];
     }

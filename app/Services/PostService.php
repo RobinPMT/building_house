@@ -18,7 +18,7 @@ class PostService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -29,7 +29,7 @@ class PostService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'slug', 'description', 'content', 'active', 'hot',
+            'title', 'slug', 'description', 'content', 'active', 'hot', 'order',
             'author_id', 'description_seo', 'title_seo', 'avatar', 'view',
             'arr_active', 'arr_hot', 'slug', 'tag_ids', 'type', 'type_name', 'keyword_seo'
         ];

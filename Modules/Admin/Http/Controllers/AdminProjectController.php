@@ -27,7 +27,8 @@ class AdminProjectController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo',
+            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo,order',
+            '_orderBy' => 'order:desc'
 //            '_relations' => 'creator',
 //            '_admin_fields' => 'name',
         ]);
@@ -42,7 +43,7 @@ class AdminProjectController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo',
+            '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo,order',
 //            '_relations' => 'creator',
 //            '_tag_fields' => 'id'
         ]);
@@ -85,6 +86,12 @@ class AdminProjectController extends WebController
     {
         $slug = SlugService::createslug(Project::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 
     public function deleteImages($id, $image)

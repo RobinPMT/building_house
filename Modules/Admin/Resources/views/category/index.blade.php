@@ -25,6 +25,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
 {{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -37,6 +38,7 @@
                                     <td scope="row">{{$stt + 1}}</td>
                                     <td>{{$category['title']}}</td>
                                     <td style="">{{$category['creator']['name']}}</td>
+                                    <td style="">{{$category['order']}}</td>
 {{--                                    <td style="">--}}
 {{--                                        {{isset($category['parent']['title']) ? $category['parent']['title'] : ''}}--}}
 {{--                                    </td>--}}
@@ -82,6 +84,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
+                        <th>Thứ tự</th>
 {{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -201,6 +204,7 @@
                         console.log(response)
                         if(response.status) {
                             $("#parent_id").val(response.data.parent_id).change();
+                            $('#order').val(response.data.order);
                             $('#title').val(response.data.title);
                             $('#slug').val(response.data.slug);
                             $('#description_seo').val(response.data.description_seo);
@@ -258,12 +262,18 @@
                         slug: {
                             required: true,
                         },
+                        order: {
+                            required: true,
+                        },
                     },
                     messages: {
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
                         slug: {
+                            required: "Vui lòng không bỏ trống!"
+                        },
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

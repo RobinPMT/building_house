@@ -11,7 +11,7 @@ class Setting extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'name', 'key', 'value', 'active', 'icon','created_at',
+        'name', 'key', 'value', 'active', 'icon','created_at', 'order',
         'updated_at', 'type', 'avatar', 'avatar_not_main'
     ];
 

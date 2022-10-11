@@ -14,7 +14,7 @@ class Project extends Base
 //    protected $guarded =  ['*'];
 
     protected $fillable = [
-        'title', 'slug', 'content', 'active', 'hot',
+        'title', 'slug', 'content', 'active', 'hot', 'order',
         'author_id', 'avatar', 'arr_image','created_at',
         'updated_at', 'title_seo', 'description_seo', 'keyword_seo'
     ];

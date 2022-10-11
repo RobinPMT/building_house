@@ -177,7 +177,7 @@
                 allowedFileTypes: ['image'],
                 allowedFileExtensions: ['jpg','png','gif'],
                 overwriteInitial: false,
-                maxFileSize: 2000,
+                maxFileSize: 20000,
                 maxFileNum: 20,
                 minFileNum: 2,
             });

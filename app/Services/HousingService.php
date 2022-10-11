@@ -17,7 +17,7 @@ class HousingService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
@@ -28,7 +28,7 @@ class HousingService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'active', 'avatar_main', 'avatar_not_main', 'author_id',
+            'title', 'active', 'avatar_main', 'avatar_not_main', 'author_id', 'order',
             'content', 'arr_active',
         ];
     }
@@ -69,6 +69,7 @@ class HousingService extends ApiService
         $this->on('saving', function ($model) use ($user) {
 //            $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
+            $model->content = $model->getRaw('_content') ?? null;
             $this->uploadFile($model, 'avatar_main');
             $this->uploadFile($model, 'avatar_not_main');
         });

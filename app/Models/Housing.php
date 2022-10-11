@@ -9,7 +9,7 @@ class Housing extends Base
     protected $table   = 'housings';
 
     protected $fillable = [
-        'title', 'active', 'avatar_main', 'avatar_not_main', 'author_id',
+        'title', 'active', 'avatar_main', 'avatar_not_main', 'author_id', 'order',
         'content','created_at', 'updated_at'
     ];
 
