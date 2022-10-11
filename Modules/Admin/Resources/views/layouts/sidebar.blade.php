@@ -41,8 +41,6 @@
                     </li>
                 </ul>
             </li>
-{{--            <li class="{{ \Request::route()->getName() == 'admin.get.list.housing' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.housing')}}"><i data-feather="briefcase"></i><span class="menu-title text-truncate" data-i18n="Todo">Consolar Housing</span></a>--}}
-{{--            </li>--}}
             <li class="{{ \Request::route()->getName() == 'admin.get.list.project' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.project')}}"><i data-feather="box"></i><span class="menu-title text-truncate" data-i18n="Todo">Dự án</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="save"></i><span class="menu-title text-truncate" data-i18n="File Manager">Thư viện ảnh</span></a>
@@ -72,6 +70,8 @@
                     <li  class="{{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.user')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Khách hàng</span></a>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item"><a class="d-flex align-items-center" id="lfm" href=""><i data-feather='file'></i><span class="menu-title text-truncate" data-i18n="Todo">Quản lý File</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="settings"></i><span class="menu-title text-truncate" data-i18n="Settings">Cài đặt</span></a>
                 <ul class="menu-content">
