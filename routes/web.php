@@ -71,10 +71,12 @@ Route::get('lien-he/', [ContactController::class, 'index'])->name('get.list.cont
 Route::post('lien-he/', [ContactController::class, 'store'])->name('get.store.contact');
 
 Route::get('cau-hoi-thuong-gap/', [QuestionController::class, 'index'])->name('get.list.question');
-Route::get('chinh-sach-bao-mat/', [PolicyController::class, 'indexSecurity'])->name('get.list.security.policy');
-Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->name('get.list.shopping.policy');
-Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
-Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
+//Route::get('chinh-sach-bao-mat/', [PolicyController::class, 'indexSecurity'])->name('get.list.security.policy');
+//Route::get('chinh-sach-mua-hang/', [PolicyController::class, 'indexShopping'])->name('get.list.shopping.policy');
+//Route::get('chinh-sach-van-chuyen/', [PolicyController::class, 'indexTransport'])->name('get.list.transport.policy');
+//Route::get('chinh-sach-bao-hanh/', [PolicyController::class, 'indexInsurance'])->name('get.list.insurance.policy');
+Route::get('chinh-sach/{slug}', [PolicyController::class, 'index'])->name('get.detail.policy');
+
 Route::get('tu-thiet-ke/', [DesignController::class, 'index'])->name('get.list.design');
 Route::post('tu-thiet-ke/', [DesignController::class, 'store'])->name('post.store.design');
 Route::prefix('/')->middleware('CheckLoginUser')->group(function () {

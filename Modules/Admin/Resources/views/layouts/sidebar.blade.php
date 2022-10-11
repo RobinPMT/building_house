@@ -33,7 +33,7 @@
             </li>
             <li class="{{ \Request::route()->getName() == 'admin.get.list.product' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.product')}}"><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Product">Sản Phẩm</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="File Manager">Quản lý thuộc tính</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="File Manager">Tự thiết kế</span></a>
                 <ul class="menu-content">
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.room' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.room')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Slide">Phòng & tiện nghi</span></a>
                     </li>
@@ -81,23 +81,25 @@
                     </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.setting' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Cài đặt trang chủ</span></a>
                     </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.setting_key_product' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting_key_product')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Cài đặt sản phẩm</span></a>
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.setting_key_product' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting_key_product')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View" style="white-space: normal; font-size: 14px;">Các thuộc tính sản phẩm</span></a>
                     </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.housing' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.housing')}}"><i data-feather="circle"></i><span class="menu-title text-truncate" data-i18n="Todo">Coffee & Food</span></a>
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Form Validation">Chính sách</span></a>
-                <ul class="menu-content">
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.shopping.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.shopping.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Mua hàng</span></a>
-                    </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.security.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.security.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo mật thông tin</span></a>
-                    </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.transport.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.transport.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Vận chuyển</span></a>
-                    </li>
-                    <li class="{{ \Request::route()->getName() == 'admin.get.list.insurance.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.insurance.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo hành</span></a>
-                    </li>
-                </ul>
+{{--            <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Form Validation">Chính sách</span></a>--}}
+{{--                <ul class="menu-content">--}}
+{{--                    <li class="{{ \Request::route()->getName() == 'admin.get.list.shopping.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.shopping.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Mua hàng</span></a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ \Request::route()->getName() == 'admin.get.list.security.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.security.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo mật thông tin</span></a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ \Request::route()->getName() == 'admin.get.list.transport.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.transport.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Vận chuyển</span></a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ \Request::route()->getName() == 'admin.get.list.insurance.policy' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.insurance.policy')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Bảo hành</span></a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+            <li class="{{ \Request::route()->getName() == 'admin.get.list.policy' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.policy')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Form Validation">Chính sách</span></a>
             </li>
             <li class="{{ \Request::route()->getName() == 'admin.get.list.question' ? 'active' : '' }} nav-item"><a class="d-flex align-items-center" href="{{route('admin.get.list.question')}}"><i data-feather="stop-circle"></i><span class="menu-title text-truncate" data-i18n="Form Validation">Câu hỏi thường gặp</span></a>
             </li>

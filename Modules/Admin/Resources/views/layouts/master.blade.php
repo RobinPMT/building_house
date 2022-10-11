@@ -283,13 +283,26 @@
     //check slug
     $('#title').change(function (event) {
         console.log(234);
-        $.get('{{route('admin.checkSlug.post')}}',
+        $.get('{{route('admin.checkSlug.'.get_name_route(\Request::route()->getName()))}}',
             { 'title' : $(this).val()},
             function (data) {
                 console.log(data);
                 $('#slug').val(data.slug);
             }
         );
+    });
+
+    //check slug
+    $(document).ready(function (event) {
+        $(".item-add").click(function (event) {
+            $.get('{{route('admin.checkOrder.'.get_name_route(\Request::route()->getName()))}}',
+                function (data) {
+                    console.log(data);
+                    $('#order').val(data.order);
+                }
+            );
+        });
+
     });
     $(window).on('load', function() {
         if (feather) {

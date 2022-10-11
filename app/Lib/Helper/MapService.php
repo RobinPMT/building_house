@@ -9,6 +9,7 @@ use App\Services\CategoryService;
 use App\Services\ContactService;
 use App\Services\HousingService;
 use App\Services\LibraryService;
+use App\Services\PolicyService;
 use App\Services\PostService;
 use App\Services\ProductService;
 use App\Services\ProjectService;
@@ -113,5 +114,10 @@ class MapService
     public function wishlistService(): WishlistService
     {
         return c(WishlistService::class);
+    }
+
+    public function policyService(): PolicyService
+    {
+        return c(PolicyService::class);
     }
 }

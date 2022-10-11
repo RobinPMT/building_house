@@ -66,9 +66,9 @@ class CreateSiteMap extends Command
 
 
         $sitemap->add(route('get.list.post', ['tin-tuc']), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.post', ['tin-tai-chinh']), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.post', ['tin-khuyen-mai']), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.post', ['tin-tuc-su-kien']), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.post', ['tin-tai-chinh']), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.post', ['tin-khuyen-mai']), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.post', ['tin-tuc-su-kien']), Carbon::now(), '1.0', 'daily');
 
         $sitemap->add(route('get.list.question'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.list.security.policy'), Carbon::now(), '1.0', 'daily');
@@ -77,6 +77,10 @@ class CreateSiteMap extends Command
         $sitemap->add(route('get.list.insurance.policy'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.list.design'), Carbon::now(), '1.0', 'daily');
 
+        $policies = services()->policyService()->orderByDesc('id')->get();
+        foreach ($policies as $policy) {
+            $sitemap->add(route('get.detail.detail', [$policy->slug]), $policy->created_at, '0.6', 'daily');
+        }
 
         $posts = services()->postService()->orderByDesc('created_at')->get();
         foreach ($posts as $post) {

@@ -40,10 +40,16 @@
                 <h4 class="footer-title">Hỗ trợ</h4>
                 <ul>
                     <li><a href="{{route('get.list.question')}}">Câu hỏi thường gặp</a></li>
-                    <li><a href="{{route('get.list.security.policy')}}">Chính sách bảo mật thông tin</a></li>
-                    <li><a href="{{route('get.list.transport.policy')}}">Chính sách vận chuyển</a></li>
-                    <li><a href="{{route('get.list.insurance.policy')}}">Chính sách bảo hành</a></li>
-                    <li><a href="{{route('get.list.shopping.policy')}}">Chính sách mua hàng</a></li>
+                    @if(isset($policies))
+                        @foreach($policies as $policy)
+                            <li><a href="{{route('get.detail.policy', [$policy->slug])}}">{{$policy->title}}</a></li>
+                        @endforeach
+                    @endif
+
+{{--                    <li><a href="{{route('get.list.security.policy')}}">Chính sách bảo mật thông tin</a></li>--}}
+{{--                    <li><a href="{{route('get.list.transport.policy')}}">Chính sách vận chuyển</a></li>--}}
+{{--                    <li><a href="{{route('get.list.insurance.policy')}}">Chính sách bảo hành</a></li>--}}
+{{--                    <li><a href="{{route('get.list.shopping.policy')}}">Chính sách mua hàng</a></li>--}}
                 </ul>
             </div>
         </div>

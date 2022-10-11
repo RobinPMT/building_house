@@ -196,17 +196,24 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     });
 
     Route::group(['prefix' => 'policy'], function () {
-        Route::get('/shopping', [AdminPolicyController::class, 'indexShopping'])->name('admin.get.list.shopping.policy');
-        Route::post('/shopping/{id}', [AdminPolicyController::class, 'updateShopping'])->name('admin.update.shopping.policy');
-
-        Route::get('/security', [AdminPolicyController::class, 'indexSecurity'])->name('admin.get.list.security.policy');
-        Route::post('/security/{id}', [AdminPolicyController::class, 'updateSecurity'])->name('admin.update.security.policy');
-
-        Route::get('/transport', [AdminPolicyController::class, 'indexTransport'])->name('admin.get.list.transport.policy');
-        Route::post('/transport/{id}', [AdminPolicyController::class, 'updateTransport'])->name('admin.update.transport.policy');
-
-        Route::get('/insurance', [AdminPolicyController::class, 'indexInsurance'])->name('admin.get.list.insurance.policy');
-        Route::post('/insurance/{id}', [AdminPolicyController::class, 'updateInsurance'])->name('admin.update.insurance.policy');
+//        Route::get('/shopping', [AdminPolicyController::class, 'indexShopping'])->name('admin.get.list.shopping.policy');
+//        Route::post('/shopping/{id}', [AdminPolicyController::class, 'updateShopping'])->name('admin.update.shopping.policy');
+//
+//        Route::get('/security', [AdminPolicyController::class, 'indexSecurity'])->name('admin.get.list.security.policy');
+//        Route::post('/security/{id}', [AdminPolicyController::class, 'updateSecurity'])->name('admin.update.security.policy');
+//
+//        Route::get('/transport', [AdminPolicyController::class, 'indexTransport'])->name('admin.get.list.transport.policy');
+//        Route::post('/transport/{id}', [AdminPolicyController::class, 'updateTransport'])->name('admin.update.transport.policy');
+//
+//        Route::get('/insurance', [AdminPolicyController::class, 'indexInsurance'])->name('admin.get.list.insurance.policy');
+//        Route::post('/insurance/{id}', [AdminPolicyController::class, 'updateInsurance'])->name('admin.update.insurance.policy');
+        Route::get('/', [AdminPolicyController::class, '__list'])->name('admin.get.list.policy');
+        Route::get('/check_slug', [AdminPolicyController::class, 'checkSlug'])->name('admin.checkSlug.policy');
+        Route::get('/check_order', [AdminPolicyController::class, 'checkOrder'])->name('admin.checkOrder.policy');
+        Route::get('/{id}', [AdminPolicyController::class, '__find'])->name('admin.get.find.policy');
+        Route::post('/', [AdminPolicyController::class, '__create'])->name('admin.store.policy');
+        Route::post('/{id}', [AdminPolicyController::class, '__update'])->name('admin.update.policy');
+        Route::get('/{action}/{id}', [AdminPolicyController::class, 'action'])->name('admin.get.action.policy');
     });
 
     Route::group(['prefix' => 'question'], function () {
