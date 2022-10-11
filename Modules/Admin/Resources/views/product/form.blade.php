@@ -45,25 +45,25 @@
                             <hr/>
                             <div class="demo-inline-spacing">
                                 <div class="form-group">
-                                    <label for="longs">Chiều dài</label>
+                                    <label for="longs">Chiều dài (m)</label>
                                     <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
                                         <input type="text" class="touchspin" name="longs" id="longs" value="0" data-bts-step="0.5" data-bts-decimals="2" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="width">Chiều Rộng</label>
+                                    <label for="width">Chiều Rộng (m)</label>
                                     <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
                                         <input type="text" class="touchspin" name="width" id="width" value="0" data-bts-step="0.5" data-bts-decimals="2" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="height">Chiều Cao</label>
+                                    <label for="height">Chiều Cao (m)</label>
                                     <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
                                         <input type="text" class="touchspin" name="height" id="height" value="0" data-bts-step="0.5" data-bts-decimals="2" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="area">Diện tích</label>
+                                    <label for="area">Diện tích (m<sup>2</sup>)</label>
                                     <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
                                         <input type="text" class="touchspin" name="area" id="area" value="0" data-bts-step="0.5" data-bts-decimals="2" />
                                     </div>
