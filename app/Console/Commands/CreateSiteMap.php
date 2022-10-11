@@ -71,10 +71,10 @@ class CreateSiteMap extends Command
 //        $sitemap->add(route('get.list.post', ['tin-tuc-su-kien']), Carbon::now(), '1.0', 'daily');
 
         $sitemap->add(route('get.list.question'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.security.policy'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.shopping.policy'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.transport.policy'), Carbon::now(), '1.0', 'daily');
-        $sitemap->add(route('get.list.insurance.policy'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.security.policy'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.shopping.policy'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.transport.policy'), Carbon::now(), '1.0', 'daily');
+//        $sitemap->add(route('get.list.insurance.policy'), Carbon::now(), '1.0', 'daily');
         $sitemap->add(route('get.list.design'), Carbon::now(), '1.0', 'daily');
 
         $policies = services()->policyService()->orderByDesc('id')->get();
