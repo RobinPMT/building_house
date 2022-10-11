@@ -13,6 +13,14 @@
                     <label class="form-label" for="title">Tiêu đề <span style="color: red">*</span></label>
                     <input type="text" name="title" class="form-control dt-full-name" id="title" placeholder="Tiêu đề" aria-label="Tiêu đề" />
                 </div>
+                <div class="demo-inline-spacing">
+                    <div class="form-group">
+                        <label for="order" style="">Thứ tự <span style="color: red">*</span></label>
+                        <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                            <input type="text" class="touchspin" name="order" id="order" value="0" data-bts-step="1" data-bts-decimals="0" />
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="form-label" for="link">Link <span style="color: red">*</span></label>
                     <input type="text" name="link" class="form-control dt-full-name" id="link" placeholder="Link" aria-label="Link" />

@@ -34,6 +34,9 @@ class AfterAddOrder extends Migration
         Schema::table('housings', function (Blueprint $table) {
             $table->bigInteger('order')->default(0)->nullable();
         });
+        Schema::table('banners', function (Blueprint $table) {
+            $table->bigInteger('order')->default(0)->nullable();
+        });
     }
 
     /**
@@ -62,6 +65,9 @@ class AfterAddOrder extends Migration
             $table->dropColumn('order');
         });
         Schema::table('housings', function (Blueprint $table) {
+            $table->dropColumn('order');
+        });
+        Schema::table('banners', function (Blueprint $table) {
             $table->dropColumn('order');
         });
     }

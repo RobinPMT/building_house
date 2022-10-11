@@ -24,6 +24,7 @@
                 <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
+                    <th>Thứ tự</th>
                     <th>Ảnh nội dung</th>
                     <th>Ảnh background</th>
                     <th>Trạng thái</th>
@@ -36,6 +37,7 @@
                         <tr id="sid{{$item['id']}}">
                                 <td scope="row">{{$stt+1}}</td>
                                 <td>{{$item['title']}}</td>
+                                <td style="">{{$item['order']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar_main']}}" width="100px" height="100px" alt="">
                                 </td>
@@ -83,6 +85,7 @@
                 <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
+                    <th>Thứ tự</th>
                     <th>Ảnh nội dung</th>
                     <th>Ảnh background</th>
                     <th>Trạng thái</th>

@@ -166,6 +166,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
 
     Route::group(['prefix' => 'banner'], function () {
         Route::get('/', [AdminBannerController::class, '__list'])->name('admin.get.list.banner');
+        Route::get('/check_order', [AdminBannerController::class, 'checkOrder'])->name('admin.checkOrder.banner');
         Route::get('/{id}', [AdminBannerController::class, '__find'])->name('admin.get.find.banner');
         Route::post('/', [AdminBannerController::class, '__create'])->name('admin.store.banner');
         Route::post('/{id}', [AdminBannerController::class, '__update'])->name('admin.update.banner');

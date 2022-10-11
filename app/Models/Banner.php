@@ -10,7 +10,7 @@ class Banner extends Base
 
     protected $fillable = [
         'title', 'active', 'link', 'avatar_main', 'avatar_not_main',
-        'description','created_at', 'updated_at'
+        'description','created_at', 'updated_at', 'order'
     ];
 
     const STATUS_PUBLIC = 1;

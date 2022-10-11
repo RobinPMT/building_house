@@ -28,7 +28,7 @@ class BannerService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'active', 'link', 'avatar_main', 'avatar_not_main', 'description', 'arr_active',
+            'title', 'active', 'link', 'avatar_main', 'avatar_not_main', 'description', 'arr_active', 'order'
         ];
     }
 

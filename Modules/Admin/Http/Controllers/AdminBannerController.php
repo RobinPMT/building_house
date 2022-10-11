@@ -26,7 +26,7 @@ class AdminBannerController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_banner_fields' => 'title,active,link,avatar_main,avatar_not_main,description,arr_active',
+            '_banner_fields' => 'title,active,link,avatar_main,avatar_not_main,description,arr_active,order',
             '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
@@ -42,7 +42,7 @@ class AdminBannerController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_banner_fields' => 'title,active,link,avatar_main,avatar_not_main,description,arr_active',
+            '_banner_fields' => 'title,active,link,avatar_main,avatar_not_main,description,arr_active,order',
         ]);
         return parent::__find($request, true);
     }
@@ -72,5 +72,11 @@ class AdminBannerController extends WebController
             }
         }
         return redirect()->back()->with('success', $messages);
+    }
+
+    public function checkOrder()
+    {
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 }
