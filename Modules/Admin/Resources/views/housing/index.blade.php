@@ -17,8 +17,8 @@
                                         <div class="row d-flex align-items-end">
                                             <div class="col-md-8 col-12">
                                                 <div class="form-group">
-                                                    <label for="value">Đoạn header Consolar Coffee & Food</label>
-                                                    <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
+                                                    <label for="content">Đoạn header Consolar Coffee & Food</label>
+                                                    <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="content" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
@@ -80,7 +80,7 @@
                                                     <img id="output_image_extra_setting_main" src="{{isset($settingHousing['avatar']) ? pare_url_file($settingHousing['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting_main">Ảnh Chính <strong>(Kích thước: 330x200 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting_main">Ảnh nội dung <strong>(Kích thước: 330x200 pixel)</strong></label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="input_image_extra_setting_main" name="avatar">
                                                         <label class="custom-file-label" for="input_image_extra_setting_main">Chọn ảnh</label>
@@ -93,7 +93,7 @@
                                                     <img id="output_image_extra_setting" src="{{isset($settingHousing['avatar_not_main']) ? pare_url_file($settingHousing['avatar_not_main'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting">Ảnh Phụ <strong>(Kích thước: 390x260 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting">Ảnh background <strong>(Kích thước: 390x260 pixel)</strong></label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="input_image_extra_setting" name="avatar_not_main">
                                                         <label class="custom-file-label" for="input_image_extra_setting">Chọn ảnh</label>
