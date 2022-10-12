@@ -164,4 +164,14 @@ class AdminProductController extends WebController
         }
         return redirect()->back()->with('danger', 'Cập nhật thất bại!');
     }
+
+    public static function showProducts()
+    {
+        $tags = services()->productService()->select('id', 'title')->get()->toArray();
+        foreach ($tags as $key => $item) {
+            echo '<option value="'.$item['id'].'">';
+            echo  $item['title'];
+            echo '</option>';
+        }
+    }
 }

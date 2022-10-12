@@ -11,7 +11,7 @@ class RoomService extends ApiService
     protected $model = Room::class;
 
     protected $relations = [
-        'creator', 'parent', 'childs',
+        'creator', 'parent', 'childs', 'products'
     ];
 
     protected $fieldsName = '_room_fields';
@@ -29,7 +29,7 @@ class RoomService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'active', 'author_id', 'arr_active', 'parent_id'
+            'title', 'active', 'author_id', 'arr_active', 'parent_id', 'order', 'product_ids'
         ];
     }
 
@@ -59,6 +59,11 @@ class RoomService extends ApiService
         return $model->getStatus();
     }
 
+    public function get_product_ids_value($record, Room $model)
+    {
+        return $model->products->pluck('id');
+    }
+
     public function includeParent()
     {
         return [services()->roomService(), 'item', function (Room $model) {
@@ -70,6 +75,13 @@ class RoomService extends ApiService
     {
         return [services()->roomService(), 'items', function (Room $model) {
             return $model->childs;
+        }];
+    }
+
+    public function includeProducts()
+    {
+        return [services()->productService(), 'items', function (Room $model) {
+            return $model->products;
         }];
     }
 
@@ -88,6 +100,11 @@ class RoomService extends ApiService
         $this->on('saving', function ($model) use ($user) {
             $model->author_id = $user->getKey() ?? null;
             $model->active = $model->active == 'on' ? true : false;
+        });
+
+        $this->on('saved', function ($model) use ($user) {
+            $product_ids = $model->getRaw('product_ids');
+            $model->products()->sync($product_ids);
         });
     }
 }

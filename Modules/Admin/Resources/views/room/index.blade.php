@@ -24,8 +24,10 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Người tạo</th>
                         <th>Danh mục cha</th>
+                        <th>Sản phẩm</th>
+                        <th>Thứ tự</th>
+                        <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -35,11 +37,21 @@
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$item['title']}}</td>
-                                    <td style="">{{$item['creator']['name']}}</td>
-                                    <td style="">
+                                    <td style="white-space: normal;">{{$item['title']}}</td>
+                                    <td style="white-space: normal;">
                                         {{isset($item['parent']['title']) ? $item['parent']['title'] : ''}}
                                     </td>
+                                    <td style="">
+                                        <ul>
+                                            @if(isset($item['products']))
+                                                @foreach($item['products'] as $product)
+                                                    <li>{{$product['title']}}</li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </td>
+                                    <td>{{$item['order']}}</td>
+                                    <td style="white-space: normal;">{{$item['creator']['name']}}</td>
                                     <td style="">
                                         <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.room', ['active', $item['id']])}}">
                                             {{$item['arr_active']['name']}}
@@ -81,14 +93,42 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Người tạo</th>
                         <th>Danh mục cha</th>
+                        <th>Sản phẩm</th>
+                        <th>Thứ tự</th>
+                        <th>Người tạo</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
                     </tfoot>
                 </table>
                 @include("admin::room.form")
+                <div class="row" style="margin-top: 8px;">
+                    <div class="col-sm-12 col-md-5" style="margin-top: 8px;">
+                        {{--                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>--}}
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <ul class="pagination" style="justify-content: flex-end">
+                                @if(isset($meta['pagination']))
+                                    <li class="paginate_button page-item previous {{$meta['pagination']['page'] > 1 ? '' : 'disabled'}}" id="example_previous">
+                                        <a href="{{route('admin.get.list.room', ['_page' => $meta['pagination']['page'] - 1])}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
+                                    </li>
+                                    @if(isset($meta['pagination']['lastPage']))
+                                        @for($i = 1; $i <= $meta['pagination']['lastPage']; $i++)
+                                            <li class="paginate_button page-item {{$meta['pagination']['page'] == $i ? 'active' : ''}}">
+                                                <a href="{{route('admin.get.list.room', ['_page' => $i])}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
+                                            </li>
+                                        @endfor
+                                    @endif
+                                    <li class="paginate_button page-item next {{$meta['pagination']['page'] < $meta['pagination']['lastPage'] ? '' : 'disabled'}}" id="example_next">
+                                        <a href="{{route('admin.get.list.room', ['_page' => $meta['pagination']['page'] + 1])}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -100,6 +140,27 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    { "width": "2%" },
+                    { "width": "15%" },
+                    { "width": "5%" },
+                    null,
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                ],
+                paging: false,
+                showEntries: false,
+                lengthChange: false,
+                searching: false,
+                ordering    : true,
+                bInfo      : false,
+                autoWidth  : false
+            });
+            $(".select-multi").select2({
+                // placeholder: "Chọn danh mục cha",
+                // tags: true,
             });
             $(".select-single").select2({
                 // placeholder: "Chọn danh mục cha",
@@ -112,7 +173,25 @@
                 }
             });
             $( "#parent_id" ).change(function () {
+                let count  = 0;
                 $("#select2-parent_id-container").text($( "#parent_id option:selected" ).text().trim());
+                let current_id = null;
+                if ($("#_id" ).val()) {
+                    current_id = $("#_id" ).val();
+                }
+                let url = '/admin/room/check_order/'+$("#parent_id option:selected" ).val() + '/' +current_id;
+                console.log();
+                if($("#parent_id option:selected" ).val()) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (response) {
+                            console.log(response)
+                            $('#_order_room').val(response.order);
+                        }
+                    })
+                }
+
             });
         });
         // ClassicEditor
@@ -201,7 +280,10 @@
                     success: function (response) {
                         console.log(response)
                         if(response.status) {
+                            $("#_id").val(response.data.id).change();
                             $("#parent_id").val(response.data.parent_id).change();
+                            $("#product_ids").val(response.data.product_ids).change();
+                            $('#_order_room').val(response.data.order);
                             $('#title').val(response.data.title);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
@@ -234,6 +316,8 @@
             $(".item-add").click(function (event) {
                 if($('#form-crud').attr('action') !== '{{route('admin.store.room')}}'){
                     $('#form-crud').trigger("reset");
+                    $("#parent_id").val('').change();
+                    $("#product_ids").val('').change();
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });

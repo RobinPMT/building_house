@@ -12,7 +12,7 @@ class ProductService extends ApiService
     protected $model = Product::class;
 
     protected $relations = [
-        'creator', 'keys', 'category'
+        'creator', 'keys', 'category', 'rooms', 'attributes'
     ];
 
     protected $fieldsName = '_product_fields';
@@ -68,10 +68,24 @@ class ProductService extends ApiService
         }];
     }
 
+    public function includeAttributes()
+    {
+        return [services()->attributeService(), 'item', function (Product $model) {
+            return $model->attributes;
+        }];
+    }
+
     public function includeKeys()
     {
         return [services()->settingKeyProductService(), 'items', function (Product $model) {
             return $model->keys;
+        }];
+    }
+
+    public function includeRooms()
+    {
+        return [services()->roomService(), 'items', function (Product $model) {
+            return $model->rooms;
         }];
     }
 

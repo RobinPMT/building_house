@@ -79,6 +79,16 @@ class Product extends Base
             ->select('value', 'key', 'name', 'tag_type');
     }
 
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'product_rooms', 'product_id', 'room_id')->withPivot('product_id', 'room_id');
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class, 'product_id');
+    }
+
     /**
      * @inheritDoc
      */

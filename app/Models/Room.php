@@ -11,7 +11,7 @@ class Room extends Base
     protected $fillable = [
         'title', 'slug', 'icon', 'active', 'parent_id',
         'author_id','created_at',
-        'updated_at'
+        'updated_at', 'order'
     ];
 
     const STATUS_PUBLIC = 1;
@@ -52,5 +52,10 @@ class Room extends Base
     public function attributes()
     {
         return $this->hasMany(Attribute::class, 'room_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_rooms', 'room_id', 'product_id')->withPivot('product_id', 'room_id');
     }
 }

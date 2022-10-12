@@ -149,6 +149,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::group(['prefix' => 'room'], function () {
         Route::get('/', [AdminRoomController::class, '__list'])->name('admin.get.list.room');
         Route::get('/check_slug', [AdminRoomController::class, 'checkSlug'])->name('admin.checkSlug.room');
+        Route::get('/check_order/{parent_id}/{current_id}', [AdminRoomController::class, 'checkOrder'])->name('admin.checkOrder.room');
         Route::get('/{id}', [AdminRoomController::class, '__find'])->name('admin.get.find.room');
         Route::post('/', [AdminRoomController::class, '__create'])->name('admin.store.room');
         Route::post('/{id}', [AdminRoomController::class, '__update'])->name('admin.update.room');

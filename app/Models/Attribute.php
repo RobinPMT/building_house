@@ -11,7 +11,7 @@ class Attribute extends Base
     protected $fillable = [
         'title', 'type', 'room_id', 'avatar', 'active',
         'author_id', 'arr_value', 'arr_image','created_at',
-        'updated_at'
+        'updated_at', 'order'
     ];
 
     const TYPE_SYSTEM = 'system';
@@ -52,5 +52,10 @@ class Attribute extends Base
     {
         return $this->belongsToMany(Wishlist::class, 'wishlists_attributes', 'attribute_id', 'wishlist_id')->withPivot('wishlist_id', 'attribute_id', 'key_choose')
             ->select('wishlist_id', 'attribute_id', 'key_choose');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

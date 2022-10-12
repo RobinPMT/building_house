@@ -26,10 +26,11 @@ class AdminRoomController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_room_fields' => 'title,active,author_id,arr_active,parent_id',
-            '_relations' => 'creator,parent',
+            '_room_fields' => 'title,active,author_id,arr_active,parent_id,order,product_ids',
+            '_relations' => 'creator,parent,products',
             '_admin_fields' => 'name',
-            '_noPagination' => 1,
+            '_product_fields' => 'title',
+//            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::room.index');
@@ -43,8 +44,10 @@ class AdminRoomController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_room_fields' => 'title,active,author_id,arr_active,parent_id',
-            '_relations' => 'creator,parent'
+            '_room_fields' => 'title,active,author_id,arr_active,parent_id,order,product_ids',
+            '_relations' => 'creator,parent,products',
+            '_admin_fields' => 'name',
+            '_product_fields' => 'title',
         ]);
         return parent::__find($request, true);
     }
@@ -129,6 +132,21 @@ class AdminRoomController extends WebController
                     AdminRoomController::showRooms([$rooms[$key]], $item['parent_id'], '');
                 }
             }
+        }
+    }
+
+    public function checkOrder($parent_id, $current_id)
+    {
+        if ($current_id == 'null') {
+            $count = $this->getService()->where('parent_id', $parent_id)->count();
+            return response()->json(['order' => $count + 1]);
+        } else {
+            $room = $this->getService()->find($current_id);
+            $count = $room->order;
+            if ($room->parent_id != $parent_id) {
+                $count = $this->getService()->where('parent_id', $parent_id)->count() + 1;
+            }
+            return response()->json(['order' => $count]);
         }
     }
 }

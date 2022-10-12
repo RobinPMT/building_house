@@ -28,9 +28,10 @@ class AdminAttributeController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_attribute_fields' => 'title,type,room_id,avatar,active,author_id,arr_value,arr_image,arr_active',
-            '_relations' => 'creator,room',
+            '_attribute_fields' => 'title,type,room_id,avatar,active,author_id,arr_value,arr_image,arr_active,order,product_id',
+            '_relations' => 'creator,room,product',
             '_admin_fields' => 'name',
+            '_product_fields' => 'title',
             '_room_fields' => 'title',
 //            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
@@ -48,8 +49,9 @@ class AdminAttributeController extends WebController
     public function __find(Request $request, $is_json = false)
     {
         $request->merge([
-            '_attribute_fields' => 'title,type,room_id,avatar,active,author_id,arr_value,arr_image,arr_active',
-            '_relations' => 'creator,room',
+            '_attribute_fields' => 'title,type,room_id,avatar,active,author_id,arr_value,arr_image,arr_active,order,product_id',
+            '_relations' => 'creator,room,product',
+            '_product_fields' => 'title',
             '_room_fields' => 'title',
         ]);
         return parent::__find($request, true);

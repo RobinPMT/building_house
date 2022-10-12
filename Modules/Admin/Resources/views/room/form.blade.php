@@ -8,6 +8,7 @@
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
 {{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
             </div>
+            <input type="text" class="form-control dt-full-name" id="_id" hidden/>
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
                     <label class="form-label" for="title">Tiêu đề<span style="color: red">*</span></label>
@@ -23,6 +24,20 @@
                         @endif
                     </select>
                 </div>
+{{--                <div class="demo-inline-spacing">--}}
+                    <div class="form-group _order_room">
+                        <label for="_order_room" style="">Thứ tự</label>
+                        <div class="input-group input-group-lg" style="right: 10px; width: 14.5rem">
+                            <input type="text" class="touchspin" name="order" id="_order_room" value="0" data-bts-step="1" data-bts-decimals="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="product_ids">Sản phẩm <span style="color: red">*</span></label>
+                        <select class="select2-size-lg form-control select-multi" name="product_ids[]" multiple="multiple" id="product_ids" >
+                            @php echo Modules\Admin\Http\Controllers\AdminProductController::showProducts();  @endphp
+                        </select>
+                    </div>
+{{--                </div>--}}
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="active" class="custom-control-input" id="checkbox_active">

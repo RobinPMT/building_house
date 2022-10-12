@@ -11,7 +11,7 @@ class AttributeService extends ApiService
     protected $model = Attribute::class;
 
     protected $relations = [
-        'creator', 'room'
+        'creator', 'room', 'product'
     ];
 
     protected $fieldsName = '_attribute_fields';
@@ -29,7 +29,7 @@ class AttributeService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'type', 'room_id', 'avatar', 'active',
+            'title', 'type', 'room_id', 'avatar', 'order', 'active', 'product_id',
             'author_id', 'arr_value', 'arr_image',
             'arr_active',
         ];
@@ -60,6 +60,13 @@ class AttributeService extends ApiService
     {
         return [services()->roomService(), 'item', function (Attribute $model) {
             return $model->room;
+        }];
+    }
+
+    public function includeProduct()
+    {
+        return [services()->productService(), 'item', function (Attribute $model) {
+            return $model->product;
         }];
     }
 
