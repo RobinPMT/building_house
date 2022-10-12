@@ -212,25 +212,34 @@
                     <label class="compare-label">{{$item->name}}</label>
                     <div class="row-sub-compare">
                         <div class="compare-column">
-                            <ul>
-                                @if(isset($product))
-                                    {!! $product->keys()->find($item->id)->value  !!}
-                                @endif
-                            </ul>
+{{--                            <ul>--}}
+{{--                                @if(isset($product))--}}
+{{--                                    {!! $product->keys()->find($item->id)->value  !!}--}}
+{{--                                @endif--}}
+{{--                            </ul>--}}
+                            @if(isset($product))
+                                {{$product->keys()->find($item->id)->value}}
+                            @endif
                         </div>
                         <div class="compare-column">
-                            <ul>
-                                @if(isset($product1))
-                                    {!! $product1->keys()->find($item->id)->value  !!}
-                                @endif
-                            </ul>
+{{--                            <ul>--}}
+{{--                                @if(isset($product1))--}}
+{{--                                    {!! $product1->keys()->find($item->id)->value  !!}--}}
+{{--                                @endif--}}
+{{--                            </ul>--}}
+                            @if(isset($product1))
+                                {{$product1->keys()->find($item->id)->value}}
+                            @endif
                         </div>
                         <div class="compare-column">
-                            <ul>
-                                @if(isset($product2))
-                                    {!! $product2->keys()->find($item->id)->value  !!}
-                                @endif
-                            </ul>
+{{--                            <ul>--}}
+{{--                                @if(isset($product2))--}}
+{{--                                    {!! $product2->keys()->find($item->id)->value  !!}--}}
+{{--                                @endif--}}
+{{--                            </ul>--}}
+                            @if(isset($product2))
+                                {{$product2->keys()->find($item->id)->value}}
+                            @endif
                         </div>
                     </div>
                 </div>

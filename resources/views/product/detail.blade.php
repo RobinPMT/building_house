@@ -90,9 +90,10 @@
                                         <li>
                                             <label>{{$item->name}}</label>
                                             <div>
-                                                <ul>
-                                                    {!! $item->value !!}
-                                                </ul>
+{{--                                                <ul>--}}
+{{--                                                    {!! $item->value !!}--}}
+{{--                                                </ul>--}}
+                                                {{$item->value}}
                                             </div>
                                         </li>
                                     @endif
@@ -258,9 +259,10 @@
                                                 <label class="compare-label">{{$item->name}}</label>
                                                 <div class="row-sub-compare">
                                                     <div class="compare-column">
-                                                        <ul>
-                                                            {!! $item->value !!}
-                                                        </ul>
+{{--                                                        <ul>--}}
+{{--                                                            {!! $item->value !!}--}}
+{{--                                                        </ul>--}}
+                                                        {{$item->value}}
                                                     </div>
                                                     <div class="compare-column">
                                                         <ul>

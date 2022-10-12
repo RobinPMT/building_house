@@ -190,9 +190,10 @@
                                                                                 <li>
                                                                                     <label>{{$items->name}}</label>
                                                                                     <div>
-                                                                                        <ul>
-                                                                                            {!! $items->value !!}
-                                                                                        </ul>
+{{--                                                                                        <ul>--}}
+{{--                                                                                            {!! $items->value !!}--}}
+{{--                                                                                        </ul>--}}
+                                                                                        {{$items->value}}
                                                                                     </div>
                                                                                 </li>
                                                                             @elseif($items->key ==='suc_chua')
@@ -260,9 +261,10 @@
                                                                                     <li>
                                                                                         <label>{{$item->name}}</label>
                                                                                         <div>
-                                                                                            <ul>
-                                                                                                {!! $item->value !!}
-                                                                                            </ul>
+{{--                                                                                            <ul>--}}
+{{--                                                                                                {!! $item->value !!}--}}
+{{--                                                                                            </ul>--}}
+                                                                                            {{$items->value}}
                                                                                         </div>
                                                                                     </li>
                                                                                 @endif
