@@ -27,8 +27,8 @@ class AdminSettingKeyProductController extends WebController
     {
         $request->merge([
             '_setting_key_product_fields' => 'name,key,tag_type,active,html,arr_active',
-            '_noPagination' => 1,
-            '_orderBy' => 'id:asc',
+//            '_noPagination' => 1,
+            '_orderBy' => 'id:desc',
         ]);
         return parent::__list($request, 'admin::setting_key_product.index');
     }

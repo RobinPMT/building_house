@@ -27,7 +27,6 @@ class AdminBannerController extends WebController
     {
         $request->merge([
             '_banner_fields' => 'title,active,link,avatar_main,avatar_not_main,description,arr_active,order',
-            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
         return parent::__list($request, 'admin::banner.index');

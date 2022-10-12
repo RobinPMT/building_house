@@ -431,7 +431,14 @@
                     null,
                     null,
                     null,
-                ]
+                ],
+                paging: true,
+                showEntries: false,
+                lengthChange: false,
+                searching: false,
+                ordering    : true,
+                bInfo      : false,
+                autoWidth  : false
 
             });
 

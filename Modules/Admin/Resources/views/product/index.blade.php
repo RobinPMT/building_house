@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header border-bottom p-1">
-                    <div class="head-label"><h6 class="mb-0">DataTable with Buttons</h6></div>
+                    <div class="head-label"><h6 class="mb-0">Sản phẩm</h6></div>
                     <div class="dt-action-buttons text-right">
                         <div class="dt-buttons d-inline-flex">
                             <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in">
@@ -19,6 +19,32 @@
                         </div>
                     </div>
                 </div>
+                <form class="tree-most" id="form_filter" method="get" action="{{route('admin.get.list.product', ['_page' => 1])}}">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="example_length">
+                                <label for="category_id" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc sản phẩm theo danh mục
+                                    <select name="category_id" id="category_id" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" class="category_id_filter" onchange="onChangeV('category_id', value)">
+                                        <option value="" selected>Chọn danh mục</option>
+                                        @if(isset($categories, $status) && $status)
+                                            @foreach($categories as $key => $category)
+                                                <option {{\Request::get('category_id') == $category['id'] ? "selected=selected" : ""}} value="{{ $category['id']}}">{{ $category['title']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        {{--                    <div class="col-sm-12 col-md-6">--}}
+                        {{--                        <div id="example_filter" class="dataTables_filter">--}}
+                        {{--                            <label>Search:--}}
+                        {{--                                <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">--}}
+                        {{--                            </label>--}}
+                        {{--                        </div>--}}
+                        {{--                    </div>--}}
+                    </div>
+                </form>
+
                 <table id="example" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -139,6 +165,32 @@
                     </tr>
                     </tfoot>
                 </table>
+                <div class="row" style="margin-top: 8px;">
+                    <div class="col-sm-12 col-md-5" style="margin-top: 8px;">
+                        {{--                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>--}}
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <ul class="pagination" style="justify-content: flex-end">
+                                @if(isset($meta['pagination']))
+                                    <li class="paginate_button page-item previous {{$meta['pagination']['page'] > 1 ? '' : 'disabled'}}" id="example_previous">
+                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] - 1], ['category_id' => \Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
+                                    </li>
+                                    @if(isset($meta['pagination']['lastPage']))
+                                        @for($i = 1; $i <= $meta['pagination']['lastPage']; $i++)
+                                            <li class="paginate_button page-item {{$meta['pagination']['page'] == $i ? 'active' : ''}}">
+                                                <a href="{{route('admin.get.list.product', array_merge(['_page' => $i], ['category_id' =>\Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
+                                            </li>
+                                        @endfor
+                                    @endif
+                                    <li class="paginate_button page-item next {{$meta['pagination']['page'] < $meta['pagination']['lastPage'] ? '' : 'disabled'}}" id="example_next">
+                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] + 1], ['category_id' =>\Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -175,6 +227,15 @@
 @stop
 @section('script')
     <script>
+        function onChangeV(key, value) {
+            $("#form_filter").submit();
+        }
+            // $('div.dataTables_length').on('click', 'label select.category_id_filter', function(e){
+            //     console.log(1234)
+            //     $("#form_filter").submit();
+            // });
+    </script>
+    <script>
         // CKEDITOR.replace('content');
         // CKEDITOR.replace('editor1', {
         //     height: 150,
@@ -185,6 +246,13 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 responsive: true,
+                paging: false,
+                showEntries: false,
+                lengthChange: false,
+                searching: false,
+                ordering    : true,
+                bInfo      : true,
+                autoWidth  : false,
                 "columns": [
                     { "width": "2%" },
                     { "width": "15%" },

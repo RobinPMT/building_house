@@ -24,7 +24,7 @@ class ProductService extends ApiService
 
     protected function getFilterableFields(): array
     {
-        return [];
+        return ['category_id'];
     }
 
     protected function fields(): array
@@ -47,6 +47,9 @@ class ProductService extends ApiService
                         $query->where('id', '!=', $user->getKey())->where('email', '!=', 'admin@gmail.com');
                     };
                 }
+            },
+            'category_id' => function ($value) {
+                return ['category_id', $value];
             },
         ];
     }

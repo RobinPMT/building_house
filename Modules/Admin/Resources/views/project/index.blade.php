@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header border-bottom p-1">
-                    <div class="head-label"><h6 class="mb-0">DataTable with Buttons</h6></div>
+                    <div class="head-label"><h6 class="mb-0">Dự án</h6></div>
                     <div class="dt-action-buttons text-right">
                         <div class="dt-buttons d-inline-flex">
                             <button class="dt-button create-new btn btn-primary item-add" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in">
@@ -117,6 +117,32 @@
                     </tr>
                     </tfoot>
                 </table>
+                <div class="row" style="margin-top: 8px;">
+                    <div class="col-sm-12 col-md-5" style="margin-top: 8px;">
+                        {{--                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>--}}
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <ul class="pagination" style="justify-content: flex-end">
+                                @if(isset($meta['pagination']))
+                                    <li class="paginate_button page-item previous {{$meta['pagination']['page'] > 1 ? '' : 'disabled'}}" id="example_previous">
+                                        <a href="{{route('admin.get.list.project', ['_page' => $meta['pagination']['page'] - 1])}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
+                                    </li>
+                                    @if(isset($meta['pagination']['lastPage']))
+                                        @for($i = 1; $i <= $meta['pagination']['lastPage']; $i++)
+                                            <li class="paginate_button page-item {{$meta['pagination']['page'] == $i ? 'active' : ''}}">
+                                                <a href="{{route('admin.get.list.project', ['_page' => $i])}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
+                                            </li>
+                                        @endfor
+                                    @endif
+                                    <li class="paginate_button page-item next {{$meta['pagination']['page'] < $meta['pagination']['lastPage'] ? '' : 'disabled'}}" id="example_next">
+                                        <a href="{{route('admin.get.list.project', ['_page' => $meta['pagination']['page'] + 1])}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -169,7 +195,14 @@
                     null,
                     null,
                     null,
-                ]
+                ],
+                paging: false,
+                showEntries: false,
+                lengthChange: false,
+                searching: false,
+                ordering    : true,
+                bInfo      : false,
+                autoWidth  : false
             });
             $("#file-1").fileinput({
                 theme: 'fa5',

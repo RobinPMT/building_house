@@ -28,7 +28,7 @@ class AdminProjectController extends WebController
     {
         $request->merge([
             '_project_fields' => 'title,slug,content,active,hot,author_id,avatar,arr_image,arr_active,arr_hot,title_seo,description_seo,keyword_seo,order',
-            '_orderBy' => 'order'
+            '_orderBy' => 'order',
 //            '_relations' => 'creator',
 //            '_admin_fields' => 'name',
         ]);
