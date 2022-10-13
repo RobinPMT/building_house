@@ -73,15 +73,15 @@
                                         <a  class="badge badge-pill {{$item['arr_active']['class']}}" href="{{ route('admin.get.action.slide',['active', $item['id']])}}">
                                             {{ $item['arr_active']['name'] }}
                                         </a>
-                                        <a class="badge badge-pill {{$item['arr_banner_home']['class']}}" href="{{ route('admin.get.action.slide',['banner_home', $item['id']])}}">
-                                            {{ $item['arr_banner_home']['name'] }}
-                                        </a>
+{{--                                        <a class="badge badge-pill {{$item['arr_banner_home']['class']}}" href="{{ route('admin.get.action.slide',['banner_home', $item['id']])}}">--}}
+{{--                                            {{ $item['arr_banner_home']['name'] }}--}}
+{{--                                        </a>--}}
                                     </div>
-                                    <div style="margin-bottom: 10px;">
-                                        <a class="badge badge-pill {{ $item['arr_banner_product']['class'] }}" href="{{ route('admin.get.action.slide',['banner_pro', $item['id']])}}">
-                                            {{ $item['arr_banner_product']['name'] }}
-                                        </a>
-                                    </div>
+{{--                                    <div style="margin-bottom: 10px;">--}}
+{{--                                        <a class="badge badge-pill {{ $item['arr_banner_product']['class'] }}" href="{{ route('admin.get.action.slide',['banner_pro', $item['id']])}}">--}}
+{{--                                            {{ $item['arr_banner_product']['name'] }}--}}
+{{--                                        </a>--}}
+{{--                                    </div>--}}
                                     <div class="file-actions">
                                         <div class="file-footer-buttons">
 {{--                                            <button type="button" class="kv-file-upload btn btn-sm btn-kv btn-default btn-outline-secondary" title="Upload file"><i class="glyphicon glyphicon-upload"></i></button>--}}
