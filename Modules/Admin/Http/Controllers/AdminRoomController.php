@@ -25,15 +25,30 @@ class AdminRoomController extends WebController
 
     public function __list(Request $request, $view = null)
     {
+        $filter = '';
+        if ($request->parent_id) {
+            $filter .= "parent_id:$request->parent_id;";
+        }
+        if ($request->product_id) {
+            $filter .= "product_id:$request->product_id;";
+        }
         $request->merge([
             '_room_fields' => 'title,active,author_id,arr_active,parent_id,order,product_ids',
             '_relations' => 'creator,parent,products',
             '_admin_fields' => 'name',
             '_product_fields' => 'title',
+            '_filter' => $filter,
 //            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
-        return parent::__list($request, 'admin::room.index');
+        $products = services()->productService()->select('title', 'id')->get()->toArray();
+        $rooms = services()->roomService()->doesntHave('parent')->select('title', 'id')->get()->toArray();
+        $data = [
+            'products' => $products,
+            'rooms' => $rooms
+        ];
+        return parent::__lists($request, $data, 'admin::room.index');
+//        return parent::__list($request, 'admin::room.index');
     }
 
     public function __create(Request $request, $route = null)
@@ -91,7 +106,7 @@ class AdminRoomController extends WebController
     public static function showRooms($rooms = null, $parent_id = null, $char = '')
     {
         if (!is_array($rooms)) {
-            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title', 'parent_id')->get()->toArray();
+            $rooms = services()->roomService()->select('id', 'title', 'parent_id')->get()->toArray();
         }
         foreach ($rooms as $key => $item) {
             if ($item['parent_id'] == $parent_id) {
@@ -108,7 +123,7 @@ class AdminRoomController extends WebController
     public static function showChildRooms($rooms = null, $parent_id = null, $char = '')
     {
         if (!is_array($rooms)) {
-            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
+            $rooms = services()->roomService()->doesntHave('parent')
                 ->with(['childs' => function ($query) {
                     $query->where('active', Room::STATUS_PUBLIC);
                 }])

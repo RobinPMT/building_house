@@ -18,12 +18,12 @@ class RoomService extends ApiService
 
     protected function getOrderbyableFields(): array
     {
-        return ['id'];
+        return ['id', 'order'];
     }
 
     protected function getFilterableFields(): array
     {
-        return [];
+        return ['parent_id', 'product_id'];
     }
 
     protected function fields(): array
@@ -43,6 +43,16 @@ class RoomService extends ApiService
                         $query->where('id', '!=', $user->getKey())->where('email', '!=', 'admin@gmail.com');
                     };
                 }
+            },
+            'product_id' => function ($value) {
+                return function ($query) use ($value) {
+                    $query->whereHas('products', function ($query) use ($value) {
+                        $query->where('product_id', $value);
+                    });
+                };
+            },
+            'parent_id' => function ($value) {
+                return ['parent_id', $value];
             },
         ];
     }
