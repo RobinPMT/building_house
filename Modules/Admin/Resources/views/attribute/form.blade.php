@@ -23,10 +23,18 @@
 
 {{--                </div>--}}
                 <div class="form-group">
+                    <label for="product_id-system">Chọn sản phẩm <span style="color: red">*</span></label>
+                    <select name="product_id" id="product_id-system" class="select2 form-control form-control-lg select-single" required>
+                        <option value="" selected>Chọn sản phẩm</option>
+                            @php echo Modules\Admin\Http\Controllers\AdminProductController::showProducts();  @endphp
+                    </select>
+
+                </div>
+                <div class="form-group">
                     <label for="room_id-system">Chọn tiện nghi <span style="color: red">*</span></label>
                     <select name="room_id" id="room_id-system" class="select2 form-control form-control-lg select-single" required>
                         <option value="" selected>Chọn tiện nghi</option>
-                        @php echo Modules\Admin\Http\Controllers\AdminRoomController::showChildRooms();  @endphp
+{{--                        @php echo Modules\Admin\Http\Controllers\AdminRoomController::showChildRooms();  @endphp--}}
                     </select>
                 </div>
 
@@ -58,9 +66,9 @@
                             <hr />
                         </div>
                     </div>
-                    <div data-repeater-list="data_old" class="data_old">
+{{--                    <div data-repeater-list="data_old" class="data_old">--}}
 
-                    </div>
+{{--                    </div>--}}
                     <div class="row">
                         <div class="col-12">
                             <button class="btn btn-icon btn-primary" type="button" data-repeater-create>

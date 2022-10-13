@@ -122,21 +122,30 @@ class AttributeService extends ApiService
             if (!isset($model->type)) {
                 throw new \Exception('Lỗi hệ thống!');
             }
-        });
+            if (!isset($model->product_id)) {
+                throw new \Exception('Vui lòng chọn sản phẩm!');
+            }
 
-        $this->on('saved', function ($model) use ($user) {
             if ($model->type == Attribute::TYPE_SYSTEM) {
                 $this->updateSystemKey($model);
             } else {
                 $this->updateStyleKey($model);
             }
         });
+
+        $this->on('saved', function ($model) use ($user) {
+        });
     }
 
     public function updateSystemKey(Attribute $model)
     {
         $arr_new = [];
-        $data_new = $model->getRaw('data_new');
+        $data_new = [];
+        if ($model->getRaw('data_new')) {
+            $data_new = $model->getRaw('data_new');
+        } elseif ($model->getRaw('value')) {
+            $data_new[]['value'] = $model->getRaw('value');
+        }
         if (is_array($data_new) && count($data_new) > 0) {
             $arr_new = array_map(function ($item) {
                 if (isset($item['value'])) {

@@ -11,7 +11,7 @@ class Attribute extends Base
     protected $fillable = [
         'title', 'type', 'room_id', 'avatar', 'active',
         'author_id', 'arr_value', 'arr_image','created_at',
-        'updated_at', 'order'
+        'updated_at', 'order', 'product_id'
     ];
 
     const TYPE_SYSTEM = 'system';

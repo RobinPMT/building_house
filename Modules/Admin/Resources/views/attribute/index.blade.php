@@ -207,6 +207,28 @@
             $( "#room_id-style" ).change(function () {
                 $("#select2-room_id-style-container").text($( "#room_id-style option:selected" ).text().trim());
             });
+            function callProductAjax(product_id, target) {
+                let url = '/admin/room/render_room_with_product/'+product_id;
+                if(product_id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (response) {
+                            $("#room_id-" + target).val('').change();
+                            console.log(response)
+                            let html = `<option value="" selected>Chọn tiện nghi</option>` + response.data;
+                            $('#room_id-'+ target).html(html);
+
+                        }
+                    });
+                }
+            }
+            $( "#product_id-style" ).change(function () {
+                callProductAjax($("#product_id-style" ).val(), 'style');
+            });
+            $( "#product_id-system" ).change(function () {
+                callProductAjax($("#product_id-system" ).val(), 'system');
+            });
             // form repeater jquery system
             $('.invoice-repeater').repeater({
                 defaultValues: {
@@ -303,12 +325,9 @@
                 $.ajax({
                     type: 'GET',
                     url: url,
-                    success: function (response) {
-                        console.log(response)
+                    success: async function (response) {
+                        // console.log(response)
                         if(response.status) {
-                            $("#room_id-"+target).val(response.data.room_id).change();
-                            $('#title-'+target).val(response.data.title);
-                            $('#output_image').attr('src', response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active-"+target).attr('checked', true)
                             }
@@ -318,9 +337,32 @@
                             if(response.data.arr_image) {
                                 get_arr_image(response.data.arr_image);
                             }
+                            $('#title-'+target).val(response.data.title);
+                            $('#output_image').attr('src', response.data.avatar);
+
+
                             $('#exampleModalLabel').text('Cập nhật hệ thống');
                             $('#example-style').text('Cập nhật kiểu dáng');
                             $('#form-crud-'+target).attr('action', data_url_update);
+
+                            await $('#product_id-'+target).val(response.data.product_id).change();
+                            let url2 = '/admin/room/render_room_with_product/'+response.data.product_id;
+                            await $.ajax({
+                                type: 'GET',
+                                url: url2,
+                                success: async function (response) {
+                                    console.log(response)
+                                    $("#room_id-" + target).val('').change();
+                                    let html = `<option value="" selected>Chọn tiện nghi</option>` + response.data;
+                                    await $('#room_id-' + target).html(html);
+                                }
+                            });
+                            console.log(response.data.room_id);
+
+                            $("#room_id-" + target).val(response.data.room_id).change();
+
+
+
                         }
                     }
                 })
@@ -463,6 +505,8 @@
                     // });
                 }
                 $('#form-crud-'+target).trigger("reset");
+                $("#product_id").val('').change();
+                $("#room_id-"+target).val('').change();
                 $(".data_new").html('');
                 $(".data_old_style").html('');
                 $(".data_new_style").html('');
@@ -483,12 +527,18 @@
                             room_id: {
                                 required: true,
                             },
+                            product_id: {
+                                required: true,
+                            },
                         },
                         messages: {
                             title: {
                                 required: "Vui lòng không bỏ trống!"
                             },
                             room_id: {
+                                required: "Vui lòng không bỏ trống!"
+                            },
+                            product_id: {
                                 required: "Vui lòng không bỏ trống!"
                             },
                         }

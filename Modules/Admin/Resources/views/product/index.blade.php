@@ -23,12 +23,12 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="example_length">
-                                <label for="category_id" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc sản phẩm theo danh mục
-                                    <select name="category_id" id="category_id" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" class="category_id_filter" onchange="onChangeV('category_id', value)">
+                                <label for="_category_id" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc sản phẩm theo danh mục
+                                    <select name="_category_id" id="_category_id" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" class="_category_id_filter" onchange="onChangeV('_category_id', value)">
                                         <option value="" selected>Chọn danh mục</option>
                                         @if(isset($categories, $status) && $status)
                                             @foreach($categories as $key => $category)
-                                                <option {{\Request::get('category_id') == $category['id'] ? "selected=selected" : ""}} value="{{ $category['id']}}">{{ $category['title']}}</option>
+                                                <option {{\Request::get('_category_id') == $category['id'] ? "selected=selected" : ""}} value="{{ $category['id']}}">{{ $category['title']}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -174,17 +174,17 @@
                             <ul class="pagination" style="justify-content: flex-end">
                                 @if(isset($meta['pagination']))
                                     <li class="paginate_button page-item previous {{$meta['pagination']['page'] > 1 ? '' : 'disabled'}}" id="example_previous">
-                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] - 1], ['category_id' => \Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
+                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] - 1], ['_category_id' => \Request::get('_category_id')]))}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
                                     </li>
                                     @if(isset($meta['pagination']['lastPage']))
                                         @for($i = 1; $i <= $meta['pagination']['lastPage']; $i++)
                                             <li class="paginate_button page-item {{$meta['pagination']['page'] == $i ? 'active' : ''}}">
-                                                <a href="{{route('admin.get.list.product', array_merge(['_page' => $i], ['category_id' =>\Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
+                                                <a href="{{route('admin.get.list.product', array_merge(['_page' => $i], ['_category_id' =>\Request::get('_category_id')]))}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
                                             </li>
                                         @endfor
                                     @endif
                                     <li class="paginate_button page-item next {{$meta['pagination']['page'] < $meta['pagination']['lastPage'] ? '' : 'disabled'}}" id="example_next">
-                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] + 1], ['category_id' =>\Request::get('category_id')]))}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
+                                        <a href="{{route('admin.get.list.product', array_merge(['_page' => $meta['pagination']['page'] + 1], ['_category_id' =>\Request::get('_category_id')]))}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
                                     </li>
                                 @endif
                             </ul>
@@ -536,9 +536,9 @@
                     type: 'GET',
                     url: url,
                     success: function (response) {
-
                         console.log(response)
                         if(response.status) {
+                            $("#_id").val(response.data.id).change();
                             $('#title').val(response.data.title);
                             $('#slug').val(response.data.slug);
                             $('#longs').val(response.data.longs);
@@ -631,6 +631,8 @@
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
+                $("#_id" ).val('');
+                $("#category_id").val('').change();
                 $('#form-crud').attr('action', '{{route('admin.store.product')}}');
                 $('#exampleModalLabel').text('Thêm mới');
             });

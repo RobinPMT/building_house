@@ -32,8 +32,8 @@ class AdminProductController extends WebController
     public function __lists(Request $request, $data, $view = null)
     {
         $filter = '';
-        if ($request->category_id) {
-            $filter .= "category_id:$request->category_id;";
+        if ($request->_category_id) {
+            $filter .= "category_id:$request->_category_id;";
         }
         $request->merge([
             '_product_fields' => 'title,description,content,active,hot,description_seo,title_seo,avatar_design,view,arr_active,arr_hot,longs,width,height,area,room_number,room_description,category_id,arr_image,slug,setting_keys,image_back_ground_design,title_seo,description_seo,keyword_seo,order',

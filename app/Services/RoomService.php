@@ -23,7 +23,7 @@ class RoomService extends ApiService
 
     protected function getFilterableFields(): array
     {
-        return ['parent_id', 'product_id'];
+        return ['_parent_id', 'product_id'];
     }
 
     protected function fields(): array
@@ -51,7 +51,7 @@ class RoomService extends ApiService
                     });
                 };
             },
-            'parent_id' => function ($value) {
+            '_parent_id' => function ($value) {
                 return ['parent_id', $value];
             },
         ];

@@ -8,6 +8,7 @@
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
 {{--                <h5 class="modal-title" id="exampleModalLabel">{{ isset($category->id) ? "Cập nhật" : "Thêm mới" }}</h5>--}}
             </div>
+            <input type="text" class="form-control dt-full-name" id="_id" hidden/>
             <div class="modal-body flex-grow-1">
                 <div class="row d-flex align-items-end">
                     <div class="col-md-6 col-12">

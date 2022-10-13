@@ -26,11 +26,11 @@ class AdminRoomController extends WebController
     public function __list(Request $request, $view = null)
     {
         $filter = '';
-        if ($request->parent_id) {
-            $filter .= "parent_id:$request->parent_id;";
+        if ($request->_parent_id) {
+            $filter .= "_parent_id:$request->_parent_id;";
         }
-        if ($request->product_id) {
-            $filter .= "product_id:$request->product_id;";
+        if ($request->_product_id) {
+            $filter .= "product_id:$request->_product_id;";
         }
         $request->merge([
             '_room_fields' => 'title,active,author_id,arr_active,parent_id,order,product_ids',
@@ -120,34 +120,64 @@ class AdminRoomController extends WebController
         }
     }
 
-    public static function showChildRooms($rooms = null, $parent_id = null, $char = '')
+    public static function showRoomsAjax($rooms = null, $parent_id = null, $char = '')
+    {
+        $html1 = '';
+        foreach ($rooms as $key => $item) {
+            if ($item['parent_id'] == $parent_id) {
+                $html1 .= '<option value="'.$item['id'].'">';
+                $html1 .= $char . $item['title'];
+                $html1 .= '</option>';
+
+                unset($rooms[$key]);
+                self::showRooms($rooms, $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+            }
+        }
+        return $html1;
+    }
+
+    public static function showChildRooms($product_id = null, $rooms = null, $parent_id = null, $char = '')
     {
         if (!is_array($rooms)) {
             $rooms = services()->roomService()->doesntHave('parent')
-                ->with(['childs' => function ($query) {
-                    $query->where('active', Room::STATUS_PUBLIC);
+                ->with(['childs' => function ($query) use ($product_id) {
+                    if (isset($product_id)) {
+                        $query->whereHas('products', function ($query) use ($product_id) {
+                            $query->where('product_id', $product_id);
+                        });
+                    }
                 }])
-                ->select('id', 'title', 'parent_id')->get()->toArray();
+                ->whereHas('products', function ($query) use ($product_id) {
+                    if (isset($product_id)) {
+                        $query->where('product_id', $product_id);
+                    }
+                })
+                ->get()->toArray();
         }
-//        if (!is_array($rooms)) {
-//            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->select('id', 'title', 'parent_id')->get()->toArray();
-//        }
+        $html = '';
         foreach ($rooms as $key => $item) {
             if ($item['parent_id'] == $parent_id) {
                 if ($parent_id == null && count($item['childs']) == 0) {
-                    echo '<optgroup label="'.$item['title'].'">';
-                    echo '</optgroup>';
+                    $html .= '<optgroup label="'.$item['title'].'">';
+                    $html .= '</optgroup>';
                     unset($rooms[$key]);
                 } elseif (count($item['childs']) > 0) {
-                    echo '<optgroup label="'.$item['title'].'">';
-                    echo '</optgroup>';
+                    $html .= '<optgroup label="'.$item['title'].'">';
+                    $html .= '</optgroup>';
                     unset($rooms[$key]);
-                    self::showChildRooms($item['childs'], $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
+                    $html .= self::showChildRooms($product_id, $item['childs'], $item['id'], $char.'&nbsp&nbsp&nbsp&nbsp&nbsp');
                 } else {
-                    AdminRoomController::showRooms([$rooms[$key]], $item['parent_id'], '');
+                    $html .= AdminRoomController::showRoomsAjax([$rooms[$key]], $item['parent_id'], '');
                 }
             }
+            $html .= '';
         }
+        return $html;
+    }
+
+    public function renderRoomWithProduct($product_id)
+    {
+        return response()->json(['data' => $this->showChildRooms($product_id)]);
     }
 
     public function checkOrder($parent_id, $current_id)
