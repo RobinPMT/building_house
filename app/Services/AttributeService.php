@@ -23,7 +23,7 @@ class AttributeService extends ApiService
 
     protected function getFilterableFields(): array
     {
-        return [];
+        return ['room_id', 'product_id', 'type'];
     }
 
     protected function fields(): array
@@ -45,6 +45,15 @@ class AttributeService extends ApiService
                         $query->where('id', '!=', $user->getKey())->where('email', '!=', 'admin@gmail.com');
                     };
                 }
+            },
+            'room_id' => function ($value) {
+                return ['room_id', $value];
+            },
+            'product_id' => function ($value) {
+                return ['product_id', $value];
+            },
+            'type' => function ($value) {
+                return ['type', $value];
             },
         ];
     }

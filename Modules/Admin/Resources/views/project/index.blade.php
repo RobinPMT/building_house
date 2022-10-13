@@ -460,6 +460,7 @@
                     $('#form-crud').trigger("reset");
                     CKEDITOR.instances.content.setData('<p>Viết nội dung ở đây</p>');
                 }
+                $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud').attr('action', '{{route('admin.store.project')}}');
                 $('#exampleModalLabel').text('Thêm mới');
             });

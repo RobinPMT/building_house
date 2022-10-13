@@ -217,6 +217,7 @@
                         if(response.status) {
                             $('#title').val(response.data.title);
                             $('#link').val(response.data.link);
+                            $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar_main);
                             $('#output_image_extra').attr('src', response.data.avatar_not_main);
                             if(response.data.active == '1'){
@@ -268,7 +269,7 @@
                         title: {
                             required: true,
                         },
-                        link: {
+                        order: {
                             required: true,
                         },
                     },
@@ -276,7 +277,7 @@
                         title: {
                             required: "Vui lòng không bỏ trống!"
                         },
-                        link: {
+                        order: {
                             required: "Vui lòng không bỏ trống!"
                         },
                     }

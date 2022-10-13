@@ -631,6 +631,8 @@
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
+                $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
+                $('#output_image_extra').attr('src', '{{asset('images/no_image.png')}}');
                 $("#_id" ).val('');
                 $("#category_id").val('').change();
                 $('#form-crud').attr('action', '{{route('admin.store.product')}}');

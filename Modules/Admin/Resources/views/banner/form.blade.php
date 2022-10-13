@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="link">Link <span style="color: red">*</span></label>
+                    <label class="form-label" for="link">Link </label>
                     <input type="text" name="link" class="form-control dt-full-name" id="link" placeholder="Link" aria-label="Link" />
                 </div>
                 <div class="form-group">

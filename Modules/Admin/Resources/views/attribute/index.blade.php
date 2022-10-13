@@ -30,14 +30,58 @@
                         </div>
                     </div>
                 </div>
+                <form class="tree-most" id="form_filter" method="get" action="{{route('admin.get.list.attribute', ['_page' => 1])}}">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="dataTables_length" id="example_length">
+                                <label for="_product_id" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc theo sản phẩm
+                                    <select name="_product_id" id="_product_id" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" class="_product_id_filter" onchange="onChangeV('_product_id', value)">
+                                        <option value="" selected>Chọn sản phẩm</option>
+                                        @if(isset($products, $status) && $status)
+                                            @foreach($products as $key => $product)
+                                                <option {{\Request::get('_product_id') == $product['id'] ? "selected=selected" : ""}} value="{{ $product['id']}}">{{ $product['title']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </label>
+
+                                <label for="product_id" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc theo tiện nghi
+                                    <select name="_room_id" id="_room_id" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" class="_room_id_filter" onchange="onChangeV('_room_id', value)">
+                                        <option value="" selected>Chọn tiện nghi</option>
+                                        @if(isset($rooms, $status) && $status)
+                                            @foreach($rooms as $key => $room)
+                                                <option {{\Request::get('_room_id') == $room['id'] ? "selected=selected" : ""}} value="{{ $room['id']}}">{{ $room['title']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </label>
+                                <label for="_type" style="margin-left: 20px;margin-bottom: 10px;margin-top: 15px;">Lọc theo loại
+                                    <select name="_type" id="_type" aria-controls="example" class="custom-select custom-select-sm form-control form-control-sm" onchange="onChangeV('_type', value)">
+                                        <option value="" selected>Chọn loại</option>
+                                        <option {{\Request::get('_type') == \App\Models\Attribute::TYPE_SYSTEM ? "selected=selected" : ""}} value="{{ \App\Models\Attribute::TYPE_SYSTEM}}">Hệ thống</option>
+                                        <option {{\Request::get('_type') == \App\Models\Attribute::TYPE_STYLE ? "selected=selected" : ""}} value="{{ \App\Models\Attribute::TYPE_STYLE}}">Kiểu dáng</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        {{--                                            <div class="col-sm-12 col-md-6">--}}
+                        {{--                                                <div id="example_filter" class="dataTables_filter">--}}
+                        {{--                                                    <label>Search:--}}
+                        {{--                                                        <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example">--}}
+                        {{--                                                    </label>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                    </div>
+                </form>
                 <table id="example" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>STT</th>
                         <th>Tên thuộc tính</th>
                         <th>Loại</th>
+                        <th>Sản phẩm</th>
                         <th>Người tạo</th>
-                        <th>Phòng</th>
+                        <th>Tiện nghi</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -48,11 +92,12 @@
                             @foreach($data as $stt => $item)
                                 <tr id="sid{{$item['id']}}">
                                     <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$item['title']}}</td>
+                                    <td style="white-space: normal;">{{$item['title']}}</td>
 {{--                                    <td>{{ $item['type']}}</td>--}}
                                     <td>{{ $item['type'] == \App\Models\Attribute::TYPE_SYSTEM ? 'Hệ thống' : 'Kiểu dáng' }}</td>
-                                    <td style="">{{$item['creator']['name']}}</td>
-                                    <td style="">
+                                    <td style="white-space: normal;">{{$item['product']['title']}}</td>
+                                    <td style="white-space: normal;">{{$item['creator']['name']}}</td>
+                                    <td style="white-space: normal;">
                                         {{isset($item['room']['title']) ? $item['room']['title'] : ''}}
                                     </td>
                                     <td style="">
@@ -97,13 +142,40 @@
                         <th>STT</th>
                         <th>Tên thuộc tính</th>
                         <th>Loại</th>
+                        <th>Sản phẩm</th>
                         <th>Người tạo</th>
-                        <th>Phòng</th>
+                        <th>Tiện nghi</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
                     </tfoot>
                 </table>
+                <div class="row" style="margin-top: 8px;">
+                    <div class="col-sm-12 col-md-5" style="margin-top: 8px;">
+                        {{--                                                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>--}}
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <ul class="pagination" style="justify-content: flex-end">
+                                @if(isset($meta['pagination']))
+                                    <li class="paginate_button page-item previous {{$meta['pagination']['page'] > 1 ? '' : 'disabled'}}" id="example_previous">
+                                        <a href="{{route('admin.get.list.attribute', ['_page' => $meta['pagination']['page'] - 1, '_product_id' =>\Request::get('_product_id'), '_room_id' =>\Request::get('_room_id'), '_type' =>\Request::get('_type')])}}" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a>
+                                    </li>
+                                    @if(isset($meta['pagination']['lastPage']))
+                                        @for($i = 1; $i <= $meta['pagination']['lastPage']; $i++)
+                                            <li class="paginate_button page-item {{$meta['pagination']['page'] == $i ? 'active' : ''}}">
+                                                <a href="{{route('admin.get.list.attribute', ['_page' => $i, '_product_id' =>\Request::get('_product_id'), '_room_id' =>\Request::get('_room_id'), '_type' =>\Request::get('_type')])}}" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">{{$i}}</a>
+                                            </li>
+                                        @endfor
+                                    @endif
+                                    <li class="paginate_button page-item next {{$meta['pagination']['page'] < $meta['pagination']['lastPage'] ? '' : 'disabled'}}" id="example_next">
+                                        <a href="{{route('admin.get.list.attribute', ['_page' => $meta['pagination']['page'] + 1, '_product_id' =>\Request::get('_product_id'), '_room_id' =>\Request::get('_room_id'), '_type' =>\Request::get('_type')])}}" aria-controls="example" data-dt-idx="2" tabindex="0" class="page-link">Trang sau</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 @include("admin::attribute.form")
                 @include("admin::attribute.form_style")
             </div>
@@ -113,6 +185,11 @@
 
 @stop
 @section('script')
+    <script>
+        function onChangeV(key, value) {
+            $("#form_filter").submit();
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('input#file-1').change(function(){
@@ -190,6 +267,23 @@
 
             $('#example').DataTable({
                 responsive: true,
+                "columns": [
+                    { "width": "2%" },
+                    null,
+                    { "width": "5%" },
+                    { "width": "15%" },
+                    { "width": "5%" },
+                    { "width": "15%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                ],
+                paging: false,
+                showEntries: false,
+                lengthChange: false,
+                searching: false,
+                ordering    : true,
+                bInfo      : false,
+                autoWidth  : false
             });
             $(".select-single").select2({
                 // placeholder: "Chọn danh mục cha",
@@ -505,11 +599,12 @@
                     // });
                 }
                 $('#form-crud-'+target).trigger("reset");
-                $("#product_id").val('').change();
+                $("#product_id-"+target).val('').change();
                 $("#room_id-"+target).val('').change();
                 $(".data_new").html('');
                 $(".data_old_style").html('');
                 $(".data_new_style").html('');
+                $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud-'+target).attr('action', '{{route('admin.store.attribute')}}');
                 $('#exampleModalLabel').text('Thêm mới hệ thống');
                 $('#example-style').text('Thêm mới kiểu dáng');

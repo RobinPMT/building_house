@@ -339,6 +339,7 @@
                     //     $(this).find('form').trigger('reset');
                     // });
                 }
+                $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud').attr('action', '{{route('admin.store.post')}}');
                 $('#exampleModalLabel').text('Thêm mới');
             });

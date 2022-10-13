@@ -27,16 +27,40 @@ class AdminAttributeController extends WebController
 
     public function __list(Request $request, $view = null)
     {
+        $filter = '';
+        if ($request->_room_id) {
+            $filter .= "room_id:$request->_room_id;";
+        }
+        if ($request->_product_id) {
+            $filter .= "product_id:$request->_product_id;";
+        }
+        if ($request->_type) {
+            $filter .= "type:$request->_type;";
+        }
         $request->merge([
             '_attribute_fields' => 'title,type,room_id,avatar,active,author_id,arr_value,arr_image,arr_active,order,product_id',
             '_relations' => 'creator,room,product',
             '_admin_fields' => 'name',
             '_product_fields' => 'title',
             '_room_fields' => 'title',
+            '_filter' => $filter,
 //            '_noPagination' => 1,
 //            '_filter' => 'user_not_myself:1;'
         ]);
-        return parent::__list($request, 'admin::attribute.index');
+        $products = services()->productService()->select('title', 'id')->get()->toArray();
+        $rooms = services()->roomService()->has('parent')
+            ->whereHas('products', function ($query) use ($request) {
+                if (isset($request->_product_id)) {
+                    $query->where('product_id', $request->_product_id);
+                }
+            })
+            ->select('title', 'id')->get()->toArray();
+        $data = [
+            'products' => $products,
+            'rooms' => $rooms
+        ];
+        return parent::__lists($request, $data, 'admin::attribute.index');
+//        return parent::__list($request, 'admin::attribute.index');
 //        return view('admin::category.index', $viewData);
     }
 

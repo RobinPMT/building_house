@@ -456,6 +456,7 @@
                 if($('#form-crud').attr('action') !== '{{route('admin.store.library')}}'){
                     $('#form-crud').trigger("reset");
                 }
+                $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud').attr('action', '{{route('admin.store.library')}}');
                 $('#exampleModalLabel').text('Thêm mới');
             });
