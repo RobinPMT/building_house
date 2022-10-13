@@ -17,8 +17,8 @@
                                         <div class="row d-flex align-items-end">
                                             <div class="col-md-8 col-12">
                                                 <div class="form-group">
-                                                    <label for="content">Đoạn header Consolar Coffee & Food</label>
-                                                    <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="content" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
+                                                    <label for="value">Đoạn header Consolar Coffee & Food</label>
+                                                    <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
@@ -71,8 +71,8 @@
                                         <div class="row d-flex align-items-end">
                                             <div class="col-md-12 col-12">
                                                 <div class="form-group">
-                                                    <label for="value">Mô tả cơ hội kinh doanh tiềm năng cùng Consolar Housing</label>
-                                                    <textarea class="form-control" name="value" value="{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}</textarea>
+                                                    <label for="content">Mô tả cơ hội kinh doanh tiềm năng cùng Consolar Housing</label>
+                                                    <textarea class="form-control" name="value" value="{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}" id="content" rows="4" placeholder="Nội dung">{{old('value',isset($settingHousing['value']) ? $settingHousing['value'] : '')}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
