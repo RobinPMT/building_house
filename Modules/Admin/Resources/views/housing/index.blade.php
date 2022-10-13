@@ -80,7 +80,7 @@
                                                     <img id="output_image_extra_setting_main" src="{{isset($settingHousing['avatar']) ? pare_url_file($settingHousing['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting_main">Ảnh nội dung <strong>(Kích thước: 330x200 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting_main">Ảnh trước <strong>(Kích thước: 330x200 pixel)</strong></label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="input_image_extra_setting_main" name="avatar">
                                                         <label class="custom-file-label" for="input_image_extra_setting_main">Chọn ảnh</label>
@@ -93,7 +93,7 @@
                                                     <img id="output_image_extra_setting" src="{{isset($settingHousing['avatar_not_main']) ? pare_url_file($settingHousing['avatar_not_main'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting">Ảnh background <strong>(Kích thước: 390x260 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting">Ảnh sau <strong>(Kích thước: 390x260 pixel)</strong></label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="input_image_extra_setting" name="avatar_not_main">
                                                         <label class="custom-file-label" for="input_image_extra_setting">Chọn ảnh</label>
