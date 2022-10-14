@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row row_sm_10 product-list">
-                @if(isset($products))
+                @if(isset($products) && count($products) > 0)
                     @foreach($products as $key => $product)
                         <div class="col-sm-4 col-xs-6 product-item">
                             <div class="product-item-ctn">
@@ -73,6 +73,8 @@
                             </div>
                         </div>
                     @endforeach
+                @else
+                    <h5 style="margin-left: 15px; color: #014C47">Rất tiếc, chưa có sản phẩm phù hợp với tìm kiếm của bạn!</h5>
                 @endif
 
             </div>

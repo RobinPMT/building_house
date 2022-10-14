@@ -26,13 +26,14 @@
                 <h4 class="footer-title">Sitemap</h4>
                 <ul>
                     <li><a href="{{route('home')}}">Trang chủ</a></li>
-                    <li><a href="{{route('get.list.product')}}">Sản phẩm</a></li>
-                    <li><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Consolar Housing</a></li>
-                    <li><a href="{{route('get.list.design')}}">Tự thiết kế</a></li>
+                    <li><a href="{{route('get.list.product')}}">Consolar Housing</a></li>
+{{--                    <li><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Consolar Housing</a></li>--}}
+                    <li><a href="{{route('get.list.design')}}">Consolar Decor</a></li>
                     <li><a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a></li>
 {{--                    <li><a href="#">Trở thành đại lý</a></li>--}}
                     <li><a href="{{route('get.list.project')}}">Dự án</a></li>
-                    <li><a href="{{route('get.list.post', ['tin-tuc'])}}">News & Gallery</a></li>
+                    <li><a href="{{route('get.list.post', ['tin-tuc'])}}">Tin tức</a></li>
+                    <li><a href="{{route('get.list.library')}}">Thư viện hình ảnh</a></li>
                     <li><a href="{{route('get.list.contact')}}">Liên hệ</a></li>
                 </ul>
             </div>

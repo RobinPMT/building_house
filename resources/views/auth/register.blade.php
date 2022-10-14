@@ -19,7 +19,7 @@
                         <input type="text" name="address" placeholder="Địa chỉ" value="{{old('address',isset($user->address) ? $user->address : '')}}"/>
                         <div class="text-center"><button type="submit" class="button-link bg-green">Đăng ký</button></div>
                         <div class="text-center member-action">
-                            Nếu bạn đã có tài khoản, <span style="display: inline-block">click <a href="{{route('get.login.auth')}}">vào đây</a> để đăng nhập.</span>
+                            Nếu bạn đã có tài khoản, <span style="display: inline-block">click <a href="{{route('get.login.auth')}}">vào đây</a> để Đăng nhập.</span>
                         </div>
                     </form>
                 </div>

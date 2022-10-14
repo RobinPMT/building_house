@@ -11,7 +11,7 @@
                         <input type="password" required name="password" placeholder="Mật khẩu *" />
                         <div class="text-center"><button type="submit" class="button-link bg-green">Đăng nhập</button></div>
                         <div class="text-center member-action">
-                            Nếu bạn chưa có tài khoản, <span style="display: inline-block">click <a href="{{route('get.register.auth')}}">vào đây</a> để đăng kí.</span>
+                            Nếu bạn chưa có tài khoản, <span style="display: inline-block">click <a href="{{route('get.register.auth')}}">vào đây</a> để Đăng kí.</span>
                         </div>
                     </form>
                 </div>

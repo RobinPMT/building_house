@@ -8,24 +8,24 @@
                 <nav class="navbar-menu navbar-collapse clearfix" id="dropmenu">
                     <ul class="navbar-nav clearfix">
                         <li class="{{ \Request::route()->getName() == 'home' ? 'active' : '' }}"><a href="{{route('home')}}">Trang chủ</a></li>
-                        <li class="{{ (\Request::route()->getName() == 'get.list.product' || \Request::route()->getName() == 'get.detail.product') ? 'active' : '' }}"><a href="{{route('get.list.product')}}">Sản phẩm</a></li>
-                        <li class="dropdown {{
-                        (   request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || request()->getUri() == route('get.list.post', ['tin-tai-chinh']) ||
-                            request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ||
-                            check_active_url(request()->getUri(), 'tin-tai-chinh') || check_active_url(request()->getUri(), 'tin-tuc-su-kien')
-                        ) ? 'active' : '' }}"
-                        >
-                            <a href="#">Consolar Housing</a>
-                            <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
-                            <ul class="dropdown-menu">
-                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Tin khuyến mãi</a></li>
-                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tai-chinh']) || check_active_url(request()->getUri(), 'tin-tai-chinh') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tai-chinh'])}}">Tin tài chính</a></li>
-                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-tuc-su-kien') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc-su-kien'])}}">Tin tức - Sự kiện</a></li>
-                            </ul>
-                        </li>
-                        <li class="{{ \Request::route()->getName() == 'get.list.design' ? 'active' : '' }}"><a href="{{route('get.list.design')}}">Tự thiết kế</a></li>
+                        <li class="{{ (\Request::route()->getName() == 'get.list.product' || \Request::route()->getName() == 'get.detail.product') ? 'active' : '' }}"><a href="{{route('get.list.product')}}">Consolar Housing</a></li>
+{{--                        <li class="dropdown {{--}}
+{{--                        (   request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || request()->getUri() == route('get.list.post', ['tin-tai-chinh']) ||--}}
+{{--                            request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ||--}}
+{{--                            check_active_url(request()->getUri(), 'tin-tai-chinh') || check_active_url(request()->getUri(), 'tin-tuc-su-kien')--}}
+{{--                        ) ? 'active' : '' }}"--}}
+{{--                        >--}}
+{{--                            <a href="#">Consolar Housing</a>--}}
+{{--                            <button class="dropdown-icon" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>--}}
+{{--                            <ul class="dropdown-menu">--}}
+{{--                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-khuyen-mai']) || check_active_url(request()->getUri(), 'tin-khuyen-mai') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-khuyen-mai'])}}">Tin khuyến mãi</a></li>--}}
+{{--                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tai-chinh']) || check_active_url(request()->getUri(), 'tin-tai-chinh') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tai-chinh'])}}">Tin tài chính</a></li>--}}
+{{--                                <li class="{{ (request()->getUri() == route('get.list.post', ['tin-tuc-su-kien']) || check_active_url(request()->getUri(), 'tin-tuc-su-kien') ) ? 'active' : '' }}"><a href="{{route('get.list.post', ['tin-tuc-su-kien'])}}">Tin tức - Sự kiện</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+                        <li class="{{ \Request::route()->getName() == 'get.list.design' ? 'active' : '' }}"><a href="{{route('get.list.design')}}">Consolar Decor</a></li>
                         <li class="{{ \Request::route()->getName() == 'get.list.coffee' ? 'active' : '' }}">
-                            <a href="{{route('get.list.coffee')}}">Coffee & Food</a>
+                            <a href="{{route('get.list.coffee')}}">Consolar Coffee & Food</a>
                         </li>
 {{--                        <li><a href="#">Kênh đại lý</a></li>--}}
                         <li class="{{ (\Request::route()->getName() == 'get.list.project' || \Request::route()->getName() == 'get.detail.project') ? 'active' : '' }}">
