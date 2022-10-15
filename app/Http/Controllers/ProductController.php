@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Filter;
 use App\Models\Product;
 use App\Models\SettingKeyProduct;
 use Artesaos\SEOTools\Facades\OpenGraph;
@@ -87,16 +88,18 @@ class ProductController extends FrontendController
                 }
             }
             if (isset($areas) && is_array($areas) && count($areas) > 0) {
-                if ($areas[0] >=100) {
+                if ($areas[1] == '') {
                     $query->where('area', '>', $areas[0]);
                 } else {
-                    $query->whereIn('area', $areas);
+                    $query->whereBetween('area', $areas);
                 }
             }
         })
         ->select('id', 'title', 'slug', 'arr_image', 'longs', 'width', 'height', 'area', 'category_id')->orderBy('order')->paginate(12);
+        $areas = services()->filterService()->where(['type' => Filter::AREA, 'active' => Filter::ACTIVE])->orderBy('order')->get();
         $viewData = [
-            'products' => $products
+            'products' => $products,
+            'areas' => $areas
         ];
         return view('product.list', $viewData);
     }

@@ -7,6 +7,7 @@ use App\Services\AttributeService;
 use App\Services\BannerService;
 use App\Services\CategoryService;
 use App\Services\ContactService;
+use App\Services\FilterService;
 use App\Services\HousingService;
 use App\Services\LibraryService;
 use App\Services\PolicyService;
@@ -119,5 +120,10 @@ class MapService
     public function policyService(): PolicyService
     {
         return c(PolicyService::class);
+    }
+
+    public function filterService(): FilterService
+    {
+        return c(FilterService::class);
     }
 }

@@ -75,8 +75,8 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="settings"></i><span class="menu-title text-truncate" data-i18n="Settings">Cài đặt</span></a>
                 <ul class="menu-content">
-{{--                    <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Cài đặt hệ thống</span></a>--}}
-{{--                    </li>--}}
+                    <li class="{{ \Request::route()->getName() == 'admin.get.list.filter' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.filter')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Cài đặt bộ lọc</span></a>
+                    </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.banner' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.banner')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="View">Cài đặt Banner</span></a>
                     </li>
                     <li class="{{ \Request::route()->getName() == 'admin.get.list.setting' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('admin.get.list.setting')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Cài đặt trang chủ</span></a>

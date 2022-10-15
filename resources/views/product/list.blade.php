@@ -23,11 +23,18 @@
                         <div class="product-filter-col">
                             <select name="area" class="area">
                                 <option {{\Request::get('area') == "0" || !\Request::get('area') ? "selected=selected" : ""}} value="0" selected>Chọn diện tích</option>
-                                <option {{\Request::get('area') == "0_20" ? "selected=selected" : ""}} value="0_20">Từ 0<sup>m2</sup> đến 20<sup>m2</sup></option>
-                                <option {{\Request::get('area') == "20_50" ? "selected=selected" : ""}} value="20_50">Từ 20<sup>m2</sup> đến 50<sup>m2</sup></option>
-                                <option {{\Request::get('area') == "50_80"  ? "selected=selected" : ""}} value="50_80">Từ 50<sup>m2</sup> đến 80<sup>m2</sup></option>
-                                <option {{\Request::get('area') == "80_100"  ? "selected=selected" : ""}} value="80_100">Từ 80<sup>m2</sup> đến 100<sup>m2</sup></option>
-                                <option {{\Request::get('area') == "100_"  ? "selected=selected" : ""}} value="100_">Trên 100<sup>m2</sup></option>
+                                @if(isset($areas))
+                                    @foreach($areas as $key => $area)
+                                        @if($area->from < $area->to)
+                                            {{$value = $area->from.'_'.$area->to}}
+                                            <option {{\Request::get('area')== $value ? "selected=selected" : ""}} value="{{$value}}">{{$area->title}}</option>
+                                        @else
+                                            {{$value = $area->from.'_'}}
+                                            <option {{\Request::get('area') == $value  ? "selected=selected" : ""}} value="{{$value}}">{{$area->title}}</option>
+                                        @endif
+
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                         <div class="product-filter-col">

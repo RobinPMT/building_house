@@ -300,7 +300,7 @@
     //check slug
     $(document).ready(function (event) {
         $(".item-add").click(function (event) {
-            $.get('{{route('admin.checkOrder.'. (in_array(get_name_route(\Request::route()->getName()), ['policy', 'category', 'product', 'post', 'library', 'project', 'housing', 'setting', 'banner']) ? get_name_route(\Request::route()->getName()) : 'policy'))}}',
+            $.get('{{route('admin.checkOrder.'. (in_array(get_name_route(\Request::route()->getName()), ['policy', 'category', 'product', 'post', 'library', 'project', 'housing', 'setting', 'banner', 'filter']) ? get_name_route(\Request::route()->getName()) : 'policy'))}}',
                 function (data) {
                     console.log(data);
                     $('#order').val(data.order);

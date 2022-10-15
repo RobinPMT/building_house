@@ -18,6 +18,7 @@ use Modules\Admin\Http\Controllers\AdminBannerController;
 use Modules\Admin\Http\Controllers\AdminCategoryController;
 use Modules\Admin\Http\Controllers\AdminContactController;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AdminFilterController;
 use Modules\Admin\Http\Controllers\AdminHousingController;
 use Modules\Admin\Http\Controllers\AdminLibraryController;
 use Modules\Admin\Http\Controllers\AdminPolicyController;
@@ -181,6 +182,15 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/', [AdminTagController::class, '__create'])->name('admin.store.tag');
         Route::post('/{id}', [AdminTagController::class, '__update'])->name('admin.update.tag');
         Route::get('/{action}/{id}', [AdminTagController::class, 'action'])->name('admin.get.action.tag');
+    });
+
+    Route::group(['prefix' => 'filter'], function () {
+        Route::get('/', [AdminFilterController::class, '__list'])->name('admin.get.list.filter');
+        Route::get('/check_order', [AdminFilterController::class, 'checkOrder'])->name('admin.checkOrder.filter');
+        Route::get('/{id}', [AdminFilterController::class, '__find'])->name('admin.get.find.filter');
+        Route::post('/', [AdminFilterController::class, '__create'])->name('admin.store.filter');
+        Route::post('/{id}', [AdminFilterController::class, '__update'])->name('admin.update.filter');
+        Route::get('/{action}/{id}', [AdminFilterController::class, 'action'])->name('admin.get.action.filter');
     });
 
     Route::group(['prefix' => 'project'], function () {
