@@ -263,6 +263,7 @@
             //     }
             // });
             $(document).on('click', '.category-item', function(e){
+                e.preventDefault();
                 let idx =  $(this).index();
                 let parent = $(this).parent();
                 parent.find('.category-item:not(:eq('+idx+'))').removeClass('active');
@@ -281,7 +282,7 @@
             let result_arr_style = [];
 
             $(document).on('click', '.miss_attributes div.properties-items', function(e){
-                console.log(234423234);
+                e.preventDefault();
 
                 $('.larger-picture').addClass('loading');
                 let parent = $(this).parent();
@@ -312,7 +313,8 @@
             });
 
 
-            $('.properties-item').click(function(){
+            $('.properties-item').click(function(e){
+                e.preventDefault();
                 let colors = JSON.parse($(this).children('.properties-item-ctx').attr('data-attribute'));
                 let attribute_id = $(this).children('.properties-item-ctx').attr('data-attribute-id');
                 let room_id = JSON.parse($(this).children('.properties-item-ctx').attr('data-room-id'));
@@ -350,7 +352,8 @@
 
             });
             let result_arr_system = [];
-            $('.other-design-item').click(function(){
+            $('.other-design-item').click(function(e){
+                e.preventDefault();
                 $(this).toggleClass('active');
                 let attribute_id = $(this).attr('data-attribute-id');
                 let room_id = String($(this).attr('data-room-id'));
@@ -431,6 +434,7 @@
                 })
             }
             $('#submit-data-wishlist').click(function(e){
+                e.preventDefault();
                 data['creator_id'] = '{{get_data_user('web')}}';
                 data['arr_style'] = result_arr_style.filter(el => {
                     return el;
@@ -442,6 +446,7 @@
             });
 
             $('#submit-data-transaction').click(function(e){
+                e.preventDefault();
                 data['creator_id'] = '{{get_data_user('web')}}';
                 data['arr_style'] = result_arr_style.filter(el => {
                     return el;
