@@ -86,16 +86,15 @@ class DesignController extends FrontendController
     public function store(Request $request)
     {
         $data = $request->data;
-        if (trim(get_data_user('web')) === '') {
-            return response()->json(['status' => false, 'message' => 'Vui lòng đăng nhập để sử dụng chức năng này!']);
-        }
         if ($data) {
+            if (trim(get_data_user('web')) === '' && $data['type'] === Wishlist::TYPE_WISHLIST) {
+                return response()->json(['status' => false, 'message' => 'Vui lòng đăng nhập để sử dụng chức năng này!']);
+            }
             $creator_id =  get_data_user('web') ?? $data['creator_id'];
             $product_id = $data['product_id'] ?? null;
             if (!$product_id) {
                 return response()->json(['status' => false, 'message' => 'Vui lòng chọn sản phẩm!']);
             }
-
             $arr_system = $data['arr_system'] ?? [];
             $arr_style = $data['arr_style'] ?? [];
             if (!isset($data['code'])) {
@@ -177,10 +176,16 @@ class DesignController extends FrontendController
                 } else {
                     $wishlist = new Wishlist();
                     $wishlist->product_id = $product_id;
-                    $wishlist->creator_id = $creator_id;
                     $wishlist->title = substr(md5(microtime().rand()), -10);
                     $wishlist->status = Wishlist::STATUS_NOT_FINISHED;
                     $wishlist->type = $data['type'] ?? Wishlist::TYPE_WISHLIST;
+                    if (trim(get_data_user('web')) === '' && $wishlist->type === Wishlist::TYPE_TRANSACTION) {
+                        $wishlist->name = $data['name'];
+                        $wishlist->email = $data['email'];
+                        $wishlist->phone = $data['phone'];
+                    } else {
+                        $wishlist->creator_id = $creator_id;
+                    }
                     if ($wishlist->type == Wishlist::TYPE_WISHLIST) {
                         $message = 'Đã thêm vào danh sách của bạn!';
                     } else {
@@ -228,13 +233,13 @@ class DesignController extends FrontendController
     public function detailWishlist($slug, Request $request)
     {
         if (get_data_user('admins') > 0) {
-            $user_id = $request->user_id ?? (trim(get_data_user('web') == '' ? null : get_data_user('web')));
+            $user_id = $request->user_id ?? (trim(get_data_user('web')) == '' ? null : get_data_user('web'));
         } else {
             $user_id = get_data_user('web');
         }
         if ($request->code && $slug) {
             $wishList = services()->wishlistService()->where([
-                'creator_id' => $user_id,
+                'creator_id' => $user_id ,
 //                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
                 'title' => $request->code
             ])->whereHas('product', function ($query) use ($slug) {
@@ -247,7 +252,6 @@ class DesignController extends FrontendController
                     $query->where('active', Attribute::STATUS_PUBLIC);
                 }])
                 ->first();
-
             $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
                 ->with(['childs' => function ($query) use ($wishList, $user_id, $request, $slug) {
                     $query->whereHas('products', function ($query) use ($wishList) {

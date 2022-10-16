@@ -11,7 +11,7 @@
                         <div class="design-short-inf">
                             <h2>Thiết kế nội thất & tiện nghi theo ý thích của bạn </h2>
                             <div class="design-short-inf-button clearfix">
-                                <a href="#" data-toggle="modal" data-target="#contact-wrapper" id="submit-data-transaction">
+                                <a href="#" id="submit-data-transaction">
                                     Liên hệ tư vấn
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.16406 4.66675H6.85743C7.48037 4.66675 7.79184 4.66675 8.03319 4.81559C8.09585 4.85423 8.15404 4.89967 8.20673 4.95108C8.40966 5.14912 8.4852 5.4513 8.63628 6.05564L8.82545 6.81228C8.94578 7.2936 9.00594 7.53426 9.10597 7.73291C9.37505 8.26727 9.86922 8.65311 10.4529 8.78455C10.6699 8.83341 10.9179 8.83341 11.4141 8.83341V8.83341" stroke="#014C47" stroke-width="2" stroke-linecap="round"/><path d="M19.748 18.2083H8.86357C8.65954 18.2083 8.55753 18.2083 8.48053 18.1962C7.93082 18.11 7.55721 17.5916 7.64925 17.0428C7.66214 16.966 7.6944 16.8692 7.75892 16.6756V16.6756C7.83055 16.4607 7.86636 16.3533 7.90868 16.2597C8.20189 15.6108 8.81796 15.1668 9.52624 15.0938C9.62847 15.0833 9.74172 15.0833 9.96823 15.0833H15.5814" stroke="#014C47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.2336 15.0833H12.4289C11.0933 15.0833 10.4255 15.0833 9.92492 14.7535C9.79066 14.6651 9.66756 14.5608 9.55827 14.4429C9.15074 14.0033 9.04096 13.3446 8.82139 12.0272C8.59876 10.6914 8.48745 10.0236 8.7842 9.54398C8.86259 9.41728 8.95943 9.30297 9.07152 9.20481C9.49579 8.83325 10.1729 8.83325 11.5271 8.83325H18.5947C20.045 8.83325 20.7702 8.83325 21.0633 9.30752C21.3565 9.78179 21.0321 10.4304 20.3835 11.7277L19.8113 12.8721C19.2734 13.9479 19.0044 14.4859 18.5211 14.7846C18.0378 15.0833 17.4364 15.0833 16.2336 15.0833Z" stroke="#014C47" stroke-width="2" stroke-linecap="round"/><circle cx="18.7057" cy="21.3334" r="1.04167" fill="#014C47"/><circle cx="10.3737" cy="21.3334" r="1.04167" fill="#014C47"/></svg>
                                 </a>
@@ -177,6 +177,28 @@
             @endif
         </div>
     </section>
+
+    <div class="modal fade contact-popup" id="contact-wrapper" tabindex="-3" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body" id="form">
+                    <h3 class="contact-popup-title">Liên hệ với chúng tôi <span>để nhận tư vấn</span></h3>
+                    <form  action="" role="form" >
+                        @csrf
+                        <div class="contact-popup-form">
+                            <input type="text" name="name" required placeholder="Họ tên *" />
+                            <input type="text" name="phone" required placeholder="Số điện thoại *" />
+                            <input type="email" name="email" required placeholder="Email *" />
+                            <div class="text-center"><button type="submit" class="button-link bg-green submit_transaction">Gửi thông tin</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -454,7 +476,46 @@
                 });
                 data['type'] = 'transaction';
                 data['arr_system'] = result_arr_system;
-                store(data);
+                if (!data['product_id']) {
+                    setTimeout(function () {
+                        toastr['error'](
+                            "Vui lòng chọn sản phẩm!",
+                            '👋 Thất bại!',
+                            {
+                                closeButton: true,
+                                tapToDismiss: false,
+                            }
+                        );
+                    }, 300);
+                } else {
+                    if ('{{get_data_user('web')}}' === '') {
+                        if(data['arr_style'].length < 1 && data['arr_system'].length < 1) {
+                            setTimeout(function () {
+                                toastr['error'](
+                                    "Vui lòng chọn ít nhất 1 thuộc tính!",
+                                    '👋 Thất bại!',
+                                    {
+                                        closeButton: true,
+                                        tapToDismiss: false,
+                                    }
+                                );
+                            }, 300);
+                        } else {
+                            $("#contact-wrapper").modal('show');
+                            $('.submit_transaction').click(function (event) {
+                                event.preventDefault();
+                                data['name'] = $('#form').find('input[name="name"]').val();
+                                data['phone'] = $('#form').find('input[name="phone"]').val();
+                                data['email'] = $('#form').find('input[name="email"]').val();
+                                store(data);
+                            })
+                        }
+
+                    } else {
+                        store(data);
+                    }
+                }
+
             });
 
 
