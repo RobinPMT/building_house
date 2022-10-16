@@ -25,6 +25,7 @@ class DesignController extends FrontendController
 
     public function index(Request $request)
     {
+//        dd($request->all());
         $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
             ->with(['childs' => function ($query) {
                 $query->with(['attributes' => function ($query) {
@@ -41,7 +42,7 @@ class DesignController extends FrontendController
                 if (isset($request->category_id) && $request->category_id > 0) {
                     $query->where('category_id', $request->category_id);
                 }
-            })->where('slug', $request->slug)->select('id', 'title', 'arr_image', 'image_back_ground_design')->first();
+            })->where('slug', $request->slug)->select('id', 'title', 'arr_image', 'image_back_ground_design', 'slug', 'category_id')->first();
         }
 
         $products = services()->productService()->where([
@@ -53,7 +54,7 @@ class DesignController extends FrontendController
             if (isset($request->slug)) {
                 $query->where('slug', '<>', $request->slug);
             }
-        })->select('id', 'title', 'arr_image', 'image_back_ground_design')->orderByDesc('id')->paginate($item);
+        })->select('id', 'title', 'arr_image', 'image_back_ground_design', 'slug', 'category_id')->orderByDesc('id')->paginate($item);
 
         SEOTools::setTitle('Tự thiết kế');
         SEOTools::setDescription('Thiết kế, khám phá ngôi nhà mơ ước của bạn!');

@@ -72,7 +72,7 @@
                             @if(isset($products))
                                 @if($productSelect)
                                     <div class="col-sm-4 col-xss-6 category-item active">
-                                        <a href="#" data-product-id="{{$productSelect->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
+                                        <a href="{{route('get.list.design', ['category_id' => $productSelect->category_id, 'slug' => $productSelect->slug])}}" data-product-id="{{$productSelect->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
                                             @if(isset($productSelect->arr_image) && $images = json_decode($productSelect->arr_image))
                                                 @foreach($images as $key => $image)
                                                     @if($image->status)
@@ -88,7 +88,7 @@
                                 @endif
                                 @foreach($products as $product)
                                     <div class="col-sm-4 col-xss-6 category-item">
-                                        <a href="#" data-product-id="{{$product->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($product->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
+                                        <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" data-product-id="{{$product->id}}" data-image_back_ground_design="{{imageUrl(pare_url_file($product->image_back_ground_design, 'products'), 1170, 550, 100, 1)}}">
                                             @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                                                 @foreach($images as $key => $image)
                                                     @if($image->status)
@@ -263,7 +263,7 @@
             //     }
             // });
             $(document).on('click', '.category-item', function(e){
-                e.preventDefault();
+                // e.preventDefault();
                 let idx =  $(this).index();
                 let parent = $(this).parent();
                 parent.find('.category-item:not(:eq('+idx+'))').removeClass('active');
