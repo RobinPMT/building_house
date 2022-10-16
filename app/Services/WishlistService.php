@@ -30,7 +30,7 @@ class WishlistService extends ApiService
     protected function fields(): array
     {
         return [
-            'title', 'creator_id', 'product_id', 'author_id', 'type', 'status', 'arr_status'
+            'title', 'creator_id', 'product_id', 'author_id', 'type', 'status', 'arr_status', 'name', 'email', 'phone'
         ];
     }
 

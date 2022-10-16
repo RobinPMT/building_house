@@ -12,7 +12,7 @@ class Wishlist extends Base
 
     protected $fillable = [
         'title', 'creator_id', 'product_id', 'author_id', 'type', 'status',
-        'created_at', 'updated_at',
+        'created_at', 'updated_at', 'name', 'email', 'phone'
     ];
 
     const STATUS_FINISHED = 1;

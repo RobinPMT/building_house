@@ -27,7 +27,7 @@ class AdminWishlistController extends WebController
     public function __list(Request $request, $view = null)
     {
         $request->merge([
-            '_wishlist_fields' => 'title,creator_id,product_id,author_id,type,status,arr_status',
+            '_wishlist_fields' => 'title,creator_id,product_id,author_id,type,status,arr_status,name,email,phone',
             '_filter' => 'type:transaction;',
             '_relations' => 'handler,creator,product',
             '_admin_fields' => 'name',
