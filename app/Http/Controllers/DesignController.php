@@ -26,13 +26,6 @@ class DesignController extends FrontendController
     public function index(Request $request)
     {
 //        dd($request->all());
-        $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
-            ->with(['childs' => function ($query) {
-                $query->with(['attributes' => function ($query) {
-                    $query->where('active', Attribute::STATUS_PUBLIC);
-                }]);
-                $query->where('active', Room::STATUS_PUBLIC);
-            }])->select('id', 'title')->get();
         $item = 12;
         if ($request->slug) {
             $item = 11;
@@ -43,6 +36,20 @@ class DesignController extends FrontendController
                     $query->where('category_id', $request->category_id);
                 }
             })->where('slug', $request->slug)->select('id', 'title', 'arr_image', 'image_back_ground_design', 'slug', 'category_id')->first();
+            if ($product) {
+                $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
+                    ->with(['childs' => function ($query) use ($product) {
+                        $query->whereHas('products', function ($query) use ($product) {
+                            $query->where('product_id', $product->id);
+                        });
+                        $query->with(['attributes' => function ($query) use ($product) {
+                            $query->where('product_id', $product->id)->where('active', Attribute::STATUS_PUBLIC)->orderBy('order');
+                        }]);
+                        $query->where('active', Room::STATUS_PUBLIC)->orderBy('order');
+                    }])->whereHas('products', function ($query) use ($product) {
+                        $query->where('product_id', $product->id);
+                    })->select('id', 'title')->get();
+            }
         }
 
         $products = services()->productService()->where([
@@ -69,7 +76,7 @@ class DesignController extends FrontendController
         }
 //        dd($products, $product);
         $viewData = [
-            'rooms' => $rooms,
+            'rooms' => $rooms ?? null,
             'products' => $products,
             'productSelect' => $product ?? null
         ];
