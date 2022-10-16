@@ -107,7 +107,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-12">
-                                                    <label>Upload ảnh cho thư viện <strong>(Kích thước: 590x410 pixel)</strong></label>
+                                                    <label>Upload ảnh cho thư viện <strong>(Kích thước: 1000x700 pixel)</strong></label>
                                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                     <div class="form-group">
                                                         <input type="file" name="images[]" id="file-1" multiple class="filename"

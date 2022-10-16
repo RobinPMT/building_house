@@ -137,8 +137,8 @@ if (!function_exists('check_active_url')) {
 }
 
 
-if (!function_exists('imageUrl1')) {
-    function imageUrl1($path, $width = null, $height = null, $quality=null, $crop=null)
+if (!function_exists('imageUrl')) {
+    function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
     {
         if (!$width && !$height) {
             $url = env('APP_URL') . $path;
@@ -167,8 +167,8 @@ if (!function_exists('imageUrl1')) {
     }
 }
 
-if (!function_exists('imageUrl')) {
-    function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
+if (!function_exists('imageUrl1')) {
+    function imageUrl1($path, $width = null, $height = null, $quality=null, $crop=null)
     {
         if (!$width && !$height) {
             $url = env('APP_URL') . $path;
