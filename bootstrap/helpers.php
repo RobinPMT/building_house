@@ -167,7 +167,7 @@ if (!function_exists('imageUrl')) {
     }
 }
 
-if (!function_exists('imageUrl1')) {
+if (!function_exists('imageUrl1')) { //sửa cái ni "imageUrl" xài cho product
     function imageUrl1($path, $width = null, $height = null, $quality=null, $crop=null)
     {
         if (!$width && !$height) {
