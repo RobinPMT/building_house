@@ -137,8 +137,8 @@ if (!function_exists('check_active_url')) {
 }
 
 
-if (!function_exists('imageUrl')) {
-    function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
+if (!function_exists('imageUrl1')) {
+    function imageUrl1($path, $width = null, $height = null, $quality=null, $crop=null)
     {
         if (!$width && !$height) {
             $url = env('APP_URL') . $path;
@@ -161,6 +161,36 @@ if (!function_exists('imageUrl')) {
             } else {
                 $url .='&q=95&s=1';
             }
+        }
+
+        return $url;
+    }
+}
+
+if (!function_exists('imageUrl')) {
+    function imageUrl($path, $width = null, $height = null, $quality=null, $crop=null)
+    {
+        if (!$width && !$height) {
+            $url = env('APP_URL') . $path;
+        } else {
+            $url = '/thumb/' . $width . '/'. $height. $path;
+
+//            if (isset($width)) {
+//                $url .= '&w=' . $width;
+//            }
+//            if (isset($height) && $height>0) {
+//                $url .= '&h=' .$height;
+//            }
+//            if (isset($crop)) {
+//                $url .= "&zc=".$crop;
+//            } else {
+//                $url .= "&zc=1";
+//            }
+//            if (isset($quality)) {
+//                $url .='&q='.$quality.'&s=1';
+//            } else {
+//                $url .='&q=95&s=1';
+//            }
         }
 
         return $url;
