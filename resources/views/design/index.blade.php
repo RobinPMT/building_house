@@ -346,7 +346,7 @@
                 // if(image != undefined && image != ''){
                 //     $('.larger-picture .main-picture').attr('src', image);
                 // }else{
-                //     $('.larger-picture .main-picture').attr('src', cur_src);
+                    $('.larger-picture .main-picture').attr('src', cur_src);
                 // }
                 // $('.larger-picture').removeClass('loading');
 
