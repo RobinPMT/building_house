@@ -341,7 +341,8 @@
                 var parent = $(this).parent(), idx =  $(this).index(), image = $(this).children('.properties-item-ctx').data('image');
                 parent.find('.properties-item:not(:eq('+idx+')) .properties-item-ctx').removeClass('active');
                 $(this).children('.properties-item-ctx').toggleClass('active');
-                var cur_src = $('.larger-picture .main-picture').data('srcs');
+                // var cur_src = $('.larger-picture .main-picture').data('srcs');
+                let cur_src = '{{isset($productSelect->image_back_ground_design) ? pare_url_file($productSelect->image_back_ground_design, 'products') : ''}}';
                 console.log(image);
                 // if(image != undefined && image != ''){
                 //     $('.larger-picture .main-picture').attr('src', image);
