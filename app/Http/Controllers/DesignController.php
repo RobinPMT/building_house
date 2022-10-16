@@ -48,7 +48,7 @@ class DesignController extends FrontendController
                         $query->where('active', Room::STATUS_PUBLIC)->orderBy('order');
                     }])->whereHas('products', function ($query) use ($product) {
                         $query->where('product_id', $product->id);
-                    })->select('id', 'title')->get();
+                    })->orderBy('order')->select('id', 'title')->get();
             }
         }
 
@@ -99,9 +99,9 @@ class DesignController extends FrontendController
             $arr_system = $data['arr_system'] ?? [];
             $arr_style = $data['arr_style'] ?? [];
             if (!isset($data['code'])) {
-                if (count($arr_system) < 1) {
-                    return response()->json(['status' => false, 'message' => 'Vui lòng chọn thuộc tính tiện nghi sản phẩm!']);
-                }
+//                if (count($arr_system) < 1) {
+//                    return response()->json(['status' => false, 'message' => 'Vui lòng chọn thuộc tính tiện nghi sản phẩm!']);
+//                }
                 if (count($arr_style) < 1) {
                     return response()->json(['status' => false, 'message' => 'Vui lòng chọn thuộc tính kiểu dáng sản phẩm!']);
                 }
@@ -233,24 +233,6 @@ class DesignController extends FrontendController
             $user_id = get_data_user('web');
         }
         if ($request->code && $slug) {
-            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
-                ->with(['childs' => function ($query) use ($user_id, $request, $slug) {
-                    $query->with(['attributes' => function ($query) use ($user_id, $request, $slug) {
-                        $query->with(['wishlists' => function ($query) use ($user_id, $request, $slug) {
-//                            $query->whereHas('product', function ($query) use ($slug) {
-//                                $query->where('slug', $slug);
-//                            });
-                            $query->where([
-                                'creator_id' => $user_id,
-//                                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
-                                'title' => $request->code
-                            ]);
-                        }]);
-                        $query->where('active', Attribute::STATUS_PUBLIC);
-                    }]);
-                    $query->where('active', Room::STATUS_PUBLIC);
-                }])->select('id', 'title')->get();
-
             $wishList = services()->wishlistService()->where([
                 'creator_id' => $user_id,
 //                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
@@ -265,6 +247,31 @@ class DesignController extends FrontendController
                     $query->where('active', Attribute::STATUS_PUBLIC);
                 }])
                 ->first();
+
+            $rooms = services()->roomService()->where('active', Room::STATUS_PUBLIC)->doesntHave('parent')
+                ->with(['childs' => function ($query) use ($wishList, $user_id, $request, $slug) {
+                    $query->whereHas('products', function ($query) use ($wishList) {
+                        $query->where('product_id', $wishList->product_id);
+                    });
+                    $query->with(['attributes' => function ($query) use ($wishList, $user_id, $request, $slug) {
+                        $query->with(['wishlists' => function ($query) use ($user_id, $request, $slug) {
+//                            $query->whereHas('product', function ($query) use ($slug) {
+//                                $query->where('slug', $slug);
+//                            });
+                            $query->where([
+                                'creator_id' => $user_id,
+//                                'type' => Wishlist::TYPE_WISHLIST, // nếu chỉ lấy wishlist thì mở cmt ra
+                                'title' => $request->code
+                            ]);
+                        }]);
+                        $query->where('product_id', $wishList->product_id)->where('active', Attribute::STATUS_PUBLIC)->orderBy('order');
+                    }]);
+                    $query->where('active', Room::STATUS_PUBLIC)->orderBy('order');
+                }])->whereHas('products', function ($query) use ($wishList) {
+                    $query->where('product_id', $wishList->product_id);
+                })->orderBy('order')->select('id', 'title')->get();
+
+
 //            dd($wishList);
             if (!$wishList) {
                 return redirect()->back();
