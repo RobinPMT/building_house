@@ -33,9 +33,9 @@ class DesignController extends FrontendController
                 }]);
                 $query->where('active', Room::STATUS_PUBLIC);
             }])->select('id', 'title')->get();
-        $item = 3;
+        $item = 12;
         if ($request->slug) {
-            $item = 2;
+            $item = 11;
             $product = services()->productService()->where([
                 'active' => Product::ACTIVE
             ])->where(function ($query) use ($request) {
