@@ -13,7 +13,7 @@
                         <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($slide->avatar, 'slides_hot'), 1440, 710, 100, 1)}}"> <!-- 1440x710 -->
                         <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($slide->avatar, 'slides_hot'), 1170, 575, 100, 1)}}"> <!-- 1170x575 -->
                         <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($slide->avatar, 'slides_hot'), 990, 475, 100, 1)}}"> <!-- 990x475 -->
-                        <img src="{{imageUrl(pare_url_file($slide->avatar, 'slides_hot'), 470, 270, 100, 1)}}" alt="470x270" />
+                        <img src="{{imageUrl(pare_url_file($slide->avatar, 'slides_hot'), 470, 270, 100, 1)}}" alt="{{$slide->avatar ?? 'no_image.png'}}" />
 {{--                        <source media="(min-width: 1500px)" srcset="{{pare_url_file($slide->avatar, 'slides_hot')}}"> <!-- 1440x710 -->--}}
 {{--                        <source media="(min-width: 992px)" srcset="{{pare_url_file($slide->avatar, 'slides_hot')}}"> <!-- 1170x575 -->--}}
 {{--                        <source media="(min-width: 571px)" srcset="{{pare_url_file($slide->avatar, 'slides_hot')}}"> <!-- 990x475 -->--}}
@@ -29,7 +29,7 @@
                 @if(isset($libraries))
                     @foreach($libraries as $key => $library)
                         <div class="col-sm-4 col-vsm-6 gallery-item">
-                            <a href="{{route('get.detail.library', [$library->slug])}}" class="gallery-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($library->avatar, 'libraries'), 480, 300, 100, 1)}}" alt="480x300" /></a>
+                            <a href="{{route('get.detail.library', [$library->slug])}}" class="gallery-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($library->avatar, 'libraries'), 480, 300, 100, 1)}}" alt="{{$library->title}}" /></a>
                             <a href="{{route('get.detail.library', [$library->slug])}}" class="gallery-title">{{$library->title}}</a>
                         </div>
                     @endforeach

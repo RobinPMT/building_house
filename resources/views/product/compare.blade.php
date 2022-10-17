@@ -12,11 +12,11 @@
                 @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                     @foreach($images as $key => $image)
                         @if($image->status)
-                            <a href="#"><img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="420x250" /></a>
+                            <a href="#"><img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" /></a>
                         @endif
                     @endforeach
                 @else
-                    <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="420x250" /></a>
+                    <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="{{$product->title}}" /></a>
                 @endif
 
                 <a href="#" hidden><i class="fa fa-times"></i></a>
@@ -28,11 +28,11 @@
                     @if(isset($product1->arr_image) && $images1 = json_decode($product1->arr_image))
                         @foreach($images1 as $key => $image1)
                             @if($image1->status)
-                                <a href="#"><img src="{{(isset($image1->image) && trim($image1->image) != '') ? imageUrl(pare_url_file($image1->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="420x250" /></a>
+                                <a href="#"><img src="{{(isset($image1->image) && trim($image1->image) != '') ? imageUrl(pare_url_file($image1->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" /></a>
                             @endif
                         @endforeach
                     @else
-                        <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="420x250" /></a>
+                        <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="{{$product->title}}" /></a>
                     @endif
 
                     <a href="#" data-product-item="product1" data-product-id="{{$product1->id}}"><i class="fa fa-times"></i></a>
@@ -50,11 +50,11 @@
                     @if(isset($product2->arr_image) && $images2 = json_decode($product2->arr_image))
                         @foreach($images2 as $key => $image2)
                             @if($image2->status)
-                                <a href="#"><img src="{{(isset($image2->image) && trim($image2->image) != '') ? imageUrl(pare_url_file($image2->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="420x250" /></a>
+                                <a href="#"><img src="{{(isset($image2->image) && trim($image2->image) != '') ? imageUrl(pare_url_file($image2->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" /></a>
                             @endif
                         @endforeach
                     @else
-                        <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="420x250" /></a>
+                        <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="{{$product->title}}" /></a>
                     @endif
 
                     <a href="#" data-product-item="product2" data-product-id="{{$product2->id}}"><i class="fa fa-times"></i></a>

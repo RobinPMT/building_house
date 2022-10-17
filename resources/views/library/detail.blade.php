@@ -13,7 +13,7 @@
                     @if(is_array(json_decode($library->arr_image)))
                         @foreach(json_decode($library->arr_image) as $item)
                             <div class="photo-grid-item">
-                                <a data-fancybox="gallery" href="{{pare_url_file($item, 'libraries')}}"><img src="{{pare_url_file($item, 'libraries')}}" alt="h450" /></a>
+                                <a data-fancybox="gallery" href="{{pare_url_file($item, 'libraries')}}"><img src="{{pare_url_file($item, 'libraries')}}" alt="{{$library->title}}" /></a>
                             </div>
                         @endforeach
                     @endif
@@ -27,7 +27,7 @@
                 @if(isset($librariesRelated))
                     @foreach($librariesRelated as $key => $librarieRelated)
                         <div class="col-sm-4 col-vsm-6 gallery-item">
-                            <a href="{{route('get.detail.library', [$librarieRelated->slug])}}" class="gallery-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($library->avatar, 'libraries'), 480, 300, 100, 1)}}" alt="480x300" /></a>
+                            <a href="{{route('get.detail.library', [$librarieRelated->slug])}}" class="gallery-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($library->avatar, 'libraries'), 480, 300, 100, 1)}}" alt="{{$library->avatar ?? 'no_image.png'}}" /></a>
                             <a href="{{route('get.detail.library', [$librarieRelated->slug])}}" class="gallery-title">{{$librarieRelated->title}}</a>
                         </div>
                     @endforeach

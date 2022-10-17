@@ -9,7 +9,7 @@
                 @if(isset($projects))
                     @foreach($projects as $key => $project)
                         <div class="col-md-3 col-sm-4 col-xsm-6 project-item">
-                            <a href="{{route('get.detail.project', [$project->slug])}}" class="project-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($project->avatar, 'projects'), 480, 300, 100, 1)}}" alt="480x300" /></a>
+                            <a href="{{route('get.detail.project', [$project->slug])}}" class="project-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($project->avatar, 'projects'), 480, 300, 100, 1)}}" alt="{{$project->title}}" /></a>
                             <a href="{{route('get.detail.project', [$project->slug])}}" class="project-title limit-two-line">{{$project->title}}</a>
                         </div>
                     @endforeach

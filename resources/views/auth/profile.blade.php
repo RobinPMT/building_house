@@ -10,7 +10,7 @@
                         <div class="form-group">
 {{--                            <label>Avatar</label>--}}
                             <span class="clearfix" >
-                                <img id="output_image" src="{{get_data_user('web','avatar') ? pare_url_file(get_data_user('web','avatar'), 'avatars') : asset('fe_template/images/avatar.jpg')}}"  alt="" width="100px" height="100px" style="border-radius: 10px;">
+                                <img id="output_image" src="{{get_data_user('web','avatar') ? pare_url_file(get_data_user('web','avatar'), 'avatars') : asset('fe_template/images/avatar.jpg')}}"  alt="{{get_data_user('web','avatar') ? get_data_user('web','avatar') : 'avatar.jpg'}}" width="100px" height="100px" style="border-radius: 10px;">
                             </span>
                         </div>
                         <div class="form-group">

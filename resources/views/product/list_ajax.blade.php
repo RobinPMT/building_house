@@ -7,13 +7,13 @@
                     @foreach($images as $key => $image)
                         @if($image->status)
                             <a href="#" class="product-item-thumb">
-                                <img class="lazyload" src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" data-src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" alt="540x400" />
+                                <img class="lazyload" src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" data-src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" />
                             </a>
                         @endif
                     @endforeach
                 @else
                     <a href="#" class="product-item-thumb">
-                        <img class="lazyload" src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" data-src="" alt="540x400" />
+                        <img class="lazyload" src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" data-src="" alt="{{$product->title}}" />
                     </a>
                 @endif
 

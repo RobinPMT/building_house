@@ -17,7 +17,7 @@
                 <picture>
                     <source media="(min-width: 1500px)" srcset="{{ isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 1920, 820, 100, 1) : asset('images/no_image.png')}}"> <!-- 1920x620 -->
                     <source media="(min-width: 992px)" srcset="{{isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 1500, 490, 100, 1) : asset('images/no_image.png')}}"> <!-- 1500x490 -->
-                    <img class="owl-lazy" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 990, 450, 100, 1) : asset('images/no_image.png')}}" alt="990x450" />
+                    <img class="owl-lazy" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 990, 450, 100, 1) : asset('images/no_image.png')}}" alt="{{isset($setting->avatar) ? $setting->avatar : 'no_image.png'}}" />
                 </picture>
             </div>
             <div class="container">
@@ -60,10 +60,10 @@
                                 @if(isset($settingHousing))
                                     {!! $settingHousing->value !!}
                                 @else
-                                    <li>R&uacute;t ngắn thời gian thi c&ocirc;ng</li>
-                                    <li>Tiết kiệm chi ph&iacute; ph&aacute;t sinh</li>
-                                    <li>Th&iacute;ch ứng với đa dạng địa h&igrave;nh &amp; kh&ocirc;ng gian</li>
-                                    <li>Thiết kế ấn tượng x&acirc;y dựng từ ch&iacute;nh &yacute; tưởng của bạn</li>
+{{--                                    <li>R&uacute;t ngắn thời gian thi c&ocirc;ng</li>--}}
+{{--                                    <li>Tiết kiệm chi ph&iacute; ph&aacute;t sinh</li>--}}
+{{--                                    <li>Th&iacute;ch ứng với đa dạng địa h&igrave;nh &amp; kh&ocirc;ng gian</li>--}}
+{{--                                    <li>Thiết kế ấn tượng x&acirc;y dựng từ ch&iacute;nh &yacute; tưởng của bạn</li>--}}
                                 @endif
 
                             </ul>
@@ -76,9 +76,9 @@
                                 <source media="(min-width: 1500px)" srcset="{{isset($settingHousing->avatar_not_main) ? imageUrl(pare_url_file($settingHousing->avatar_not_main, 'settings'), 660, 440, 100, 1) : asset('images/no_image.png')}}"> <!-- 660x440 -->
                                 <source media="(min-width: 992px)" srcset="{{isset($settingHousing->avatar_not_main) ? imageUrl(pare_url_file($settingHousing->avatar_not_main, 'settings'), 570, 380, 100, 1) : asset('images/no_image.png')}}"> <!-- 570x380 -->
                                 <source media="(min-width: 571px)" srcset="{{isset($settingHousing->avatar_not_main) ? imageUrl(pare_url_file($settingHousing->avatar_not_main, 'settings'), 610, 410, 100, 1) : asset('images/no_image.png')}}"> <!-- 610x410 -->
-                                <img src="{{isset($settingHousing->avatar_not_main) ? imageUrl(pare_url_file($settingHousing->avatar_not_main, 'settings'), 390, 260, 100, 1) : asset('images/no_image.png')}}" alt="390x260" />
+                                <img src="{{isset($settingHousing->avatar_not_main) ? imageUrl(pare_url_file($settingHousing->avatar_not_main, 'settings'), 390, 260, 100, 1) : asset('images/no_image.png')}}" alt="{{isset($settingHousing->avatar_not_main) ? $settingHousing->avatar_not_main : 'no_image.png'}}" />
                             </picture>
-                            <img class="opportunity-smthumb lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{isset($settingHousing->avatar) ? imageUrl(pare_url_file($settingHousing->avatar, 'settings'), 330, 200, 100, 1) : asset('images/no_image.png')}}" alt="330x200" />
+                            <img class="opportunity-smthumb lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{isset($settingHousing->avatar) ? imageUrl(pare_url_file($settingHousing->avatar, 'settings'), 330, 200, 100, 1) : asset('images/no_image.png')}}" alt="{{isset($settingHousing->avatar) ? $settingHousing->avatar : 'no_image.png'}}" />
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                         <picture>
                             <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($housing->avatar_main, 'housings'), 450, 300, 100, 1)}}"> <!-- 450x300 -->
                             <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing->avatar_main, 'housings'), 370, 250, 100, 1)}}"> <!-- 370x250 -->
-                            <img src="{{imageUrl(pare_url_file($housing->avatar, 'housings'), 450, 300, 100, 1)}}" alt="450x300" />
+                            <img src="{{imageUrl(pare_url_file($housing->avatar, 'housings'), 450, 300, 100, 1)}}" alt="{{$housing->title}}" />
                         </picture>
                         <strong>{{$housing->title}}</strong>
                         <p>{{$housing->content}}</p>

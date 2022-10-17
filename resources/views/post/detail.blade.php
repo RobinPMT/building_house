@@ -15,7 +15,7 @@
                         <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 1140, 445, 100, 1)}}"> <!-- 1140x445 -->
                         <source media="(min-width: 768px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 990, 380, 100, 1)}}"> <!-- 990x380 -->
                         <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 740, 300, 100, 1)}}"> <!-- 740x300 -->
-                        <img src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 540, 220, 100, 0)}}" alt="540x220" />
+                        <img src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 540, 220, 100, 0)}}" alt="{{$post->title}}" />
                     </picture>
                 </div>
             @endif
@@ -49,7 +49,7 @@
                             @foreach($postsRelated as $key => $postRelated)
                                 <div class="col-md-12 col-sm-4 col-xss-6 news-item">
                                     <div class="news-item-ct">
-                                        <a href="{{route('get.detail.post', [$postRelated->type, $postRelated->slug])}}" class="news-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($postRelated->avatar, 'posts'), 480, 330, 100, 1)}}" alt="480x330" /></a>
+                                        <a href="{{route('get.detail.post', [$postRelated->type, $postRelated->slug])}}" class="news-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($postRelated->avatar, 'posts'), 480, 330, 100, 1)}}" alt="{{$postRelated->title}}" /></a>
                                         <div class="news-short">
                                             <a href="{{route('get.detail.post', [$postRelated->type, $postRelated->slug])}}" class="news-title limit-two-line">{{$postRelated->title}}</a>
                                             <span>{{$postRelated->created_at->format('d/m/Y')}} • {{$postRelated->creator->name ?? ''}}</span>

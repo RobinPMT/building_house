@@ -21,7 +21,7 @@
                                 @if(is_array(json_decode($project->arr_image)))
                                     @foreach(json_decode($project->arr_image) as $item)
                                         <div class="photo-grid-item">
-                                            <a data-fancybox="gallery" href="{{pare_url_file($item, 'projects')}}"><img src="{{pare_url_file($item, 'projects')}}" alt="h450" /></a>
+                                            <a data-fancybox="gallery" href="{{pare_url_file($item, 'projects')}}"><img src="{{pare_url_file($item, 'projects')}}" alt="{{$project->title}}" /></a>
                                         </div>
                                     @endforeach
                                 @endif
@@ -36,7 +36,7 @@
                 @if(isset($projectRandoms))
                     @foreach($projectRandoms as $key => $projectRandom)
                         <div class="col-md-3 col-sm-4 col-xsm-6 project-item">
-                            <a href="{{route('get.detail.project', [$projectRandom->slug])}}" class="project-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($projectRandom->avatar, 'projects'), 480, 300, 100, 1)}}" alt="480x300" /></a>
+                            <a href="{{route('get.detail.project', [$projectRandom->slug])}}" class="project-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($projectRandom->avatar, 'projects'), 480, 300, 100, 1)}}" alt="{{$projectRandom->title}}" /></a>
                             <a href="{{route('get.detail.project', [$projectRandom->slug])}}" class="project-title limit-two-line">{{$projectRandom->title}}</a>
                         </div>
                     @endforeach

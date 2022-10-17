@@ -5,8 +5,8 @@
             @if(isset($banners))
                 @foreach($banners as $key => $banner)
                     <div class="owl-itemct">
-                        <img class="bg-banner" src="{{imageUrl(pare_url_file($banner->avatar_not_main, 'banners'), 1920, 1080, 100, 1)}}" alt="1920x1080" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
-                        <img class="detail-banner" src="{{imageUrl(pare_url_file($banner->avatar_main, 'banners'), 1920, 1080, 100, 1)}}" alt="1920x1080" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
+                        <img class="bg-banner" src="{{imageUrl(pare_url_file($banner->avatar_not_main, 'banners'), 1920, 1080, 100, 1)}}" alt="{{$banner->avatar_not_main ?? 'no_image.png'}}" class="animated slideScaleIn" data-animation-in="slideScaleIn" data-animation-out="animate-out slideScaleOut" />
+                        <img class="detail-banner" src="{{imageUrl(pare_url_file($banner->avatar_main, 'banners'), 1920, 1080, 100, 1)}}" alt="{{$banner->avatar_main ?? 'no_image.png'}}" class="animated slideScaleInDt" data-animation-in="slideScaleInDt" data-animation-out="animate-out slideScaleOutDt" />
                         <div class="banner-descr">
                             @if(isset($banner->title, $banner->description))
                                 <h2>{{$banner->title}}</h2>
@@ -46,7 +46,7 @@
                                             <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 1170, 335, 100, 1)}}"> <!-- 1170x335 -->
                                             <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 940, 270, 100, 1)}}"> <!-- 940x270 -->
                                             <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 970, 280, 100, 1)}}"> <!-- 970x280 -->
-                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="540x320" />
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="{{$housing_setting->value}}" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
@@ -64,7 +64,7 @@
                                             <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 570, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 495  : 335) : 700 , 100, 1)}}"> <!-- 570x700 -->
                                             <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 455, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 265) : 560 , 100, 1)}}"> <!-- 455x560 -->
                                             <source media="(min-width: 571px)" srcset="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 470, in_array($key, [1,2,5,4]) ? (in_array($key, [5,4]) ? 395  : 275) : 570 , 100, 1)}}"> <!-- 470x570 -->
-                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="540x320" />
+                                            <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($housing_setting->avatar, 'settings'), 540, 320, 100, 1)}}" alt="{{$housing_setting->value}}" />
                                         </picture>
                                         <div class="benefit-item-desc">
                                             <span>0{{$key + 1}}</span>
@@ -127,7 +127,7 @@
                                                             @foreach($images as $key => $image)
                                                                 @if($image->status)
                                                                     <picture class="product-larger-thumb">
-                                                                        <img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 930, 845, 100, 1) : asset('images/no_image.png')}}" alt="930x845" />
+                                                                        <img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 930, 845, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" />
                                                                     </picture>
                                                                 @endif
                                                             @endforeach
@@ -135,22 +135,22 @@
                                                                 <div class="owl-carousel">
                                                                     @foreach($images as $key => $image)
                                                                         @if(!$image->status)
-                                                                            <a href="#"><img data-larger="{{pare_url_file($image->image, 'products')}}" class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 145, 100, 100, 1)}}" alt="145x100" /></a>
+                                                                            <a href="#"><img data-larger="{{pare_url_file($image->image, 'products')}}" class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
                                                             </div>
                                                             @else
                                                                 <picture class="product-larger-thumb">
-                                                                    <img src="{{imageUrl(asset('images/no_image.png'), 930, 845, 100, 1)}}" alt="930x845" />
+                                                                    <img src="{{imageUrl(asset('images/no_image.png'), 930, 845, 100, 1)}}" alt="{{$product->title}}" />
                                                                 </picture>
                                                                 <div class="product-small-thumb">
                                                                     <div class="owl-carousel">
-                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
-                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
-                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
-                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
-                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
+                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
+                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
+                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
+                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
+                                                                        <a href="#"><img data-larger="{{asset('images/no_image.png')}}" class="owl-lazy" data-src="{{imageUrl(asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
                                                                     </div>
                                                                 </div>
                                                         @endif
@@ -282,7 +282,7 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="col-sm-5">
-                                                                <div class="product-tech-img"><img src="{{pare_url_file($product->avatar_design, 'products')}}" alt="" /></div>
+                                                                <div class="product-tech-img"><img src="{{pare_url_file($product->avatar_design, 'products')}}" alt="{{$product->title}}" /></div>
                                                                 <div class="popup-action">
                                                                     <a href="{{route('get.list.design', ['category_id' => $product->category_id, 'slug' => $product->slug])}}" class="button-link bg-green">Tự thiết kế</a>
 
@@ -398,7 +398,7 @@
                                         <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 1000, 700, 100, 1)}}"> <!-- 1000x700 -->
                                         <source media="(min-width: 1230px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 680, 520, 100, 1)}}"> <!-- 680x520 -->
                                         <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 730, 510, 100, 1)}}"> <!-- 730x510 -->
-                                        <img src="{{imageUrl(pare_url_file($image, 'settings'), 590, 410, 100, 1)}}" alt="590x410" />
+                                        <img src="{{imageUrl(pare_url_file($image, 'settings'), 590, 410, 100, 1)}}" alt="{{$image ?? 'no_image.png'}}" />
                                     </picture>
                                 @endforeach
                             @endif
@@ -428,7 +428,7 @@
             @if(isset($libraries))
                 @foreach($libraries as $key => $library)
                     <div class="photo-grid-item">
-                        <img src="{{pare_url_file($library->avatar, 'libraries')}}">
+                        <img src="{{pare_url_file($library->avatar, 'libraries')}}" alt="{{$library->title}}">
                         <div class="item_description">
                             <a href="{{route('get.detail.library', [$library->slug])}}" class="pictures-title">{{$library->title}}</a>
                             <a href="{{route('get.detail.library', [$library->slug])}}" class="button-link">Xem thêm ảnh</a>
@@ -457,7 +457,7 @@
                                 <picture>
                                     <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 500, 620, 100, 1)}}"> <!-- 500x620 -->
                                     <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($post->avatar, 'posts'), 370, 465, 100, 1)}}"> <!-- 370x465 -->
-                                    <img class="owl-lazy" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 450, 560, 100, 1)}}" alt="450x560" />
+                                    <img class="owl-lazy" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 450, 560, 100, 1)}}" alt="{{$post->title}}" />
                                 </picture>
                             </a>
                             <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-title limit-two-line">{{$post->title}}</a>

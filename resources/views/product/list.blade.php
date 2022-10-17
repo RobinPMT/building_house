@@ -60,13 +60,13 @@
                                     @foreach($images as $key => $image)
                                         @if($image->status)
                                             <a href="{{route('get.detail.product', [$product->slug])}}" class="product-item-thumb">
-                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" alt="540x400" />
+                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" />
                                             </a>
                                         @endif
                                     @endforeach
                                 @else
                                     <a href="{{route('get.detail.product', [$product->slug])}}" class="product-item-thumb">
-                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" alt="540x400" />
+                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" alt="{{$product->title}}" />
                                     </a>
                                 @endif
 

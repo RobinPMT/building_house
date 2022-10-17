@@ -76,11 +76,11 @@
                                             @if(isset($productSelect->arr_image) && $images = json_decode($productSelect->arr_image))
                                                 @foreach($images as $key => $image)
                                                     @if($image->status)
-                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="{{$productSelect->title}}" />
                                                     @endif
                                                 @endforeach
                                             @else
-                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($productSelect->title, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" alt="{{$productSelect->title}}" />
                                             @endif
                                             <strong>{{$productSelect->title}}</strong>
                                         </a>
@@ -92,11 +92,11 @@
                                             @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                                                 @foreach($images as $key => $image)
                                                     @if($image->status)
-                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                        <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image->image, 'products'), 540, 400, 100, 1)}}" alt="{{$product->title}}" />
                                                     @endif
                                                 @endforeach
                                             @else
-                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($product->title, 'products'), 540, 400, 100, 1)}}" alt="540x400" />
+                                                <img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(asset('images/no_image.png'), 540, 400, 100, 1)}}" alt="{{$product->title}}" />
                                             @endif
                                             <strong>{{$product->title}}</strong>
                                         </a>

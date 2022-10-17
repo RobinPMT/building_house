@@ -17,13 +17,13 @@
                                     @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                                         @foreach($images as $key => $image)
                                             @if($image->status)
-                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}" alt="690x630" /></a>
+                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}" alt="{{$product->title}}" /></a>
                                             @endif
                                         @endforeach
 
                                         @foreach($images as $key => $image)
                                             @if(!$image->status)
-                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}" alt="690x630" /></a>
+                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 690, 630, 100, 1)}}" alt="{{$product->title}}" /></a>
                                             @endif
                                         @endforeach
 
@@ -35,12 +35,12 @@
                                     @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                                         @foreach($images as $key => $image)
                                             @if($image->status)
-                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="690x630" /></a>
+                                                <a data-fancybox="gallery" href="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
                                             @endif
                                         @endforeach
                                         @foreach($images as $key => $image)
                                                 @if(!$image->status)
-                                                    <a href="#"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="145x100" /></a>
+                                                    <a href="#"><img class="owl-lazy" data-src="{{imageUrl(pare_url_file($image->image, 'products') ?? asset('images/no_image.png'), 145, 100, 100, 1)}}" alt="{{$product->title}}" /></a>
                                                 @endif
                                         @endforeach
                                     @endif
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="product-single-thumb-more"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($product->avatar_design, 'products') ?? asset('images/no_image.png'), 540, 320, 100, 1)}}" alt="540x320" /></div>
+                        <div class="product-single-thumb-more"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($product->avatar_design, 'products') ?? asset('images/no_image.png'), 540, 320, 100, 1)}}" alt="{{$product->title}}" /></div>
                     </div>
                 </div>
                 <h4 class="other-title">Thông số chi tiết</h4>
@@ -131,11 +131,11 @@
                                             @if(isset($product->arr_image) && $images = json_decode($product->arr_image))
                                                 @foreach($images as $key => $image)
                                                     @if($image->status)
-                                                        <a href="#"><img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="420x250" /></a>
+                                                        <a href="#"><img src="{{(isset($image->image) && trim($image->image) != '') ? imageUrl(pare_url_file($image->image, 'products'), 420, 250, 100, 1) : asset('images/no_image.png')}}" alt="{{$product->title}}" /></a>
                                                     @endif
                                                 @endforeach
                                             @else
-                                                <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="420x250" /></a>
+                                                <a href="#"><img src="{{imageUrl(asset('images/no_image.png'), 420, 250, 100, 1)}}" alt="{{$product->title}}" /></a>
                                             @endif
                                             <a href="#" hidden><i class="fa fa-times"></i></a>
                                         </div>

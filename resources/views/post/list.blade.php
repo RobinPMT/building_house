@@ -10,7 +10,7 @@
                     @foreach($posts as $key => $post)
                         <div class="col-sm-4 col-xss-6 news-item">
                             <div class="news-item-ct">
-                                <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 480, 330, 100, 1)}}" alt="480x330" /></a>
+                                <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-thumb"><img class="lazyload" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($post->avatar, 'posts'), 480, 330, 100, 1)}}" alt="{{$post->title}}" /></a>
                                 <div class="news-short">
                                     <a href="{{route('get.detail.post', [$post->type, $post->slug])}}" class="news-title limit-two-line">{{$post->title}}</a>
                                     <span>{{$post->created_at->format('d/m/Y')}} • {{$post->creator->name ?? ''}}</span>
