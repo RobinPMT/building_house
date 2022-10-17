@@ -95,7 +95,7 @@
                                     <td style="white-space: normal;">{{$item['title']}}</td>
 {{--                                    <td>{{ $item['type']}}</td>--}}
                                     <td>{{ $item['type'] == \App\Models\Attribute::TYPE_SYSTEM ? 'Hệ thống' : 'Kiểu dáng' }}</td>
-                                    <td style="white-space: normal;">{{$item['product']['title']}}</td>
+                                    <td style="white-space: normal;">{{$item['product']['title'] ?? 'Không rõ'}}</td>
                                     <td style="white-space: normal;">{{$item['creator']['name']}}</td>
                                     <td style="white-space: normal;">
                                         {{isset($item['room']['title']) ? $item['room']['title'] : ''}}
