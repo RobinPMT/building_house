@@ -11,7 +11,7 @@
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
                     <label class="form-label" for="title-style">Tên thuộc tính <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title-style" placeholder="Tiêu đề" aria-label="Tiêu đề" />
+                    <input type="text" name="title" class="form-control dt-full-name" id="title-style" placeholder="Tiêu đề" aria-label="Tiêu đề" required/>
                 </div>
 {{--                <div class="form-group">--}}
 {{--                    <label for="room_id-style">Chọn phòng <span style="color: red">*</span></label>--}}
@@ -48,10 +48,10 @@
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
-                    <label for="input_image">Ảnh mẫu <strong>(Kích thước: 170x120 pixel)</strong></label>
+                    <label for="input_image">Ảnh mẫu <strong>(Kích thước: 170x120 pixel)</strong> <span style="color: red">*</span></label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="input_image" name="avatar">
-                        <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                        <input type="file" class="custom-file-input" id="input_image" name="avatar" required>
+                        <label class="custom-file-label file_src" for="input_image">Chọn ảnh</label>
                     </div>
                 </div>
                 <div class="form-group">

@@ -216,10 +216,20 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#link').val(response.data.link);
                             $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar_main);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('#input_image-error').remove();
+                            $('.file_src1').text(response.data.avatar_main);
                             $('#output_image_extra').attr('src', response.data.avatar_not_main);
+                            $('#input_image_extra').removeAttr('required');
+                            $('#input_image_extra').removeClass('error');
+                            $('#input_image_extra-error').remove();
+                            $('.file_src2').text(response.data.avatar_not_main);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }
@@ -254,6 +264,10 @@
                     $("form #checkbox_active").attr('checked', false);
                     $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                     $('#output_image_extra').attr('src', '{{asset('images/no_image.png')}}');
+                    $('.file_src1').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
+                    $('.file_src2').text('Chọn ảnh');
+                    $('#input_image_extra').attr("required", true);
                 }
                 $('#form-crud').attr('action', '{{route('admin.store.banner')}}');
                 $('#exampleModalLabel').text('Thêm mới');

@@ -324,8 +324,12 @@
                             $("#_id").val(response.data.id).change();
                             $("#parent_id").val(response.data.parent_id).change();
                             $("#product_ids").val(response.data.product_ids).change();
+                            $('#product_ids').removeClass('error');
+                            $('#product_ids-error').remove();
                             $('#_order_room').val(response.data.order);
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }

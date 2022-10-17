@@ -540,7 +540,11 @@
                         if(response.status) {
                             $("#_id").val(response.data.id).change();
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#slug').val(response.data.slug);
+                            $('#slug').removeClass('error');
+                            $('#slug-error').remove();
                             $('#longs').val(response.data.longs);
                             $('#width').val(response.data.width);
                             $('#height').val(response.data.height);
@@ -549,7 +553,15 @@
                             $('#room_description').val(response.data.room_description);
                             $("#category_id").val(response.data.category_id).change();
                             $('#output_image').attr('src', response.data.avatar_design);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('.file_src1').text(response.data.avatar_design);
+                            $('#input_image-error').remove();
                             $('#output_image_extra').attr('src', response.data.image_back_ground_design);
+                            $('#input_image_extra').removeAttr('required');
+                            $('#input_image_extra').removeClass('error');
+                            $('.file_src2').text(response.data.image_back_ground_design);
+                            $('#input_image_extra-error').remove();
                             $("textarea#description").html(response.data.description);
                             $('#keyword_seo').val(response.data.keyword_seo);
                             $('#order').val(response.data.order);
@@ -630,6 +642,10 @@
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });
+                    $('.file_src1').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
+                    $('.file_src2').text('Chọn ảnh');
+                    $('#input_image_extra').attr("required", true);
                 }
                 $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#output_image_extra').attr('src', '{{asset('images/no_image.png')}}');

@@ -226,6 +226,8 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             CKEDITOR.instances.content.setData( response.data.content);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)

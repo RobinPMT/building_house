@@ -11,7 +11,7 @@
             <div class="modal-body flex-grow-1">
                 <div class="form-group">
                     <label class="form-label" for="title-system">Tên thuộc tính <span style="color: red">*</span></label>
-                    <input type="text" name="title" class="form-control dt-full-name" id="title-system" placeholder="Tiêu đề" aria-label="Tiêu đề" />
+                    <input type="text" name="title" class="form-control dt-full-name" id="title-system" placeholder="Tiêu đề" aria-label="Tiêu đề" required/>
                 </div>
 {{--                <div class="form-group">--}}
 {{--                    <label for="room_id-system">Chọn phòng <span style="color: red">*</span></label>--}}

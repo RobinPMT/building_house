@@ -173,6 +173,8 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#exampleModalLabel').text('Cập nhật');
                             $('#form-crud').attr('action', data_url_update);
                         }

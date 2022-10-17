@@ -33,10 +33,10 @@
                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
-                    <label for="input_image">Ảnh nội dung <strong>(Kích thước: 1920x1080 pixel)</strong></label>
+                    <label for="input_image">Ảnh nội dung <strong>(Kích thước: 1920x1080 pixel)</strong> <span style="color: red">*</span></label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="input_image" name="avatar_main">
-                        <label class="custom-file-label" for="input_image">Chọn ảnh nội dung</label>
+                        <input type="file" class="custom-file-input" id="input_image" name="avatar_main" required>
+                        <label class="custom-file-label file_src1" for="input_image">Chọn ảnh nội dung</label>
                     </div>
                 </div>
 
@@ -44,10 +44,10 @@
                     <img id="output_image_extra" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                 </div>
                 <div class="form-group">
-                    <label for="input_image_extra">Ảnh background <strong>(Kích thước: 1920x1080 pixel)</strong></label>
+                    <label for="input_image_extra">Ảnh background <strong>(Kích thước: 1920x1080 pixel)</strong> <span style="color: red">*</span></label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar_not_main">
-                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh background</label>
+                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar_not_main" required>
+                        <label class="custom-file-label file_src2" for="input_image_extra">Chọn ảnh background</label>
                     </div>
                 </div>
 {{--                <input type="text" name="type" class="form-control dt-full-name" value="home" hidden />--}}

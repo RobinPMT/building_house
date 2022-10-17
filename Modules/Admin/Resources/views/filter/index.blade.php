@@ -213,6 +213,8 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#from').val(response.data.from);
                             $('#to').val(response.data.to);
                             $('#order').val(response.data.order);

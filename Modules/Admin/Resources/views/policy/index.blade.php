@@ -222,7 +222,11 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#slug').val(response.data.slug);
+                            $('#slug').removeClass('error');
+                            $('#slug-error').remove();
                             $('#order').val(response.data.order);
                             $('#description_seo').val(response.data.description_seo);
                             $('#title_seo').val(response.data.title_seo);

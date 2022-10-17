@@ -269,8 +269,12 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#order').val(response.data.order);
                             $('#slug').val(response.data.slug);
+                            $('#slug').removeClass('error');
+                            $('#slug-error').remove();
                             $('#description').val(response.data.description);
                             $("#tag_ids").val(response.data.tag_ids).change();
                             $("#type").val(response.data.type).change();
@@ -281,6 +285,10 @@
                             $('#title_seo').val(response.data.title_seo);
                             $('#keyword_seo').val(response.data.keyword_seo);
                             $('#output_image').attr('src', response.data.avatar);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('.file_src').text(response.data.avatar);
+                            $('#input_image-error').remove();
                             // $('#input_image').val(response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
@@ -338,6 +346,8 @@
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });
+                    $('.file_src').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
                 }
                 $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud').attr('action', '{{route('admin.store.post')}}');

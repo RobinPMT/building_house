@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="product_ids">Sản phẩm <span style="color: red">*</span></label>
-                        <select class="select2-size-lg form-control select-multi" name="product_ids[]" multiple="multiple" id="product_ids" >
+                        <select class="select2-size-lg form-control select-multi" name="product_ids[]" multiple="multiple" id="product_ids" required>
                             @php echo Modules\Admin\Http\Controllers\AdminProductController::showProducts();  @endphp
                         </select>
                     </div>

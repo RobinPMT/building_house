@@ -80,10 +80,10 @@
                                     <img id="output_image" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_image">Ảnh bản vẽ <strong>(Kích thước: 540x320 pixel)</strong></label>
+                                    <label for="input_image">Ảnh bản vẽ <strong>(Kích thước: 540x320 pixel)</strong> <span style="color: red">*</span></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="input_image" name="avatar_design">
-                                        <label class="custom-file-label" for="input_image">Chọn ảnh</label>
+                                        <input type="file" class="custom-file-input" id="input_image" name="avatar_design" required >
+                                        <label class="custom-file-label file_src1" for="input_image" style="white-space: nowrap">Chọn ảnh</label>
                                     </div>
                                 </div>
                             </div>
@@ -92,10 +92,10 @@
                                     <img id="output_image_extra" src="{{asset('images/no_image.png')}}" alt="" width="200px" height="180px">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_image_extra">Ảnh tự thiết kế <strong>(Kích thước: 1170x550 pixel)</strong></label>
+                                    <label for="input_image_extra">Ảnh tự thiết kế <strong>(Kích thước: 1170x550 pixel)</strong> <span style="color: red">*</span></label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="input_image_extra" name="image_back_ground_design">
-                                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
+                                        <input type="file" class="custom-file-input" id="input_image_extra" name="image_back_ground_design" required >
+                                        <label class="custom-file-label file_src2" for="input_image_extra" style="white-space: nowrap">Chọn ảnh</label>
                                     </div>
                                 </div>
                             </div>

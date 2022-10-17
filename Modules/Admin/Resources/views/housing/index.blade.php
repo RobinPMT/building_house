@@ -26,9 +26,9 @@
                                                     <img id="output_image_extra" src="{{isset($setting['avatar']) ? pare_url_file($setting['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra">Ảnh Banner <strong>(Kích thước: 1920x620 pixel)</strong></label>
+                                                    <label for="input_image_extra">Ảnh Banner <strong>(Kích thước: 1920x620 pixel)</strong> <span style="color: red">*</span></label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar" {{isset($setting['avatar']) ? '' : 'required'}}>
                                                         <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
                                                     </div>
                                                 </div>
@@ -80,9 +80,9 @@
                                                     <img id="output_image_extra_setting_main" src="{{isset($settingHousing['avatar']) ? pare_url_file($settingHousing['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting_main">Ảnh trước <strong>(Kích thước: 330x200 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting_main">Ảnh trước <strong>(Kích thước: 330x200 pixel)</strong> <span style="color: red">*</span></label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting_main" name="avatar">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting_main" name="avatar" {{isset($settingHousing['avatar']) ? '' : 'required'}}>
                                                         <label class="custom-file-label" for="input_image_extra_setting_main">Chọn ảnh</label>
                                                     </div>
                                                 </div>
@@ -93,9 +93,9 @@
                                                     <img id="output_image_extra_setting" src="{{isset($settingHousing['avatar_not_main']) ? pare_url_file($settingHousing['avatar_not_main'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="input_image_extra_setting">Ảnh sau <strong>(Kích thước: 660x440 pixel)</strong></label>
+                                                    <label for="input_image_extra_setting">Ảnh sau <strong>(Kích thước: 660x440 pixel)</strong> <span style="color: red">*</span></label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting" name="avatar_not_main">
+                                                        <input type="file" class="custom-file-input" id="input_image_extra_setting" name="avatar_not_main" {{isset($settingHousing['avatar_not_main']) ? '' : 'required'}}>
                                                         <label class="custom-file-label" for="input_image_extra_setting">Chọn ảnh</label>
                                                     </div>
                                                 </div>
@@ -332,9 +332,15 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#link').val(response.data.link);
                             $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar_main);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('.file_src').text(response.data.avatar_main);
+                            $('#input_image-error').remove();
                             $('#output_image_extra').attr('src', response.data.avatar_not_main);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
@@ -371,6 +377,8 @@
                     $("form #checkbox_active").attr('checked', false);
                     $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                     $('#output_image_extra').attr('src', '{{asset('images/no_image.png')}}');
+                    $('.file_src').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
                 }
                 $('#form-crud').attr('action', '{{route('admin.store.housing')}}');
                 $('#exampleModalLabel').text('Thêm mới');

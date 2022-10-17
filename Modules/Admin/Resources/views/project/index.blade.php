@@ -418,8 +418,16 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.title);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#slug').val(response.data.slug);
+                            $('#slug').removeClass('error');
+                            $('#slug-error').remove();
                             $('#output_image').attr('src', response.data.avatar);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('.file_src').text(response.data.avatar);
+                            $('#input_image-error').remove();
                             CKEDITOR.instances.content.setData( response.data.content);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
@@ -459,6 +467,8 @@
                 if($('#form-crud').attr('action') !== '{{route('admin.store.project')}}'){
                     $('#form-crud').trigger("reset");
                     CKEDITOR.instances.content.setData('<p>Viết nội dung ở đây</p>');
+                    $('.file_src').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
                 }
                 $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
                 $('#form-crud').attr('action', '{{route('admin.store.project')}}');

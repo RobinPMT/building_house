@@ -432,13 +432,17 @@
                                 get_arr_image(response.data.arr_image);
                             }
                             $('#title-'+target).val(response.data.title);
+                            $('#title-'+target).removeClass('error');
+                            $('#title-'+target+'-error').remove();
                             $('#output_image').attr('src', response.data.avatar);
-
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('.file_src').text(response.data.avatar);
+                            $('#input_image-error').remove();
 
                             $('#exampleModalLabel').text('Cập nhật hệ thống');
                             $('#example-style').text('Cập nhật kiểu dáng');
                             $('#form-crud-'+target).attr('action', data_url_update);
-
                             await $('#product_id-'+target).val(response.data.product_id).change();
                             let url2 = '/admin/room/render_room_with_product/'+response.data.product_id;
                             await $.ajax({
@@ -597,6 +601,8 @@
                     // $('#modals-slide-in').on('hidden.bs.modal', function (event) {
                     //     $(this).find('form').trigger('reset');
                     // });
+                    $('.file_src').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
                 }
                 $('#form-crud-'+target).trigger("reset");
                 $("#product_id-"+target).val('').change();

@@ -224,9 +224,15 @@
                         console.log(response)
                         if(response.status) {
                             $('#name').val(response.data.name);
+                            $('#name').removeClass('error');
+                            $('#name-error').remove();
                             $('#email').val(response.data.email);
+                            $('#email').removeClass('error');
+                            $('#email-error').remove();
                             $('#phone').val(response.data.phone);
                             $('#password').val('');
+                            $('#password').removeClass('error');
+                            $('#password-error').remove();
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }
@@ -283,7 +289,7 @@
                             required: true,
                         },
                         password: {
-                            // required: true,
+                            required: true,
                             minlength: 6,
                         },
                     },

@@ -699,8 +699,14 @@
                         console.log(response)
                         if(response.status) {
                             $('#title').val(response.data.value);
+                            $('#title').removeClass('error');
+                            $('#title-error').remove();
                             $('#order').val(response.data.order);
                             $('#output_image').attr('src', response.data.avatar);
+                            $('#input_image').removeAttr('required');
+                            $('#input_image').removeClass('error');
+                            $('#input_image-error').remove();
+                            $('.file_src').text(response.data.avatar);
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }
@@ -733,6 +739,8 @@
                     $('#form-crud').trigger("reset");
                     $("form #checkbox_active").attr('checked', false);
                     $('#output_image').attr('src', '{{asset('images/no_image.png')}}');
+                    $('.file_src').text('Chọn ảnh');
+                    $('#input_image').attr("required", true);
                 }
                 $('#form-crud').attr('action', '{{route('admin.store.setting')}}');
                 $('#exampleModalLabel').text('Thêm mới');

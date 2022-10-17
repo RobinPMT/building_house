@@ -229,7 +229,11 @@
                         if(response.status) {
                             $("#tag_type").val(response.data.tag_type).change();
                             $('#name').val(response.data.name);
+                            $('#name').removeClass('error');
+                            $('#name-error').remove();
                             $('#key').val(response.data.key);
+                            $('#key').removeClass('error');
+                            $('#key-error').remove();
                             if(response.data.active == '1'){
                                 $("form #checkbox_active").attr('checked', true)
                             }
