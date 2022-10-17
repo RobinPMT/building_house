@@ -25,7 +25,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
 {{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -35,10 +35,11 @@
                         @if(isset($data, $status) && $status)
                             @foreach($data as $stt => $category)
                                 <tr id="sid{{$category['id']}}">
-                                    <td scope="row">{{$stt + 1}}</td>
+{{--                                    <td scope="row">{{$stt + 1}}</td>--}}
+                                    <td style="">{{$category['order']}}</td>
                                     <td>{{$category['title']}}</td>
                                     <td style="">{{$category['creator']['name']}}</td>
-                                    <td style="">{{$category['order']}}</td>
+{{--                                    <td style="">{{$category['order']}}</td>--}}
 {{--                                    <td style="">--}}
 {{--                                        {{isset($category['parent']['title']) ? $category['parent']['title'] : ''}}--}}
 {{--                                    </td>--}}
@@ -84,7 +85,7 @@
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Người tạo</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
 {{--                        <th>Danh mục cha</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>

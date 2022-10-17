@@ -343,7 +343,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
-                    <th>Thứ tự</th>
+{{--                    <th>Thứ tự</th>--}}
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -354,12 +354,13 @@
                     @foreach($data as $stt => $item)
                         @if($item['type'] == 'home')
                             <tr id="sid{{$item['id']}}">
-                                <td scope="row">{{$i}}</td>
+{{--                                <td scope="row">{{$i}}</td>--}}
+                                <td style="">{{$item['order']}}</td>
                                 <td style="white-space: normal;">{{$item['value']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar']}}" width="100px" height="100px" alt="">
                                 </td>
-                                <td style="">{{$item['order']}}</td>
+{{--                                <td style="">{{$item['order']}}</td>--}}
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.setting', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -405,7 +406,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
-                    <th>Thứ tự</th>
+{{--                    <th>Thứ tự</th>--}}
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -430,7 +431,7 @@
                     null,
                     null,
                     null,
-                    null,
+                    // null,
                 ],
                 paging: true,
                 showEntries: false,

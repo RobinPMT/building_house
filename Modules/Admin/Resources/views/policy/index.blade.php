@@ -24,7 +24,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
@@ -33,9 +33,10 @@
                         @if(isset($data, $status) && $status)
                             @foreach($data as $stt => $policy)
                                 <tr id="sid{{$policy['id']}}">
-                                    <td scope="row">{{$stt + 1}}</td>
-                                    <td>{{$policy['title']}}</td>
+{{--                                    <td scope="row">{{$stt + 1}}</td>--}}
                                     <td style="">{{$policy['order']}}</td>
+                                    <td>{{$policy['title']}}</td>
+{{--                                    <td style="">{{$policy['order']}}</td>--}}
 {{--                                    <td style="">--}}
 {{--                                        {{isset($policy['parent']['title']) ? $policy['parent']['title'] : ''}}--}}
 {{--                                    </td>--}}
@@ -80,7 +81,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Tiêu đề</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>

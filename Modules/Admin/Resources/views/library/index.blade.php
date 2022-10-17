@@ -27,7 +27,7 @@
                         <th>Ảnh</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -37,7 +37,8 @@
                     @if(isset($data, $status) && $status)
                         @foreach($data as $stt => $item)
                             <tr id="sid{{$item['id']}}">
-                                <td scope="row">{{$stt + 1}}</td>
+{{--                                <td scope="row">{{$stt + 1}}</td>--}}
+                                <td style="">{{$item['order']}}</td>
                                 <td style="white-space: normal;">{{$item['title']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar_url']}}" width="100px" height="100px" alt="">
@@ -52,7 +53,7 @@
                                     </a>
                                 </td>
                                 <td style="">{{$item['creator']['name']}}</td>
-                                <td style="">{{$item['order']}}</td>
+{{--                                <td style="">{{$item['order']}}</td>--}}
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.slide', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -110,7 +111,7 @@
                         <th>Ảnh</th>
                         <th>List ảnh</th>
                         <th>Người tạo</th>
-                        <th>Thứ tự</th>
+{{--                        <th>Thứ tự</th>--}}
                         <th>Trạng thái</th>
                         <th>Nổi bật</th>
                         <th>Hành động</th>
@@ -192,7 +193,7 @@
                     null,
                     null,
                     null,
-                    null,
+                    // null,
                 ],
                 paging: false,
                 showEntries: false,

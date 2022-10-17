@@ -84,8 +84,8 @@ class AdminPolicyController extends WebController
 
     public function checkOrder()
     {
-        $count = $this->getService()->latest()->first();
-        return response()->json(['order' => isset($count->order) ? $count->order + 1 : 1]);
+        $count = $this->getService()->count();
+        return response()->json(['order' => $count + 1]);
     }
 
 //    /**

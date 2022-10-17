@@ -146,7 +146,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
-                    <th>Thứ tự</th>
+{{--                    <th>Thứ tự</th>--}}
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -155,12 +155,13 @@
                 @if(isset($data, $status) && $status)
                     @foreach($data as $stt => $item)
                         <tr id="sid{{$item['id']}}">
-                                <td scope="row">{{$stt+1}}</td>
+{{--                                <td scope="row">{{$stt+1}}</td>--}}
+                                <td style="">{{$item['order']}}</td>
                                 <td>{{$item['title']}}</td>
                                 <td style="">
                                     <img src="{{$item['avatar_main']}}" width="100px" height="100px" alt="">
                                 </td>
-                                <td style="">{{$item['order']}}</td>
+{{--                                <td style="">{{$item['order']}}</td>--}}
                                 <td style="">
                                     <a class="badge badge-pill {{$item['arr_active']['class']}}" href="{{route('admin.get.action.housing', ['active', $item['id']])}}">
                                         {{$item['arr_active']['name']}}
@@ -203,7 +204,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
-                    <th>Thứ tự</th>
+{{--                    <th>Thứ tự</th>--}}
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
