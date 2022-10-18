@@ -86,7 +86,7 @@ class SettingService extends ApiService
         $user = auth('admins')->user();
         $this->on('saving', function ($model) use ($user) {
             $model->active = $model->active == 'on' ? true : false;
-            if ($model->type === Setting::TYPE_COFFEE_HOME) {
+            if ($model->type === Setting::TYPE_COFFEE_HOME || $model->type === Setting::TYPE_COFFEE) {
                 $model->active = true;
                 $data = $this->uploadArrImages($model);
                 if (isset($data)) {

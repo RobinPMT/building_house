@@ -15,22 +15,30 @@
                                 <div>
                                     <div id="sid{{$setting['id']}}" data-id="{{$setting['id']}}">
                                         <div class="row d-flex align-items-end">
-                                            <div class="col-md-8 col-12">
+                                            <div class="col-md-12 col-12">
                                                 <div class="form-group">
                                                     <label for="value">Đoạn header Consolar Coffee & Food</label>
                                                     <textarea class="form-control" name="value" value="{{old('value',isset($setting['value']) ? $setting['value'] : '')}}" id="value" rows="4" placeholder="Nội dung">{{old('value',isset($setting['value']) ? $setting['value'] : '')}}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 col-12">
+{{--                                            <div class="col-md-4 col-12">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <img id="output_image_extra" src="{{isset($setting['avatar']) ? pare_url_file($setting['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="input_image_extra">Ảnh Banner <strong>(Kích thước: 1920x620 pixel)</strong> <span style="color: red">*</span></label>--}}
+{{--                                                    <div class="custom-file">--}}
+{{--                                                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar" {{isset($setting['avatar']) ? '' : 'required'}}>--}}
+{{--                                                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+                                            <div class="col-md-12 col-12">
+                                                <label>Upload ảnh cho thư viện <strong>(Kích thước: 1920x620 pixel)</strong></label>
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                 <div class="form-group">
-                                                    <img id="output_image_extra" src="{{isset($setting['avatar']) ? pare_url_file($setting['avatar'], 'settings') : asset('images/no_image.png')}}" alt="" width="200px" height="160px">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="input_image_extra">Ảnh Banner <strong>(Kích thước: 1920x620 pixel)</strong> <span style="color: red">*</span></label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="input_image_extra" name="avatar" {{isset($setting['avatar']) ? '' : 'required'}}>
-                                                        <label class="custom-file-label" for="input_image_extra">Chọn ảnh</label>
-                                                    </div>
+                                                    <input type="file" name="images[]" id="file-1" multiple class="filename"
+                                                           data-overwrite-initial="fasle" data-min-file-count="0">
                                                 </div>
                                             </div>
 
@@ -47,6 +55,60 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <hr />
+
+                            <section id="component-swiper-multi-row">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Danh sách Slide</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="swiper-multi-row swiper-container">
+                                            <div class="swiper-wrapper">
+                                                @if(isset($setting['avatar']) && $avatars = json_decode($setting['avatar']))
+                                                    @foreach($avatars as $stt => $avatar)
+                                                        <div class="swiper-slide" id="sid{{$stt}}">
+                                                            <div class="file-preview-frame krajee-default kv-preview-thumb"  data-template="image">
+                                                                <div class="kv-zoom-cache">
+                                                                    <div class="file-preview-frame krajee-default kv-zoom-thumb"  data-template="image">
+                                                                        <div class="kv-file-content">
+                                                                            <img
+                                                                                    src="{{pare_url_file($avatar, 'settings')}}"
+
+                                                                                    title="{{$avatar}}"
+                                                                                    alt="{{$avatar}}"
+                                                                                    style="width: auto; height: auto; max-width: 100%; max-height: 100%; image-orientation: from-image;"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="file-thumbnail-footer">
+                                                                    <div class="file-footer-caption">
+                                                                        <div class="file-caption-info">{{$avatar}}</div>
+                                                                    </div>
+                                                                    <div class="file-actions">
+                                                                        <div class="file-footer-buttons">
+                                                                            <a href="{{route('admin.delete.images.setting',[$setting['id'], $avatar])}}" data-id="{{$setting['id']}}" class="kv-file-remove btn btn-sm btn-kv btn-default btn-outline-secondary delete-image" title="Remove file"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                            <a href="#" id="data-image-{{$setting['id']}}"  data-detail-title="{{$avatar}}" data-image-src="{{pare_url_file($avatar, 'settings')}}" data-toggle="modal" data-target="#image_modal" class="kv-file-zoom btn btn-sm btn-kv btn-default btn-outline-secondary item-detail" title="View Details"><i class="glyphicon glyphicon-zoom-in"></i></a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <br>
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination" style="margin-top: 150px"></div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         @endif
                     </div>
                 </div>
@@ -54,6 +116,41 @@
             <!-- /Invoice repeater -->
         </div>
     </section>
+    {{--<!--/ Multi row Slides Per View swiper -->--}}
+    <div id="image_modal" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="image_modal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Detailed Preview</h5>
+                    <span class="kv-zoom-title" title="" id="detail-title">wip-work-in-progress-1024x701.jpg
+{{--                    <samp id="detail-storage">(75.52 KB)</samp>--}}
+                </span>
+                    <div class="kv-zoom-actions">
+                        {{--                    <button type="button" class="btn btn-sm btn-kv btn-default btn-outline-secondary btn-toggleheader" title="Toggle header" data-toggle="button" aria-pressed="false" autocomplete="off">--}}
+                        {{--                        <i class="glyphicon glyphicon-resize-vertical"></i>--}}
+                        {{--                    </button>--}}
+                        {{--                    <button type="button" class="btn btn-sm btn-kv btn-default btn-outline-secondary btn-fullscreen" title="Toggle full screen" data-toggle="button" aria-pressed="false" autocomplete="off">--}}
+                        {{--                        <i class="glyphicon glyphicon-fullscreen"></i>--}}
+                        {{--                    </button>--}}
+                        {{--                    <button type="button" class="btn btn-sm btn-kv btn-default btn-outline-secondary btn-borderless" title="Toggle borderless mode" data-toggle="button" aria-pressed="false" autocomplete="off">--}}
+                        {{--                        <i class="glyphicon glyphicon-resize-full"></i>--}}
+                        {{--                    </button>--}}
+                        <button type="button" class="btn btn-sm btn-kv btn-default btn-outline-secondary btn-close" title="Close detailed preview" data-dismiss="modal" aria-hidden="true">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="floating-buttons"></div>
+                    <div class="kv-zoom-body file-zoom-content krajee-default">
+                        <img src="" class="file-preview-image kv-preview-data file-zoom-detail" title="wip-work-in-progress-1024x701.jpg" alt="wip-work-in-progress-1024x701.jpg" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+                    </div>
+
+                    <button type="button" class="btn btn-navigate btn-prev" title="View previous file" style="display: none;"><i class="glyphicon glyphicon-triangle-left"></i></button> <button type="button" class="btn btn-navigate btn-next" title="View next file" style="display: none;"><i class="glyphicon glyphicon-triangle-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="form-control-repeater">
         <div class="row">
             <!-- Invoice repeater -->
@@ -258,10 +355,105 @@
                 autoWidth  : false
             });
         });
+        $("#file-1").fileinput({
+            theme: 'fa5',
+            showUpload: false,
+            showRemove:true,
+            initialPreviewAsData: true,
+            showCancel: true,
+            allowedFileTypes: ['image'],
+            allowedFileExtensions: ['jpg','png','gif'],
+            overwriteInitial: false,
+            maxFileSize: 20000,
+            maxFileNum: 20,
+            minFileNum: 2,
+        });
+
+        var mySwiper5 = new Swiper('.swiper-multi-row', {
+            slidesPerView: 5,
+            slidesPerColumn: 2,
+            spaceBetween: 10,
+            slidesPerColumnFill: 'row',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            }
+        });
+
+        $(document).ready(function() {
+            $(".item-detail").click(function (event) {
+                event.preventDefault();
+                // $('#output_image').attr('src', response.data.avatar);
+                let $this = $(this);
+                let src = $this.attr('data-image-src');
+                let detailTitle = $this.attr('data-detail-title');
+
+                console.log(src);
+                $(' img.file-zoom-detail ').attr('src', src);
+                $('#detail-title').text(detailTitle);
+            });
+
+        });
     </script>
 
     <script>
         $(document).ready(function() {
+            $(".delete-image").click(function (e) {
+                e.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                let id = $this.index();
+                Swal.fire({
+                    title: 'Bạn có chắc không?',
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Vâng, xóa nó!',
+                    cancelButtonText: 'Hủy!',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ml-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'get',
+                            url: url,
+                            success: function(response) {
+                                // console.log(response);
+                                $('#sid'+id).remove();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Đã xóa!',
+                                    text: 'Tài nguyên này đã được xóa!',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success'
+                                    }
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                });
+
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                //xử lý lỗi tại đây
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'Đã hủy',
+                            text: 'Tài nguyên của bạn an toàn :)',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-success'
+                            }
+                        });
+                    }
+                });
+
+            });
             // $(".detele-item").click(function (e) {
             $(".delete-record").click(function (e) {
                 e.preventDefault();

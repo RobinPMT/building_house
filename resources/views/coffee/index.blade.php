@@ -14,11 +14,18 @@
         </div>
         <div class="coffee-banner">
             <div class="owl-carousel">
-                <picture>
-                    <source media="(min-width: 1500px)" srcset="{{ isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 1920, 820, 100, 1) : asset('images/no_image.png')}}"> <!-- 1920x620 -->
-                    <source media="(min-width: 992px)" srcset="{{isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 1500, 490, 100, 1) : asset('images/no_image.png')}}"> <!-- 1500x490 -->
-                    <img class="owl-lazy" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{isset($setting->avatar) ? imageUrl(pare_url_file($setting->avatar, 'settings'), 990, 450, 100, 1) : asset('images/no_image.png')}}" alt="{{isset($setting->avatar) ? $setting->avatar : 'no_image.png'}}" />
-                </picture>
+                @if(isset($setting))
+                    @if(isset($setting) && $images = json_decode($setting->avatar))
+                        @foreach($images as $image)
+                            <picture>
+                                <source media="(min-width: 1500px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 1920, 820, 100, 1)}}"> <!-- 1920x620 -->
+                                <source media="(min-width: 992px)" srcset="{{imageUrl(pare_url_file($image, 'settings'), 1500, 490, 100, 1)}}"> <!-- 1500x490 -->
+                                <img class="owl-lazy" src="{{asset('fe_template/images/loading.gif')}}" data-src="{{imageUrl(pare_url_file($image, 'settings'), 990, 450, 100, 1)}}" alt="{{$image ?? 'no_image.png'}}" />
+                            </picture>
+                        @endforeach
+                    @endif
+                @endif
+
             </div>
             <div class="container">
                 <div class="contact-form clearfix">
