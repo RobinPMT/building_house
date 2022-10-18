@@ -211,7 +211,7 @@
                 <div class="row-compare clearfix">
                     <label class="compare-label">{{$item->name}}</label>
                     <div class="row-sub-compare">
-                        <div class="compare-column">
+                        <div class="compare-column" style="white-space: pre-line; margin-top: -125px; padding: 10px;">
 {{--                            <ul>--}}
 {{--                                @if(isset($product))--}}
 {{--                                    {!! $product->keys()->find($item->id)->value  !!}--}}
@@ -221,7 +221,7 @@
                                 {{$product->keys()->find($item->id)->value}}
                             @endif
                         </div>
-                        <div class="compare-column">
+                        <div class="compare-column" style="white-space: pre-line; margin-top: -125px; padding: 10px;">
 {{--                            <ul>--}}
 {{--                                @if(isset($product1))--}}
 {{--                                    {!! $product1->keys()->find($item->id)->value  !!}--}}
@@ -231,7 +231,7 @@
                                 {{$product1->keys()->find($item->id)->value}}
                             @endif
                         </div>
-                        <div class="compare-column">
+                        <div class="compare-column" style="white-space: pre-line; margin-top: -125px; padding: 10px;">
 {{--                            <ul>--}}
 {{--                                @if(isset($product2))--}}
 {{--                                    {!! $product2->keys()->find($item->id)->value  !!}--}}

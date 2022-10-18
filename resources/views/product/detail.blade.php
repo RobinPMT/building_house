@@ -89,7 +89,7 @@
                                     @elseif($item->tag_type === 'textarea')
                                         <li>
                                             <label>{{$item->name}}</label>
-                                            <div>
+                                            <div style="margin-top: -85px; padding: 10px;">
 {{--                                                <ul>--}}
 {{--                                                    {!! $item->value !!}--}}
 {{--                                                </ul>--}}
@@ -258,7 +258,7 @@
                                             <div class="row-compare clearfix">
                                                 <label class="compare-label">{{$item->name}}</label>
                                                 <div class="row-sub-compare">
-                                                    <div class="compare-column">
+                                                    <div class="compare-column" style="white-space: pre-line; margin-top: -85px; padding: 10px;">
 {{--                                                        <ul>--}}
 {{--                                                            {!! $item->value !!}--}}
 {{--                                                        </ul>--}}

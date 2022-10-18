@@ -77,7 +77,7 @@
                         <i class="fa fa-caret-down"></i>
                     </span>
                         <ul>
-                            <li><a href="{{route('get.register.auth')}}">Đăng kí</a></li>
+                            <li><a href="{{route('get.register.auth')}}">Đăng ký</a></li>
                             <li><a href="{{route('get.login.auth')}}">Đăng nhập</a></li>
                         </ul>
                     </li>

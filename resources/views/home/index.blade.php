@@ -157,7 +157,7 @@
 
                                                     </div>
                                                     <div class="product-item-right">
-                                                        <h3 class="product-name"><a href="#">{{$product->title}}</a></h3>
+                                                        <h3 class="product-name"><a href="{{route('get.detail.product', [$product->slug])}}">{{$product->title}}</a></h3>
                                                         <div class="product-description">
                                                             {{$product->description}}
                                                         </div>
@@ -196,7 +196,7 @@
                                                                             @if($items->key === 'cong_nghe')
                                                                                 <li>
                                                                                     <label>{{$items->name}}</label>
-                                                                                    <div>
+                                                                                    <div style="margin-top: -85px;">
 {{--                                                                                        <ul>--}}
 {{--                                                                                            {!! $items->value !!}--}}
 {{--                                                                                        </ul>--}}
@@ -267,11 +267,11 @@
                                                                                 @elseif($item->tag_type === 'textarea')
                                                                                     <li>
                                                                                         <label>{{$item->name}}</label>
-                                                                                        <div>
-{{--                                                                                            <ul>--}}
+                                                                                        <div style="margin-top: -85px;">
+
 {{--                                                                                                {!! $item->value !!}--}}
-{{--                                                                                            </ul>--}}
-                                                                                            {{$items->value}}
+
+                                                                                            {{$item->value}}
                                                                                         </div>
                                                                                     </li>
                                                                                 @endif

@@ -3,7 +3,7 @@
     <section class="design-banner-group">
         <div class="design-banner">
             <div class="larger-picture">
-                <img class="main-picture" src="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" data-srcs="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" alt="1170x550" />
+                <img class="main-picture" src="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" data-srcs="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" alt="{{$productSelect->title}}" />
             </div>
             <div class="container">
                 <div class="row">
@@ -130,7 +130,7 @@
                                                             @foreach($attributes as $attribute)
                                                                 @if($attribute->type == \App\Models\Attribute::TYPE_STYLE)
                                                                     <div class="col-lg-3 col-md-4 col-sm-2 col-xs-3 col-xss-4 col-vsm-6 properties-item">
-                                                                        <div class="properties-item-ctx" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-attribute="{{$attribute->arr_image}}" data-image="{{pare_url_file($attribute->avatar, 'attributes')}}">
+                                                                        <div class="properties-item-ctx" data-room-id="{{$child->id}}" data-attribute-id="{{$attribute->id}}" data-attribute="{{$attribute->arr_image}}" data-image="{{imageUrl(pare_url_file($attribute->avatar, 'attributes'), 1170, 550, 100, 1)}}">
                                                                             <span style="background-image: url({{pare_url_file($attribute->avatar, 'attributes')}});">{{$attribute->title}}</span>
                                                                             <strong>{{$attribute->title}}</strong>
                                                                         </div>
@@ -219,9 +219,10 @@
         $(document).ready(function(){
             let data = {};
             data['product_id'] = '{{$productSelect->id ?? null}}';
-            let image = '{{isset($productSelect->image_back_ground_design) ? pare_url_file($productSelect->image_back_ground_design, 'products') : ''}}';
+            let image = '{{isset($productSelect->image_back_ground_design) ? imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1) : ''}}';
             $('.larger-picture').addClass('loading');
             if(image !== undefined && image !== ''){
+                image =  image.replace(new RegExp('amp;', 'g'), '');
                 $('.larger-picture .main-picture').attr('src', image);
                 $('.larger-picture').removeClass('loading');
             }
@@ -345,9 +346,11 @@
                 // console.log(colors)
                 if(colors.length) {
                     for (let i = 0; i < colors.length; i++){
+                        let JSvar = `/storage/files/attributes/${colors[i]['image']}`;
+                        let JSnewVar = "<?=imageUrl('" + JSvar + "', 1170, 550, 100, 1);?>";
                         html += `
                             <div class="col-lg-3 col-md-4 col-sm-2 col-xs-3 col-xss-4 col-vsm-6 properties-items">
-                                <div class="properties-item-ctx" data-image="/storage/files/attributes/${colors[i]['image']}" data-key="${colors[i]['key']}" data-attribute_id="${attribute_id}" data-room_id="${room_id}">
+                                <div class="properties-item-ctx" data-image="${JSnewVar}" data-key="${colors[i]['key']}" data-attribute_id="${attribute_id}" data-room_id="${room_id}">
                                     <span style="background-color: ${colors[i]['color']};">${colors[i]['value']}</span>
                                     <strong>${colors[i]['value']}</strong>
                                 </div>
@@ -364,8 +367,8 @@
                 parent.find('.properties-item:not(:eq('+idx+')) .properties-item-ctx').removeClass('active');
                 $(this).children('.properties-item-ctx').toggleClass('active');
                 // var cur_src = $('.larger-picture .main-picture').data('srcs');
-                let cur_src = '{{isset($productSelect->image_back_ground_design) ? pare_url_file($productSelect->image_back_ground_design, 'products') : ''}}';
-                console.log(image);
+                let cur_src = '{{isset($productSelect->image_back_ground_design) ? imageUrl(pare_url_file($productSelect->image_back_ground_design, 'products'), 1170, 550, 100, 1) : ''}}';
+                cur_src =  cur_src.replace(new RegExp('amp;', 'g'), '');
                 // if(image != undefined && image != ''){
                 //     $('.larger-picture .main-picture').attr('src', image);
                 // }else{
