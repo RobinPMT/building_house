@@ -3,7 +3,7 @@
     <section class="design-banner-group">
         <div class="design-banner">
             <div class="larger-picture">
-                <img class="main-picture" src="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" data-srcs="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" alt="{{$productSelect->title ?? ''}}" />
+                <img class="main-picture" src="{{imageUrl('/fe_template/images/design/main.jpg', 1170, 550, 100, 1)}}" data-srcs="{{imageUrl(asset('fe_template/images/design/main.jpg'), 1170, 550, 100, 1)}}" alt="{{$productSelect->title ?? ''}}" />
             </div>
             <div class="container">
                 <div class="row">
