@@ -79,7 +79,7 @@ class CreateSiteMap extends Command
 
         $policies = services()->policyService()->orderByDesc('id')->get();
         foreach ($policies as $policy) {
-            $sitemap->add(route('get.detail.detail', [$policy->slug]), $policy->created_at, '0.6', 'daily');
+            $sitemap->add(route('get.detail.policy', [$policy->slug]), $policy->created_at, '0.6', 'daily');
         }
 
         $posts = services()->postService()->orderByDesc('created_at')->get();
