@@ -116,10 +116,10 @@ class ProductService extends ApiService
 
     public function get_arr_image_value($record, Product $model)
     {
-        if (isset($model->arr_image) && trim($model->arr_image) != '') {
+        if (isset($model->arr_image) && trim($model->arr_image) != '' && is_array(json_decode($model->arr_image)) && count(json_decode($model->arr_image)) > 0) {
             return json_encode(array_map(function ($item) {
                 return [
-                    'image' => pare_url_file($item->image, 'products'),
+                    'image' => pare_url_file($item->image ?? '', 'products'),
                     'status' => $item->status
                 ];
             }, json_decode($model->arr_image)));

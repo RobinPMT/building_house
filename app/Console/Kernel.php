@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sitemap:create')->everyMinute();
-        $schedule->command('queue:checkup')->withoutOverlapping()->everyMinute()->runInBackground();
+//        $schedule->command('queue:checkup')->withoutOverlapping()->everyMinute()->runInBackground();
 //        $schedule->command('sitemap:create')->withoutOverlapping()->dailyAt('0:00')->runInBackground();
     }
 

@@ -252,7 +252,7 @@
                 lengthChange: false,
                 searching: false,
                 ordering    : true,
-                bInfo      : true,
+                bInfo      : false,
                 autoWidth  : false,
                 "columns": [
                     { "width": "2%" },

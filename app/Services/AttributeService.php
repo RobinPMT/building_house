@@ -98,9 +98,9 @@ class AttributeService extends ApiService
 
     public function get_arr_image_value($record, Attribute $model)
     {
-        if (isset($model->arr_image) && $model->type == Attribute::TYPE_STYLE) {
+        if (isset($model->arr_image) && $model->type == Attribute::TYPE_STYLE  && trim($model->arr_image) != '' && is_array(json_decode($model->arr_image)) && count(json_decode($model->arr_image)) > 0) {
             return array_map(function ($item) {
-                $item->image = pare_url_file($item->image, 'attributes');
+                $item->image = pare_url_file($item->image ?? '', 'attributes');
                 return $item;
             }, json_decode($model->arr_image));
 //            return json_decode($model->arr_image);
