@@ -423,17 +423,19 @@
 
                 console.log(result_arr_system, result_arr_system.length)
             });
-
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
             function store(data){
                 let url = '{{route('post.store.design')}}';
                 $.ajax({
                     type: 'POST',
                     url: url,
                     data: {data},
-                    success: function (response) {
+                    success:  function (response) {
                         if(response.status) {
-                            setTimeout(function () {
-                                toastr['success'](
+                            setTimeout( async function () {
+                                await toastr['success'](
                                     response.message,
                                     '👋 Thành công!',
                                     {
@@ -442,7 +444,9 @@
                                         // rtl: isRtl
                                     }
                                 );
-                            }, 300);
+                                await sleep(3000);
+                                window.location.reload()
+                            }, 1000);
                         } else {
                             setTimeout(function () {
                                 toastr['error'](

@@ -6,7 +6,12 @@
 
 @section('content1')
     <p style="Margin: 0;line-height: 150%;">Khách hàng: <strong>{{ $name }}</strong> với email: <strong><a target="_blank" href="mailto:{{ $email }}" style="text-decoration: underline;">{{ $email }}</a></strong> cần được liên hệ tư vấn về <strong>{{$type}}</strong>. Vui lòng liên hệ với khách hàng qua số điện thoại: <strong><a target="_blank" href="tel:{{ $phone }}" style="text-decoration: underline;">{{ $phone }}</a></strong></p>
-    <p style="Margin: 0;line-height: 150%;">Lời nhắn:{{$content}}<br></p>
+    @if(isset($content))
+        <p style="Margin: 0;line-height: 150%;">Lời nhắn:{{$content}}<br></p>
+    @else
+        <p style="Margin: 0;line-height: 150%;">Link thiết kế: <a target="_blank" href="{{$link}}"><strong>Bấm vào đây!</strong></a><br></p>
+    @endif
+
 @endsection
 
 {{--@section('content_important')--}}

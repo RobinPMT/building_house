@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ContactSendMailJob;
 use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\Room;
+use App\Models\Setting;
 use App\Models\Wishlist;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -198,6 +200,13 @@ class DesignController extends FrontendController
                         }
                         if (count($syncData) > 0) {
                             $wishlist->attributes()->sync($syncData);
+                        }
+                        $email = env('MAIL_RECEIVE', null);
+                        if (!isset($email)) {
+                            $email = services()->settingService()->where(['key' => 'email', 'type' => Setting::TYPE_SETTING])->first()->value;
+                        }
+                        if ($email) {
+                            dispatch(new ContactSendMailJob($wishlist, $email));
                         }
                     }
                 }
