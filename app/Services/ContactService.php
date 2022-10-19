@@ -95,9 +95,9 @@ class ContactService extends ApiService
 
         $this->on('created', function ($model) use ($user) {
             //TODO: gửi mail
-            $email = services()->settingService()->where(['key' => 'email', 'type' => Setting::TYPE_SETTING])->first()->value;
+            $email = env('MAIL_RECEIVE', null);
             if (!isset($email)) {
-                $email = env('MAIL_RECEIVE');
+                $email = services()->settingService()->where(['key' => 'email', 'type' => Setting::TYPE_SETTING])->first()->value;
             }
             if ($email) {
                 dispatch(new ContactSendMailJob($model, $email));
